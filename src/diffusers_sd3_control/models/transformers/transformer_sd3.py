@@ -325,7 +325,7 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
                 hidden_states = hidden_states + block_controlnet_hidden_states[index_block // interval_control]
         hidden_states = self.norm_out(hidden_states, temb)
         hidden_states = self.proj_out(hidden_states)
-        print(hidden_states)
+
         # unpatchify
         patch_size = self.config.patch_size
         height = height // patch_size

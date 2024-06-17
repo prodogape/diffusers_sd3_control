@@ -13,7 +13,7 @@ pipe = StableDiffusion3ControlNetPipeline.from_pretrained(
     torch_dtype=torch.float16
 )
 print("*** load SD3 ok")
-pipe.to("cuda", torch.float16)
+pipe.to("cuda")  #, torch.float16
 
 # config
 control_image = load_image("https://hf-mirror.com/InstantX/SD3-Controlnet-Canny/resolve/main/canny.jpg")

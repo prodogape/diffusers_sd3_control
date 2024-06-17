@@ -190,7 +190,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
         ],
     ):
         super().__init__()
-        print("************** INit start")
+
         self.register_modules(
             vae=vae,
             text_encoder=text_encoder,
@@ -215,7 +215,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
             if hasattr(self, "transformer") and self.transformer is not None
             else 128
         )
-        print("************** INit ok")
+
 
     # Copied from diffusers_sd3_control.pipelines.stable_diffusion_3.pipeline_stable_diffusion_3.StableDiffusion3Pipeline._get_t5_prompt_embeds
     def _get_t5_prompt_embeds(
@@ -861,7 +861,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
 
         device = self._execution_device
         dtype = self.transformer.dtype
-        print("****** before encode_prompt")
+
         (
             prompt_embeds,
             negative_prompt_embeds,
@@ -883,7 +883,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
             clip_skip=self.clip_skip,
             num_images_per_prompt=num_images_per_prompt,
         )
-        print("******* after encode_prompt")
+
         if self.do_classifier_free_guidance:
             prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
             pooled_prompt_embeds = torch.cat([negative_pooled_prompt_embeds, pooled_prompt_embeds], dim=0)
