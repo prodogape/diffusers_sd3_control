@@ -24,7 +24,7 @@ By default the [`AutoencoderKL`] should be loaded with [`~ModelMixin.from_pretra
 from the original format using [`FromOriginalVAEMixin.from_single_file`] as follows:
 
 ```py
-from diffusers import AutoencoderKL
+from diffusers_sd3_control import AutoencoderKL
 
 url = "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/blob/main/vae-ft-mse-840000-ema-pruned.safetensors"  # can also be a local file
 model = AutoencoderKL.from_single_file(url)

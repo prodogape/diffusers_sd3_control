@@ -22,7 +22,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -165,7 +165,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./cat"
 snapshot_download(
-    "diffusers/cat_toy_example", local_dir=local_dir, repo_type="dataset", ignore_patterns=".gitattributes"
+    "diffusers_sd3_control/cat_toy_example", local_dir=local_dir, repo_type="dataset", ignore_patterns=".gitattributes"
 )
 ```
 
@@ -245,7 +245,7 @@ After training is complete, you can use your newly trained model for inference l
 <hfoption id="PyTorch">
 
 ```py
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16).to("cuda")
@@ -264,7 +264,7 @@ import jax
 import numpy as np
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard
-from diffusers import FlaxStableDiffusionPipeline
+from diffusers_sd3_control import FlaxStableDiffusionPipeline
 
 model_path = "path-to-your-trained-model"
 pipeline, params = FlaxStableDiffusionPipeline.from_pretrained(model_path, dtype=jax.numpy.bfloat16)

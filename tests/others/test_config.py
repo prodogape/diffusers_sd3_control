@@ -16,7 +16,7 @@
 import tempfile
 import unittest
 
-from diffusers import (
+from diffusers_sd3_control import (
     DDIMScheduler,
     DDPMScheduler,
     DPMSolverMultistepScheduler,
@@ -25,8 +25,8 @@ from diffusers import (
     PNDMScheduler,
     logging,
 )
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.utils.testing_utils import CaptureLogger
+from diffusers_sd3_control.configuration_utils import ConfigMixin, register_to_config
+from diffusers_sd3_control.utils.testing_utils import CaptureLogger
 
 
 class SampleObject(ConfigMixin):
@@ -157,7 +157,7 @@ class ConfigTester(unittest.TestCase):
         assert config == new_config
 
     def test_load_ddim_from_pndm(self):
-        logger = logging.get_logger("diffusers.configuration_utils")
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
         # 30 for warning
         logger.setLevel(30)
 
@@ -171,7 +171,7 @@ class ConfigTester(unittest.TestCase):
         assert cap_logger.out == ""
 
     def test_load_euler_from_pndm(self):
-        logger = logging.get_logger("diffusers.configuration_utils")
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
         # 30 for warning
         logger.setLevel(30)
 
@@ -185,7 +185,7 @@ class ConfigTester(unittest.TestCase):
         assert cap_logger.out == ""
 
     def test_load_euler_ancestral_from_pndm(self):
-        logger = logging.get_logger("diffusers.configuration_utils")
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
         # 30 for warning
         logger.setLevel(30)
 
@@ -199,7 +199,7 @@ class ConfigTester(unittest.TestCase):
         assert cap_logger.out == ""
 
     def test_load_pndm(self):
-        logger = logging.get_logger("diffusers.configuration_utils")
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
         # 30 for warning
         logger.setLevel(30)
 
@@ -213,7 +213,7 @@ class ConfigTester(unittest.TestCase):
         assert cap_logger.out == ""
 
     def test_overwrite_config_on_load(self):
-        logger = logging.get_logger("diffusers.configuration_utils")
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
         # 30 for warning
         logger.setLevel(30)
 
@@ -238,7 +238,7 @@ class ConfigTester(unittest.TestCase):
         assert cap_logger_2.out == ""
 
     def test_load_dpmsolver(self):
-        logger = logging.get_logger("diffusers.configuration_utils")
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
         # 30 for warning
         logger.setLevel(30)
 

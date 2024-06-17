@@ -63,7 +63,7 @@ pipe = StableDiffusionXLPipeline.from_pretrained(..., add_watermarker=False)
 *text-to-image*를 위해 다음과 같이 SDXL을 사용할 수 있습니다:
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch
 
 pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -81,8 +81,8 @@ image = pipe(prompt=prompt).images[0]
 
 ```py
 import torch
-from diffusers import StableDiffusionXLImg2ImgPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionXLImg2ImgPipeline
+from diffusers_sd3_control.utils import load_image
 
 pipe = StableDiffusionXLImg2ImgPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-refiner-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -101,8 +101,8 @@ image = pipe(prompt, image=init_image).images[0]
 
 ```py
 import torch
-from diffusers import StableDiffusionXLInpaintPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionXLInpaintPipeline
+from diffusers_sd3_control.utils import load_image
 
 pipe = StableDiffusionXLInpaintPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -150,7 +150,7 @@ base 모델의 [`denoising_end`](https://huggingface.co/docs/diffusers/main/en/a
 우선, 두 개의 파이프라인을 가져옵니다. 텍스트 인코더와 variational autoencoder는 동일하므로 refiner를 위해 다시 불러오지 않아도 됩니다.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 base = DiffusionPipeline.from_pretrained(
@@ -220,7 +220,7 @@ image = refiner(
 이를 위해, 보통의 "base" text-to-image 파이프라인을 수행 후에 image-to-image 파이프라인으로써 refiner를 실행시킬 수 있습니다. base 모델의 출력을 잠재 공간에 남겨둘 수 있습니다.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -257,8 +257,8 @@ refiner는 또한 인페인팅 설정에 잘 사용될 수 있습니다. 아래�
 Denoiser 앙상블 설정에서 인페인팅에 refiner를 사용하려면 다음을 수행하면 됩니다:
 
 ```py
-from diffusers import StableDiffusionXLInpaintPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionXLInpaintPipeline
+from diffusers_sd3_control.utils import load_image
 
 pipe = StableDiffusionXLInpaintPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -309,7 +309,7 @@ image = refiner(
 [`~diffusers.loaders.FromSingleFileMixin.from_single_file`]를 사용함으로써 원래의 파일 형식을 `diffusers` 형식으로 불러올 수 있습니다:
 
 ```py
-from diffusers import StableDiffusionXLPipeline, StableDiffusionXLImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline, StableDiffusionXLImg2ImgPipeline
 import torch
 
 pipe = StableDiffusionXLPipeline.from_single_file(
@@ -384,7 +384,7 @@ pip install xformers
 Stable Diffusion XL는 두 개의 텍스트 인코더에 학습되었습니다. 기본 동작은 각 프롬프트에 동일한 프롬프트를 전달하는 것입니다. 그러나 [일부 사용자](https://github.com/huggingface/diffusers/issues/4004#issuecomment-1627764201)가 품질을 향상시킬 수 있다고 지적한 것처럼 텍스트 인코더마다 다른 프롬프트를 전달할 수 있습니다. 그렇게 하려면, `prompt_2`와 `negative_prompt_2`를 `prompt`와 `negative_prompt`에 전달해야 합니다. 그렇게 함으로써, 원래의 프롬프트들(`prompt`)과 부정 프롬프트들(`negative_prompt`)를 `텍스트 인코더`에 전달할 것입니다.(공식 SDXL 0.9/1.0의 [OpenAI CLIP-ViT/L-14](https://huggingface.co/openai/clip-vit-large-patch14)에서 볼 수 있습니다.) 그리고 `prompt_2`와 `negative_prompt_2`는 `text_encoder_2`에 전달됩니다.(공식 SDXL 0.9/1.0의 [OpenCLIP-ViT/bigG-14](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k)에서 볼 수 있습니다.)
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch
 
 pipe = StableDiffusionXLPipeline.from_pretrained(

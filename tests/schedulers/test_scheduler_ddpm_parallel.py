@@ -14,7 +14,7 @@
 
 import torch
 
-from diffusers import DDPMParallelScheduler
+from diffusers_sd3_control import DDPMParallelScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

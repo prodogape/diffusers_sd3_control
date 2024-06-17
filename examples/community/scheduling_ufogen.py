@@ -21,14 +21,14 @@ from typing import List, Optional, Tuple, Union
 import numpy as np
 import torch
 
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.schedulers.scheduling_utils import SchedulerMixin
-from diffusers.utils import BaseOutput
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.configuration_utils import ConfigMixin, register_to_config
+from diffusers_sd3_control.schedulers.scheduling_utils import SchedulerMixin
+from diffusers_sd3_control.utils import BaseOutput
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 @dataclass
-# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->UFOGen
+# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->UFOGen
 class UFOGenSchedulerOutput(BaseOutput):
     """
     Output class for the scheduler's `step` function output.
@@ -46,7 +46,7 @@ class UFOGenSchedulerOutput(BaseOutput):
     pred_original_sample: Optional[torch.Tensor] = None
 
 
-# Copied from diffusers.schedulers.scheduling_ddpm.betas_for_alpha_bar
+# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.betas_for_alpha_bar
 def betas_for_alpha_bar(
     num_diffusion_timesteps,
     max_beta=0.999,
@@ -91,7 +91,7 @@ def betas_for_alpha_bar(
     return torch.tensor(betas, dtype=torch.float32)
 
 
-# Copied from diffusers.schedulers.scheduling_ddim.rescale_zero_terminal_snr
+# Copied from diffusers_sd3_control.schedulers.scheduling_ddim.rescale_zero_terminal_snr
 def rescale_zero_terminal_snr(betas):
     """
     Rescales betas to have zero terminal SNR Based on https://arxiv.org/pdf/2305.08891.pdf (Algorithm 1)
@@ -339,7 +339,7 @@ class UFOGenScheduler(SchedulerMixin, ConfigMixin):
 
         self.timesteps = torch.from_numpy(timesteps).to(device)
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler._threshold_sample
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler._threshold_sample
     def _threshold_sample(self, sample: torch.Tensor) -> torch.Tensor:
         """
         "Dynamic thresholding: At each sampling step we set s to a certain percentile absolute pixel value in xt0 (the
@@ -458,7 +458,7 @@ class UFOGenScheduler(SchedulerMixin, ConfigMixin):
 
         return UFOGenSchedulerOutput(prev_sample=pred_prev_sample, pred_original_sample=pred_original_sample)
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler.add_noise
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler.add_noise
     def add_noise(
         self,
         original_samples: torch.Tensor,
@@ -482,7 +482,7 @@ class UFOGenScheduler(SchedulerMixin, ConfigMixin):
         noisy_samples = sqrt_alpha_prod * original_samples + sqrt_one_minus_alpha_prod * noise
         return noisy_samples
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler.get_velocity
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler.get_velocity
     def get_velocity(self, sample: torch.Tensor, noise: torch.Tensor, timesteps: torch.IntTensor) -> torch.Tensor:
         # Make sure alphas_cumprod and timestep have same device and dtype as sample
         alphas_cumprod = self.alphas_cumprod.to(device=sample.device, dtype=sample.dtype)
@@ -504,7 +504,7 @@ class UFOGenScheduler(SchedulerMixin, ConfigMixin):
     def __len__(self):
         return self.config.num_train_timesteps
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler.previous_timestep
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler.previous_timestep
     def previous_timestep(self, timestep):
         if self.custom_timesteps:
             index = (self.timesteps == timestep).nonzero(as_tuple=True)[0][0]

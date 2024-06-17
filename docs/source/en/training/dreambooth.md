@@ -22,7 +22,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -240,7 +240,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./dog"
 snapshot_download(
-    "diffusers/dog-example",
+    "diffusers_sd3_control/dog-example",
     local_dir=local_dir,
     repo_type="dataset",
     ignore_patterns=".gitattributes",
@@ -364,7 +364,7 @@ Once training is complete, you can use your newly trained model for inference!
 Can't wait to try your model for inference before training is complete? 🤭 Make sure you have the latest version of 🤗 Accelerate installed.
 
 ```py
-from diffusers import DiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control import DiffusionPipeline, UNet2DConditionModel
 from transformers import CLIPTextModel
 import torch
 
@@ -387,7 +387,7 @@ image.save("dog-bucket.png")
 <hfoption id="PyTorch">
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained("path_to_saved_model", torch_dtype=torch.float16, use_safetensors=True).to("cuda")
@@ -403,7 +403,7 @@ import jax
 import numpy as np
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard
-from diffusers import FlaxStableDiffusionPipeline
+from diffusers_sd3_control import FlaxStableDiffusionPipeline
 
 pipeline, params = FlaxStableDiffusionPipeline.from_pretrained("path-to-your-trained-model", dtype=jax.numpy.bfloat16)
 
@@ -447,7 +447,7 @@ DeepFloyd IF is a cascading pixel diffusion model with three stages. The first s
 DeepFloyd IF uses predicted variance, but the Diffusers training scripts uses predicted error so the trained DeepFloyd IF models are switched to a fixed variance schedule. The training scripts will update the scheduler config of the fully trained model for you. However, when you load the saved LoRA weights you must also update the pipeline's scheduler config.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("DeepFloyd/IF-I-XL-v1.0", use_safetensors=True)
 
@@ -464,7 +464,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./dog_downsized"
 snapshot_download(
-    "diffusers/dog-example-downsized",
+    "diffusers_sd3_control/dog-example-downsized",
     local_dir=local_dir,
     repo_type="dataset",
     ignore_patterns=".gitattributes",

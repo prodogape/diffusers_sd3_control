@@ -30,7 +30,7 @@ from transformers import (
     DPTForDepthEstimation,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -39,8 +39,8 @@ from diffusers import (
     StableDiffusionDepth2ImgPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils import is_accelerate_available, is_accelerate_version
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils import is_accelerate_available, is_accelerate_version
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

@@ -4,7 +4,7 @@ import os
 import torch
 from transformers import T5EncoderModel, T5Tokenizer
 
-from diffusers import AutoencoderKL, DPMSolverMultistepScheduler, PixArtAlphaPipeline, Transformer2DModel
+from diffusers_sd3_control import AutoencoderKL, DPMSolverMultistepScheduler, PixArtAlphaPipeline, Transformer2DModel
 
 
 ckpt_id = "PixArt-alpha/PixArt-alpha"

@@ -14,14 +14,14 @@ from transformers import (
     GPT2Tokenizer,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DPMSolverMultistepScheduler,
     UniDiffuserModel,
     UniDiffuserPipeline,
     UniDiffuserTextDecoder,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,
@@ -31,7 +31,7 @@ from diffusers.utils.testing_utils import (
     run_test_in_subprocess,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ..pipeline_params import (
     IMAGE_TO_IMAGE_IMAGE_PARAMS,
@@ -88,7 +88,7 @@ class UniDiffuserPipelineFastTests(
 
     def get_dummy_components(self):
         unet = UniDiffuserModel.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="unet",
         )
 
@@ -100,21 +100,21 @@ class UniDiffuserPipelineFastTests(
         )
 
         vae = AutoencoderKL.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="vae",
         )
 
         text_encoder = CLIPTextModel.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="text_encoder",
         )
         clip_tokenizer = CLIPTokenizer.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="clip_tokenizer",
         )
 
         image_encoder = CLIPVisionModelWithProjection.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="image_encoder",
         )
         # From the Stable Diffusion Image Variation pipeline tests
@@ -122,11 +122,11 @@ class UniDiffuserPipelineFastTests(
         # image_processor = CLIPImageProcessor.from_pretrained("hf-internal-testing/tiny-random-clip")
 
         text_tokenizer = GPT2Tokenizer.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="text_tokenizer",
         )
         text_decoder = UniDiffuserTextDecoder.from_pretrained(
-            "hf-internal-testing/unidiffuser-diffusers-test",
+            "hf-internal-testing/unidiffuser-diffusers_sd3_control-test",
             subfolder="text_decoder",
         )
 

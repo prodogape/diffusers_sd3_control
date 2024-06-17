@@ -31,16 +31,16 @@ from huggingface_hub import ModelCard, delete_repo
 from huggingface_hub.utils import is_jinja_available
 from requests.exceptions import HTTPError
 
-from diffusers.models import UNet2DConditionModel
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control.models import UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import (
     AttnProcessor,
     AttnProcessor2_0,
     AttnProcessorNPU,
     XFormersAttnProcessor,
 )
-from diffusers.training_utils import EMAModel
-from diffusers.utils import SAFE_WEIGHTS_INDEX_NAME, is_torch_npu_available, is_xformers_available, logging
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.training_utils import EMAModel
+from diffusers_sd3_control.utils import SAFE_WEIGHTS_INDEX_NAME, is_torch_npu_available, is_xformers_available, logging
+from diffusers_sd3_control.utils.testing_utils import (
     CaptureLogger,
     get_python_version,
     require_python39_or_higher,
@@ -274,7 +274,7 @@ class ModelTesterMixin:
         model.dummy_attribute = 5
         model.register_to_config(test_attribute=5)
 
-        logger = logging.get_logger("diffusers.models.modeling_utils")
+        logger = logging.get_logger("diffusers_sd3_control.models.modeling_utils")
         # 30 for warning
         logger.setLevel(30)
         with CaptureLogger(logger) as cap_logger:
@@ -285,7 +285,7 @@ class ModelTesterMixin:
         # no warning should be thrown
         assert cap_logger.out == ""
 
-        logger = logging.get_logger("diffusers.models.modeling_utils")
+        logger = logging.get_logger("diffusers_sd3_control.models.modeling_utils")
         # 30 for warning
         logger.setLevel(30)
         with CaptureLogger(logger) as cap_logger:
@@ -992,7 +992,7 @@ class ModelPushToHubTester(unittest.TestCase):
         model.push_to_hub(self.repo_id, token=TOKEN)
 
         model_card = ModelCard.load(f"{USER}/{self.repo_id}", token=TOKEN).data
-        assert model_card.library_name == "diffusers"
+        assert model_card.library_name == "diffusers_sd3_control"
 
         # Reset repo
         delete_repo(self.repo_id, token=TOKEN)

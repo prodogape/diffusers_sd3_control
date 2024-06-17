@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple
 
 import torch
 
-from diffusers import EDMEulerScheduler
+from diffusers_sd3_control import EDMEulerScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

@@ -22,7 +22,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -166,8 +166,8 @@ Once training is complete, you can use your newly trained model for inference!
 
 ```py
 import torch
-from diffusers import AutoPipelineForText2Image
-from diffusers.pipelines.wuerstchen import DEFAULT_STAGE_C_TIMESTEPS
+from diffusers_sd3_control import AutoPipelineForText2Image
+from diffusers_sd3_control.pipelines.wuerstchen import DEFAULT_STAGE_C_TIMESTEPS
 
 pipeline = AutoPipelineForText2Image.from_pretrained("path/to/saved/model", torch_dtype=torch.float16).to("cuda")
 

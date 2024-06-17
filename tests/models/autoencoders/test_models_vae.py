@@ -20,7 +20,7 @@ import numpy as np
 import torch
 from parameterized import parameterized
 
-from diffusers import (
+from diffusers_sd3_control import (
     AsymmetricAutoencoderKL,
     AutoencoderKL,
     AutoencoderKLTemporalDecoder,
@@ -28,9 +28,9 @@ from diffusers import (
     ConsistencyDecoderVAE,
     StableDiffusionPipeline,
 )
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.loading_utils import load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.loading_utils import load_image
+from diffusers_sd3_control.utils.testing_utils import (
     backend_empty_cache,
     enable_full_determinism,
     floats_tensor,
@@ -44,7 +44,7 @@ from diffusers.utils.testing_utils import (
     torch_all_close,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ..test_modeling_common import ModelTesterMixin, UNetTesterMixin
 
@@ -495,7 +495,7 @@ class AutoencoderTinyIntegrationTests(unittest.TestCase):
         image = torch.from_numpy(load_hf_numpy(self.get_file_format(seed, shape))).to(torch_device).to(dtype)
         return image
 
-    def get_sd_vae_model(self, model_id="hf-internal-testing/taesd-diffusers", fp16=False):
+    def get_sd_vae_model(self, model_id="hf-internal-testing/taesd-diffusers_sd3_control", fp16=False):
         torch_dtype = torch.float16 if fp16 else torch.float32
 
         model = AutoencoderTiny.from_pretrained(model_id, torch_dtype=torch_dtype)

@@ -84,7 +84,7 @@ Clone o repositório e instale o 🤗 Diffusers com os seguintes comandos:
 
 ```bash
 git clone https://github.com/huggingface/diffusers.git
-cd diffusers
+cd diffusers_sd3_control
 ```
 
 <frameworkcontent>
@@ -113,7 +113,7 @@ Você deve deixar a pasta `diffusers` se você quiser continuar usando a bibliot
 Agora você pode facilmente atualizar seu clone para a última versão do 🤗 Diffusers com o seguinte comando:
 
 ```bash
-cd ~/diffusers/
+cd ~/diffusers_sd3_control/
 git pull
 ```
 

@@ -39,7 +39,7 @@ There are two ways to load a pipeline for a task:
 The [`DiffusionPipeline`] class is a simple and generic way to load the latest trending diffusion model from the [Hub](https://huggingface.co/models?library=diffusers&sort=trending). It uses the [`~DiffusionPipeline.from_pretrained`] method to automatically detect the correct pipeline class for a task from the checkpoint, downloads and caches all the required configuration and weight files, and returns a pipeline ready for inference.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -47,7 +47,7 @@ pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", u
 This same checkpoint can also be used for an image-to-image task. The [`DiffusionPipeline`] class can handle any task as long as you provide the appropriate inputs. For example, for an image-to-image task, you need to pass an initial image to the pipeline.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 
@@ -62,7 +62,7 @@ image = pipeline("Astronaut in a jungle, cold color palette, muted colors, detai
 Checkpoints can be loaded by their specific pipeline class if you already know it. For example, to load a Stable Diffusion model, use the [`StableDiffusionPipeline`] class.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -70,7 +70,7 @@ pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1
 This same checkpoint may also be used for another task like image-to-image. To differentiate what task you want to use the checkpoint for, you have to use the corresponding task-specific pipeline class. For example, to use the same checkpoint for image-to-image, use the [`StableDiffusionImg2ImgPipeline`] class.
 
 ```py
-from diffusers import StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionImg2ImgPipeline
 
 pipeline = StableDiffusionImg2ImgPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -107,7 +107,7 @@ git clone https://huggingface.co/runwayml/stable-diffusion-v1-5
 This creates a local folder, ./stable-diffusion-v1-5, on your disk and you should pass its path to [`~DiffusionPipeline.from_pretrained`].
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 stable_diffusion = DiffusionPipeline.from_pretrained("./stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -127,7 +127,7 @@ For example, let's customize the default [stabilityai/stable-diffusion-xl-base-1
 - A more stable VAE that runs in fp16.
 
 ```py
-from diffusers import StableDiffusionXLPipeline, HeunDiscreteScheduler, AutoencoderKL
+from diffusers_sd3_control import StableDiffusionXLPipeline, HeunDiscreteScheduler, AutoencoderKL
 import torch
 
 scheduler = HeunDiscreteScheduler.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", subfolder="scheduler")
@@ -162,10 +162,10 @@ With the [`DiffusionPipeline.from_pipe`] API, you can switch between multiple pi
 Let's start with a [`StableDiffusionPipeline`] and then reuse the loaded model components to create a [`StableDiffusionSAGPipeline`] to increase generation quality. You'll use the [`StableDiffusionPipeline`] with an [IP-Adapter](./ip_adapter) to generate a bear eating pizza.
 
 ```python
-from diffusers import DiffusionPipeline, StableDiffusionSAGPipeline
+from diffusers_sd3_control import DiffusionPipeline, StableDiffusionSAGPipeline
 import torch
 import gc
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 from accelerate.utils import compute_module_sizes
 
 image = load_image("https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/load_neg_embed.png")
@@ -238,8 +238,8 @@ print(f"Max memory allocated: {bytes_to_giga_bytes(torch.cuda.max_memory_allocat
 Let's animate the image with the [`AnimateDiffPipeline`] and also add a [`MotionAdapter`] module to the pipeline. For the [`AnimateDiffPipeline`], you need to unload the IP-Adapter first and reload it *after* you've created your new pipeline (this only applies to the [`AnimateDiffPipeline`]).
 
 ```py
-from diffusers import AnimateDiffPipeline, MotionAdapter, DDIMScheduler
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, MotionAdapter, DDIMScheduler
+from diffusers_sd3_control.utils import export_to_gif
 
 pipe_sag.unload_ip_adapter()
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
@@ -309,11 +309,11 @@ The [`AnimateDiffPipeline`] has the highest memory requirement, so the *total me
 Diffusers implements a [safety checker](https://github.com/huggingface/diffusers/blob/main/src/diffusers/pipelines/stable_diffusion/safety_checker.py) for Stable Diffusion models which can generate harmful content. The safety checker screens the generated output against known hardcoded not-safe-for-work (NSFW) content. If for whatever reason you'd like to disable the safety checker, pass `safety_checker=None` to the [`~DiffusionPipeline.from_pretrained`] method.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", safety_checker=None, use_safetensors=True)
 """
-You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide by the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend keeping the safety filter enabled in all public-facing circumstances, disabling it only for use cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+You have disabled the safety checker for <class 'diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide by the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face strongly recommend keeping the safety filter enabled in all public-facing circumstances, disabling it only for use cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
 """
 ```
 
@@ -347,7 +347,7 @@ There are two important arguments for loading variants:
 <hfoption id="fp16">
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained(
@@ -373,7 +373,7 @@ Use the `variant` parameter in the [`DiffusionPipeline.save_pretrained`] method 
 <hfoption id="fp16">
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline.save_pretrained("runwayml/stable-diffusion-v1-5", variant="fp16")
 ```
@@ -411,7 +411,7 @@ As a class method, [`DiffusionPipeline.from_pretrained`] is responsible for two 
 The pipelines' underlying folder structure corresponds directly with their class instances. For example, the [`StableDiffusionPipeline`] corresponds to the folder structure in [`runwayml/stable-diffusion-v1-5`](https://huggingface.co/runwayml/stable-diffusion-v1-5).
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 pipeline = DiffusionPipeline.from_pretrained(repo_id, use_safetensors=True)
@@ -439,7 +439,7 @@ StableDiffusionPipeline {
     "StableDiffusionSafetyChecker"
   ],
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   "text_encoder": [
@@ -451,11 +451,11 @@ StableDiffusionPipeline {
     "CLIPTokenizer"
   ],
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -543,7 +543,7 @@ Every pipeline expects a [`model_index.json`](https://huggingface.co/runwayml/st
     "StableDiffusionSafetyChecker"
   ],
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   "text_encoder": [
@@ -555,11 +555,11 @@ Every pipeline expects a [`model_index.json`](https://huggingface.co/runwayml/st
     "CLIPTokenizer"
   ],
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }

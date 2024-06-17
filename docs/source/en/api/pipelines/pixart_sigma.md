@@ -51,7 +51,7 @@ Then load the text encoder in 8-bit:
 
 ```python
 from transformers import T5EncoderModel
-from diffusers import PixArtSigmaPipeline
+from diffusers_sd3_control import PixArtSigmaPipeline
 import torch
 
 text_encoder = T5EncoderModel.from_pretrained(

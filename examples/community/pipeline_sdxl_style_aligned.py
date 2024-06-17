@@ -34,15 +34,15 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers.image_processor import PipelineImageInput, VaeImageProcessor
-from diffusers.loaders import (
+from diffusers_sd3_control.image_processor import PipelineImageInput, VaeImageProcessor
+from diffusers_sd3_control.loaders import (
     FromSingleFileMixin,
     IPAdapterMixin,
     StableDiffusionXLLoraLoaderMixin,
     TextualInversionLoaderMixin,
 )
-from diffusers.models import AutoencoderKL, ImageProjection, UNet2DConditionModel
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control.models import AutoencoderKL, ImageProjection, UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import (
     Attention,
     AttnProcessor2_0,
     FusedAttnProcessor2_0,
@@ -50,11 +50,11 @@ from diffusers.models.attention_processor import (
     LoRAXFormersAttnProcessor,
     XFormersAttnProcessor,
 )
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion_xl.pipeline_output import StableDiffusionXLPipelineOutput
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion_xl.pipeline_output import StableDiffusionXLPipelineOutput
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     USE_PEFT_BACKEND,
     deprecate,
     is_invisible_watermark_available,
@@ -64,11 +64,11 @@ from diffusers.utils import (
     scale_lora_layers,
     unscale_lora_layers,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 if is_invisible_watermark_available():
-    from diffusers.pipelines.stable_diffusion_xl.watermark import StableDiffusionXLWatermarker
+    from diffusers_sd3_control.pipelines.stable_diffusion_xl.watermark import StableDiffusionXLWatermarker
 
 if is_torch_xla_available():
     import torch_xla.core.xla_model as xm
@@ -85,7 +85,7 @@ EXAMPLE_DOC_STRING = """
         >>> from typing import List
 
         >>> import torch
-        >>> from diffusers.pipelines.pipeline_utils import DiffusionPipeline
+        >>> from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
         >>> from PIL import Image
 
         >>> model_id = "a-r-r-o-w/dreamshaper-xl-turbo"
@@ -313,7 +313,7 @@ class SharedAttentionProcessor(AttnProcessor2_0):
         return hidden_states
 
 
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.rescale_noise_cfg
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.rescale_noise_cfg
 def rescale_noise_cfg(noise_cfg, noise_pred_text, guidance_rescale=0.0):
     """
     Rescale `noise_cfg` according to `guidance_rescale`. Based on findings of [Common Diffusion Noise Schedules and
@@ -328,7 +328,7 @@ def rescale_noise_cfg(noise_cfg, noise_pred_text, guidance_rescale=0.0):
     return noise_cfg
 
 
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.retrieve_timesteps
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.retrieve_timesteps
 def retrieve_timesteps(
     scheduler,
     num_inference_steps: Optional[int] = None,
@@ -373,7 +373,7 @@ def retrieve_timesteps(
     return timesteps, num_inference_steps
 
 
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.retrieve_latents
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.retrieve_latents
 def retrieve_latents(
     encoder_output: torch.Tensor, generator: Optional[torch.Generator] = None, sample_mode: str = "sample"
 ):
@@ -739,7 +739,7 @@ class StyleAlignedSDXLPipeline(
 
         return prompt_embeds, negative_prompt_embeds, pooled_prompt_embeds, negative_pooled_prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
     def encode_image(self, image, device, num_images_per_prompt, output_hidden_states=None):
         dtype = next(self.image_encoder.parameters()).dtype
 
@@ -764,7 +764,7 @@ class StyleAlignedSDXLPipeline(
 
             return image_embeds, uncond_image_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
@@ -1311,7 +1311,7 @@ class StyleAlignedSDXLPipeline(
             self._style_aligned_norm_layers = None
             self._disable_shared_attention_processors()
 
-    # Copied from diffusers.pipelines.latent_consistency_models.pipeline_latent_consistency_text2img.LatentConsistencyModelPipeline.get_guidance_scale_embedding
+    # Copied from diffusers_sd3_control.pipelines.latent_consistency_models.pipeline_latent_consistency_text2img.LatentConsistencyModelPipeline.get_guidance_scale_embedding
     def get_guidance_scale_embedding(self, w, embedding_dim=512, dtype=torch.float32):
         """
         See https://github.com/google-research/vdm/blob/dc27b98a554f65cdc654b800da5aa1846545d41b/model_vdm.py#L298
@@ -1503,7 +1503,7 @@ class StyleAlignedSDXLPipeline(
             cross_attention_kwargs (`dict`, *optional*):
                 A kwargs dictionary that if specified is passed along to the `AttentionProcessor` as defined under
                 `self.processor` in
-                [diffusers.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
+                [diffusers_sd3_control.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
             guidance_rescale (`float`, *optional*, defaults to 0.0):
                 Guidance rescale factor proposed by [Common Diffusion Noise Schedules and Sample Steps are
                 Flawed](https://arxiv.org/pdf/2305.08891.pdf) `guidance_scale` is defined as `φ` in equation 16. of

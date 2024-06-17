@@ -5,8 +5,8 @@ These scripts contain the code to prepare the grounding data and train the GLIGE
 ### Install the requirements
 
 ```bash
-conda create -n diffusers python==3.10
-conda activate diffusers
+conda create -n diffusers_sd3_control python==3.10
+conda activate diffusers_sd3_control
 pip install -r requirements.txt
 ```
 

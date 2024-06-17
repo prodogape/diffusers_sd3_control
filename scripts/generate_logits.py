@@ -3,7 +3,7 @@ import random
 import torch
 from huggingface_hub import HfApi
 
-from diffusers import UNet2DModel
+from diffusers_sd3_control import UNet2DModel
 
 
 api = HfApi()
@@ -101,7 +101,7 @@ results["google_ddpm_ema_cat_256"] = torch.tensor([
 ])
 # fmt: on
 
-models = api.list_models(filter="diffusers")
+models = api.list_models(filter="diffusers_sd3_control")
 for mod in models:
     if "google" in mod.author or mod.modelId == "CompVis/ldm-celebahq-256":
         local_checkpoint = "/home/patrick/google_checkpoints/" + mod.modelId.split("/")[-1]

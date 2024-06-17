@@ -15,13 +15,13 @@ from typing import Any, Dict, Optional, Tuple, Union
 
 import torch
 
-from diffusers.configuration_utils import register_to_config
-from diffusers.models.controlnet import (
+from diffusers_sd3_control.configuration_utils import register_to_config
+from diffusers_sd3_control.models.controlnet import (
     ControlNetConditioningEmbedding,
     ControlNetModel,
     ControlNetOutput,
 )
-from diffusers.utils import logging
+from diffusers_sd3_control.utils import logging
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name

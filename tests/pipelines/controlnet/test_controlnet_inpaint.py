@@ -25,17 +25,17 @@ import torch
 from PIL import Image
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     ControlNetModel,
     DDIMScheduler,
     StableDiffusionControlNetInpaintPipeline,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.controlnet.pipeline_controlnet import MultiControlNetModel
-from diffusers.utils import load_image
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet import MultiControlNetModel
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_numpy,
@@ -44,7 +44,7 @@ from diffusers.utils.testing_utils import (
     slow,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ..pipeline_params import (
     TEXT_GUIDED_IMAGE_INPAINTING_BATCH_PARAMS,

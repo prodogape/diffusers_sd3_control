@@ -145,7 +145,7 @@ To help you get the most out of the Stable Diffusion pipelines, here are a few t
 [`StableDiffusionPipeline`] uses the [`PNDMScheduler`] by default, but 🤗 Diffusers provides many other schedulers (some of which are faster or output better quality) that are compatible. For example, if you want to use the [`EulerDiscreteScheduler`] instead of the default:
 
 ```py
-from diffusers import StableDiffusionPipeline, EulerDiscreteScheduler
+from diffusers_sd3_control import StableDiffusionPipeline, EulerDiscreteScheduler
 
 pipeline = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4")
 pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -160,7 +160,7 @@ pipeline = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-
 To save memory and use the same components across multiple pipelines, use the `.components` method to avoid loading weights into RAM more than once.
 
 ```py
-from diffusers import (
+from diffusers_sd3_control import (
     StableDiffusionPipeline,
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
@@ -184,7 +184,7 @@ pip install -U gradio
 Then, create a web demo around any Stable Diffusion-based pipeline. For example, you can create an image generation pipeline in a single line of code with Gradio's [`Interface.from_pipeline`](https://www.gradio.app/docs/interface#interface-from-pipeline) function:
 
 ```py
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import gradio as gr
 
 pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4")
@@ -199,7 +199,7 @@ which opens an intuitive drag-and-drop interface in your browser:
 Similarly, you could create a demo for an image-to-image pipeline with:
 
 ```py
-from diffusers import StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionImg2ImgPipeline
 import gradio as gr
 
 

@@ -29,7 +29,7 @@ JAX는 TPU 전용은 아니지만 각 TPU 서버에는 8개의 TPU 가속기가 
 
 ```bash
 !pip install jax==0.3.25 jaxlib==0.3.25 flax transformers ftfy
-!pip install diffusers
+!pip install diffusers_sd3_control
 ```
 
 ```python
@@ -67,7 +67,7 @@ from flax.training.common_utils import shard
 from PIL import Image
 
 from huggingface_hub import notebook_login
-from diffusers import FlaxStableDiffusionPipeline
+from diffusers_sd3_control import FlaxStableDiffusionPipeline
 ```
 
 ## 모델 불러오기

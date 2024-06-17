@@ -19,18 +19,17 @@ specific language governing permissions and limitations under the License.
 시작하기 전에 필요한 라이브러리가 모두 설치되어 있는지 확인하세요:
 
 ```bash
-!pip install diffusers transformers ftfy accelerate
+!pip install diffusers_sd3_control transformers ftfy accelerate
 ```
 
 [`nitrosocke/Ghibli-Diffusion`](https://huggingface.co/nitrosocke/Ghibli-Diffusion)과 같은 사전학습된 stable diffusion 모델로 [`StableDiffusionImg2ImgPipeline`]을 생성하여 시작하세요.
-
 
 ```python
 import torch
 import requests
 from PIL import Image
 from io import BytesIO
-from diffusers import StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionImg2ImgPipeline
 
 device = "cuda"
 pipe = StableDiffusionImg2ImgPipeline.from_pretrained("nitrosocke/Ghibli-Diffusion", torch_dtype=torch.float16).to(
@@ -75,7 +74,7 @@ image
 다른 스케줄러로 실험하여 출력에 어떤 영향을 미치는지 확인할 수도 있습니다:
 
 ```python
-from diffusers import LMSDiscreteScheduler
+from diffusers_sd3_control import LMSDiscreteScheduler
 
 lms = LMSDiscreteScheduler.from_config(pipe.scheduler.config)
 pipe.scheduler = lms

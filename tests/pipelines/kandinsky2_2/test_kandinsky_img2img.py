@@ -21,14 +21,14 @@ import numpy as np
 import torch
 from PIL import Image
 
-from diffusers import (
+from diffusers_sd3_control import (
     DDIMScheduler,
     KandinskyV22Img2ImgPipeline,
     KandinskyV22PriorPipeline,
     UNet2DConditionModel,
     VQModel,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

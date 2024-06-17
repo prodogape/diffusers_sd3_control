@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "src/diffusers/**.py"
+      - "src/diffusers_sd3_control/**.py"
       - "examples/**.py"
       - "tests/**.py"
 
@@ -23,11 +23,11 @@ jobs:
     name: Setup Torch Pipelines CUDA Slow Tests Matrix
     runs-on: [ self-hosted, intel-cpu, 8-cpu, ci ]
     container:
-      image: diffusers/diffusers-pytorch-cpu
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cpu
     outputs:
       pipeline_test_matrix: ${{ steps.fetch_pipeline_matrix.outputs.pipeline_test_matrix }}
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -61,10 +61,10 @@ jobs:
         module: ${{ fromJson(needs.setup_torch_cuda_pipeline_matrix.outputs.pipeline_test_matrix) }}
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
-      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers:/mnt/cache/ --gpus 0
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
+      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers_sd3_control:/mnt/cache/ --gpus 0
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -105,8 +105,8 @@ jobs:
     name: Torch CUDA Tests
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
-      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers:/mnt/cache/ --gpus 0
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
+      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers_sd3_control:/mnt/cache/ --gpus 0
     defaults:
       run:
         shell: bash
@@ -114,7 +114,7 @@ jobs:
       matrix:
         module: [models, schedulers, lora, others, single_file]
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -157,13 +157,13 @@ jobs:
     name: PEFT CUDA Tests
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
-      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers:/mnt/cache/ --gpus 0
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
+      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers_sd3_control:/mnt/cache/ --gpus 0
     defaults:
       run:
         shell: bash
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -212,13 +212,13 @@ jobs:
     name: Flax TPU Tests
     runs-on: docker-tpu
     container:
-      image: diffusers/diffusers-flax-tpu
+      image: diffusers_sd3_control/diffusers_sd3_control-flax-tpu
       options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/ --privileged
     defaults:
       run:
         shell: bash
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -259,13 +259,13 @@ jobs:
     name: ONNX CUDA Tests
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-onnxruntime-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-onnxruntime-cuda
       options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/ --gpus 0
     defaults:
       run:
         shell: bash
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -308,11 +308,11 @@ jobs:
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
 
     container:
-      image: diffusers/diffusers-pytorch-compile-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-compile-cuda
       options: --gpus 0 --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
 
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -349,11 +349,11 @@ jobs:
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
 
     container:
-      image: diffusers/diffusers-pytorch-xformers-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-xformers-cuda
       options: --gpus 0 --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
 
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -390,11 +390,11 @@ jobs:
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
 
     container:
-      image: diffusers/diffusers-pytorch-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
       options: --gpus 0 --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface:/mnt/cache/
 
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2

@@ -21,16 +21,16 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     EulerDiscreteScheduler,
     StableDiffusionLatentUpscalePipeline,
     StableDiffusionPipeline,
     UNet2DConditionModel,
 )
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,
@@ -229,7 +229,7 @@ class StableDiffusionLatentUpscalePipelineFastTests(
                 # no schedulers
                 continue
 
-            scheduler_cls = getattr(diffusers, scheduler_enum.name)
+            scheduler_cls = getattr(diffusers_sd3_control, scheduler_enum.name)
             pipe.scheduler = scheduler_cls.from_config(pipe.scheduler.config)
             output = pipe(**inputs)[0]
             outputs.append(output)

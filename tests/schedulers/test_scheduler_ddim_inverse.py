@@ -1,6 +1,6 @@
 import torch
 
-from diffusers import DDIMInverseScheduler
+from diffusers_sd3_control import DDIMInverseScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

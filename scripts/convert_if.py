@@ -8,8 +8,8 @@ import yaml
 from torch.nn import functional as F
 from transformers import CLIPConfig, CLIPImageProcessor, CLIPVisionModelWithProjection, T5EncoderModel, T5Tokenizer
 
-from diffusers import DDPMScheduler, IFPipeline, IFSuperResolutionPipeline, UNet2DConditionModel
-from diffusers.pipelines.deepfloyd_if.safety_checker import IFSafetyChecker
+from diffusers_sd3_control import DDPMScheduler, IFPipeline, IFSuperResolutionPipeline, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.deepfloyd_if.safety_checker import IFSafetyChecker
 
 
 def parse_args():

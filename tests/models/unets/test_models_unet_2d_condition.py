@@ -25,16 +25,16 @@ from huggingface_hub import snapshot_download
 from parameterized import parameterized
 from pytest import mark
 
-from diffusers import UNet2DConditionModel
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control import UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import (
     CustomDiffusionAttnProcessor,
     IPAdapterAttnProcessor,
     IPAdapterAttnProcessor2_0,
 )
-from diffusers.models.embeddings import ImageProjection, IPAdapterFaceIDImageProjection, IPAdapterPlusImageProjection
-from diffusers.utils import logging
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.models.embeddings import ImageProjection, IPAdapterFaceIDImageProjection, IPAdapterPlusImageProjection
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import (
     backend_empty_cache,
     enable_full_determinism,
     floats_tensor,
@@ -733,7 +733,7 @@ class UNet2DConditionModelTests(ModelTesterMixin, UNetTesterMixin, unittest.Test
                 trunc_cond_out, rtol=1e-05, atol=1e-05
             ), "masking the last token from our cond should be equivalent to truncating that token out of the condition"
 
-    # see diffusers.models.attention_processor::Attention#prepare_attention_mask
+    # see diffusers_sd3_control.models.attention_processor::Attention#prepare_attention_mask
     # note: we may not need to fix mask padding to work for stable-diffusion cross-attn masks.
     # since the use-case (somebody passes in a too-short cross-attn mask) is pretty esoteric.
     # maybe it's fine that this only works for the unclip use-case.

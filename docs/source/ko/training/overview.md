@@ -62,7 +62,7 @@ memory-efficient attention 연산을 수행하기 위해, 가능하면 [xFormers
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 

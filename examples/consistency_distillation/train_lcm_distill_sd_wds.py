@@ -52,18 +52,18 @@ from webdataset.tariterators import (
     valid_sample,
 )
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     LCMScheduler,
     StableDiffusionPipeline,
     UNet2DConditionModel,
 )
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import resolve_interpolation_mode
-from diffusers.utils import check_min_version, is_wandb_available
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import resolve_interpolation_mode
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
 MAX_SEQ_LENGTH = 77
@@ -71,7 +71,7 @@ MAX_SEQ_LENGTH = 77
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__)
@@ -866,10 +866,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:
@@ -1012,7 +1012,7 @@ def main(args):
                 # pop models so that they are not loaded again
                 model = models.pop()
 
-                # load diffusers style into model
+                # load diffusers_sd3_control style into model
                 load_model = UNet2DConditionModel.from_pretrained(input_dir, subfolder="unet")
                 model.register_to_config(**load_model.config)
 

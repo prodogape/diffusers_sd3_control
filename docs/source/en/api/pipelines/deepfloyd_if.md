@@ -47,7 +47,7 @@ and enter your [Hugging Face Hub access token](https://huggingface.co/docs/hub/s
 Next we install `diffusers` and dependencies:
 
 ```sh
-pip install -q diffusers accelerate transformers
+pip install -q diffusers_sd3_control accelerate transformers
 ```
 
 The following sections give more in-detail examples of how to use IF. Specifically:
@@ -81,8 +81,8 @@ The following sections give more in-detail examples of how to use IF. Specifical
 By default diffusers makes use of [model cpu offloading](../../optimization/memory#model-offloading) to run the whole IF pipeline with as little as 14 GB of VRAM.
 
 ```python
-from diffusers import DiffusionPipeline
-from diffusers.utils import pt_to_pil, make_image_grid
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import pt_to_pil, make_image_grid
 import torch
 
 # stage 1
@@ -143,8 +143,8 @@ In this case just make sure to load the weights using the [`IFImg2ImgPipeline`] 
 without loading them twice by making use of the [`~DiffusionPipeline.components`] argument as explained [here](#converting-between-different-pipelines).
 
 ```python
-from diffusers import IFImg2ImgPipeline, IFImg2ImgSuperResolutionPipeline, DiffusionPipeline
-from diffusers.utils import pt_to_pil, load_image, make_image_grid
+from diffusers_sd3_control import IFImg2ImgPipeline, IFImg2ImgSuperResolutionPipeline, DiffusionPipeline
+from diffusers_sd3_control.utils import pt_to_pil, load_image, make_image_grid
 import torch
 
 # download image
@@ -215,8 +215,8 @@ In this case just make sure to load the weights using the [`IFInpaintingPipeline
 without loading them twice by making use of the [`~DiffusionPipeline.components()`] function as explained [here](#converting-between-different-pipelines).
 
 ```python
-from diffusers import IFInpaintingPipeline, IFInpaintingSuperResolutionPipeline, DiffusionPipeline
-from diffusers.utils import pt_to_pil, load_image, make_image_grid
+from diffusers_sd3_control import IFInpaintingPipeline, IFInpaintingSuperResolutionPipeline, DiffusionPipeline
+from diffusers_sd3_control.utils import pt_to_pil, load_image, make_image_grid
 import torch
 
 # download image
@@ -288,19 +288,19 @@ make_image_grid([original_image, mask_image, pt_to_pil(stage_1_output)[0], pt_to
 In addition to being loaded with `from_pretrained`, Pipelines can also be loaded directly from each other.
 
 ```python
-from diffusers import IFPipeline, IFSuperResolutionPipeline
+from diffusers_sd3_control import IFPipeline, IFSuperResolutionPipeline
 
 pipe_1 = IFPipeline.from_pretrained("DeepFloyd/IF-I-XL-v1.0")
 pipe_2 = IFSuperResolutionPipeline.from_pretrained("DeepFloyd/IF-II-L-v1.0")
 
 
-from diffusers import IFImg2ImgPipeline, IFImg2ImgSuperResolutionPipeline
+from diffusers_sd3_control import IFImg2ImgPipeline, IFImg2ImgSuperResolutionPipeline
 
 pipe_1 = IFImg2ImgPipeline(**pipe_1.components)
 pipe_2 = IFImg2ImgSuperResolutionPipeline(**pipe_2.components)
 
 
-from diffusers import IFInpaintingPipeline, IFInpaintingSuperResolutionPipeline
+from diffusers_sd3_control import IFInpaintingPipeline, IFInpaintingSuperResolutionPipeline
 
 pipe_1 = IFInpaintingPipeline(**pipe_1.components)
 pipe_2 = IFInpaintingSuperResolutionPipeline(**pipe_2.components)
@@ -326,7 +326,7 @@ pipe("<prompt>", num_inference_steps=30)
 Or with the `timesteps` argument:
 
 ```py
-from diffusers.pipelines.deepfloyd_if import fast27_timesteps
+from diffusers_sd3_control.pipelines.deepfloyd_if import fast27_timesteps
 
 pipe("<prompt>", timesteps=fast27_timesteps)
 ```
@@ -346,7 +346,7 @@ You can also use [`torch.compile`](../../optimization/torch2.0). Note that we ha
 with IF and it might not give expected results.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained("DeepFloyd/IF-I-XL-v1.0", variant="fp16", torch_dtype=torch.float16)
@@ -383,7 +383,7 @@ text_encoder = T5EncoderModel.from_pretrained(
     "DeepFloyd/IF-I-XL-v1.0", subfolder="text_encoder", device_map="auto", load_in_8bit=True, variant="8bit"
 )
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained(
     "DeepFloyd/IF-I-XL-v1.0",
@@ -399,11 +399,11 @@ For CPU RAM constrained machines like Google Colab free tier where we can't load
 the text encoder or UNet when the respective model components are needed.
 
 ```py
-from diffusers import IFPipeline, IFSuperResolutionPipeline
+from diffusers_sd3_control import IFPipeline, IFSuperResolutionPipeline
 import torch
 import gc
 from transformers import T5EncoderModel
-from diffusers.utils import pt_to_pil, make_image_grid
+from diffusers_sd3_control.utils import pt_to_pil, make_image_grid
 
 text_encoder = T5EncoderModel.from_pretrained(
     "DeepFloyd/IF-I-XL-v1.0", subfolder="text_encoder", device_map="auto", load_in_8bit=True, variant="8bit"

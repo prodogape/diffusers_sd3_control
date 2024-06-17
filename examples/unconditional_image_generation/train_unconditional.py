@@ -20,15 +20,15 @@ from packaging import version
 from torchvision import transforms
 from tqdm.auto import tqdm
 
-import diffusers
-from diffusers import DDPMPipeline, DDPMScheduler, UNet2DModel
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import EMAModel
-from diffusers.utils import check_min_version, is_accelerate_version, is_tensorboard_available, is_wandb_available
-from diffusers.utils.import_utils import is_xformers_available
+import diffusers_sd3_control
+from diffusers_sd3_control import DDPMPipeline, DDPMScheduler, UNet2DModel
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import EMAModel
+from diffusers_sd3_control.utils import check_min_version, is_accelerate_version, is_tensorboard_available, is_wandb_available
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
@@ -319,7 +319,7 @@ def main(args):
                 # pop models so that they are not loaded again
                 model = models.pop()
 
-                # load diffusers style into model
+                # load diffusers_sd3_control style into model
                 load_model = UNet2DModel.from_pretrained(input_dir, subfolder="unet")
                 model.register_to_config(**load_model.config)
 
@@ -338,10 +338,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         datasets.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # Handle the repository creation
     if accelerator.is_main_process:

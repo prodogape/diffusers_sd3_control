@@ -20,7 +20,7 @@ specific language governing permissions and limitations under the License.
 Both of these optimizations require PyTorch 2.0 or later and 🤗 Diffusers > 0.13.0.
 
 ```bash
-pip install --upgrade torch diffusers
+pip install --upgrade torch diffusers_sd3_control
 ```
 
 ## Scaled dot product attention
@@ -61,7 +61,7 @@ In some cases - such as making the pipeline more deterministic or converting it 
 The `torch.compile` function can often provide an additional speed-up to your PyTorch code. In 🤗 Diffusers, it is usually best to wrap the UNet with `torch.compile` because it does most of the heavy lifting in the pipeline.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True).to("cuda")
@@ -89,7 +89,7 @@ Expand the dropdown below to find the code used to benchmark each pipeline:
 ### Stable Diffusion text-to-image
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 path = "runwayml/stable-diffusion-v1-5"
@@ -113,8 +113,8 @@ for _ in range(3):
 ### Stable Diffusion image-to-image
 
 ```python
-from diffusers import StableDiffusionImg2ImgPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control.utils import load_image
 import torch
 
 url = "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/assets/stable-samples/img2img/sketch-mountains-input.jpg"
@@ -143,8 +143,8 @@ for _ in range(3):
 ### Stable Diffusion inpainting
 
 ```python
-from diffusers import StableDiffusionInpaintPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionInpaintPipeline
+from diffusers_sd3_control.utils import load_image
 import torch
 
 img_url = "https://raw.githubusercontent.com/CompVis/latent-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png"
@@ -174,8 +174,8 @@ for _ in range(3):
 ### ControlNet
 
 ```python
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control.utils import load_image
 import torch
 
 url = "https://raw.githubusercontent.com/CompVis/stable-diffusion/main/assets/stable-samples/img2img/sketch-mountains-input.jpg"
@@ -209,7 +209,7 @@ for _ in range(3):
 ### DeepFloyd IF text-to-image + upscaling
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 run_compile = True  # Set True / False

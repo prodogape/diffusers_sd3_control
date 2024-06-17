@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  REGISTRY: diffusers
+  REGISTRY: diffusers_sd3_control
   CI_SLACK_CHANNEL: ${{ secrets.CI_DOCKER_CHANNEL }}
 
 jobs:
@@ -61,15 +61,15 @@ jobs:
       fail-fast: false
       matrix:
         image-name:
-          - diffusers-pytorch-cpu
-          - diffusers-pytorch-cuda
-          - diffusers-pytorch-compile-cuda
-          - diffusers-pytorch-xformers-cuda
-          - diffusers-flax-cpu
-          - diffusers-flax-tpu
-          - diffusers-onnxruntime-cpu
-          - diffusers-onnxruntime-cuda
-          - diffusers-doc-builder
+          - diffusers_sd3_control-pytorch-cpu
+          - diffusers_sd3_control-pytorch-cuda
+          - diffusers_sd3_control-pytorch-compile-cuda
+          - diffusers_sd3_control-pytorch-xformers-cuda
+          - diffusers_sd3_control-flax-cpu
+          - diffusers_sd3_control-flax-tpu
+          - diffusers_sd3_control-onnxruntime-cpu
+          - diffusers_sd3_control-onnxruntime-cuda
+          - diffusers_sd3_control-doc-builder
 
     steps:
       - name: Checkout repository

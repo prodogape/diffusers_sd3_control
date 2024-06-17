@@ -35,7 +35,7 @@ from PIL import Image
 from requests.exceptions import HTTPError
 from transformers import CLIPImageProcessor, CLIPModel, CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     ConfigMixin,
     DDIMPipeline,
@@ -57,13 +57,13 @@ from diffusers import (
     UniPCMultistepScheduler,
     logging,
 )
-from diffusers.pipelines.pipeline_utils import _get_pipeline_class
-from diffusers.schedulers.scheduling_utils import SCHEDULER_CONFIG_NAME
-from diffusers.utils import (
+from diffusers_sd3_control.pipelines.pipeline_utils import _get_pipeline_class
+from diffusers_sd3_control.schedulers.scheduling_utils import SCHEDULER_CONFIG_NAME
+from diffusers_sd3_control.utils import (
     CONFIG_NAME,
     WEIGHTS_NAME,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     CaptureLogger,
     enable_full_determinism,
     floats_tensor,
@@ -81,7 +81,7 @@ from diffusers.utils.testing_utils import (
     slow,
     torch_device,
 )
-from diffusers.utils.torch_utils import is_compiled_module
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module
 
 
 enable_full_determinism()
@@ -106,7 +106,7 @@ def _test_from_save_pretrained_dynamo(in_queue, out_queue, timeout):
 
         ddpm = DDPMPipeline(model, scheduler)
 
-        # previous diffusers versions stripped compilation off
+        # previous diffusers_sd3_control versions stripped compilation off
         # compiled modules
         assert is_compiled_module(ddpm.unet)
 
@@ -868,7 +868,7 @@ class DownloadTests(unittest.TestCase):
 class CustomPipelineTests(unittest.TestCase):
     def test_load_custom_pipeline(self):
         pipeline = DiffusionPipeline.from_pretrained(
-            "google/ddpm-cifar10-32", custom_pipeline="hf-internal-testing/diffusers-dummy-pipeline"
+            "google/ddpm-cifar10-32", custom_pipeline="hf-internal-testing/diffusers_sd3_control-dummy-pipeline"
         )
         pipeline = pipeline.to(torch_device)
         # NOTE that `"CustomPipeline"` is not a class that is defined in this library, but solely on the Hub
@@ -902,7 +902,7 @@ class CustomPipelineTests(unittest.TestCase):
 
     def test_run_custom_pipeline(self):
         pipeline = DiffusionPipeline.from_pretrained(
-            "google/ddpm-cifar10-32", custom_pipeline="hf-internal-testing/diffusers-dummy-pipeline"
+            "google/ddpm-cifar10-32", custom_pipeline="hf-internal-testing/diffusers_sd3_control-dummy-pipeline"
         )
         pipeline = pipeline.to(torch_device)
         images, output_str = pipeline(num_inference_steps=2, output_type="np")
@@ -1245,7 +1245,7 @@ class PipelineFastTests(unittest.TestCase):
 
         sd.enable_model_cpu_offload()
 
-        logger = logging.get_logger("diffusers.pipelines.pipeline_utils")
+        logger = logging.get_logger("diffusers_sd3_control.pipelines.pipeline_utils")
         with CaptureLogger(logger) as cap_logger:
             sd.to("cuda")
 
@@ -1431,12 +1431,12 @@ class PipelineFastTests(unittest.TestCase):
         # by default we don't download
         with tempfile.TemporaryDirectory() as tmpdirname:
             _ = StableDiffusionPipeline.from_pretrained(
-                "hf-internal-testing/diffusers-stable-diffusion-tiny-all", cache_dir=tmpdirname
+                "hf-internal-testing/diffusers_sd3_control-stable-diffusion-tiny-all", cache_dir=tmpdirname
             )
 
             path = os.path.join(
                 tmpdirname,
-                "models--hf-internal-testing--diffusers-stable-diffusion-tiny-all",
+                "models--hf-internal-testing--diffusers_sd3_control-stable-diffusion-tiny-all",
                 "snapshots",
                 "07838d72e12f9bcec1375b0482b80c1d399be843",
                 "unet",
@@ -1451,14 +1451,14 @@ class PipelineFastTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmpdirname:
             _ = StableDiffusionPipeline.from_pretrained(
-                "hf-internal-testing/diffusers-stable-diffusion-tiny-all",
+                "hf-internal-testing/diffusers_sd3_control-stable-diffusion-tiny-all",
                 cache_dir=tmpdirname,
                 use_safetensors=use_safetensors,
             )
 
             path = os.path.join(
                 tmpdirname,
-                "models--hf-internal-testing--diffusers-stable-diffusion-tiny-all",
+                "models--hf-internal-testing--diffusers_sd3_control-stable-diffusion-tiny-all",
                 "snapshots",
                 "07838d72e12f9bcec1375b0482b80c1d399be843",
                 "unet",
@@ -1588,7 +1588,7 @@ class PipelineFastTests(unittest.TestCase):
         variant = "fp16"
         with self.assertRaises(ValueError) as error_context:
             _ = StableDiffusionPipeline.download(
-                "hf-internal-testing/diffusers-stable-diffusion-tiny-all", variant=variant
+                "hf-internal-testing/diffusers_sd3_control-stable-diffusion-tiny-all", variant=variant
             )
 
         assert "but no such modeling files are available" in str(error_context.exception)
@@ -1716,7 +1716,7 @@ class PipelineSlowTests(unittest.TestCase):
 
     def test_warning_unused_kwargs(self):
         model_id = "hf-internal-testing/unet-pipeline-dummy"
-        logger = logging.get_logger("diffusers.pipelines")
+        logger = logging.get_logger("diffusers_sd3_control.pipelines")
         with tempfile.TemporaryDirectory() as tmpdirname:
             with CaptureLogger(logger) as cap_logger:
                 DiffusionPipeline.from_pretrained(
@@ -1843,7 +1843,7 @@ class PipelineSlowTests(unittest.TestCase):
         )
         pipe_pt.to(torch_device)
 
-        from diffusers import FlaxStableDiffusionPipeline
+        from diffusers_sd3_control import FlaxStableDiffusionPipeline
 
         with tempfile.TemporaryDirectory() as tmpdirname:
             pipe_pt.save_pretrained(tmpdirname)

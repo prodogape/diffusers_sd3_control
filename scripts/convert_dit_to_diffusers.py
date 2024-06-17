@@ -4,7 +4,7 @@ import os
 import torch
 from torchvision.datasets.utils import download_url
 
-from diffusers import AutoencoderKL, DDIMScheduler, DiTPipeline, Transformer2DModel
+from diffusers_sd3_control import AutoencoderKL, DDIMScheduler, DiTPipeline, Transformer2DModel
 
 
 pretrained_models = {512: "DiT-XL-2-512x512.pt", 256: "DiT-XL-2-256x256.pt"}

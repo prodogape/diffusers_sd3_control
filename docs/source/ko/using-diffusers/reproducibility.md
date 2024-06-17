@@ -37,7 +37,7 @@ diffusion 모델에서 무작위성의 원천을 제어하거나 결정론적 �
 [DDIMPipeline](https://huggingface.co/docs/diffusers/v0.18.0/en/api/pipelines/ddim#diffusers.DDIMPipeline)에서 두 추론 단계 이후의 텐서 값을 살펴보세요:
 
 ```python
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 import numpy as np
 
 model_id = "google/ddpm-cifar10-32"
@@ -63,7 +63,7 @@ CPU에서 재현 가능한 결과를 생성하려면, PyTorch [Generator](https:
 
 ```python
 import torch
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 import numpy as np
 
 model_id = "google/ddpm-cifar10-32"
@@ -96,7 +96,7 @@ print(np.abs(image).sum())
 
 ```python
 import torch
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 import numpy as np
 
 model_id = "google/ddpm-cifar10-32"
@@ -123,7 +123,7 @@ GPU가 CPU와 다른 난수 생성기를 사용하기 때문에 동일한 시드
 
 ```python
 import torch
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 import numpy as np
 
 model_id = "google/ddpm-cifar10-32"
@@ -180,7 +180,7 @@ torch.use_deterministic_algorithms(True)
 
 ```py
 import torch
-from diffusers import DDIMScheduler, StableDiffusionPipeline
+from diffusers_sd3_control import DDIMScheduler, StableDiffusionPipeline
 import numpy as np
 
 model_id = "runwayml/stable-diffusion-v1-5"

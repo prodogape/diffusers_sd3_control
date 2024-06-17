@@ -22,7 +22,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -314,7 +314,7 @@ Once training is finished, you can use your new Custom Diffusion model for infer
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "CompVis/stable-diffusion-v1-4", torch_dtype=torch.float16,
@@ -337,7 +337,7 @@ image.save("cat.png")
 ```py
 import torch
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("sayakpaul/custom-diffusion-cat-wooden-pot", torch_dtype=torch.float16).to("cuda")
 pipeline.unet.load_attn_procs(model_id, weight_name="pytorch_custom_diffusion_weights.bin")

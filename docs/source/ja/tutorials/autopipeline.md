@@ -28,7 +28,7 @@ Diffusersは様々なタスクをこなすことができ、テキストから�
 まずはチェックポイントを選ぶことから始めましょう。例えば、 [runwayml/stable-diffusion-v1-5](https://huggingface.co/runwayml/stable-diffusion-v1-5) チェックポイントでテキストから画像への変換したいなら、[`AutoPipelineForText2Image`]を使います:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained(
@@ -52,7 +52,7 @@ image
 同様に、画像から画像へ変換する場合、[`AutoPipelineForImage2Image`] は `model_index.json` ファイルから `"stable-diffusion"` チェックポイントを検出し、対応する [`StableDiffusionImg2ImgPipeline`] を読み込みます。また、入力画像にノイズの量やバリエーションの追加を決めるための強さなど、パイプラインクラスに固有の追加引数を渡すこともできます:
 
 ```py
-from diffusers import AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForImage2Image
 import torch
 import requests
 from PIL import Image
@@ -82,8 +82,8 @@ image
 また、画像の修復を行いたい場合は、 [`AutoPipelineForInpainting`] が、同様にベースとなる[`StableDiffusionInpaintPipeline`]クラスを読み込みます：
 
 ```py
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
@@ -108,7 +108,7 @@ image
 サポートされていないチェックポイントを読み込もうとすると、エラーになります:
 
 ```py
-from diffusers import AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForImage2Image
 import torch
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
@@ -124,14 +124,14 @@ pipeline = AutoPipelineForImage2Image.from_pretrained(
 [from_pipe()](https://huggingface.co/docs/diffusers/v0.25.1/en/api/pipelines/auto_pipeline#diffusers.AutoPipelineForImage2Image.from_pipe) メソッドは、元のパイプラインクラスを検出し、実行したいタスクに対応する新しいパイプラインクラスにマッピングします。例えば、テキストから画像への`"stable-diffusion"` クラスのパイプラインを読み込む場合：
 
 ```py
-from diffusers import AutoPipelineForText2Image, AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForText2Image, AutoPipelineForImage2Image
 import torch
 
 pipeline_text2img = AutoPipelineForText2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True
 )
 print(type(pipeline_text2img))
-"<class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>"
+"<class 'diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>"
 ```
 
 そして、[from_pipe()] (https://huggingface.co/docs/diffusers/v0.25.1/en/api/pipelines/auto_pipeline#diffusers.AutoPipelineForImage2Image.from_pipe)は、もとの`"stable-diffusion"` パイプラインのクラスである [`StableDiffusionImg2ImgPipeline`] にマップします:
@@ -139,12 +139,12 @@ print(type(pipeline_text2img))
 ```py
 pipeline_img2img = AutoPipelineForImage2Image.from_pipe(pipeline_text2img)
 print(type(pipeline_img2img))
-"<class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline'>"
+"<class 'diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline'>"
 ```
 元のパイプラインにオプションとして引数（セーフティチェッカーの無効化など）を渡した場合、この引数も新しいパイプラインに渡されます:
 
 ```py
-from diffusers import AutoPipelineForText2Image, AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForText2Image, AutoPipelineForImage2Image
 import torch
 
 pipeline_text2img = AutoPipelineForText2Image.from_pretrained(

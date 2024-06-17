@@ -20,7 +20,7 @@ import re
 
 # All paths are set with the intent you should run this script from the root of the repo with the command
 # python utils/check_dummies.py
-PATH_TO_DIFFUSERS = "src/diffusers"
+PATH_TO_DIFFUSERS = "src/diffusers_sd3_control"
 
 # Matches is_xxx_available()
 _re_backend = re.compile(r"is\_([a-z_]*)_available\(\)")
@@ -154,7 +154,7 @@ def check_dummies(overwrite=False):
         if dummy_files[backend] != actual_dummies[backend]:
             if overwrite:
                 print(
-                    f"Updating diffusers.utils.dummy_{short_names.get(backend, backend)}_objects.py as the main "
+                    f"Updating diffusers_sd3_control.utils.dummy_{short_names.get(backend, backend)}_objects.py as the main "
                     "__init__ has new objects."
                 )
                 with open(dummy_file_paths[backend], "w", encoding="utf-8", newline="\n") as f:
@@ -162,7 +162,7 @@ def check_dummies(overwrite=False):
             else:
                 raise ValueError(
                     "The main __init__ has objects that are not present in "
-                    f"diffusers.utils.dummy_{short_names.get(backend, backend)}_objects.py. Run `make fix-copies` "
+                    f"diffusers_sd3_control.utils.dummy_{short_names.get(backend, backend)}_objects.py. Run `make fix-copies` "
                     "to fix this."
                 )
 

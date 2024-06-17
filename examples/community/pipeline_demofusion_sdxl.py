@@ -9,34 +9,34 @@ import torch
 import torch.nn.functional as F
 from transformers import CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.loaders import (
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.loaders import (
     FromSingleFileMixin,
     LoraLoaderMixin,
     TextualInversionLoaderMixin,
 )
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import (
     AttnProcessor2_0,
     LoRAAttnProcessor2_0,
     LoRAXFormersAttnProcessor,
     XFormersAttnProcessor,
 )
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     is_accelerate_available,
     is_accelerate_version,
     is_invisible_watermark_available,
     logging,
     replace_example_docstring,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 if is_invisible_watermark_available():
-    from diffusers.pipelines.stable_diffusion_xl.watermark import (
+    from diffusers_sd3_control.pipelines.stable_diffusion_xl.watermark import (
         StableDiffusionXLWatermarker,
     )
 
@@ -47,7 +47,7 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> import torch
-        >>> from diffusers import StableDiffusionXLPipeline
+        >>> from diffusers_sd3_control import StableDiffusionXLPipeline
 
         >>> pipe = StableDiffusionXLPipeline.from_pretrained(
         ...     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16
@@ -78,7 +78,7 @@ def gaussian_filter(latents, kernel_size=3, sigma=1.0):
     return blurred_latents
 
 
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.rescale_noise_cfg
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.rescale_noise_cfg
 def rescale_noise_cfg(noise_cfg, noise_pred_text, guidance_rescale=0.0):
     """
     Rescale `noise_cfg` according to `guidance_rescale`. Based on findings of [Common Diffusion Noise Schedules and
@@ -373,7 +373,7 @@ class DemoFusionSDXLPipeline(
 
         return prompt_embeds, negative_prompt_embeds, pooled_prompt_embeds, negative_pooled_prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
@@ -475,7 +475,7 @@ class DemoFusionSDXLPipeline(
             warnings.warn("num_images_per_prompt != 1 is not supported by DemoFusion and will be ignored.")
             num_images_per_prompt = 1
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_latents
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_latents
     def prepare_latents(self, batch_size, num_channels_latents, height, width, dtype, device, generator, latents=None):
         shape = (
             batch_size,
@@ -606,7 +606,7 @@ class DemoFusionSDXLPipeline(
 
         return image
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_upscale.StableDiffusionUpscalePipeline.upcast_vae
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_upscale.StableDiffusionUpscalePipeline.upcast_vae
     def upcast_vae(self):
         dtype = self.vae.dtype
         self.vae.to(dtype=torch.float32)
@@ -753,7 +753,7 @@ class DemoFusionSDXLPipeline(
             cross_attention_kwargs (`dict`, *optional*):
                 A kwargs dictionary that if specified is passed along to the `AttentionProcessor` as defined under
                 `self.processor` in
-                [diffusers.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
+                [diffusers_sd3_control.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
             guidance_rescale (`float`, *optional*, defaults to 0.7):
                 Guidance rescale factor proposed by [Common Diffusion Noise Schedules and Sample Steps are
                 Flawed](https://arxiv.org/pdf/2305.08891.pdf) `guidance_scale` is defined as `φ` in equation 16. of

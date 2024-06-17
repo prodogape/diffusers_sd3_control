@@ -20,16 +20,16 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     EulerDiscreteScheduler,
     UNet2DConditionModel,
 )
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl_instruct_pix2pix import (
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl_instruct_pix2pix import (
     StableDiffusionXLInstructPix2PixPipeline,
 )
-from diffusers.utils.testing_utils import enable_full_determinism, floats_tensor, torch_device
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, floats_tensor, torch_device
 
 from ..pipeline_params import (
     IMAGE_TO_IMAGE_IMAGE_PARAMS,

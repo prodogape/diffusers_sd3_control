@@ -32,7 +32,7 @@ specific language governing permissions and limitations under the License.
 시작하기 전에 학습을 위한 의존성 라이브러리들을 설치해야 합니다:
 
 ```bash
-pip install diffusers accelerate transformers
+pip install diffusers_sd3_control accelerate transformers
 ```
 
 의존성 라이브러리들의 설치가 완료되면, [🤗Accelerate](https://github.com/huggingface/accelerate/) 환경을 초기화시킵니다.
@@ -88,7 +88,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./cat"
 snapshot_download(
-    "diffusers/cat_toy_example", local_dir=local_dir, repo_type="dataset", ignore_patterns=".gitattributes"
+    "diffusers_sd3_control/cat_toy_example", local_dir=local_dir, repo_type="dataset", ignore_patterns=".gitattributes"
 )
 ```
 
@@ -202,7 +202,7 @@ textual-inversion 스크립트는 기본적으로 textual-inversion을 통해 �
 textual-inversion 임베딩 벡터을 불러오기 위해서는, 먼저 해당 임베딩 벡터를 학습할 때 사용한 모델을 불러와야 합니다. 여기서는  [`runwayml/stable-diffusion-v1-5`](https://huggingface.co/docs/diffusers/training/runwayml/stable-diffusion-v1-5) 모델이 사용되었다고 가정하고 불러오겠습니다.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_id = "runwayml/stable-diffusion-v1-5"
@@ -239,7 +239,7 @@ import jax
 import numpy as np
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard
-from diffusers import FlaxStableDiffusionPipeline
+from diffusers_sd3_control import FlaxStableDiffusionPipeline
 
 model_path = "path-to-your-trained-model"
 pipeline, params = FlaxStableDiffusionPipeline.from_pretrained(model_path, dtype=jax.numpy.bfloat16)

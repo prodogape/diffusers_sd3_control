@@ -22,7 +22,7 @@ import torch
 from huggingface_hub import hf_hub_download
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -30,7 +30,7 @@ from diffusers import (
     StableDiffusionPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_numpy,
     numpy_cosine_similarity_distance,

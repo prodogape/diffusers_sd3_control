@@ -16,7 +16,7 @@ To make sure you can successfully run the latest versions of the example scripts
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -84,7 +84,7 @@ accelerate launch train_text_to_image_sdxl.py \
 ### Inference
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 model_path = "you-model-id-goes-here" # <-- change this
@@ -97,8 +97,9 @@ image.save("naruto.png")
 ```
 
 ### Inference in Pytorch XLA
+
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 import torch_xla.core.xla_model as xm
 
@@ -272,7 +273,7 @@ Once you have trained a model using above command, the inference can be done sim
 need to pass the `output_dir` for loading the LoRA weights which, in this case, is `sd-naruto-model-lora-sdxl`.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 model_path = "takuoko/sd-naruto-model-lora-sdxl"

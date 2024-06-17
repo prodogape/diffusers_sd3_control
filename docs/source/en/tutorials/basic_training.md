@@ -28,7 +28,7 @@ Before you begin, make sure you have 🤗 Datasets installed to load and preproc
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install diffusers[training]
+#!pip install diffusers_sd3_control[training]
 ```
 
 We encourage you to share your model with the community, and in order to do that, you'll need to login to your Hugging Face account (create one [here](https://hf.co/join) if you don't already have one!). You can login from a notebook and enter your token when prompted. Make sure your token has the write role.
@@ -159,7 +159,7 @@ Feel free to visualize the images again to confirm that they've been resized. No
 Pretrained models in 🧨 Diffusers are easily created from their model class with the parameters you want. For example, to create a [`UNet2DModel`]:
 
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> model = UNet2DModel(
 ...     sample_size=config.image_size,  # the target image resolution
@@ -208,7 +208,7 @@ Let's take a look at the [`DDPMScheduler`] and use the `add_noise` method to add
 ```py
 >>> import torch
 >>> from PIL import Image
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> noise_scheduler = DDPMScheduler(num_train_timesteps=1000)
 >>> noise = torch.randn(sample_image.shape)
@@ -238,7 +238,7 @@ By now, you have most of the pieces to start training the model and all that's l
 First, you'll need an optimizer and a learning rate scheduler:
 
 ```py
->>> from diffusers.optimization import get_cosine_schedule_with_warmup
+>>> from diffusers_sd3_control.optimization import get_cosine_schedule_with_warmup
 
 >>> optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 >>> lr_scheduler = get_cosine_schedule_with_warmup(
@@ -251,8 +251,8 @@ First, you'll need an optimizer and a learning rate scheduler:
 Then, you'll need a way to evaluate the model. For evaluation, you can use the [`DDPMPipeline`] to generate a batch of sample images and save it as a grid:
 
 ```py
->>> from diffusers import DDPMPipeline
->>> from diffusers.utils import make_image_grid
+>>> from diffusers_sd3_control import DDPMPipeline
+>>> from diffusers_sd3_control.utils import make_image_grid
 >>> import os
 
 >>> def evaluate(config, epoch, pipeline):

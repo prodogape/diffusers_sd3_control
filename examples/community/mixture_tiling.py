@@ -6,11 +6,11 @@ from typing import List, Optional, Tuple, Union
 import torch
 from tqdm.auto import tqdm
 
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
-from diffusers.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
-from diffusers.utils import logging
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
+from diffusers_sd3_control.utils import logging
 
 
 try:
@@ -24,7 +24,7 @@ logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 EXAMPLE_DOC_STRING = """
     Examples:
         ```py
-        >>> from diffusers import LMSDiscreteScheduler, DiffusionPipeline
+        >>> from diffusers_sd3_control import LMSDiscreteScheduler, DiffusionPipeline
 
         >>> scheduler = LMSDiscreteScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", num_train_timesteps=1000)
         >>> pipeline = DiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", scheduler=scheduler, custom_pipeline="mixture_tiling")

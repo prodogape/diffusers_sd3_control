@@ -20,7 +20,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -214,8 +214,8 @@ After training is finished, you can use your new InstructPix2Pix for inference:
 import PIL
 import requests
 import torch
-from diffusers import StableDiffusionInstructPix2PixPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionInstructPix2PixPipeline
+from diffusers_sd3_control.utils import load_image
 
 pipeline = StableDiffusionInstructPix2PixPipeline.from_pretrained("your_cool_model", torch_dtype=torch.float16).to("cuda")
 generator = torch.Generator("cuda").manual_seed(0)

@@ -122,7 +122,7 @@ In this section, we will walk you through how to evaluate three different diffus
 Let's first load a [`StableDiffusionPipeline`]:
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_ckpt = "CompVis/stable-diffusion-v1-4"
@@ -276,7 +276,7 @@ We will first edit the images of our dataset with the edit instruction and compu
 Let's first load the [`StableDiffusionInstructPix2PixPipeline`]:
 
 ```python
-from diffusers import StableDiffusionInstructPix2PixPipeline
+from diffusers_sd3_control import StableDiffusionInstructPix2PixPipeline
 
 instruct_pix2pix_pipeline = StableDiffusionInstructPix2PixPipeline.from_pretrained(
     "timbrooks/instruct-pix2pix", torch_dtype=torch.float16
@@ -492,7 +492,7 @@ print(real_images.shape)
 We now load the [`DiTPipeline`](https://huggingface.co/docs/diffusers/api/pipelines/dit) to generate images conditioned on the above-mentioned classes.
 
 ```python
-from diffusers import DiTPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control import DiTPipeline, DPMSolverMultistepScheduler
 
 dit_pipeline = DiTPipeline.from_pretrained("facebook/DiT-XL-2-256", torch_dtype=torch.float16)
 dit_pipeline.scheduler = DPMSolverMultistepScheduler.from_config(dit_pipeline.scheduler.config)

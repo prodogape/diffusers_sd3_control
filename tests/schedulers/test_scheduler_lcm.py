@@ -3,8 +3,8 @@ from typing import Dict, List, Tuple
 
 import torch
 
-from diffusers import LCMScheduler
-from diffusers.utils.testing_utils import torch_device
+from diffusers_sd3_control import LCMScheduler
+from diffusers_sd3_control.utils.testing_utils import torch_device
 
 from .test_schedulers import SchedulerCommonTest
 

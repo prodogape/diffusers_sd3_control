@@ -17,9 +17,9 @@ import unittest
 
 import torch
 
-from diffusers import DDIMScheduler, DDPMScheduler, UNet2DModel
-from diffusers.training_utils import set_seed
-from diffusers.utils.testing_utils import slow
+from diffusers_sd3_control import DDIMScheduler, DDPMScheduler, UNet2DModel
+from diffusers_sd3_control.training_utils import set_seed
+from diffusers_sd3_control.utils.testing_utils import slow
 
 
 torch.backends.cuda.matmul.allow_tf32 = False

@@ -11,7 +11,7 @@
 - sections:
   - local: tutorials/tutorial_overview
     title: Overview
-  - local: using-diffusers/write_own_pipeline
+  - local: using-diffusers_sd3_control/write_own_pipeline
     title: Understanding pipelines, models and schedulers
   - local: tutorials/autopipeline
     title: AutoPipeline
@@ -23,49 +23,49 @@
     title: Accelerate inference of text-to-image diffusion models
   title: Tutorials
 - sections:
-  - local: using-diffusers/loading
+  - local: using-diffusers_sd3_control/loading
     title: Load pipelines
-  - local: using-diffusers/custom_pipeline_overview
+  - local: using-diffusers_sd3_control/custom_pipeline_overview
     title: Load community pipelines and components
-  - local: using-diffusers/schedulers
+  - local: using-diffusers_sd3_control/schedulers
     title: Load schedulers and models
-  - local: using-diffusers/other-formats
+  - local: using-diffusers_sd3_control/other-formats
     title: Model files and layouts
-  - local: using-diffusers/loading_adapters
+  - local: using-diffusers_sd3_control/loading_adapters
     title: Load adapters
-  - local: using-diffusers/push_to_hub
+  - local: using-diffusers_sd3_control/push_to_hub
     title: Push files to the Hub
   title: Load pipelines and adapters
 - sections:
-  - local: using-diffusers/unconditional_image_generation
+  - local: using-diffusers_sd3_control/unconditional_image_generation
     title: Unconditional image generation
-  - local: using-diffusers/conditional_image_generation
+  - local: using-diffusers_sd3_control/conditional_image_generation
     title: Text-to-image
-  - local: using-diffusers/img2img
+  - local: using-diffusers_sd3_control/img2img
     title: Image-to-image
-  - local: using-diffusers/inpaint
+  - local: using-diffusers_sd3_control/inpaint
     title: Inpainting
-  - local: using-diffusers/text-img2vid
+  - local: using-diffusers_sd3_control/text-img2vid
     title: Text or image-to-video
-  - local: using-diffusers/depth2img
+  - local: using-diffusers_sd3_control/depth2img
     title: Depth-to-image
   title: Generative tasks
 - sections:
-  - local: using-diffusers/overview_techniques
+  - local: using-diffusers_sd3_control/overview_techniques
     title: Overview
   - local: training/distributed_inference
     title: Distributed inference with multiple GPUs
-  - local: using-diffusers/merge_loras
+  - local: using-diffusers_sd3_control/merge_loras
     title: Merge LoRAs
-  - local: using-diffusers/scheduler_features
+  - local: using-diffusers_sd3_control/scheduler_features
     title: Scheduler features
-  - local: using-diffusers/callback
+  - local: using-diffusers_sd3_control/callback
     title: Pipeline callbacks
-  - local: using-diffusers/reusing_seeds
+  - local: using-diffusers_sd3_control/reusing_seeds
     title: Reproducible pipelines
-  - local: using-diffusers/image_quality
+  - local: using-diffusers_sd3_control/image_quality
     title: Controlling image quality
-  - local: using-diffusers/weighted_prompts
+  - local: using-diffusers_sd3_control/weighted_prompts
     title: Prompt techniques
   title: Inference techniques
 - sections:
@@ -73,31 +73,31 @@
     title: Outpainting
   title: Advanced inference
 - sections:
-  - local: using-diffusers/sdxl
+  - local: using-diffusers_sd3_control/sdxl
     title: Stable Diffusion XL
-  - local: using-diffusers/sdxl_turbo
+  - local: using-diffusers_sd3_control/sdxl_turbo
     title: SDXL Turbo
-  - local: using-diffusers/kandinsky
+  - local: using-diffusers_sd3_control/kandinsky
     title: Kandinsky
-  - local: using-diffusers/ip_adapter
+  - local: using-diffusers_sd3_control/ip_adapter
     title: IP-Adapter
-  - local: using-diffusers/controlnet
+  - local: using-diffusers_sd3_control/controlnet
     title: ControlNet
-  - local: using-diffusers/t2i_adapter
+  - local: using-diffusers_sd3_control/t2i_adapter
     title: T2I-Adapter
-  - local: using-diffusers/inference_with_lcm
+  - local: using-diffusers_sd3_control/inference_with_lcm
     title: Latent Consistency Model
-  - local: using-diffusers/textual_inversion_inference
+  - local: using-diffusers_sd3_control/textual_inversion_inference
     title: Textual inversion
-  - local: using-diffusers/shap-e
+  - local: using-diffusers_sd3_control/shap-e
     title: Shap-E
-  - local: using-diffusers/diffedit
+  - local: using-diffusers_sd3_control/diffedit
     title: DiffEdit
-  - local: using-diffusers/inference_with_tcd_lora
+  - local: using-diffusers_sd3_control/inference_with_tcd_lora
     title: Trajectory Consistency Distillation-LoRA
-  - local: using-diffusers/svd
+  - local: using-diffusers_sd3_control/svd
     title: Stable Video Diffusion
-  - local: using-diffusers/marigold_usage
+  - local: using-diffusers_sd3_control/marigold_usage
     title: Marigold Computer Vision
   title: Specific pipeline examples
 - sections:
@@ -158,7 +158,7 @@
   - local: optimization/tgate
     title: TGATE
   - sections:
-    - local: using-diffusers/stable_diffusion_jax_how_to
+    - local: using-diffusers_sd3_control/stable_diffusion_jax_how_to
       title: JAX/Flax
     - local: optimization/onnx
       title: ONNX
@@ -177,7 +177,7 @@
 - sections:
   - local: conceptual/philosophy
     title: Philosophy
-  - local: using-diffusers/controlling_generation
+  - local: using-diffusers_sd3_control/controlling_generation
     title: Controlled generation
   - local: conceptual/contribution
     title: How to contribute?

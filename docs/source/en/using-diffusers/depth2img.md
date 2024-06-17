@@ -20,8 +20,8 @@ Start by creating an instance of the [`StableDiffusionDepth2ImgPipeline`]:
 
 ```python
 import torch
-from diffusers import StableDiffusionDepth2ImgPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionDepth2ImgPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = StableDiffusionDepth2ImgPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-depth",

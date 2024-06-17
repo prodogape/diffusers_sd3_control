@@ -22,7 +22,7 @@ import torch
 from packaging import version
 from torch.onnx import export
 
-from diffusers import OnnxRuntimeModel, OnnxStableDiffusionPipeline, StableDiffusionPipeline
+from diffusers_sd3_control import OnnxRuntimeModel, OnnxStableDiffusionPipeline, StableDiffusionPipeline
 
 
 is_torch_less_than_1_11 = version.parse(version.parse(torch.__version__).base_version) < version.parse("1.11")
@@ -247,7 +247,7 @@ if __name__ == "__main__":
         "--model_path",
         type=str,
         required=True,
-        help="Path to the `diffusers` checkpoint to convert (either a local directory or on the Hub).",
+        help="Path to the `diffusers_sd3_control` checkpoint to convert (either a local directory or on the Hub).",
     )
 
     parser.add_argument("--output_path", type=str, required=True, help="Path to the output model.")

@@ -19,14 +19,14 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     EulerAncestralDiscreteScheduler,
     StableDiffusionGLIGENPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils.testing_utils import enable_full_determinism
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism
 
 from ..pipeline_params import (
     TEXT_TO_IMAGE_BATCH_PARAMS,

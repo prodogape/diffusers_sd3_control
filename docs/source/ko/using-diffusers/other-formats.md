@@ -74,7 +74,7 @@ git checkout pr/13
 4. 이제 스크립트를 실행하여 .ckpt 파일을 변환할 수 있습니다:
 
 ```bash
-python ../diffusers/scripts/convert_original_stable_diffusion_to_diffusers.py --checkpoint_path temporalnetv3.ckpt --original_config_file cldm_v15.yaml --dump_path ./ --controlnet
+python ../diffusers_sd3_control/scripts/convert_original_stable_diffusion_to_diffusers.py --checkpoint_path temporalnetv3.ckpt --original_config_file cldm_v15.yaml --dump_path ./ --controlnet
 ```
 
 5. 변환이 완료되면 변환된 모델을 업로드하고 결과물을 pull request [pull request](https://huggingface.co/CiaraRowles/TemporalNet/discussions/13)를 테스트하세요!
@@ -105,7 +105,7 @@ KerasCV Space 변환에서는 다음을 입력할 수 있습니다:
 코드를 사용하여 추론을 실행하려면 모델 카드의 오른쪽 상단 모서리에 있는 **Use in Diffusers**  버튼을 클릭하여 예시 코드를 복사하여 붙여넣습니다:
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("sayakpaul/textual-inversion-cat-kerascv_sd_diffusers_pipeline")
 ```
@@ -113,7 +113,7 @@ pipeline = DiffusionPipeline.from_pretrained("sayakpaul/textual-inversion-cat-ke
 그러면 다음과 같은 이미지를 생성할 수 있습니다:
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("sayakpaul/textual-inversion-cat-kerascv_sd_diffusers_pipeline")
 pipeline.to("cuda")
@@ -130,7 +130,7 @@ image = pipeline(prompt, num_inference_steps=50).images[0]
 🤗 Diffusers는 [`~loaders.LoraLoaderMixin.load_lora_weights`]:를 사용하여 A1111 LoRA 체크포인트 불러오기를 지원합니다:
 
 ```py
-from diffusers import DiffusionPipeline, UniPCMultistepScheduler
+from diffusers_sd3_control import DiffusionPipeline, UniPCMultistepScheduler
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained(

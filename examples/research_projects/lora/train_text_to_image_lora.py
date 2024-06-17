@@ -39,16 +39,16 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import AutoencoderKL, DDPMScheduler, DiffusionPipeline, UNet2DConditionModel
-from diffusers.loaders import AttnProcsLayers
-from diffusers.models.attention_processor import LoRAAttnProcessor
-from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version, is_wandb_available
-from diffusers.utils.import_utils import is_xformers_available
+import diffusers_sd3_control
+from diffusers_sd3_control import AutoencoderKL, DDPMScheduler, DiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control.loaders import AttnProcsLayers
+from diffusers_sd3_control.models.attention_processor import LoRAAttnProcessor
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.14.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
@@ -66,10 +66,10 @@ license: creativeml-openrail-m
 base_model: {base_model}
 tags:
 - stable-diffusion
-- stable-diffusion-diffusers
+- stable-diffusion-diffusers_sd3_control
 - text-to-image
-- diffusers
-- diffusers-training
+- diffusers_sd3_control
+- diffusers_sd3_control-training
 - lora
 inference: true
 ---
@@ -431,11 +431,11 @@ def main():
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         datasets.utils.logging.set_verbosity_error()
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

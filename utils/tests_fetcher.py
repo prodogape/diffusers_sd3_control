@@ -63,7 +63,7 @@ from git import Repo
 
 PATH_TO_REPO = Path(__file__).parent.parent.resolve()
 PATH_TO_EXAMPLES = PATH_TO_REPO / "examples"
-PATH_TO_DIFFUSERS = PATH_TO_REPO / "src/diffusers"
+PATH_TO_DIFFUSERS = PATH_TO_REPO / "src/diffusers_sd3_control"
 PATH_TO_TESTS = PATH_TO_REPO / "tests"
 
 # Ignore fixtures in tests folder
@@ -466,11 +466,11 @@ _re_multi_line_relative_imports = re.compile(r"(?:^|\n)\s*from\s+(\.+\S+)\s+impo
 #           .xxx and yyy
 # (?=\n) -> Look-ahead to a new line. We can't just put \n here or using find_all on this re will only catch every
 #           other import.
-_re_single_line_direct_imports = re.compile(r"(?:^|\n)\s*from\s+diffusers(\S*)\s+import\s+([^\n]+)(?=\n)")
+_re_single_line_direct_imports = re.compile(r"(?:^|\n)\s*from\s+diffusers_sd3_control(\S*)\s+import\s+([^\n]+)(?=\n)")
 # (:?^|\n) -> Non-catching group for the beginning of the doc or a new line.
 # \s*from\s+transformers(\S*)\s+import\s+\(([^\)]+)\) -> Line continues with from transformers.xxx import (yyy) and we
 # catch .xxx and yyy. yyy will take multiple lines otherwise there wouldn't be parenthesis.
-_re_multi_line_direct_imports = re.compile(r"(?:^|\n)\s*from\s+diffusers(\S*)\s+import\s+\(([^\)]+)\)")
+_re_multi_line_direct_imports = re.compile(r"(?:^|\n)\s*from\s+diffusers_sd3_control(\S*)\s+import\s+\(([^\)]+)\)")
 
 
 def extract_imports(module_fname: str, cache: Dict[str, List[str]] = None) -> List[str]:
@@ -536,7 +536,7 @@ def extract_imports(module_fname: str, cache: Dict[str, List[str]] = None) -> Li
     # We need to find the relative path of those imports.
     for module, imports in direct_imports:
         import_parts = module.split(".")[1:]  # ignore the name of the repo since we add it below.
-        dep_parts = ["src", "diffusers"] + import_parts
+        dep_parts = ["src", "diffusers_sd3_control"] + import_parts
         imported_module = os.path.sep.join(dep_parts)
         imported_modules.append((imported_module, [imp.strip() for imp in imports.split(",")]))
 

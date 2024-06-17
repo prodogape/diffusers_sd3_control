@@ -20,8 +20,8 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, DDIMScheduler, LDMTextToImagePipeline, UNet2DConditionModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import AutoencoderKL, DDIMScheduler, LDMTextToImagePipeline, UNet2DConditionModel
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_numpy,
     nightly,

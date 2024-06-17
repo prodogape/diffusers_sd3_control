@@ -5,19 +5,19 @@ import numpy as np
 import torch
 from torch.backends.cuda import sdp_kernel
 
-from diffusers import (
+from diffusers_sd3_control import (
     CMStochasticIterativeScheduler,
     ConsistencyModelPipeline,
     UNet2DModel,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     nightly,
     require_torch_2,
     require_torch_gpu,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ..pipeline_params import UNCONDITIONAL_IMAGE_GENERATION_BATCH_PARAMS, UNCONDITIONAL_IMAGE_GENERATION_PARAMS
 from ..test_pipelines_common import PipelineTesterMixin
@@ -47,7 +47,7 @@ class ConsistencyModelPipelineFastTests(PipelineTesterMixin, unittest.TestCase):
     @property
     def dummy_uncond_unet(self):
         unet = UNet2DModel.from_pretrained(
-            "diffusers/consistency-models-test",
+            "diffusers_sd3_control/consistency-models-test",
             subfolder="test_unet",
         )
         return unet
@@ -55,7 +55,7 @@ class ConsistencyModelPipelineFastTests(PipelineTesterMixin, unittest.TestCase):
     @property
     def dummy_cond_unet(self):
         unet = UNet2DModel.from_pretrained(
-            "diffusers/consistency-models-test",
+            "diffusers_sd3_control/consistency-models-test",
             subfolder="test_unet_class_cond",
         )
         return unet
@@ -205,7 +205,7 @@ class ConsistencyModelPipelineSlowTests(unittest.TestCase):
         return latents
 
     def test_consistency_model_cd_multistep(self):
-        unet = UNet2DModel.from_pretrained("diffusers/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
+        unet = UNet2DModel.from_pretrained("diffusers_sd3_control/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
         scheduler = CMStochasticIterativeScheduler(
             num_train_timesteps=40,
             sigma_min=0.002,
@@ -226,7 +226,7 @@ class ConsistencyModelPipelineSlowTests(unittest.TestCase):
         assert np.abs(image_slice.flatten() - expected_slice).max() < 1e-3
 
     def test_consistency_model_cd_onestep(self):
-        unet = UNet2DModel.from_pretrained("diffusers/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
+        unet = UNet2DModel.from_pretrained("diffusers_sd3_control/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
         scheduler = CMStochasticIterativeScheduler(
             num_train_timesteps=40,
             sigma_min=0.002,
@@ -250,7 +250,7 @@ class ConsistencyModelPipelineSlowTests(unittest.TestCase):
 
     @require_torch_2
     def test_consistency_model_cd_multistep_flash_attn(self):
-        unet = UNet2DModel.from_pretrained("diffusers/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
+        unet = UNet2DModel.from_pretrained("diffusers_sd3_control/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
         scheduler = CMStochasticIterativeScheduler(
             num_train_timesteps=40,
             sigma_min=0.002,
@@ -274,7 +274,7 @@ class ConsistencyModelPipelineSlowTests(unittest.TestCase):
 
     @require_torch_2
     def test_consistency_model_cd_onestep_flash_attn(self):
-        unet = UNet2DModel.from_pretrained("diffusers/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
+        unet = UNet2DModel.from_pretrained("diffusers_sd3_control/consistency_models", subfolder="diffusers_cd_imagenet64_l2")
         scheduler = CMStochasticIterativeScheduler(
             num_train_timesteps=40,
             sigma_min=0.002,

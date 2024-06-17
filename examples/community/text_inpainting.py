@@ -10,14 +10,14 @@ from transformers import (
     CLIPTokenizer,
 )
 
-from diffusers import DiffusionPipeline
-from diffusers.configuration_utils import FrozenDict
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.pipelines.pipeline_utils import StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion import StableDiffusionInpaintPipeline
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
-from diffusers.utils import deprecate, logging
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.configuration_utils import FrozenDict
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.pipeline_utils import StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionInpaintPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
+from diffusers_sd3_control.utils import deprecate, logging
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -103,7 +103,7 @@ class TextInpainting(DiffusionPipeline, StableDiffusionMixin):
             logger.warning(
                 f"You have disabled the safety checker for {self.__class__} by passing `safety_checker=None`. Ensure"
                 " that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered"
-                " results in services or applications open to the public. Both the diffusers team and Hugging Face"
+                " results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face"
                 " strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling"
                 " it only for use-cases that involve analyzing network behavior or auditing its results. For more"
                 " information, please have a look at https://github.com/huggingface/diffusers/pull/254 ."

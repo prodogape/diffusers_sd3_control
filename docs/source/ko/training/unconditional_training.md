@@ -27,7 +27,7 @@ unconditional 이미지 생성은 text-to-image 또는 image-to-image 모델과 
 스크립트를 실행하기 전, 먼저 의존성 라이브러리들을 설치해야 합니다.
 
 ```bash
-pip install diffusers[training] accelerate datasets
+pip install diffusers_sd3_control[training] accelerate datasets
 ```
 
 그 다음 🤗 [Accelerate](https://github.com/huggingface/accelerate/) 환경을 초기화합니다.

@@ -33,7 +33,7 @@ Before you begin, make sure you have the following libraries installed.
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install -q diffusers accelerate controlnet-aux==0.0.7
+#!pip install -q diffusers_sd3_control accelerate controlnet-aux==0.0.7
 ```
 
 ## Text-to-image
@@ -52,7 +52,7 @@ Create a canny image with the [opencv-library](https://github.com/opencv/opencv-
 import cv2
 import numpy as np
 from PIL import Image
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 image = load_image("https://huggingface.co/datasets/hf-internal-testing/diffusers-images/resolve/main/sd_controlnet/hf-logo.png")
 image = np.array(image)
@@ -69,7 +69,7 @@ the [`StableDiffusionAdapterPipeline`].
 
 ```py
 import torch
-from diffusers import StableDiffusionAdapterPipeline, T2IAdapter
+from diffusers_sd3_control import StableDiffusionAdapterPipeline, T2IAdapter
 
 adapter = T2IAdapter.from_pretrained("TencentARC/t2iadapter_canny_sd15v2", torch_dtype=torch.float16)
 pipeline = StableDiffusionAdapterPipeline.from_pretrained(
@@ -104,7 +104,7 @@ Create a canny image with the [controlnet-aux](https://github.com/huggingface/co
 
 ```py
 from controlnet_aux.canny import CannyDetector
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 canny_detector = CannyDetector()
 
@@ -117,7 +117,7 @@ to the [`StableDiffusionXLAdapterPipeline`].
 
 ```py
 import torch
-from diffusers import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
+from diffusers_sd3_control import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteScheduler, AutoencoderKL
 
 scheduler = EulerAncestralDiscreteScheduler.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", subfolder="scheduler")
 vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
@@ -162,7 +162,7 @@ enabled by the [`MultiAdapter`] class.
 Let's condition a text-to-image model with a pose and depth adapter. Create and place your depth and pose image and in a list.
 
 ```py
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 pose_image = load_image(
     "https://huggingface.co/datasets/diffusers/docs-images/resolve/main/t2i-adapter/keypose_sample_input.png"
@@ -189,7 +189,7 @@ Load the corresponding pose and depth adapters as a list in the [`MultiAdapter`]
 
 ```py
 import torch
-from diffusers import StableDiffusionAdapterPipeline, MultiAdapter, T2IAdapter
+from diffusers_sd3_control import StableDiffusionAdapterPipeline, MultiAdapter, T2IAdapter
 
 adapters = MultiAdapter(
     [

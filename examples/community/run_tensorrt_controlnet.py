@@ -15,17 +15,17 @@ from PIL import Image
 from pycuda.tools import make_default_context
 from transformers import CLIPTokenizer
 
-from diffusers import OnnxRuntimeModel, StableDiffusionImg2ImgPipeline, UniPCMultistepScheduler
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control import OnnxRuntimeModel, StableDiffusionImg2ImgPipeline, UniPCMultistepScheduler
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     deprecate,
     logging,
     replace_example_docstring,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 # Initialize CUDA
@@ -135,8 +135,8 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> # !pip install opencv-python transformers accelerate
-        >>> from diffusers import StableDiffusionControlNetImg2ImgPipeline, ControlNetModel, UniPCMultistepScheduler
-        >>> from diffusers.utils import load_image
+        >>> from diffusers_sd3_control import StableDiffusionControlNetImg2ImgPipeline, ControlNetModel, UniPCMultistepScheduler
+        >>> from diffusers_sd3_control.utils import load_image
         >>> import numpy as np
         >>> import torch
 
@@ -338,7 +338,7 @@ class TensorRTStableDiffusionControlNetImg2ImgPipeline(DiffusionPipeline):
 
         return prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.decode_latents
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.decode_latents
     def decode_latents(self, latents):
         warnings.warn(
             "The decode_latents method is deprecated and will be removed in a future version. Please"
@@ -352,7 +352,7 @@ class TensorRTStableDiffusionControlNetImg2ImgPipeline(DiffusionPipeline):
         image = image.cpu().permute(0, 2, 3, 1).float().numpy()
         return image
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
@@ -478,7 +478,7 @@ class TensorRTStableDiffusionControlNetImg2ImgPipeline(DiffusionPipeline):
             if end > 1.0:
                 raise ValueError(f"control guidance end: {end} can't be larger than 1.0.")
 
-    # Copied from diffusers.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.check_image
+    # Copied from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.check_image
     def check_image(self, image, prompt, prompt_embeds):
         image_is_pil = isinstance(image, PIL.Image.Image)
         image_is_tensor = isinstance(image, torch.Tensor)
@@ -516,7 +516,7 @@ class TensorRTStableDiffusionControlNetImg2ImgPipeline(DiffusionPipeline):
                 f"If image batch size is not 1, image batch size must be same as prompt batch size. image batch size: {image_batch_size}, prompt batch size: {prompt_batch_size}"
             )
 
-    # Copied from diffusers.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.prepare_image
+    # Copied from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.prepare_image
     def prepare_control_image(
         self,
         image,
@@ -547,7 +547,7 @@ class TensorRTStableDiffusionControlNetImg2ImgPipeline(DiffusionPipeline):
 
         return image
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline.get_timesteps
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline.get_timesteps
     def get_timesteps(self, num_inference_steps, strength, device):
         # get the original timestep using init_timestep
         init_timestep = min(int(num_inference_steps * strength), num_inference_steps)
@@ -718,7 +718,7 @@ class TensorRTStableDiffusionControlNetImg2ImgPipeline(DiffusionPipeline):
             cross_attention_kwargs (`dict`, *optional*):
                 A kwargs dictionary that if specified is passed along to the `AttentionProcessor` as defined under
                 `self.processor` in
-                [diffusers.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
+                [diffusers_sd3_control.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
             controlnet_conditioning_scale (`float` or `List[float]`, *optional*, defaults to 1.0):
                 The outputs of the controlnet are multiplied by `controlnet_conditioning_scale` before they are added
                 to the residual in the original unet. If multiple ControlNets are specified in init, you can set the
@@ -953,7 +953,7 @@ if __name__ == "__main__":
         "--sd_model",
         type=str,
         required=True,
-        help="Path to the `diffusers` checkpoint to convert (either a local directory or on the Hub).",
+        help="Path to the `diffusers_sd3_control` checkpoint to convert (either a local directory or on the Hub).",
     )
 
     parser.add_argument(

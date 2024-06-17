@@ -22,8 +22,8 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
-from diffusers import AutoencoderKL, DDPMScheduler, DiffusionPipeline, UNet2DConditionModel
-from diffusers.optimization import get_scheduler
+from diffusers_sd3_control import AutoencoderKL, DDPMScheduler, DiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control.optimization import get_scheduler
 
 
 disable_existing_loggers()
@@ -43,7 +43,7 @@ def import_model_class_from_model_name_or_path(pretrained_model_name_or_path: st
 
         return CLIPTextModel
     elif model_class == "RobertaSeriesModelWithTransformation":
-        from diffusers.pipelines.alt_diffusion.modeling_roberta_series import RobertaSeriesModelWithTransformation
+        from diffusers_sd3_control.pipelines.alt_diffusion.modeling_roberta_series import RobertaSeriesModelWithTransformation
 
         return RobertaSeriesModelWithTransformation
     else:

@@ -6,14 +6,14 @@ import numpy as np
 import torch
 from transformers import AutoTokenizer, CLIPTextConfig, CLIPTextModelWithProjection, CLIPTokenizer, T5EncoderModel
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     FlowMatchEulerDiscreteScheduler,
     SD3Transformer2DModel,
     StableDiffusion3Img2ImgPipeline,
 )
-from diffusers.utils import load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.testing_utils import (
     floats_tensor,
     numpy_cosine_similarity_distance,
     require_torch_gpu,
@@ -198,7 +198,7 @@ class StableDiffusion3Img2ImgPipelineFastTests(PipelineLatentTesterMixin, unitte
 @require_torch_gpu
 class StableDiffusion3Img2ImgPipelineSlowTests(unittest.TestCase):
     pipeline_class = StableDiffusion3Img2ImgPipeline
-    repo_id = "stabilityai/stable-diffusion-3-medium-diffusers"
+    repo_id = "stabilityai/stable-diffusion-3-medium-diffusers_sd3_control"
 
     def setUp(self):
         super().setUp()

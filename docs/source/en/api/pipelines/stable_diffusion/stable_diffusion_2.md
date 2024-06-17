@@ -44,7 +44,7 @@ If you're interested in using one of the official checkpoints for a task, explor
 ## Text-to-image
 
 ```py
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control import DiffusionPipeline, DPMSolverMultistepScheduler
 import torch
 
 repo_id = "stabilityai/stable-diffusion-2-base"
@@ -62,8 +62,8 @@ image
 
 ```py
 import torch
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 img_url = "https://raw.githubusercontent.com/CompVis/latent-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png"
 mask_url = "https://raw.githubusercontent.com/CompVis/latent-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo_mask.png"
@@ -85,8 +85,8 @@ make_image_grid([init_image, mask_image, image], rows=1, cols=3)
 ## Super-resolution
 
 ```py
-from diffusers import StableDiffusionUpscalePipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionUpscalePipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 import torch
 
 # load model and scheduler
@@ -107,8 +107,8 @@ make_image_grid([low_res_img.resize((512, 512)), upscaled_image.resize((512, 512
 
 ```py
 import torch
-from diffusers import StableDiffusionDepth2ImgPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionDepth2ImgPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipe = StableDiffusionDepth2ImgPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-depth",

@@ -17,9 +17,9 @@ specific language governing permissions and limitations under the License.
 To change the verbosity level, use one of the direct setters. For instance, to change the verbosity to the `INFO` level.
 
 ```python
-import diffusers
+import diffusers_sd3_control
 
-diffusers.logging.set_verbosity_info()
+diffusers_sd3_control.logging.set_verbosity_info()
 ```
 
 You can also use the environment variable `DIFFUSERS_VERBOSITY` to override the default verbosity. You can set it
@@ -40,10 +40,10 @@ DIFFUSERS_NO_ADVISORY_WARNINGS=1 ./myprogram.py
 Here is an example of how to use the same logger as the library in your own module or script:
 
 ```python
-from diffusers.utils import logging
+from diffusers_sd3_control.utils import logging
 
 logging.set_verbosity_info()
-logger = logging.get_logger("diffusers")
+logger = logging.get_logger("diffusers_sd3_control")
 logger.info("INFO")
 logger.warning("WARN")
 ```

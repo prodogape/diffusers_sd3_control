@@ -35,7 +35,7 @@ from transformers import (
     T5Tokenizer,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AudioLDM2Pipeline,
     AudioLDM2ProjectionModel,
     AudioLDM2UNet2DConditionModel,
@@ -44,7 +44,7 @@ from diffusers import (
     LMSDiscreteScheduler,
     PNDMScheduler,
 )
-from diffusers.utils.testing_utils import enable_full_determinism, nightly, torch_device
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, nightly, torch_device
 
 from ..pipeline_params import TEXT_TO_AUDIO_BATCH_PARAMS, TEXT_TO_AUDIO_PARAMS
 from ..test_pipelines_common import PipelineTesterMixin

@@ -21,16 +21,16 @@ import torch
 from PIL import Image
 from transformers import AutoTokenizer, T5EncoderModel
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoPipelineForImage2Image,
     AutoPipelineForText2Image,
     Kandinsky3Pipeline,
     Kandinsky3UNet,
     VQModel,
 )
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.schedulers.scheduling_ddpm import DDPMScheduler
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.schedulers.scheduling_ddpm import DDPMScheduler
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_image,
     require_torch_gpu,

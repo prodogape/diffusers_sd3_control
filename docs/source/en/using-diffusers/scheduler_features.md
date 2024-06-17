@@ -26,7 +26,7 @@ The timestep or noise schedule determines the amount of noise at each sampling s
 For example, [Align Your Steps (AYS)](https://research.nvidia.com/labs/toronto-ai/AlignYourSteps/) is a method for optimizing a sampling schedule to generate a high-quality image in as little as 10 steps. The optimal [10-step schedule](https://github.com/huggingface/diffusers/blob/a7bf77fc284810483f1e60afe34d1d27ad91ce2e/src/diffusers/schedulers/scheduling_utils.py#L51) for Stable Diffusion XL is:
 
 ```py
-from diffusers.schedulers import AysSchedules
+from diffusers_sd3_control.schedulers import AysSchedules
 
 sampling_schedule = AysSchedules["StableDiffusionXLTimesteps"]
 print(sampling_schedule)
@@ -80,7 +80,7 @@ It is recommended to use the `trailing` spacing method because it generates high
 
 ```py
 import torch
-from diffusers import StableDiffusionXLPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, DPMSolverMultistepScheduler
 
 pipeline = StableDiffusionXLPipeline.from_pretrained(
     "SG161222/RealVisXL_V4.0",
@@ -120,7 +120,7 @@ For example, you can manually pass the [sigmas](https://github.com/huggingface/d
 ```py
 import torch
 
-from diffusers import DiffusionPipeline, EulerDiscreteScheduler
+from diffusers_sd3_control import DiffusionPipeline, EulerDiscreteScheduler
 
 model_id = "stabilityai/stable-diffusion-xl-base-1.0"
 pipeline = DiffusionPipeline.from_pretrained(
@@ -161,7 +161,7 @@ Enable Karras sigmas by setting `use_karras_sigmas=True` in the scheduler.
 
 ```py
 import torch
-from diffusers import StableDiffusionXLPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, DPMSolverMultistepScheduler
 
 pipeline = StableDiffusionXLPipeline.from_pretrained(
     "SG161222/RealVisXL_V4.0",
@@ -209,7 +209,7 @@ For example, load the [ptx0/pseudo-journey-v2](https://hf.co/ptx0/pseudo-journey
 Set `guidance_rescale` in the pipeline to prevent over-exposure. A lower value increases brightness but some of the details may appear washed out.
 
 ```py
-from diffusers import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
 
 pipeline = DiffusionPipeline.from_pretrained("ptx0/pseudo-journey-v2", use_safetensors=True)
 

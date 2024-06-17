@@ -11,7 +11,7 @@ from tabulate import tabulate
 MAX_LEN_MESSAGE = 2900  # slack endpoint has a limit of 3001 characters
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--slack_channel_name", default="diffusers-ci-nightly")
+parser.add_argument("--slack_channel_name", default="diffusers_sd3_control-ci-nightly")
 
 
 def main(slack_channel_name=None):

@@ -39,7 +39,7 @@ Unconditional generation (where we start from only latents sampled from a standa
 ```python
 import torch
 
-from diffusers import UniDiffuserPipeline
+from diffusers_sd3_control import UniDiffuserPipeline
 
 device = "cuda"
 model_id_or_path = "thu-ml/unidiffuser-v1"
@@ -88,7 +88,7 @@ Here is an example of sampling from the conditional image distribution (text-to-
 ```python
 import torch
 
-from diffusers import UniDiffuserPipeline
+from diffusers_sd3_control import UniDiffuserPipeline
 
 device = "cuda"
 model_id_or_path = "thu-ml/unidiffuser-v1"
@@ -112,8 +112,8 @@ Similarly, UniDiffuser can also produce text samples given an image (image-to-te
 ```python
 import torch
 
-from diffusers import UniDiffuserPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import UniDiffuserPipeline
+from diffusers_sd3_control.utils import load_image
 
 device = "cuda"
 model_id_or_path = "thu-ml/unidiffuser-v1"
@@ -139,8 +139,8 @@ This produces a new image which is semantically similar to the input image:
 ```python
 import torch
 
-from diffusers import UniDiffuserPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import UniDiffuserPipeline
+from diffusers_sd3_control.utils import load_image
 
 device = "cuda"
 model_id_or_path = "thu-ml/unidiffuser-v1"
@@ -169,7 +169,7 @@ Similarly, text variation can be performed on an input prompt with a text-to-ima
 ```python
 import torch
 
-from diffusers import UniDiffuserPipeline
+from diffusers_sd3_control import UniDiffuserPipeline
 
 device = "cuda"
 model_id_or_path = "thu-ml/unidiffuser-v1"

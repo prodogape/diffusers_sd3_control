@@ -9,7 +9,7 @@ from flax.jax_utils import replicate
 # Let's cache the model compilation, so that it doesn't take as long the next time around.
 from jax.experimental.compilation_cache import compilation_cache as cc
 
-from diffusers import FlaxStableDiffusionXLPipeline
+from diffusers_sd3_control import FlaxStableDiffusionXLPipeline
 
 
 cc.initialize_cache("/tmp/sdxl_cache")

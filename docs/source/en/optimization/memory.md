@@ -38,7 +38,7 @@ To use sliced VAE, call [`~StableDiffusionPipeline.enable_vae_slicing`] on your 
 
 ```python
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipe = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -63,7 +63,7 @@ To use tiled VAE processing, call [`~StableDiffusionPipeline.enable_vae_tiling`]
 
 ```python
 import torch
-from diffusers import StableDiffusionPipeline, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionPipeline, UniPCMultistepScheduler
 
 pipe = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -89,7 +89,7 @@ To perform CPU offloading, call [`~StableDiffusionPipeline.enable_sequential_cpu
 
 ```Python
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipe = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -137,7 +137,7 @@ Enable model offloading by calling [`~StableDiffusionPipeline.enable_model_cpu_o
 
 ```Python
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipe = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -181,7 +181,7 @@ To trace a UNet:
 ```python
 import time
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import functools
 
 # torch disable grad
@@ -254,7 +254,7 @@ unet_traced.save("unet_traced.pt")
 Replace the `unet` attribute of the pipeline with the traced model:
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 from dataclasses import dataclass
 
@@ -311,7 +311,7 @@ To use Flash Attention, install the following:
 Then call [`~ModelMixin.enable_xformers_memory_efficient_attention`] on the pipeline:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(

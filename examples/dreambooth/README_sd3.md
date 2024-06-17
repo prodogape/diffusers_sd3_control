@@ -23,7 +23,7 @@ To make sure you can successfully run the latest versions of the example scripts
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -66,7 +66,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./dog"
 snapshot_download(
-    "diffusers/dog-example",
+    "diffusers_sd3_control/dog-example",
     local_dir=local_dir, repo_type="dataset",
     ignore_patterns=".gitattributes",
 )

@@ -15,13 +15,13 @@ modified_only_fixup:
 		echo "No library .py files were modified"; \
 	fi
 
-# Update src/diffusers/dependency_versions_table.py
+# Update src/diffusers_sd3_control/dependency_versions_table.py
 
 deps_table_update:
 	@python setup.py deps_table_update
 
 deps_table_check_updated:
-	@md5sum src/diffusers/dependency_versions_table.py > md5sum.saved
+	@md5sum src/diffusers_sd3_control/dependency_versions_table.py > md5sum.saved
 	@python setup.py deps_table_update
 	@md5sum -c --quiet md5sum.saved || (printf "\nError: the version dependency table is outdated.\nPlease run 'make fixup' or 'make style' and commit the changes.\n\n" && exit 1)
 	@rm md5sum.saved

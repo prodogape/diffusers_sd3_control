@@ -29,23 +29,23 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     DiffusionPipeline,
     DPMSolverMultistepScheduler,
     UNet2DConditionModel,
 )
-from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version, is_wandb_available
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.13.0.dev0")
 
 logger = get_logger(__name__)
@@ -169,7 +169,7 @@ def import_model_class_from_model_name_or_path(pretrained_model_name_or_path: st
 
         return CLIPTextModel
     elif model_class == "RobertaSeriesModelWithTransformation":
-        from diffusers.pipelines.alt_diffusion.modeling_roberta_series import RobertaSeriesModelWithTransformation
+        from diffusers_sd3_control.pipelines.alt_diffusion.modeling_roberta_series import RobertaSeriesModelWithTransformation
 
         return RobertaSeriesModelWithTransformation
     else:
@@ -804,11 +804,11 @@ def main(args):
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         datasets.utils.logging.set_verbosity_error()
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

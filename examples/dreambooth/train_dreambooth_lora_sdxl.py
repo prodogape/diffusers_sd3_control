@@ -48,8 +48,8 @@ from torchvision.transforms.functional import crop
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     DPMSolverMultistepScheduler,
@@ -58,10 +58,10 @@ from diffusers import (
     StableDiffusionXLPipeline,
     UNet2DConditionModel,
 )
-from diffusers.loaders import LoraLoaderMixin
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import _set_state_dict_into_text_encoder, cast_training_params, compute_snr
-from diffusers.utils import (
+from diffusers_sd3_control.loaders import LoraLoaderMixin
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import _set_state_dict_into_text_encoder, cast_training_params, compute_snr
+from diffusers_sd3_control.utils import (
     check_min_version,
     convert_all_state_dict_to_peft,
     convert_state_dict_to_diffusers,
@@ -69,15 +69,15 @@ from diffusers.utils import (
     convert_unet_state_dict_to_peft,
     is_wandb_available,
 )
-from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.torch_utils import is_compiled_module
+from diffusers_sd3_control.utils.hub_utils import load_or_create_model_card, populate_model_card
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module
 
 
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__)
@@ -160,15 +160,15 @@ Please adhere to the licensing terms as described [here](https://huggingface.co/
     tags = [
         "text-to-image",
         "text-to-image",
-        "diffusers-training",
-        "diffusers",
+        "diffusers_sd3_control-training",
+        "diffusers_sd3_control",
         "lora" if not use_dora else "dora",
         "template:sd-lora",
     ]
     if "playground" in base_model:
-        tags.extend(["playground", "playground-diffusers"])
+        tags.extend(["playground", "playground-diffusers_sd3_control"])
     else:
-        tags.extend(["stable-diffusion-xl", "stable-diffusion-xl-diffusers"])
+        tags.extend(["stable-diffusion-xl", "stable-diffusion-xl-diffusers_sd3_control"])
 
     model_card = populate_model_card(model_card, tags=tags)
     model_card.save(os.path.join(repo_folder, "README.md"))
@@ -1004,10 +1004,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

@@ -21,15 +21,15 @@ import torch.nn.functional as F
 from PIL import Image
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
-from diffusers.image_processor import PipelineImageInput, VaeImageProcessor
-from diffusers.loaders import IPAdapterMixin, LoraLoaderMixin, TextualInversionLoaderMixin
-from diffusers.models import AutoencoderKL, ControlNetModel, ImageProjection, UNet2DConditionModel, UNetMotionModel
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.models.unets.unet_motion_model import MotionAdapter
-from diffusers.pipelines.animatediff.pipeline_output import AnimateDiffPipelineOutput
-from diffusers.pipelines.controlnet.multicontrolnet import MultiControlNetModel
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.schedulers import (
+from diffusers_sd3_control.image_processor import PipelineImageInput, VaeImageProcessor
+from diffusers_sd3_control.loaders import IPAdapterMixin, LoraLoaderMixin, TextualInversionLoaderMixin
+from diffusers_sd3_control.models import AutoencoderKL, ControlNetModel, ImageProjection, UNet2DConditionModel, UNetMotionModel
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.models.unets.unet_motion_model import MotionAdapter
+from diffusers_sd3_control.pipelines.animatediff.pipeline_output import AnimateDiffPipelineOutput
+from diffusers_sd3_control.pipelines.controlnet.multicontrolnet import MultiControlNetModel
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.schedulers import (
     DDIMScheduler,
     DPMSolverMultistepScheduler,
     EulerAncestralDiscreteScheduler,
@@ -37,8 +37,8 @@ from diffusers.schedulers import (
     LMSDiscreteScheduler,
     PNDMScheduler,
 )
-from diffusers.utils import USE_PEFT_BACKEND, deprecate, logging, scale_lora_layers, unscale_lora_layers
-from diffusers.utils.torch_utils import is_compiled_module, randn_tensor
+from diffusers_sd3_control.utils import USE_PEFT_BACKEND, deprecate, logging, scale_lora_layers, unscale_lora_layers
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module, randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -47,9 +47,9 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> import torch
-        >>> from diffusers import AutoencoderKL, ControlNetModel, MotionAdapter
-        >>> from diffusers.pipelines import DiffusionPipeline
-        >>> from diffusers.schedulers import DPMSolverMultistepScheduler
+        >>> from diffusers_sd3_control import AutoencoderKL, ControlNetModel, MotionAdapter
+        >>> from diffusers_sd3_control.pipelines import DiffusionPipeline
+        >>> from diffusers_sd3_control.schedulers import DPMSolverMultistepScheduler
         >>> from PIL import Image
 
         >>> motion_id = "guoyww/animatediff-motion-adapter-v1-5-2"
@@ -85,13 +85,13 @@ EXAMPLE_DOC_STRING = """
         ...     num_inference_steps=12,
         ... )
 
-        >>> from diffusers.utils import export_to_gif
+        >>> from diffusers_sd3_control.utils import export_to_gif
         >>> export_to_gif(result.frames[0], "result.gif")
         ```
 """
 
 
-# Copied from diffusers.pipelines.animatediff.pipeline_animatediff.tensor2vid
+# Copied from diffusers_sd3_control.pipelines.animatediff.pipeline_animatediff.tensor2vid
 def tensor2vid(video: torch.Tensor, processor, output_type="np"):
     batch_size, channels, num_frames, height, width = video.shape
     outputs = []
@@ -190,7 +190,7 @@ class AnimateDiffControlNetPipeline(
             vae_scale_factor=self.vae_scale_factor, do_convert_rgb=True, do_normalize=False
         )
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_prompt with num_images_per_prompt -> num_videos_per_prompt
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_prompt with num_images_per_prompt -> num_videos_per_prompt
     def encode_prompt(
         self,
         prompt,
@@ -372,7 +372,7 @@ class AnimateDiffControlNetPipeline(
 
         return prompt_embeds, negative_prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
     def encode_image(self, image, device, num_images_per_prompt, output_hidden_states=None):
         dtype = next(self.image_encoder.parameters()).dtype
 
@@ -397,7 +397,7 @@ class AnimateDiffControlNetPipeline(
 
             return image_embeds, uncond_image_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_ip_adapter_image_embeds
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_ip_adapter_image_embeds
     def prepare_ip_adapter_image_embeds(
         self, ip_adapter_image, ip_adapter_image_embeds, device, num_images_per_prompt
     ):
@@ -432,7 +432,7 @@ class AnimateDiffControlNetPipeline(
             image_embeds = ip_adapter_image_embeds
         return image_embeds
 
-    # Copied from diffusers.pipelines.text_to_video_synthesis/pipeline_text_to_video_synth.TextToVideoSDPipeline.decode_latents
+    # Copied from diffusers_sd3_control.pipelines.text_to_video_synthesis/pipeline_text_to_video_synth.TextToVideoSDPipeline.decode_latents
     def decode_latents(self, latents):
         latents = 1 / self.vae.config.scaling_factor * latents
 
@@ -456,7 +456,7 @@ class AnimateDiffControlNetPipeline(
         video = video.float()
         return video
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
@@ -474,7 +474,7 @@ class AnimateDiffControlNetPipeline(
             extra_step_kwargs["generator"] = generator
         return extra_step_kwargs
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.check_inputs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.check_inputs
     def check_inputs(
         self,
         prompt,
@@ -621,7 +621,7 @@ class AnimateDiffControlNetPipeline(
             if end > 1.0:
                 raise ValueError(f"control guidance end: {end} can't be larger than 1.0.")
 
-    # Copied from diffusers.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.check_image
+    # Copied from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.check_image
     def check_image(self, image, prompt, prompt_embeds):
         image_is_pil = isinstance(image, Image.Image)
         image_is_tensor = isinstance(image, torch.Tensor)
@@ -659,7 +659,7 @@ class AnimateDiffControlNetPipeline(
                 f"If image batch size is not 1, image batch size must be same as prompt batch size. image batch size: {image_batch_size}, prompt batch size: {prompt_batch_size}"
             )
 
-    # Copied from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_synth.TextToVideoSDPipeline.prepare_latents
+    # Copied from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_synth.TextToVideoSDPipeline.prepare_latents
     def prepare_latents(
         self, batch_size, num_channels_latents, num_frames, height, width, dtype, device, generator, latents=None
     ):
@@ -685,7 +685,7 @@ class AnimateDiffControlNetPipeline(
         latents = latents * self.scheduler.init_noise_sigma
         return latents
 
-    # Copied from diffusers.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.prepare_image
+    # Copied from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.prepare_image
     def prepare_image(
         self,
         image,

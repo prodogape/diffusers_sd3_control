@@ -20,7 +20,7 @@ import PIL.Image
 import torch
 from parameterized import parameterized
 
-from diffusers.video_processor import VideoProcessor
+from diffusers_sd3_control.video_processor import VideoProcessor
 
 
 np.random.seed(0)

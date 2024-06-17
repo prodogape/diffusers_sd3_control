@@ -13,18 +13,18 @@ import torch
 import torch.nn.functional as F
 from accelerate import Accelerator
 
-# TODO: remove and import from diffusers.utils when the new version of diffusers is released
+# TODO: remove and import from diffusers_sd3_control.utils when the new version of diffusers_sd3_control is released
 from packaging import version
 from tqdm.auto import tqdm
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 
-from diffusers import DiffusionPipeline
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.pipelines.pipeline_utils import StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
-from diffusers.utils import logging
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.pipeline_utils import StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
+from diffusers_sd3_control.utils import logging
 
 
 if version.parse(version.parse(PIL.__version__).base_version) >= version.parse("9.1.0"):

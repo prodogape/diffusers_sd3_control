@@ -21,13 +21,13 @@ In this tutorial, you'll learn how to easily load and manage adapters for infere
 Let's first install all the required libraries.
 
 ```bash
-!pip install -q transformers accelerate peft diffusers
+!pip install -q transformers accelerate peft diffusers_sd3_control
 ```
 
 Now, load a pipeline with a [Stable Diffusion XL (SDXL)](../api/pipelines/stable_diffusion/stable_diffusion_xl) checkpoint:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe_id = "stabilityai/stable-diffusion-xl-base-1.0"

@@ -33,7 +33,7 @@ Diffusion 모델은 이미지나 오디오와 같은 관심 샘플들을 생성�
 
 ```py
 # 주석 풀어서 Colab에 필요한 라이브러리 설치하기.
-#!pip install --upgrade diffusers accelerate transformers
+#!pip install --upgrade diffusers_sd3_control accelerate transformers
 ```
 
 - [🤗 Accelerate](https://huggingface.co/docs/accelerate/index)는 추론 및 학습을 위한 모델 로딩 속도를 높여줍니다.
@@ -64,7 +64,7 @@ Diffusion 모델은 이미지나 오디오와 같은 관심 샘플들을 생성�
 [`~DiffusionPipeline.from_pretrained`] 방법으로 모델 로드하기:
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 ```
@@ -78,16 +78,16 @@ StableDiffusionPipeline {
   "_diffusers_version": "0.13.1",
   ...,
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   ...,
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -139,7 +139,7 @@ PyTorch에서와 마찬가지로 제너레이터 객체를 GPU로 이동할 수 
 스케줄러마다 노이즈 제거 속도와 품질이 서로 다릅니다. 자신에게 가장 적합한 스케줄러를 찾는 가장 좋은 방법은 직접 사용해 보는 것입니다! 🧨 Diffusers의 주요 기능 중 하나는 스케줄러 간에 쉽게 전환이 가능하다는 것입니다. 예를 들어, 기본 스케줄러인 [`PNDMScheduler`]를 [`EulerDiscreteScheduler`]로 바꾸려면, [`~diffusers.ConfigMixin.from_config`] 메서드를 사용하여 로드하세요:
 
 ```py
->>> from diffusers import EulerDiscreteScheduler
+>>> from diffusers_sd3_control import EulerDiscreteScheduler
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 >>> pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -156,7 +156,7 @@ PyTorch에서와 마찬가지로 제너레이터 객체를 GPU로 이동할 수 
 모델은 [`~ModelMixin.from_pretrained`] 메서드로 시작되며, 이 메서드는 모델 가중치를 로컬에 캐시하여 다음에 모델을 로드할 때 더 빠르게 로드할 수 있습니다. 훑어보기에서는 고양이 이미지에 대해 학습된 체크포인트가 있는 기본적인 unconditional 이미지 생성 모델인 [`UNet2DModel`]을 로드합니다:
 
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> repo_id = "google/ddpm-cat-256"
 >>> model = UNet2DModel.from_pretrained(repo_id)
@@ -212,7 +212,7 @@ torch.Size([1, 3, 256, 256])
 훑어보기의 경우, [`~diffusers.ConfigMixin.from_config`] 메서드를 사용하여 [`DDPMScheduler`]를 인스턴스화합니다:
 
 ```py
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> scheduler = DDPMScheduler.from_config(repo_id)
 >>> scheduler

@@ -26,7 +26,7 @@ Before you begin, make sure you have the following libraries installed:
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install -q diffusers transformers accelerate
+#!pip install -q diffusers_sd3_control transformers accelerate
 ```
 
 The [`StableDiffusionDiffEditPipeline`] requires an image mask and a set of partially inverted latents. The image mask is generated from the [`~StableDiffusionDiffEditPipeline.generate_mask`] function, and includes two parameters, `source_prompt` and `target_prompt`. These parameters determine what to edit in the image. For example, if you want to change a bowl of *fruits* to a bowl of *pears*, then:
@@ -42,7 +42,7 @@ Let's load the pipeline, scheduler, inverse scheduler, and enable some optimizat
 
 ```py
 import torch
-from diffusers import DDIMScheduler, DDIMInverseScheduler, StableDiffusionDiffEditPipeline
+from diffusers_sd3_control import DDIMScheduler, DDIMInverseScheduler, StableDiffusionDiffEditPipeline
 
 pipeline = StableDiffusionDiffEditPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-1",
@@ -59,7 +59,7 @@ pipeline.enable_vae_slicing()
 Load the image to edit:
 
 ```py
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 img_url = "https://github.com/Xiang-cd/DiffEdit-stable-diffusion/raw/main/assets/origin.png"
 raw_image = load_image(img_url).resize((768, 768))
@@ -166,7 +166,7 @@ Load the text encoder model used by the [`StableDiffusionDiffEditPipeline`] to e
 
 ```py
 import torch
-from diffusers import StableDiffusionDiffEditPipeline
+from diffusers_sd3_control import StableDiffusionDiffEditPipeline
 
 pipeline = StableDiffusionDiffEditPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-1", torch_dtype=torch.float16, use_safetensors=True
@@ -268,7 +268,7 @@ def generate_caption(images, caption_generator, caption_processor):
 Load an input image and generate a caption for it using the `generate_caption` function:
 
 ```py
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 img_url = "https://github.com/Xiang-cd/DiffEdit-stable-diffusion/raw/main/assets/origin.png"
 raw_image = load_image(img_url).resize((768, 768))

@@ -18,8 +18,8 @@ import unittest
 
 import torch
 
-from diffusers import DDIMScheduler, TextToVideoZeroPipeline
-from diffusers.utils.testing_utils import load_pt, nightly, require_torch_gpu
+from diffusers_sd3_control import DDIMScheduler, TextToVideoZeroPipeline
+from diffusers_sd3_control.utils.testing_utils import load_pt, nightly, require_torch_gpu
 
 from ..test_pipelines_common import assert_mean_pixel_difference
 

@@ -3,7 +3,7 @@ import sys
 
 import torch
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoPipelineForImage2Image,
     AutoPipelineForInpainting,
     AutoPipelineForText2Image,
@@ -16,7 +16,7 @@ from diffusers import (
     T2IAdapter,
     WuerstchenCombinedPipeline,
 )
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 
 sys.path.append(".")
@@ -36,7 +36,7 @@ from utils import (  # noqa: E402
 RESOLUTION_MAPPING = {
     "runwayml/stable-diffusion-v1-5": (512, 512),
     "lllyasviel/sd-controlnet-canny": (512, 512),
-    "diffusers/controlnet-canny-sdxl-1.0": (1024, 1024),
+    "diffusers_sd3_control/controlnet-canny-sdxl-1.0": (1024, 1024),
     "TencentARC/t2iadapter_canny_sd14v1": (512, 512),
     "TencentARC/t2i-adapter-canny-sdxl-1.0": (1024, 1024),
     "stabilityai/stable-diffusion-2-1": (768, 768),

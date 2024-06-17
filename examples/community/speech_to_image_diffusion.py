@@ -10,7 +10,7 @@ from transformers import (
     WhisperProcessor,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DiffusionPipeline,
@@ -18,10 +18,10 @@ from diffusers import (
     PNDMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.pipeline_utils import StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.utils import logging
+from diffusers_sd3_control.pipelines.pipeline_utils import StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.utils import logging
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -46,7 +46,7 @@ class SpeechToImagePipeline(DiffusionPipeline, StableDiffusionMixin):
             logger.warning(
                 f"You have disabled the safety checker for {self.__class__} by passing `safety_checker=None`. Ensure"
                 " that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered"
-                " results in services or applications open to the public. Both the diffusers team and Hugging Face"
+                " results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face"
                 " strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling"
                 " it only for use-cases that involve analyzing network behavior or auditing its results. For more"
                 " information, please have a look at https://github.com/huggingface/diffusers/pull/254 ."

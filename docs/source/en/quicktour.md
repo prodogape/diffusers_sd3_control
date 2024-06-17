@@ -34,7 +34,7 @@ Before you begin, make sure you have all the necessary libraries installed:
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install --upgrade diffusers accelerate transformers
+#!pip install --upgrade diffusers_sd3_control accelerate transformers
 ```
 
 - [🤗 Accelerate](https://huggingface.co/docs/accelerate/index) speeds up model loading for inference and training.
@@ -65,7 +65,7 @@ For [Stable Diffusion](https://huggingface.co/CompVis/stable-diffusion) models, 
 Load the model with the [`~DiffusionPipeline.from_pretrained`] method:
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -79,16 +79,16 @@ StableDiffusionPipeline {
   "_diffusers_version": "0.21.4",
   ...,
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   ...,
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -140,7 +140,7 @@ Now, you can run the pipeline as you would in the section above.
 Different schedulers come with different denoising speeds and quality trade-offs. The best way to find out which one works best for you is to try them out! One of the main features of 🧨 Diffusers is to allow you to easily switch between schedulers. For example, to replace the default [`PNDMScheduler`] with the [`EulerDiscreteScheduler`], load it with the [`~diffusers.ConfigMixin.from_config`] method:
 
 ```py
->>> from diffusers import EulerDiscreteScheduler
+>>> from diffusers_sd3_control import EulerDiscreteScheduler
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 >>> pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -157,7 +157,7 @@ Most models take a noisy sample, and at each timestep it predicts the *noise res
 Models are initiated with the [`~ModelMixin.from_pretrained`] method which also locally caches the model weights so it is faster the next time you load the model. For the quicktour, you'll load the [`UNet2DModel`], a basic unconditional image generation model with a checkpoint trained on cat images:
 
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> repo_id = "google/ddpm-cat-256"
 >>> model = UNet2DModel.from_pretrained(repo_id, use_safetensors=True)
@@ -213,7 +213,7 @@ Schedulers manage going from a noisy sample to a less noisy sample given the mod
 For the quicktour, you'll instantiate the [`DDPMScheduler`] with its [`~diffusers.ConfigMixin.from_config`] method:
 
 ```py
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> scheduler = DDPMScheduler.from_pretrained(repo_id)
 >>> scheduler

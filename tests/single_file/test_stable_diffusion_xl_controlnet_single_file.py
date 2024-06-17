@@ -4,9 +4,9 @@ import unittest
 
 import torch
 
-from diffusers import ControlNetModel, StableDiffusionXLControlNetPipeline
-from diffusers.utils import load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import ControlNetModel, StableDiffusionXLControlNetPipeline
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     numpy_cosine_similarity_distance,
     require_torch_gpu,
@@ -62,7 +62,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
         return inputs
 
     def test_single_file_format_inference_is_same_as_pretrained(self):
-        controlnet = ControlNetModel.from_pretrained("diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16)
+        controlnet = ControlNetModel.from_pretrained("diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16)
         pipe_single_file = self.pipeline_class.from_single_file(
             self.ckpt_path, controlnet=controlnet, torch_dtype=torch.float16
         )
@@ -88,7 +88,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
 
     def test_single_file_components(self):
         controlnet = ControlNetModel.from_pretrained(
-            "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+            "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
         )
         pipe = self.pipeline_class.from_pretrained(
             self.repo_id,
@@ -102,7 +102,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
 
     def test_single_file_components_local_files_only(self):
         controlnet = ControlNetModel.from_pretrained(
-            "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+            "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
         )
         pipe = self.pipeline_class.from_pretrained(
             self.repo_id,
@@ -123,7 +123,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
 
     def test_single_file_components_with_original_config(self):
         controlnet = ControlNetModel.from_pretrained(
-            "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+            "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
         )
         pipe = self.pipeline_class.from_pretrained(
             self.repo_id,
@@ -141,7 +141,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
 
     def test_single_file_components_with_original_config_local_files_only(self):
         controlnet = ControlNetModel.from_pretrained(
-            "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+            "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
         )
         pipe = self.pipeline_class.from_pretrained(
             self.repo_id,
@@ -164,7 +164,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
 
     def test_single_file_components_with_diffusers_config(self):
         controlnet = ControlNetModel.from_pretrained(
-            "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+            "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
         )
         pipe = self.pipeline_class.from_pretrained(self.repo_id, controlnet=controlnet)
         pipe_single_file = self.pipeline_class.from_single_file(
@@ -175,7 +175,7 @@ class StableDiffusionXLControlNetPipelineSingleFileSlowTests(unittest.TestCase, 
 
     def test_single_file_components_with_diffusers_config_local_files_only(self):
         controlnet = ControlNetModel.from_pretrained(
-            "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+            "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
         )
         pipe = self.pipeline_class.from_pretrained(
             self.repo_id,

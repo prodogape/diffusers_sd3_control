@@ -28,14 +28,14 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     I2VGenXLPipeline,
 )
-from diffusers.models.unets import I2VGenXLUNet
-from diffusers.utils import is_xformers_available, load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.models.unets import I2VGenXLUNet
+from diffusers_sd3_control.utils import is_xformers_available, load_image
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     numpy_cosine_similarity_distance,

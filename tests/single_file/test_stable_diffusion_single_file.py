@@ -4,8 +4,8 @@ import unittest
 
 import torch
 
-from diffusers import EulerDiscreteScheduler, StableDiffusionPipeline
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import EulerDiscreteScheduler, StableDiffusionPipeline
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     require_torch_gpu,
     slow,

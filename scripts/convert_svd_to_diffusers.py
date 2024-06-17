@@ -1,4 +1,4 @@
-from diffusers.utils import is_accelerate_available, logging
+from diffusers_sd3_control.utils import is_accelerate_available, logging
 
 
 if is_accelerate_available():
@@ -9,7 +9,7 @@ logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 
 def create_unet_diffusers_config(original_config, image_size: int, controlnet=False):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers_sd3_control based on the config of the LDM model.
     """
     if controlnet:
         unet_params = original_config.model.params.control_stage_config.params

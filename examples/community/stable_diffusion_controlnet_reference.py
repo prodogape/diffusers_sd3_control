@@ -5,14 +5,14 @@ import numpy as np
 import PIL.Image
 import torch
 
-from diffusers import StableDiffusionControlNetPipeline
-from diffusers.models import ControlNetModel
-from diffusers.models.attention import BasicTransformerBlock
-from diffusers.models.unets.unet_2d_blocks import CrossAttnDownBlock2D, CrossAttnUpBlock2D, DownBlock2D, UpBlock2D
-from diffusers.pipelines.controlnet.multicontrolnet import MultiControlNetModel
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.utils import logging
-from diffusers.utils.torch_utils import is_compiled_module, randn_tensor
+from diffusers_sd3_control import StableDiffusionControlNetPipeline
+from diffusers_sd3_control.models import ControlNetModel
+from diffusers_sd3_control.models.attention import BasicTransformerBlock
+from diffusers_sd3_control.models.unets.unet_2d_blocks import CrossAttnDownBlock2D, CrossAttnUpBlock2D, DownBlock2D, UpBlock2D
+from diffusers_sd3_control.pipelines.controlnet.multicontrolnet import MultiControlNetModel
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module, randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -24,8 +24,8 @@ EXAMPLE_DOC_STRING = """
         >>> import torch
         >>> import numpy as np
         >>> from PIL import Image
-        >>> from diffusers import UniPCMultistepScheduler
-        >>> from diffusers.utils import load_image
+        >>> from diffusers_sd3_control import UniPCMultistepScheduler
+        >>> from diffusers_sd3_control.utils import load_image
 
         >>> input_image = load_image("https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png")
 
@@ -202,7 +202,7 @@ class StableDiffusionControlNetReferencePipeline(StableDiffusionControlNetPipeli
             cross_attention_kwargs (`dict`, *optional*):
                 A kwargs dictionary that if specified is passed along to the `AttentionProcessor` as defined under
                 `self.processor` in
-                [diffusers.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
+                [diffusers_sd3_control.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
             controlnet_conditioning_scale (`float` or `List[float]`, *optional*, defaults to 1.0):
                 The outputs of the controlnet are multiplied by `controlnet_conditioning_scale` before they are added
                 to the residual in the original unet. If multiple ControlNets are specified in init, you can set the

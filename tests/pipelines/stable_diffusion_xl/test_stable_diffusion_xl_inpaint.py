@@ -30,7 +30,7 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -41,7 +41,7 @@ from diffusers import (
     UNet2DConditionModel,
     UniPCMultistepScheduler,
 )
-from diffusers.utils.testing_utils import enable_full_determinism, floats_tensor, require_torch_gpu, slow, torch_device
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, floats_tensor, require_torch_gpu, slow, torch_device
 
 from ..pipeline_params import (
     TEXT_GUIDED_IMAGE_INPAINTING_BATCH_PARAMS,

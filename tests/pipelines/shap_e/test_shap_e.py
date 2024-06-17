@@ -19,9 +19,9 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import HeunDiscreteScheduler, PriorTransformer, ShapEPipeline
-from diffusers.pipelines.shap_e import ShapERenderer
-from diffusers.utils.testing_utils import load_numpy, nightly, require_torch_gpu, torch_device
+from diffusers_sd3_control import HeunDiscreteScheduler, PriorTransformer, ShapEPipeline
+from diffusers_sd3_control.pipelines.shap_e import ShapERenderer
+from diffusers_sd3_control.utils.testing_utils import load_numpy, nightly, require_torch_gpu, torch_device
 
 from ..test_pipelines_common import PipelineTesterMixin, assert_mean_pixel_difference
 

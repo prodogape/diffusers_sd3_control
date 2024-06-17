@@ -17,8 +17,8 @@ from huggingface_hub import ModelCard, delete_repo
 from huggingface_hub.utils import is_jinja_available
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AsymmetricAutoencoderKL,
     AutoencoderKL,
     AutoencoderTiny,
@@ -29,18 +29,18 @@ from diffusers import (
     StableDiffusionXLPipeline,
     UNet2DConditionModel,
 )
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.loaders import IPAdapterMixin
-from diffusers.models.attention_processor import AttnProcessor
-from diffusers.models.controlnet_xs import UNetControlNetXSModel
-from diffusers.models.unets.unet_3d_condition import UNet3DConditionModel
-from diffusers.models.unets.unet_i2vgen_xl import I2VGenXLUNet
-from diffusers.models.unets.unet_motion_model import UNetMotionModel
-from diffusers.pipelines.pipeline_utils import StableDiffusionMixin
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import logging
-from diffusers.utils.import_utils import is_accelerate_available, is_accelerate_version, is_xformers_available
-from diffusers.utils.testing_utils import CaptureLogger, require_torch, skip_mps, torch_device
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.loaders import IPAdapterMixin
+from diffusers_sd3_control.models.attention_processor import AttnProcessor
+from diffusers_sd3_control.models.controlnet_xs import UNetControlNetXSModel
+from diffusers_sd3_control.models.unets.unet_3d_condition import UNet3DConditionModel
+from diffusers_sd3_control.models.unets.unet_i2vgen_xl import I2VGenXLUNet
+from diffusers_sd3_control.models.unets.unet_motion_model import UNetMotionModel
+from diffusers_sd3_control.pipelines.pipeline_utils import StableDiffusionMixin
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.import_utils import is_accelerate_available, is_accelerate_version, is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import CaptureLogger, require_torch, skip_mps, torch_device
 
 from ..models.autoencoders.test_models_vae import (
     get_asym_autoencoder_kl_config,
@@ -831,7 +831,7 @@ class PipelineKarrasSchedulerTesterMixin:
             if "KDPM2" in scheduler_enum.name:
                 inputs["num_inference_steps"] = num_inference_steps_for_strength_for_iterations
 
-            scheduler_cls = getattr(diffusers, scheduler_enum.name)
+            scheduler_cls = getattr(diffusers_sd3_control, scheduler_enum.name)
             pipe.scheduler = scheduler_cls.from_config(pipe.scheduler.config)
             output = pipe(**inputs)[0]
             outputs.append(output)
@@ -961,8 +961,8 @@ class PipelineTesterMixin:
         inputs = self.get_dummy_inputs(torch_device)
         output = pipe(**inputs)[0]
 
-        logger = logging.get_logger("diffusers.pipelines.pipeline_utils")
-        logger.setLevel(diffusers.logging.INFO)
+        logger = logging.get_logger("diffusers_sd3_control.pipelines.pipeline_utils")
+        logger.setLevel(diffusers_sd3_control.logging.INFO)
 
         with tempfile.TemporaryDirectory() as tmpdir:
             pipe.save_pretrained(tmpdir, safe_serialization=False)
@@ -1041,7 +1041,7 @@ class PipelineTesterMixin:
         inputs["generator"] = self.get_generator(0)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # prepare batched inputs
         batched_inputs = []
@@ -1073,7 +1073,7 @@ class PipelineTesterMixin:
 
             batched_inputs.append(batched_input)
 
-        logger.setLevel(level=diffusers.logging.WARNING)
+        logger.setLevel(level=diffusers_sd3_control.logging.WARNING)
         for batch_size, batched_input in zip(batch_sizes, batched_inputs):
             output = pipe(**batched_input)
             assert len(output[0]) == batch_size
@@ -1100,7 +1100,7 @@ class PipelineTesterMixin:
         inputs["generator"] = self.get_generator(0)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # batchify inputs
         batched_inputs = {}
@@ -1953,7 +1953,7 @@ class PipelinePushToHubTester(unittest.TestCase):
         pipeline.push_to_hub(self.repo_id, token=TOKEN)
 
         model_card = ModelCard.load(f"{USER}/{self.repo_id}", token=TOKEN).data
-        assert model_card.library_name == "diffusers"
+        assert model_card.library_name == "diffusers_sd3_control"
 
         # Reset repo
         delete_repo(self.repo_id, token=TOKEN)

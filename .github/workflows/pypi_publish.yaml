@@ -65,7 +65,7 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
         run: twine upload dist/* -r pypitest --repository-url=https://test.pypi.org/legacy/    
 
-      - name: Test installing diffusers and importing
+      - name: Test installing diffusers_sd3_control and importing
         run: |
           pip install diffusers && pip uninstall diffusers -y
           pip install -i https://testpypi.python.org/pypi diffusers

@@ -42,7 +42,7 @@ We benchmarked the impact of using `tomesd` on [`StableDiffusionPipeline`] along
 다양한 이미지 해상도에서 [xformers](https://huggingface.co/docs/diffusers/optimization/xformers)를 적용한 상태에서, [`StableDiffusionPipeline`]에 `tomesd`를 사용했을 때의 영향을 벤치마킹했습니다. 테스트 GPU 장치로 A100과 V100을 사용했으며 개발 환경은 다음과 같습니다(Python 3.8.5 사용):
 
 ```bash
-- `diffusers` version: 0.15.1
+- `diffusers_sd3_control` version: 0.15.1
 - Python version: 3.8.16
 - PyTorch version (GPU?): 1.13.1+cu116 (True)
 - Huggingface_hub version: 0.13.2

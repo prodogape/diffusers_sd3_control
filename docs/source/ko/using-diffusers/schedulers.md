@@ -36,7 +36,7 @@ diffusion 파이프라인은 diffusion 모델, 스케줄러 등의 컴포넌트�
 
 ```python
 from huggingface_hub import login
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 # first we need to login with our access token
@@ -166,7 +166,7 @@ FrozenDict([('num_train_timesteps', 1000),
 다음 예시는 기존 스케줄러(`pipeline.scheduler`)를 다른 종류의 스케줄러(`DDIMScheduler`)로 바꾸는 코드입니다. 기존 스케줄러가 갖고 있던 config를 `.from_config` 메서드의 인자로 전달하는 것을 확인할 수 있습니다.
 
 ```python
-from diffusers import DDIMScheduler
+from diffusers_sd3_control import DDIMScheduler
 
 pipeline.scheduler = DDIMScheduler.from_config(pipeline.scheduler.config)
 ```
@@ -199,7 +199,7 @@ image
 [`LMSDiscreteScheduler`]을 일반적으로 더 좋은 결과를 보여줍니다.
 
 ```python
-from diffusers import LMSDiscreteScheduler
+from diffusers_sd3_control import LMSDiscreteScheduler
 
 pipeline.scheduler = LMSDiscreteScheduler.from_config(pipeline.scheduler.config)
 
@@ -218,7 +218,7 @@ image
 [`EulerDiscreteScheduler`]와 [`EulerAncestralDiscreteScheduler`] 고작 30번의 inference step만으로도 높은 퀄리티의 이미지를 생성하는 것을 알 수 있습니다.
 
 ```python
-from diffusers import EulerDiscreteScheduler
+from diffusers_sd3_control import EulerDiscreteScheduler
 
 pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
 
@@ -233,9 +233,8 @@ image
     <br>
 </p>
 
-
 ```python
-from diffusers import EulerAncestralDiscreteScheduler
+from diffusers_sd3_control import EulerAncestralDiscreteScheduler
 
 pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(pipeline.scheduler.config)
 
@@ -253,10 +252,8 @@ image
 
 지금 이 문서를 작성하는 현시점 기준에선, [`DPMSolverMultistepScheduler`]가 시간 대비 가장 좋은 품질의 이미지를 생성하는 것 같습니다. 20번 정도의 스텝만으로도 실행될 수 있습니다.
 
-
-
 ```python
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
 
@@ -286,7 +283,7 @@ import numpy as np
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard
 
-from diffusers import FlaxStableDiffusionPipeline, FlaxDPMSolverMultistepScheduler
+from diffusers_sd3_control import FlaxStableDiffusionPipeline, FlaxDPMSolverMultistepScheduler
 
 model_id = "runwayml/stable-diffusion-v1-5"
 scheduler, scheduler_state = FlaxDPMSolverMultistepScheduler.from_pretrained(

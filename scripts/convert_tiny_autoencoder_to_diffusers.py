@@ -2,11 +2,11 @@ import argparse
 
 import safetensors.torch
 
-from diffusers import AutoencoderTiny
+from diffusers_sd3_control import AutoencoderTiny
 
 
 """
-Example - From the diffusers root directory:
+Example - From the diffusers_sd3_control root directory:
 
 Download the weights:
 ```sh
@@ -19,7 +19,7 @@ Convert the model:
 $ python scripts/convert_tiny_autoencoder_to_diffusers.py \
     --encoder_ckpt_path  taesd_encoder.safetensors \
     --decoder_ckpt_path taesd_decoder.safetensors \
-    --dump_path taesd-diffusers
+    --dump_path taesd-diffusers_sd3_control
 ```
 """
 
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     encoder_state_dict = safetensors.torch.load_file(args.encoder_ckpt_path)
     decoder_state_dict = safetensors.torch.load_file(args.decoder_ckpt_path)
 
-    print("Populating the state_dicts in the diffusers format...")
+    print("Populating the state_dicts in the diffusers_sd3_control format...")
     tiny_autoencoder = AutoencoderTiny()
     new_state_dict = {}
 

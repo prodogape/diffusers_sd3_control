@@ -25,17 +25,17 @@ import torch.nn.functional as F
 from packaging import version
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
-from diffusers.configuration_utils import FrozenDict
-from diffusers.image_processor import PipelineImageInput, VaeImageProcessor
-from diffusers.loaders import FromSingleFileMixin, IPAdapterMixin, LoraLoaderMixin, TextualInversionLoaderMixin
-from diffusers.models import AutoencoderKL, ImageProjection, UNet2DConditionModel
-from diffusers.models.attention_processor import Attention, FusedAttnProcessor2_0
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline
-from diffusers.pipelines.stable_diffusion.pipeline_output import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control.configuration_utils import FrozenDict
+from diffusers_sd3_control.image_processor import PipelineImageInput, VaeImageProcessor
+from diffusers_sd3_control.loaders import FromSingleFileMixin, IPAdapterMixin, LoraLoaderMixin, TextualInversionLoaderMixin
+from diffusers_sd3_control.models import AutoencoderKL, ImageProjection, UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import Attention, FusedAttnProcessor2_0
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_output import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     USE_PEFT_BACKEND,
     deprecate,
     logging,
@@ -43,7 +43,7 @@ from diffusers.utils import (
     scale_lora_layers,
     unscale_lora_layers,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -52,7 +52,7 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> import torch
-        >>> from diffusers import StableDiffusionPipeline
+        >>> from diffusers_sd3_control import StableDiffusionPipeline
 
         >>> pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
         >>> pipe = pipe.to("cuda")
@@ -443,7 +443,7 @@ class StableDiffusionBoxDiffPipeline(
             logger.warning(
                 f"You have disabled the safety checker for {self.__class__} by passing `safety_checker=None`. Ensure"
                 " that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered"
-                " results in services or applications open to the public. Both the diffusers team and Hugging Face"
+                " results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face"
                 " strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling"
                 " it only for use-cases that involve analyzing network behavior or auditing its results. For more"
                 " information, please have a look at https://github.com/huggingface/diffusers/pull/254 ."
@@ -909,7 +909,7 @@ class StableDiffusionBoxDiffPipeline(
         """Disables the FreeU mechanism if enabled."""
         self.unet.disable_freeu()
 
-    # Copied from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl.StableDiffusionXLPipeline.fuse_qkv_projections
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl.StableDiffusionXLPipeline.fuse_qkv_projections
     def fuse_qkv_projections(self, unet: bool = True, vae: bool = True):
         """
         Enables fused QKV projections. For self-attention modules, all projection matrices (i.e., query,
@@ -941,7 +941,7 @@ class StableDiffusionBoxDiffPipeline(
             self.vae.fuse_qkv_projections()
             self.vae.set_attn_processor(FusedAttnProcessor2_0())
 
-    # Copied from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl.StableDiffusionXLPipeline.unfuse_qkv_projections
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl.StableDiffusionXLPipeline.unfuse_qkv_projections
     def unfuse_qkv_projections(self, unet: bool = True, vae: bool = True):
         """Disable QKV projection fusion if enabled.
 
@@ -970,7 +970,7 @@ class StableDiffusionBoxDiffPipeline(
                 self.vae.unfuse_qkv_projections()
                 self.fusing_vae = False
 
-    # Copied from diffusers.pipelines.latent_consistency_models.pipeline_latent_consistency_text2img.LatentConsistencyModelPipeline.get_guidance_scale_embedding
+    # Copied from diffusers_sd3_control.pipelines.latent_consistency_models.pipeline_latent_consistency_text2img.LatentConsistencyModelPipeline.get_guidance_scale_embedding
     def get_guidance_scale_embedding(self, w, embedding_dim=512, dtype=torch.float32):
         """
         See https://github.com/google-research/vdm/blob/dc27b98a554f65cdc654b800da5aa1846545d41b/model_vdm.py#L298

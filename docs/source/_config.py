@@ -1,7 +1,7 @@
 # docstyle-ignore
 INSTALL_CONTENT = """
 # Diffusers installation
-! pip install diffusers transformers datasets accelerate
+! pip install diffusers_sd3_control transformers datasets accelerate
 # To install from source instead of the last release, comment the command above and uncomment the following one.
 # ! pip install git+https://github.com/huggingface/diffusers.git
 """

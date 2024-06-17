@@ -22,18 +22,18 @@ import PIL.Image
 import torch
 import torch.nn as nn
 
-from diffusers import StableDiffusionXLControlNetPipeline
-from diffusers.image_processor import PipelineImageInput
-from diffusers.models import ControlNetModel
-from diffusers.pipelines.controlnet.multicontrolnet import MultiControlNetModel
-from diffusers.pipelines.stable_diffusion_xl import StableDiffusionXLPipelineOutput
-from diffusers.utils import (
+from diffusers_sd3_control import StableDiffusionXLControlNetPipeline
+from diffusers_sd3_control.image_processor import PipelineImageInput
+from diffusers_sd3_control.models import ControlNetModel
+from diffusers_sd3_control.pipelines.controlnet.multicontrolnet import MultiControlNetModel
+from diffusers_sd3_control.pipelines.stable_diffusion_xl import StableDiffusionXLPipelineOutput
+from diffusers_sd3_control.utils import (
     deprecate,
     logging,
     replace_example_docstring,
 )
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.torch_utils import is_compiled_module, is_torch_version
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module, is_torch_version
 
 
 try:
@@ -361,9 +361,9 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> # !pip install opencv-python transformers accelerate insightface
-        >>> import diffusers
-        >>> from diffusers.utils import load_image
-        >>> from diffusers.models import ControlNetModel
+        >>> import diffusers_sd3_control
+        >>> from diffusers_sd3_control.utils import load_image
+        >>> from diffusers_sd3_control.models import ControlNetModel
 
         >>> import cv2
         >>> import torch

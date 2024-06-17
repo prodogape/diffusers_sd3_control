@@ -23,7 +23,7 @@ import numpy as np
 import torch
 from packaging import version
 
-from diffusers import (
+from diffusers_sd3_control import (
     ControlNetModel,
     EulerDiscreteScheduler,
     LCMScheduler,
@@ -32,8 +32,8 @@ from diffusers import (
     StableDiffusionXLPipeline,
     T2IAdapter,
 )
-from diffusers.utils.import_utils import is_accelerate_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.import_utils import is_accelerate_available
+from diffusers_sd3_control.utils.testing_utils import (
     load_image,
     nightly,
     numpy_cosine_similarity_distance,
@@ -494,7 +494,7 @@ class LoraSDXLIntegrationTests(unittest.TestCase):
         release_memory(pipe)
 
     def test_controlnet_canny_lora(self):
-        controlnet = ControlNetModel.from_pretrained("diffusers/controlnet-canny-sdxl-1.0")
+        controlnet = ControlNetModel.from_pretrained("diffusers_sd3_control/controlnet-canny-sdxl-1.0")
 
         pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0", controlnet=controlnet

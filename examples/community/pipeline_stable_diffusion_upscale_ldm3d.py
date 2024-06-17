@@ -20,22 +20,22 @@ import PIL
 import torch
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 
-from diffusers import DiffusionPipeline
-from diffusers.image_processor import PipelineDepthInput, PipelineImageInput, VaeImageProcessorLDM3D
-from diffusers.loaders import FromSingleFileMixin, LoraLoaderMixin, TextualInversionLoaderMixin
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
-from diffusers.pipelines.stable_diffusion_ldm3d.pipeline_stable_diffusion_ldm3d import LDM3DPipelineOutput
-from diffusers.schedulers import DDPMScheduler, KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.image_processor import PipelineDepthInput, PipelineImageInput, VaeImageProcessorLDM3D
+from diffusers_sd3_control.loaders import FromSingleFileMixin, LoraLoaderMixin, TextualInversionLoaderMixin
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+from diffusers_sd3_control.pipelines.stable_diffusion_ldm3d.pipeline_stable_diffusion_ldm3d import LDM3DPipelineOutput
+from diffusers_sd3_control.schedulers import DDPMScheduler, KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     USE_PEFT_BACKEND,
     deprecate,
     logging,
     scale_lora_layers,
     unscale_lora_layers,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -43,7 +43,7 @@ logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 EXAMPLE_DOC_STRING = """
     Examples:
         ```python
-        >>> from diffusers import StableDiffusionUpscaleLDM3DPipeline
+        >>> from diffusers_sd3_control import StableDiffusionUpscaleLDM3DPipeline
         >>> from PIL import Image
         >>> from io import BytesIO
         >>> import requests
@@ -128,7 +128,7 @@ class StableDiffusionUpscaleLDM3DPipeline(
             logger.warning(
                 f"You have disabled the safety checker for {self.__class__} by passing `safety_checker=None`. Ensure"
                 " that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered"
-                " results in services or applications open to the public. Both the diffusers team and Hugging Face"
+                " results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face"
                 " strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling"
                 " it only for use-cases that involve analyzing network behavior or auditing its results. For more"
                 " information, please have a look at https://github.com/huggingface/diffusers/pull/254 ."
@@ -156,7 +156,7 @@ class StableDiffusionUpscaleLDM3DPipeline(
         # self.register_to_config(requires_safety_checker=requires_safety_checker)
         self.register_to_config(max_noise_level=max_noise_level)
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_ldm3d.StableDiffusionLDM3DPipeline._encode_prompt
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_ldm3d.StableDiffusionLDM3DPipeline._encode_prompt
     def _encode_prompt(
         self,
         prompt,
@@ -189,7 +189,7 @@ class StableDiffusionUpscaleLDM3DPipeline(
 
         return prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_ldm3d.StableDiffusionLDM3DPipeline.encode_prompt
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_ldm3d.StableDiffusionLDM3DPipeline.encode_prompt
     def encode_prompt(
         self,
         prompt,
@@ -386,7 +386,7 @@ class StableDiffusionUpscaleLDM3DPipeline(
             )
         return image, has_nsfw_concept
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.

@@ -22,9 +22,9 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, DDPMScheduler, StableDiffusionPipeline, UNet2DConditionModel
-from diffusers.optimization import get_scheduler
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control import AutoencoderKL, DDPMScheduler, StableDiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import make_image_grid
 
 
 if version.parse(version.parse(PIL.__version__).base_version) >= version.parse("9.1.0"):

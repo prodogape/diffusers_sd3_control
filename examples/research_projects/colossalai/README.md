@@ -98,7 +98,7 @@ torchrun --nproc_per_node 2 train_dreambooth_colossalai.py \
 Once you have trained a model using above command, the inference can be done simply using the `StableDiffusionPipeline`. Make sure to include the `identifier`(e.g. sks in above example) in your prompt.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_id = "path-to-save-model"

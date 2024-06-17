@@ -19,7 +19,7 @@ from packaging.version import parse
 
 # GitHub repository details
 USER = "huggingface"
-REPO = "diffusers"
+REPO = "diffusers_sd3_control"
 
 
 def fetch_all_branches(user, repo):

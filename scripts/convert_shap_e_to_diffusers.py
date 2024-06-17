@@ -4,12 +4,12 @@ import tempfile
 import torch
 from accelerate import load_checkpoint_and_dispatch
 
-from diffusers.models.transformers.prior_transformer import PriorTransformer
-from diffusers.pipelines.shap_e import ShapERenderer
+from diffusers_sd3_control.models.transformers.prior_transformer import PriorTransformer
+from diffusers_sd3_control.pipelines.shap_e import ShapERenderer
 
 
 """
-Example - From the diffusers root directory:
+Example - From the diffusers_sd3_control root directory:
 
 Download weights:
 ```sh
@@ -58,7 +58,7 @@ def prior_model_from_original_config():
 def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
     diffusers_checkpoint = {}
 
-    # <original>.time_embed.c_fc -> <diffusers>.time_embedding.linear_1
+    # <original>.time_embed.c_fc -> <diffusers_sd3_control>.time_embedding.linear_1
     diffusers_checkpoint.update(
         {
             "time_embedding.linear_1.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.time_embed.c_fc.weight"],
@@ -66,7 +66,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.time_embed.c_proj -> <diffusers>.time_embedding.linear_2
+    # <original>.time_embed.c_proj -> <diffusers_sd3_control>.time_embedding.linear_2
     diffusers_checkpoint.update(
         {
             "time_embedding.linear_2.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.time_embed.c_proj.weight"],
@@ -74,7 +74,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.input_proj -> <diffusers>.proj_in
+    # <original>.input_proj -> <diffusers_sd3_control>.proj_in
     diffusers_checkpoint.update(
         {
             "proj_in.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.input_proj.weight"],
@@ -82,7 +82,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.clip_emb -> <diffusers>.embedding_proj
+    # <original>.clip_emb -> <diffusers_sd3_control>.embedding_proj
     diffusers_checkpoint.update(
         {
             "embedding_proj.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.clip_embed.weight"],
@@ -90,10 +90,10 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.pos_emb -> <diffusers>.positional_embedding
+    # <original>.pos_emb -> <diffusers_sd3_control>.positional_embedding
     diffusers_checkpoint.update({"positional_embedding": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.pos_emb"][None, :]})
 
-    # <original>.ln_pre -> <diffusers>.norm_in
+    # <original>.ln_pre -> <diffusers_sd3_control>.norm_in
     diffusers_checkpoint.update(
         {
             "norm_in.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.ln_pre.weight"],
@@ -101,12 +101,12 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.backbone.resblocks.<x> -> <diffusers>.transformer_blocks.<x>
+    # <original>.backbone.resblocks.<x> -> <diffusers_sd3_control>.transformer_blocks.<x>
     for idx in range(len(model.transformer_blocks)):
         diffusers_transformer_prefix = f"transformer_blocks.{idx}"
         original_transformer_prefix = f"{PRIOR_ORIGINAL_PREFIX}.backbone.resblocks.{idx}"
 
-        # <original>.attn -> <diffusers>.attn1
+        # <original>.attn -> <diffusers_sd3_control>.attn1
         diffusers_attention_prefix = f"{diffusers_transformer_prefix}.attn1"
         original_attention_prefix = f"{original_transformer_prefix}.attn"
         diffusers_checkpoint.update(
@@ -118,7 +118,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             )
         )
 
-        # <original>.mlp -> <diffusers>.ff
+        # <original>.mlp -> <diffusers_sd3_control>.ff
         diffusers_ff_prefix = f"{diffusers_transformer_prefix}.ff"
         original_ff_prefix = f"{original_transformer_prefix}.mlp"
         diffusers_checkpoint.update(
@@ -127,7 +127,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             )
         )
 
-        # <original>.ln_1 -> <diffusers>.norm1
+        # <original>.ln_1 -> <diffusers_sd3_control>.norm1
         diffusers_checkpoint.update(
             {
                 f"{diffusers_transformer_prefix}.norm1.weight": checkpoint[
@@ -137,7 +137,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             }
         )
 
-        # <original>.ln_2 -> <diffusers>.norm3
+        # <original>.ln_2 -> <diffusers_sd3_control>.norm3
         diffusers_checkpoint.update(
             {
                 f"{diffusers_transformer_prefix}.norm3.weight": checkpoint[
@@ -147,7 +147,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             }
         )
 
-    # <original>.ln_post -> <diffusers>.norm_out
+    # <original>.ln_post -> <diffusers_sd3_control>.norm_out
     diffusers_checkpoint.update(
         {
             "norm_out.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.ln_post.weight"],
@@ -155,7 +155,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.output_proj -> <diffusers>.proj_to_clip_embeddings
+    # <original>.output_proj -> <diffusers_sd3_control>.proj_to_clip_embeddings
     diffusers_checkpoint.update(
         {
             "proj_to_clip_embeddings.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.output_proj.weight"],
@@ -171,7 +171,7 @@ def prior_attention_to_diffusers(
 ):
     diffusers_checkpoint = {}
 
-    # <original>.c_qkv -> <diffusers>.{to_q, to_k, to_v}
+    # <original>.c_qkv -> <diffusers_sd3_control>.{to_q, to_k, to_v}
     [q_weight, k_weight, v_weight], [q_bias, k_bias, v_bias] = split_attentions(
         weight=checkpoint[f"{original_attention_prefix}.c_qkv.weight"],
         bias=checkpoint[f"{original_attention_prefix}.c_qkv.bias"],
@@ -190,7 +190,7 @@ def prior_attention_to_diffusers(
         }
     )
 
-    # <original>.c_proj -> <diffusers>.to_out.0
+    # <original>.c_proj -> <diffusers_sd3_control>.to_out.0
     diffusers_checkpoint.update(
         {
             f"{diffusers_attention_prefix}.to_out.0.weight": checkpoint[f"{original_attention_prefix}.c_proj.weight"],
@@ -203,10 +203,10 @@ def prior_attention_to_diffusers(
 
 def prior_ff_to_diffusers(checkpoint, *, diffusers_ff_prefix, original_ff_prefix):
     diffusers_checkpoint = {
-        # <original>.c_fc -> <diffusers>.net.0.proj
+        # <original>.c_fc -> <diffusers_sd3_control>.net.0.proj
         f"{diffusers_ff_prefix}.net.{0}.proj.weight": checkpoint[f"{original_ff_prefix}.c_fc.weight"],
         f"{diffusers_ff_prefix}.net.{0}.proj.bias": checkpoint[f"{original_ff_prefix}.c_fc.bias"],
-        # <original>.c_proj -> <diffusers>.net.2
+        # <original>.c_proj -> <diffusers_sd3_control>.net.2
         f"{diffusers_ff_prefix}.net.{2}.weight": checkpoint[f"{original_ff_prefix}.c_proj.weight"],
         f"{diffusers_ff_prefix}.net.{2}.bias": checkpoint[f"{original_ff_prefix}.c_proj.bias"],
     }
@@ -250,7 +250,7 @@ def prior_image_model_from_original_config():
 def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
     diffusers_checkpoint = {}
 
-    # <original>.time_embed.c_fc -> <diffusers>.time_embedding.linear_1
+    # <original>.time_embed.c_fc -> <diffusers_sd3_control>.time_embedding.linear_1
     diffusers_checkpoint.update(
         {
             "time_embedding.linear_1.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.time_embed.c_fc.weight"],
@@ -258,7 +258,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.time_embed.c_proj -> <diffusers>.time_embedding.linear_2
+    # <original>.time_embed.c_proj -> <diffusers_sd3_control>.time_embedding.linear_2
     diffusers_checkpoint.update(
         {
             "time_embedding.linear_2.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.time_embed.c_proj.weight"],
@@ -266,7 +266,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.input_proj -> <diffusers>.proj_in
+    # <original>.input_proj -> <diffusers_sd3_control>.proj_in
     diffusers_checkpoint.update(
         {
             "proj_in.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.input_proj.weight"],
@@ -274,7 +274,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.clip_embed.0 -> <diffusers>.embedding_proj_norm
+    # <original>.clip_embed.0 -> <diffusers_sd3_control>.embedding_proj_norm
     diffusers_checkpoint.update(
         {
             "embedding_proj_norm.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.clip_embed.0.weight"],
@@ -282,7 +282,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>..clip_embed.1 -> <diffusers>.embedding_proj
+    # <original>..clip_embed.1 -> <diffusers_sd3_control>.embedding_proj
     diffusers_checkpoint.update(
         {
             "embedding_proj.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.clip_embed.1.weight"],
@@ -290,12 +290,12 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.pos_emb -> <diffusers>.positional_embedding
+    # <original>.pos_emb -> <diffusers_sd3_control>.positional_embedding
     diffusers_checkpoint.update(
         {"positional_embedding": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.pos_emb"][None, :]}
     )
 
-    # <original>.ln_pre -> <diffusers>.norm_in
+    # <original>.ln_pre -> <diffusers_sd3_control>.norm_in
     diffusers_checkpoint.update(
         {
             "norm_in.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.ln_pre.weight"],
@@ -303,12 +303,12 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.backbone.resblocks.<x> -> <diffusers>.transformer_blocks.<x>
+    # <original>.backbone.resblocks.<x> -> <diffusers_sd3_control>.transformer_blocks.<x>
     for idx in range(len(model.transformer_blocks)):
         diffusers_transformer_prefix = f"transformer_blocks.{idx}"
         original_transformer_prefix = f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.backbone.resblocks.{idx}"
 
-        # <original>.attn -> <diffusers>.attn1
+        # <original>.attn -> <diffusers_sd3_control>.attn1
         diffusers_attention_prefix = f"{diffusers_transformer_prefix}.attn1"
         original_attention_prefix = f"{original_transformer_prefix}.attn"
         diffusers_checkpoint.update(
@@ -320,7 +320,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             )
         )
 
-        # <original>.mlp -> <diffusers>.ff
+        # <original>.mlp -> <diffusers_sd3_control>.ff
         diffusers_ff_prefix = f"{diffusers_transformer_prefix}.ff"
         original_ff_prefix = f"{original_transformer_prefix}.mlp"
         diffusers_checkpoint.update(
@@ -329,7 +329,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             )
         )
 
-        # <original>.ln_1 -> <diffusers>.norm1
+        # <original>.ln_1 -> <diffusers_sd3_control>.norm1
         diffusers_checkpoint.update(
             {
                 f"{diffusers_transformer_prefix}.norm1.weight": checkpoint[
@@ -339,7 +339,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             }
         )
 
-        # <original>.ln_2 -> <diffusers>.norm3
+        # <original>.ln_2 -> <diffusers_sd3_control>.norm3
         diffusers_checkpoint.update(
             {
                 f"{diffusers_transformer_prefix}.norm3.weight": checkpoint[
@@ -349,7 +349,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
             }
         )
 
-    # <original>.ln_post -> <diffusers>.norm_out
+    # <original>.ln_post -> <diffusers_sd3_control>.norm_out
     diffusers_checkpoint.update(
         {
             "norm_out.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.ln_post.weight"],
@@ -357,7 +357,7 @@ def prior_image_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         }
     )
 
-    # <original>.output_proj -> <diffusers>.proj_to_clip_embeddings
+    # <original>.output_proj -> <diffusers_sd3_control>.proj_to_clip_embeddings
     diffusers_checkpoint.update(
         {
             "proj_to_clip_embeddings.weight": checkpoint[f"{PRIOR_IMAGE_ORIGINAL_PREFIX}.output_proj.weight"],

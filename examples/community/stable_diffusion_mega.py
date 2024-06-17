@@ -4,7 +4,7 @@ import PIL.Image
 import torch
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DiffusionPipeline,
@@ -15,10 +15,10 @@ from diffusers import (
     StableDiffusionPipeline,
     UNet2DConditionModel,
 )
-from diffusers.configuration_utils import FrozenDict
-from diffusers.pipelines.pipeline_utils import StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.utils import deprecate, logging
+from diffusers_sd3_control.configuration_utils import FrozenDict
+from diffusers_sd3_control.pipelines.pipeline_utils import StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.utils import deprecate, logging
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name

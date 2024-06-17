@@ -11,10 +11,10 @@ from torchvision.transforms.functional import resize
 from tqdm.auto import tqdm
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
-from diffusers.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import DDIMScheduler, LMSDiscreteScheduler, PNDMScheduler
 
 
 def preprocess_image(image):
@@ -265,7 +265,7 @@ class MaskWeightsBuilder:
 
 
 class StableDiffusionCanvasPipeline(DiffusionPipeline, StableDiffusionMixin):
-    """Stable Diffusion pipeline that mixes several diffusers in the same canvas"""
+    """Stable Diffusion pipeline that mixes several diffusers_sd3_control in the same canvas"""
 
     def __init__(
         self,

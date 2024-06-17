@@ -17,7 +17,7 @@ Before running the scripts, make sure to install the library's training dependen
 To make sure you can successfully run the latest versions of the example scripts, we highly recommend **installing from source** and keeping the install up to date as we update the example scripts frequently and install some example-specific requirements. To do this, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -103,7 +103,7 @@ Once the training is finished the model will be saved in the `output_dir` specif
 
 ```python
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 model_path = "path_to_saved_model"
 pipe = StableDiffusionPipeline.from_pretrained(model_path, torch_dtype=torch.float16)
@@ -117,7 +117,7 @@ Checkpoints only save the unet, so to run inference from a checkpoint, just load
 
 ```python
 import torch
-from diffusers import StableDiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control import StableDiffusionPipeline, UNet2DConditionModel
 
 model_path = "path_to_saved_model"
 unet = UNet2DConditionModel.from_pretrained(model_path + "/checkpoint-<N>/unet", torch_dtype=torch.float16)
@@ -239,7 +239,7 @@ Once you have trained a model using above command, the inference can be done sim
 need to pass the `output_dir` for loading the LoRA weights which, in this case, is `sd-naruto-model-lora`.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_path = "sayakpaul/sd-model-finetuned-lora-t4"

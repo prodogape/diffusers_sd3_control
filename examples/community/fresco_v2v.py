@@ -25,25 +25,25 @@ from einops import rearrange, repeat
 from gmflow.gmflow import GMFlow
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
-from diffusers.image_processor import PipelineImageInput, VaeImageProcessor
-from diffusers.loaders import LoraLoaderMixin, TextualInversionLoaderMixin
-from diffusers.models import AutoencoderKL, ControlNetModel, ImageProjection, UNet2DConditionModel
-from diffusers.models.attention_processor import AttnProcessor2_0
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.models.unets.unet_2d_condition import UNet2DConditionOutput
-from diffusers.pipelines.controlnet.multicontrolnet import MultiControlNetModel
-from diffusers.pipelines.controlnet.pipeline_controlnet_img2img import StableDiffusionControlNetImg2ImgPipeline
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control.image_processor import PipelineImageInput, VaeImageProcessor
+from diffusers_sd3_control.loaders import LoraLoaderMixin, TextualInversionLoaderMixin
+from diffusers_sd3_control.models import AutoencoderKL, ControlNetModel, ImageProjection, UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import AttnProcessor2_0
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.models.unets.unet_2d_condition import UNet2DConditionOutput
+from diffusers_sd3_control.pipelines.controlnet.multicontrolnet import MultiControlNetModel
+from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet_img2img import StableDiffusionControlNetImg2ImgPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     USE_PEFT_BACKEND,
     deprecate,
     logging,
     scale_lora_layers,
     unscale_lora_layers,
 )
-from diffusers.utils.torch_utils import is_compiled_module, randn_tensor
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module, randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -312,7 +312,7 @@ def my_forward(
     """
     Hacked pipe.unet.forward()
     copied from https://github.com/huggingface/diffusers/blob/v0.19.3/src/diffusers/models/unet_2d_condition.py#L700
-    if you are using a new version of diffusers, please copy the source code and modify it accordingly (find [HACK] in the code)
+    if you are using a new version of diffusers_sd3_control, please copy the source code and modify it accordingly (find [HACK] in the code)
     * restore and return the decoder features
     * optimize the decoder features
     * perform background smoothing
@@ -1316,7 +1316,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
             logger.warning(
                 f"You have disabled the safety checker for {self.__class__} by passing `safety_checker=None`. Ensure"
                 " that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered"
-                " results in services or applications open to the public. Both the diffusers team and Hugging Face"
+                " results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face"
                 " strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling"
                 " it only for use-cases that involve analyzing network behavior or auditing its results. For more"
                 " information, please have a look at https://github.com/huggingface/diffusers/pull/254 ."
@@ -1379,7 +1379,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
         flow_model.eval()
         self.flow_model = flow_model
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline._encode_prompt
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline._encode_prompt
     def _encode_prompt(
         self,
         prompt,
@@ -1412,7 +1412,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
 
         return prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_prompt
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_prompt
     def encode_prompt(
         self,
         prompt,
@@ -1594,7 +1594,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
 
         return prompt_embeds, negative_prompt_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.encode_image
     def encode_image(self, image, device, num_images_per_prompt, output_hidden_states=None):
         dtype = next(self.image_encoder.parameters()).dtype
 
@@ -1619,7 +1619,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
 
             return image_embeds, uncond_image_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_ip_adapter_image_embeds
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_ip_adapter_image_embeds
     def prepare_ip_adapter_image_embeds(
         self, ip_adapter_image, ip_adapter_image_embeds, device, num_images_per_prompt, do_classifier_free_guidance
     ):
@@ -1671,7 +1671,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
 
         return image_embeds
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.run_safety_checker
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.run_safety_checker
     def run_safety_checker(self, image, device, dtype):
         if self.safety_checker is None:
             has_nsfw_concept = None
@@ -1686,7 +1686,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
             )
         return image, has_nsfw_concept
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.decode_latents
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.decode_latents
     def decode_latents(self, latents):
         deprecation_message = "The decode_latents method is deprecated and will be removed in 1.0.0. Please use VaeImageProcessor.postprocess(...) instead"
         deprecate("decode_latents", "1.0.0", deprecation_message, standard_warn=False)
@@ -1698,7 +1698,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
         image = image.cpu().permute(0, 2, 3, 1).float().numpy()
         return image
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline.prepare_extra_step_kwargs
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
         # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
@@ -1873,7 +1873,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
                     f"`ip_adapter_image_embeds` has to be a list of 3D or 4D tensors but is {ip_adapter_image_embeds[0].ndim}D"
                 )
 
-    # Copied from diffusers.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.check_image
+    # Copied from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.check_image
     def check_image(self, image, prompt, prompt_embeds):
         image_is_pil = isinstance(image, PIL.Image.Image)
         image_is_tensor = isinstance(image, torch.Tensor)
@@ -1911,7 +1911,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
                 f"If image batch size is not 1, image batch size must be same as prompt batch size. image batch size: {image_batch_size}, prompt batch size: {prompt_batch_size}"
             )
 
-    # Copied from diffusers.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.prepare_image
+    # Copied from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet.StableDiffusionControlNetPipeline.prepare_image
     def prepare_control_image(
         self,
         image,
@@ -1942,7 +1942,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
 
         return image
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline.get_timesteps
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline.get_timesteps
     def get_timesteps(self, num_inference_steps, strength, device):
         # get the original timestep using init_timestep
         init_timestep = min(int(num_inference_steps * strength), num_inference_steps)
@@ -1954,7 +1954,7 @@ class FrescoV2VPipeline(StableDiffusionControlNetImg2ImgPipeline):
 
         return timesteps, num_inference_steps - t_start
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline.prepare_latents
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_img2img.StableDiffusionImg2ImgPipeline.prepare_latents
     def prepare_latents(
         self, image, timestep, batch_size, num_images_per_prompt, dtype, device, repeat_noise, generator=None
     ):

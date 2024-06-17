@@ -19,7 +19,7 @@ However, you don't necessarily need to use these techniques to speed up inferenc
 Make sure you're using the latest version of Diffusers:
 
 ```bash
-pip install -U diffusers
+pip install -U diffusers_sd3_control
 ```
 
 Then upgrade the other required libraries too:
@@ -47,7 +47,7 @@ If you're interested in the full benchmarking code, take a look at [huggingface/
 Let's start with a baseline. Disable reduced precision and the [`scaled_dot_product_attention` (SDPA)](../optimization/torch2.0#scaled-dot-product-attention) function which is automatically used by Diffusers:
 
 ```python
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 # Load the pipeline in full-precision and place its model components on CUDA.
 pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -77,7 +77,7 @@ Enable the first optimization, reduced precision or more specifically bfloat16. 
 * bfloat16 is much more resilient when used with quantization compared to float16, but more recent versions of the quantization library ([torchao](https://github.com/pytorch-labs/ao)) we used don't have numerical issues with float16.
 
 ```python
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch
 
 pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -111,7 +111,7 @@ Take a look at the [Speed up inference](../optimization/fp16) guide to learn mor
 Attention blocks are intensive to run. But with PyTorch's [`scaled_dot_product_attention`](../optimization/torch2.0#scaled-dot-product-attention) function, it is a lot more efficient. This function is used by default in Diffusers so you don't need to make any changes to the code.
 
 ```python
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch
 
 pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -133,7 +133,7 @@ Scaled dot product attention improves the latency from 4.63 seconds to 3.31 seco
 PyTorch 2 includes `torch.compile` which uses fast and optimized kernels. In Diffusers, the UNet and VAE are usually compiled because these are the most compute-intensive modules. First, configure a few compiler flags (refer to the [full list](https://github.com/pytorch/pytorch/blob/main/torch/_inductor/config.py) for more options):
 
 ```python
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch
 
 torch._inductor.config.conv_1x1_as_mm = True
@@ -221,7 +221,7 @@ You can also use the ultra-lightweight PyTorch quantization library, [torchao](h
 First, configure all the compiler tags:
 
 ```python
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch 
 
 # Notice the two new flags at the end.

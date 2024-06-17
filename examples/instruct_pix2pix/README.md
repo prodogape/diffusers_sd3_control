@@ -28,7 +28,7 @@ Before running the scripts, make sure to install the library's training dependen
 To make sure you can successfully run the latest versions of the example scripts, we highly recommend **installing from source** and keeping the install up to date as we update the example scripts frequently and install some example-specific requirements. To do this, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -145,7 +145,7 @@ accelerate launch --mixed_precision="fp16" --multi_gpu train_instruct_pix2pix.py
 import PIL
 import requests
 import torch
-from diffusers import StableDiffusionInstructPix2PixPipeline
+from diffusers_sd3_control import StableDiffusionInstructPix2PixPipeline
 
 model_id = "your_model_id" # <- replace this 
 pipe = StableDiffusionInstructPix2PixPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")

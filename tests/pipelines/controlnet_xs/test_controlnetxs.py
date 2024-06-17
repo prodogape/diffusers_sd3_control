@@ -21,7 +21,7 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AsymmetricAutoencoderKL,
     AutoencoderKL,
     AutoencoderTiny,
@@ -32,8 +32,8 @@ from diffusers import (
     StableDiffusionControlNetXSPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_image,
     load_numpy,
@@ -44,7 +44,7 @@ from diffusers.utils.testing_utils import (
     slow,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ...models.autoencoders.test_models_vae import (
     get_asym_autoencoder_kl_config,

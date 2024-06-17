@@ -20,7 +20,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -199,7 +199,7 @@ accelerate launch --multi_gpu train_unconditional.py \
 The training script creates and saves a checkpoint file in your repository. Now you can load and use your trained model for inference:
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained("anton-l/ddpm-butterflies-128").to("cuda")

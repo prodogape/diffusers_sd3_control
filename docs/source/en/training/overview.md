@@ -44,7 +44,7 @@ Make sure you can successfully run the latest versions of the example scripts by
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 

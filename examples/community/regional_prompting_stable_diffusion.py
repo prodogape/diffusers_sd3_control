@@ -5,11 +5,11 @@ import torch
 import torchvision.transforms.functional as FF
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
-from diffusers import StableDiffusionPipeline
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import USE_PEFT_BACKEND
+from diffusers_sd3_control import StableDiffusionPipeline
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import USE_PEFT_BACKEND
 
 
 try:
@@ -196,7 +196,7 @@ class RegionalPromptingStableDiffusionPipeline(StableDiffusionPipeline):
                 return latents
 
             def hook_forward(module):
-                # diffusers==0.23.2
+                # diffusers_sd3_control==0.23.2
                 def forward(
                     hidden_states: torch.Tensor,
                     encoder_hidden_states: Optional[torch.Tensor] = None,

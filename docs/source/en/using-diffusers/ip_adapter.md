@@ -36,8 +36,8 @@ Crafting the precise text prompt to generate the image you want can be difficult
 Load a Stable Diffusion XL (SDXL) model and insert an IP-Adapter into the model with the [`~loaders.IPAdapterMixin.load_ip_adapter`] method. Use the `subfolder` parameter to load the SDXL model weights.
 
 ```py
-from diffusers import AutoPipelineForText2Image
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForText2Image
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -79,8 +79,8 @@ IP-Adapter can also help with image-to-image by guiding the model to generate an
 Load a Stable Diffusion XL (SDXL) model and insert an IP-Adapter into the model with the [`~loaders.IPAdapterMixin.load_ip_adapter`] method. Use the `subfolder` parameter to load the SDXL model weights.
 
 ```py
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipeline = AutoPipelineForImage2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -128,11 +128,11 @@ IP-Adapter is also useful for inpainting because the image prompt allows you to 
 Load a Stable Diffusion XL (SDXL) model and insert an IP-Adapter into the model with the [`~loaders.IPAdapterMixin.load_ip_adapter`] method. Use the `subfolder` parameter to load the SDXL model weights.
 
 ```py
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image
 import torch
 
-pipeline = AutoPipelineForInpainting.from_pretrained("diffusers/stable-diffusion-xl-1.0-inpainting-0.1", torch_dtype=torch.float16).to("cuda")
+pipeline = AutoPipelineForInpainting.from_pretrained("diffusers_sd3_control/stable-diffusion-xl-1.0-inpainting-0.1", torch_dtype=torch.float16).to("cuda")
 pipeline.load_ip_adapter("h94/IP-Adapter", subfolder="sdxl_models", weight_name="ip-adapter_sdxl.bin")
 pipeline.set_ip_adapter_scale(0.6)
 ```
@@ -181,9 +181,9 @@ IP-Adapter can also help you generate videos that are more aligned with your tex
 
 ```py
 import torch
-from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
-from diffusers.utils import load_image
+from diffusers_sd3_control import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
+from diffusers_sd3_control.utils import load_image
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
 pipeline = AnimateDiffPipeline.from_pretrained("emilianJR/epiCRealism", motion_adapter=adapter, torch_dtype=torch.float16)
@@ -282,7 +282,7 @@ Binary masks specify which portion of the output image should be assigned to an 
 To start, preprocess the input IP-Adapter images with the [`~image_processor.IPAdapterMaskProcessor.preprocess()`] to generate their masks. For optimal results, provide the output height and width to [`~image_processor.IPAdapterMaskProcessor.preprocess()`]. This ensures masks with different aspect ratios are appropriately stretched. If the input masks already match the aspect ratio of the generated image, you don't have to set the `height` and `width`.
 
 ```py
-from diffusers.image_processor import IPAdapterMaskProcessor
+from diffusers_sd3_control.image_processor import IPAdapterMaskProcessor
 
 mask1 = load_image("https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/ip_mask_mask1.png")
 mask2 = load_image("https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/ip_mask_mask2.png")
@@ -376,8 +376,8 @@ For face models, use the [h94/IP-Adapter](https://huggingface.co/h94/IP-Adapter)
 
 ```py
 import torch
-from diffusers import StableDiffusionPipeline, DDIMScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import load_image
 
 pipeline = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -416,8 +416,8 @@ To use IP-Adapter FaceID models, first extract face embeddings with `insightface
 
 ```py
 import torch
-from diffusers import StableDiffusionPipeline, DDIMScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import load_image
 from insightface.app import FaceAnalysis
 
 pipeline = StableDiffusionPipeline.from_pretrained(
@@ -488,9 +488,9 @@ Load the image encoder with [`~transformers.CLIPVisionModelWithProjection`].
 
 ```py
 import torch
-from diffusers import AutoPipelineForText2Image, DDIMScheduler
+from diffusers_sd3_control import AutoPipelineForText2Image, DDIMScheduler
 from transformers import CLIPVisionModelWithProjection
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 image_encoder = CLIPVisionModelWithProjection.from_pretrained(
     "h94/IP-Adapter",
@@ -565,9 +565,9 @@ image
 The IP-Adapter weights need to be loaded first, then you can use [`~StableDiffusionPipeline.load_lora_weights`] to load the LoRA style and weight you want to apply to your image.
 
 ```py
-from diffusers import DiffusionPipeline, LCMScheduler
+from diffusers_sd3_control import DiffusionPipeline, LCMScheduler
 import torch
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 model_id = "sd-dreambooth-library/herge-style"
 lcm_lora_id = "latent-consistency/lcm-lora-sdv1-5"
@@ -609,9 +609,9 @@ To control image generation to an even greater degree, you can combine IP-Adapte
 Load a [`ControlNetModel`] checkpoint conditioned on depth maps, insert it into a diffusion model, and load the IP-Adapter.
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
 import torch
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 controlnet_model_path = "lllyasviel/control_v11f1p_sd15_depth"
 controlnet = ControlNetModel.from_pretrained(controlnet_model_path, torch_dtype=torch.float16)
@@ -666,8 +666,8 @@ image
 By default IP-Adapters are inserted to all layers of the model. Use the [`~loaders.IPAdapterMixin.set_ip_adapter_scale`] method with a dictionary to assign scales to IP-Adapter at different layers.
 
 ```py
-from diffusers import AutoPipelineForText2Image
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForText2Image
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")

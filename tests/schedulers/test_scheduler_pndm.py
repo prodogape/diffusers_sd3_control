@@ -2,7 +2,7 @@ import tempfile
 
 import torch
 
-from diffusers import PNDMScheduler
+from diffusers_sd3_control import PNDMScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

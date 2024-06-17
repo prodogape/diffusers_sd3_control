@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "src/diffusers/**.py"
+      - "src/diffusers_sd3_control/**.py"
       - "benchmarks/**.py"
       - "examples/**.py"
       - "scripts/**.py"
@@ -78,22 +78,22 @@ jobs:
           - name: Fast PyTorch Pipeline CPU tests
             framework: pytorch_pipelines
             runner: [ self-hosted, intel-cpu, 32-cpu, 256-ram, ci ]
-            image: diffusers/diffusers-pytorch-cpu
+            image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cpu
             report: torch_cpu_pipelines
           - name: Fast PyTorch Models & Schedulers CPU tests
             framework: pytorch_models
             runner: [ self-hosted, intel-cpu, 8-cpu, ci ]
-            image: diffusers/diffusers-pytorch-cpu
+            image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cpu
             report: torch_cpu_models_schedulers
           - name: Fast Flax CPU tests
             framework: flax
             runner: [ self-hosted, intel-cpu, 8-cpu, ci ]
-            image: diffusers/diffusers-flax-cpu
+            image: diffusers_sd3_control/diffusers_sd3_control-flax-cpu
             report: flax_cpu
           - name: PyTorch Example CPU tests
             framework: pytorch_examples
             runner: [ self-hosted, intel-cpu, 8-cpu, ci ]
-            image: diffusers/diffusers-pytorch-cpu
+            image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cpu
             report: torch_example_cpu
 
     name: ${{ matrix.config.name }}
@@ -109,7 +109,7 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -181,7 +181,7 @@ jobs:
           - name: Hub tests for models, schedulers, and pipelines
             framework: hub_tests_pytorch
             runner: [ self-hosted, intel-cpu, 8-cpu, ci ]
-            image: diffusers/diffusers-pytorch-cpu
+            image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cpu
             report: torch_hub
 
     name: ${{ matrix.config.name }}
@@ -197,7 +197,7 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2

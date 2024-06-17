@@ -28,7 +28,7 @@ specific language governing permissions and limitations under the License.
 커뮤니티 파이프라인을 위한 `one_step_unet.py` 파일을 생성하는 것으로 시작합니다. 이 파일에서, Hub에서 모델 가중치와 스케줄러 구성을 로드할 수 있도록 [`DiffusionPipeline`]을 상속하는 파이프라인 클래스를 생성합니다. one-step 파이프라인에는 `UNet`과 스케줄러가 필요하므로 이를 `__init__` 함수에 인수로 추가해야합니다:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 
@@ -82,7 +82,7 @@ Forward pass 에서는(`__call__`로 정의하는 것이 좋습니다) 원하는
 끝났습니다! 🚀 이제 이 파이프라인에 `unet`과 `scheduler`를 전달하여 실행할 수 있습니다:
 
 ```python
-from diffusers import DDPMScheduler, UNet2DModel
+from diffusers_sd3_control import DDPMScheduler, UNet2DModel
 
 scheduler = DDPMScheduler()
 unet = UNet2DModel()
@@ -107,7 +107,7 @@ output = pipeline()
 병합이 되면, `diffusers >= 0.4.0`이 설치된 사용자라면 누구나 `custom_pipeline` 인수에 지정하여 이 파이프라인을 마술처럼 🪄 사용할 수 있습니다:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("google/ddpm-cifar10-32", custom_pipeline="one_step_unet")
 pipe()
@@ -116,7 +116,7 @@ pipe()
 커뮤니티 파이프라인을 공유하는 또 다른 방법은 Hub 에서 선호하는 [모델 리포지토리](https://huggingface.co/docs/hub/models-uploading)에 직접  `one_step_unet.py` 파일을 업로드하는 것입니다. `one_step_unet.py` 파일을 지정하는 대신 모델 저장소 id를 `custom_pipeline` 인수에 전달하세요:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("google/ddpm-cifar10-32", custom_pipeline="stevhliu/one_step_unet")
 ```
@@ -146,7 +146,7 @@ pipeline = DiffusionPipeline.from_pretrained("google/ddpm-cifar10-32", custom_pi
 공식 저장소에서 모든 파이프라인 구성 요소 가중치를 로드할 수 없는 경우가 있습니다. 이 경우 다른 구성 요소는 파이프라인에 직접 전달해야 합니다:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import CLIPFeatureExtractor, CLIPModel
 
 model_id = "CompVis/stable-diffusion-v1-4"

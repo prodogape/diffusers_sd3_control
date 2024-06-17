@@ -25,7 +25,7 @@ from check_dummies import create_dummy_files, create_dummy_object, find_backend,
 
 
 # Align TRANSFORMERS_PATH in check_dummies with the current path
-check_dummies.PATH_TO_DIFFUSERS = os.path.join(git_repo_path, "src", "diffusers")
+check_dummies.PATH_TO_DIFFUSERS = os.path.join(git_repo_path, "src", "diffusers_sd3_control")
 
 
 class CheckDummiesTester(unittest.TestCase):

@@ -5,13 +5,13 @@ import tempfile
 import torch
 from accelerate import load_checkpoint_and_dispatch
 
-from diffusers import UNet2DConditionModel
-from diffusers.models.transformers.prior_transformer import PriorTransformer
-from diffusers.models.vq_model import VQModel
+from diffusers_sd3_control import UNet2DConditionModel
+from diffusers_sd3_control.models.transformers.prior_transformer import PriorTransformer
+from diffusers_sd3_control.models.vq_model import VQModel
 
 
 """
-Example - From the diffusers root directory:
+Example - From the diffusers_sd3_control root directory:
 
 Download weights:
 ```sh
@@ -49,7 +49,7 @@ def prior_model_from_original_config():
 def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_stats_checkpoint):
     diffusers_checkpoint = {}
 
-    # <original>.time_embed.0 -> <diffusers>.time_embedding.linear_1
+    # <original>.time_embed.0 -> <diffusers_sd3_control>.time_embedding.linear_1
     diffusers_checkpoint.update(
         {
             "time_embedding.linear_1.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.time_embed.0.weight"],
@@ -57,7 +57,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
         }
     )
 
-    # <original>.clip_img_proj -> <diffusers>.proj_in
+    # <original>.clip_img_proj -> <diffusers_sd3_control>.proj_in
     diffusers_checkpoint.update(
         {
             "proj_in.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.clip_img_proj.weight"],
@@ -65,7 +65,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
         }
     )
 
-    # <original>.text_emb_proj -> <diffusers>.embedding_proj
+    # <original>.text_emb_proj -> <diffusers_sd3_control>.embedding_proj
     diffusers_checkpoint.update(
         {
             "embedding_proj.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.text_emb_proj.weight"],
@@ -73,7 +73,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
         }
     )
 
-    # <original>.text_enc_proj -> <diffusers>.encoder_hidden_states_proj
+    # <original>.text_enc_proj -> <diffusers_sd3_control>.encoder_hidden_states_proj
     diffusers_checkpoint.update(
         {
             "encoder_hidden_states_proj.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.text_enc_proj.weight"],
@@ -81,13 +81,13 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
         }
     )
 
-    # <original>.positional_embedding -> <diffusers>.positional_embedding
+    # <original>.positional_embedding -> <diffusers_sd3_control>.positional_embedding
     diffusers_checkpoint.update({"positional_embedding": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.positional_embedding"]})
 
-    # <original>.prd_emb -> <diffusers>.prd_embedding
+    # <original>.prd_emb -> <diffusers_sd3_control>.prd_embedding
     diffusers_checkpoint.update({"prd_embedding": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.prd_emb"]})
 
-    # <original>.time_embed.2 -> <diffusers>.time_embedding.linear_2
+    # <original>.time_embed.2 -> <diffusers_sd3_control>.time_embedding.linear_2
     diffusers_checkpoint.update(
         {
             "time_embedding.linear_2.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.time_embed.2.weight"],
@@ -95,12 +95,12 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
         }
     )
 
-    # <original>.resblocks.<x> -> <diffusers>.transformer_blocks.<x>
+    # <original>.resblocks.<x> -> <diffusers_sd3_control>.transformer_blocks.<x>
     for idx in range(len(model.transformer_blocks)):
         diffusers_transformer_prefix = f"transformer_blocks.{idx}"
         original_transformer_prefix = f"{PRIOR_ORIGINAL_PREFIX}.transformer.resblocks.{idx}"
 
-        # <original>.attn -> <diffusers>.attn1
+        # <original>.attn -> <diffusers_sd3_control>.attn1
         diffusers_attention_prefix = f"{diffusers_transformer_prefix}.attn1"
         original_attention_prefix = f"{original_transformer_prefix}.attn"
         diffusers_checkpoint.update(
@@ -112,7 +112,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
             )
         )
 
-        # <original>.mlp -> <diffusers>.ff
+        # <original>.mlp -> <diffusers_sd3_control>.ff
         diffusers_ff_prefix = f"{diffusers_transformer_prefix}.ff"
         original_ff_prefix = f"{original_transformer_prefix}.mlp"
         diffusers_checkpoint.update(
@@ -121,7 +121,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
             )
         )
 
-        # <original>.ln_1 -> <diffusers>.norm1
+        # <original>.ln_1 -> <diffusers_sd3_control>.norm1
         diffusers_checkpoint.update(
             {
                 f"{diffusers_transformer_prefix}.norm1.weight": checkpoint[
@@ -131,7 +131,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
             }
         )
 
-        # <original>.ln_2 -> <diffusers>.norm3
+        # <original>.ln_2 -> <diffusers_sd3_control>.norm3
         diffusers_checkpoint.update(
             {
                 f"{diffusers_transformer_prefix}.norm3.weight": checkpoint[
@@ -141,7 +141,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
             }
         )
 
-    # <original>.final_ln -> <diffusers>.norm_out
+    # <original>.final_ln -> <diffusers_sd3_control>.norm_out
     diffusers_checkpoint.update(
         {
             "norm_out.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.final_ln.weight"],
@@ -149,7 +149,7 @@ def prior_original_checkpoint_to_diffusers_checkpoint(model, checkpoint, clip_st
         }
     )
 
-    # <original>.out_proj -> <diffusers>.proj_to_clip_embeddings
+    # <original>.out_proj -> <diffusers_sd3_control>.proj_to_clip_embeddings
     diffusers_checkpoint.update(
         {
             "proj_to_clip_embeddings.weight": checkpoint[f"{PRIOR_ORIGINAL_PREFIX}.out_proj.weight"],
@@ -172,7 +172,7 @@ def prior_attention_to_diffusers(
 ):
     diffusers_checkpoint = {}
 
-    # <original>.c_qkv -> <diffusers>.{to_q, to_k, to_v}
+    # <original>.c_qkv -> <diffusers_sd3_control>.{to_q, to_k, to_v}
     [q_weight, k_weight, v_weight], [q_bias, k_bias, v_bias] = split_attentions(
         weight=checkpoint[f"{original_attention_prefix}.c_qkv.weight"],
         bias=checkpoint[f"{original_attention_prefix}.c_qkv.bias"],
@@ -191,7 +191,7 @@ def prior_attention_to_diffusers(
         }
     )
 
-    # <original>.c_proj -> <diffusers>.to_out.0
+    # <original>.c_proj -> <diffusers_sd3_control>.to_out.0
     diffusers_checkpoint.update(
         {
             f"{diffusers_attention_prefix}.to_out.0.weight": checkpoint[f"{original_attention_prefix}.c_proj.weight"],
@@ -204,10 +204,10 @@ def prior_attention_to_diffusers(
 
 def prior_ff_to_diffusers(checkpoint, *, diffusers_ff_prefix, original_ff_prefix):
     diffusers_checkpoint = {
-        # <original>.c_fc -> <diffusers>.net.0.proj
+        # <original>.c_fc -> <diffusers_sd3_control>.net.0.proj
         f"{diffusers_ff_prefix}.net.{0}.proj.weight": checkpoint[f"{original_ff_prefix}.c_fc.weight"],
         f"{diffusers_ff_prefix}.net.{0}.proj.bias": checkpoint[f"{original_ff_prefix}.c_fc.bias"],
-        # <original>.c_proj -> <diffusers>.net.2
+        # <original>.c_proj -> <diffusers_sd3_control>.net.2
         f"{diffusers_ff_prefix}.net.{2}.weight": checkpoint[f"{original_ff_prefix}.c_proj.weight"],
         f"{diffusers_ff_prefix}.net.{2}.bias": checkpoint[f"{original_ff_prefix}.c_proj.bias"],
     }
@@ -294,7 +294,7 @@ def unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
     diffusers_checkpoint.update(unet_add_embedding(checkpoint))
     diffusers_checkpoint.update(unet_encoder_hid_proj(checkpoint))
 
-    # <original>.input_blocks -> <diffusers>.down_blocks
+    # <original>.input_blocks -> <diffusers_sd3_control>.down_blocks
 
     original_down_block_idx = 1
 
@@ -311,7 +311,7 @@ def unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
 
         diffusers_checkpoint.update(checkpoint_update)
 
-    # done <original>.input_blocks -> <diffusers>.down_blocks
+    # done <original>.input_blocks -> <diffusers_sd3_control>.down_blocks
 
     diffusers_checkpoint.update(
         unet_midblock_to_diffusers_checkpoint(
@@ -321,7 +321,7 @@ def unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         )
     )
 
-    # <original>.output_blocks -> <diffusers>.up_blocks
+    # <original>.output_blocks -> <diffusers_sd3_control>.up_blocks
 
     original_up_block_idx = 0
 
@@ -338,7 +338,7 @@ def unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
 
         diffusers_checkpoint.update(checkpoint_update)
 
-    # done <original>.output_blocks -> <diffusers>.up_blocks
+    # done <original>.output_blocks -> <diffusers_sd3_control>.up_blocks
 
     diffusers_checkpoint.update(unet_conv_norm_out(checkpoint))
     diffusers_checkpoint.update(unet_conv_out(checkpoint))
@@ -425,7 +425,7 @@ def inpaint_unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
     diffusers_checkpoint.update(unet_add_embedding(checkpoint))
     diffusers_checkpoint.update(unet_encoder_hid_proj(checkpoint))
 
-    # <original>.input_blocks -> <diffusers>.down_blocks
+    # <original>.input_blocks -> <diffusers_sd3_control>.down_blocks
 
     original_down_block_idx = 1
 
@@ -442,7 +442,7 @@ def inpaint_unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
 
         diffusers_checkpoint.update(checkpoint_update)
 
-    # done <original>.input_blocks -> <diffusers>.down_blocks
+    # done <original>.input_blocks -> <diffusers_sd3_control>.down_blocks
 
     diffusers_checkpoint.update(
         unet_midblock_to_diffusers_checkpoint(
@@ -452,7 +452,7 @@ def inpaint_unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
         )
     )
 
-    # <original>.output_blocks -> <diffusers>.up_blocks
+    # <original>.output_blocks -> <diffusers_sd3_control>.up_blocks
 
     original_up_block_idx = 0
 
@@ -469,7 +469,7 @@ def inpaint_unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
 
         diffusers_checkpoint.update(checkpoint_update)
 
-    # done <original>.output_blocks -> <diffusers>.up_blocks
+    # done <original>.output_blocks -> <diffusers_sd3_control>.up_blocks
 
     diffusers_checkpoint.update(unet_conv_norm_out(checkpoint))
     diffusers_checkpoint.update(unet_conv_out(checkpoint))
@@ -483,7 +483,7 @@ def inpaint_unet_original_checkpoint_to_diffusers_checkpoint(model, checkpoint):
 # unet utils
 
 
-# <original>.time_embed -> <diffusers>.time_embedding
+# <original>.time_embed -> <diffusers_sd3_control>.time_embedding
 def unet_time_embeddings(checkpoint):
     diffusers_checkpoint = {}
 
@@ -499,7 +499,7 @@ def unet_time_embeddings(checkpoint):
     return diffusers_checkpoint
 
 
-# <original>.input_blocks.0 -> <diffusers>.conv_in
+# <original>.input_blocks.0 -> <diffusers_sd3_control>.conv_in
 def unet_conv_in(checkpoint):
     diffusers_checkpoint = {}
 
@@ -545,7 +545,7 @@ def unet_encoder_hid_proj(checkpoint):
     return diffusers_checkpoint
 
 
-# <original>.out.0 -> <diffusers>.conv_norm_out
+# <original>.out.0 -> <diffusers_sd3_control>.conv_norm_out
 def unet_conv_norm_out(checkpoint):
     diffusers_checkpoint = {}
 
@@ -559,7 +559,7 @@ def unet_conv_norm_out(checkpoint):
     return diffusers_checkpoint
 
 
-# <original>.out.2 -> <diffusers>.conv_out
+# <original>.out.2 -> <diffusers_sd3_control>.conv_out
 def unet_conv_out(checkpoint):
     diffusers_checkpoint = {}
 
@@ -573,7 +573,7 @@ def unet_conv_out(checkpoint):
     return diffusers_checkpoint
 
 
-# <original>.input_blocks -> <diffusers>.down_blocks
+# <original>.input_blocks -> <diffusers_sd3_control>.down_blocks
 def unet_downblock_to_diffusers_checkpoint(
     model, checkpoint, *, diffusers_down_block_idx, original_down_block_idx, num_head_channels
 ):
@@ -632,7 +632,7 @@ def unet_downblock_to_diffusers_checkpoint(
     return diffusers_checkpoint, num_original_down_blocks
 
 
-# <original>.middle_block -> <diffusers>.mid_block
+# <original>.middle_block -> <diffusers_sd3_control>.mid_block
 def unet_midblock_to_diffusers_checkpoint(model, checkpoint, *, num_head_channels):
     diffusers_checkpoint = {}
 
@@ -676,7 +676,7 @@ def unet_midblock_to_diffusers_checkpoint(model, checkpoint, *, num_head_channel
     return diffusers_checkpoint
 
 
-# <original>.output_blocks -> <diffusers>.up_blocks
+# <original>.output_blocks -> <diffusers_sd3_control>.up_blocks
 def unet_upblock_to_diffusers_checkpoint(
     model, checkpoint, *, diffusers_up_block_idx, original_up_block_idx, num_head_channels
 ):
@@ -777,7 +777,7 @@ def resnet_to_diffusers_checkpoint(checkpoint, *, diffusers_resnet_prefix, resne
 def attention_to_diffusers_checkpoint(checkpoint, *, diffusers_attention_prefix, attention_prefix, num_head_channels):
     diffusers_checkpoint = {}
 
-    # <original>.norm -> <diffusers>.group_norm
+    # <original>.norm -> <diffusers_sd3_control>.group_norm
     diffusers_checkpoint.update(
         {
             f"{diffusers_attention_prefix}.group_norm.weight": checkpoint[f"{attention_prefix}.norm.weight"],
@@ -785,7 +785,7 @@ def attention_to_diffusers_checkpoint(checkpoint, *, diffusers_attention_prefix,
         }
     )
 
-    # <original>.qkv -> <diffusers>.{query, key, value}
+    # <original>.qkv -> <diffusers_sd3_control>.{query, key, value}
     [q_weight, k_weight, v_weight], [q_bias, k_bias, v_bias] = split_attentions(
         weight=checkpoint[f"{attention_prefix}.qkv.weight"][:, :, 0],
         bias=checkpoint[f"{attention_prefix}.qkv.bias"],
@@ -804,7 +804,7 @@ def attention_to_diffusers_checkpoint(checkpoint, *, diffusers_attention_prefix,
         }
     )
 
-    # <original>.encoder_kv -> <diffusers>.{context_key, context_value}
+    # <original>.encoder_kv -> <diffusers_sd3_control>.{context_key, context_value}
     [encoder_k_weight, encoder_v_weight], [encoder_k_bias, encoder_v_bias] = split_attentions(
         weight=checkpoint[f"{attention_prefix}.encoder_kv.weight"][:, :, 0],
         bias=checkpoint[f"{attention_prefix}.encoder_kv.bias"],
@@ -821,7 +821,7 @@ def attention_to_diffusers_checkpoint(checkpoint, *, diffusers_attention_prefix,
         }
     )
 
-    # <original>.proj_out (1d conv) -> <diffusers>.proj_attn (linear)
+    # <original>.proj_out (1d conv) -> <diffusers_sd3_control>.proj_attn (linear)
     diffusers_checkpoint.update(
         {
             f"{diffusers_attention_prefix}.to_out.0.weight": checkpoint[f"{attention_prefix}.proj_out.weight"][
@@ -981,7 +981,7 @@ def movq_encoder_to_diffusers_checkpoint(model, checkpoint):
         # There is no downsample on the last down block
         if down_block_idx != len(model.encoder.down_blocks) - 1:
             # There's a single downsample in the original checkpoint but a list of downsamples
-            # in the diffusers model.
+            # in the diffusers_sd3_control model.
             diffusers_downsample_prefix = f"{diffusers_down_block_prefix}.downsamplers.0.conv"
             downsample_prefix = f"{down_block_prefix}.downsample.conv"
             diffusers_checkpoint.update(
@@ -1084,7 +1084,7 @@ def movq_decoder_to_diffusers_checkpoint(model, checkpoint):
         # there is no up sample on the last up block
         if diffusers_up_block_idx != len(model.decoder.up_blocks) - 1:
             # There's a single upsample in the VQ-diffusion checkpoint but a list of downsamples
-            # in the diffusers model.
+            # in the diffusers_sd3_control model.
             diffusers_downsample_prefix = f"{diffusers_up_block_prefix}.upsamplers.0.conv"
             downsample_prefix = f"{up_block_prefix}.upsample.conv"
             diffusers_checkpoint.update(

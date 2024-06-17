@@ -28,7 +28,7 @@ First, you'll need to [fork the Diffusers repo](https://docs.github.com/en/get-s
 Once you've forked the repo, you'll want to get the files on your local machine for editing. You can do that by cloning the fork with Git as follows:
 
 ```bash
-git clone https://github.com/<YOUR-USERNAME>/diffusers.git
+git clone https://github.com/<YOUR-USERNAME>/diffusers_sd3_control.git
 ```
 
 **📋 Copy-paste the English version with a new language code**
@@ -40,7 +40,7 @@ The documentation files are in one leading directory:
 You'll only need to copy the files in the [`docs/source/en`](https://github.com/huggingface/diffusers/tree/main/docs/source/en) directory, so first navigate to your fork of the repo and run the following:
 
 ```bash
-cd ~/path/to/diffusers/docs
+cd ~/path/to/diffusers_sd3_control/docs
 cp -r source/en source/<LANG-ID>
 ```
 

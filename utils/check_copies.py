@@ -22,7 +22,7 @@ import subprocess
 
 # All paths are set with the intent you should run this script from the root of the repo with the command
 # python utils/check_copies.py
-DIFFUSERS_PATH = "src/diffusers"
+DIFFUSERS_PATH = "src/diffusers_sd3_control"
 REPO_PATH = "."
 
 
@@ -42,7 +42,7 @@ def find_code_in_diffusers(object_name):
         if i < len(parts):
             module = os.path.join(module, parts[i])
     if i >= len(parts):
-        raise ValueError(f"`object_name` should begin with the name of a module of diffusers but got {object_name}.")
+        raise ValueError(f"`object_name` should begin with the name of a module of diffusers_sd3_control but got {object_name}.")
 
     with open(
         os.path.join(DIFFUSERS_PATH, f"{module}.py"),
@@ -78,7 +78,7 @@ def find_code_in_diffusers(object_name):
     return "".join(code_lines)
 
 
-_re_copy_warning = re.compile(r"^(\s*)#\s*Copied from\s+diffusers\.(\S+\.\S+)\s*($|\S.*$)")
+_re_copy_warning = re.compile(r"^(\s*)#\s*Copied from\s+diffusers_sd3_control\.(\S+\.\S+)\s*($|\S.*$)")
 _re_replace_pattern = re.compile(r"^\s*(\S+)->(\S+)(\s+.*|$)")
 _re_fill_pattern = re.compile(r"<FILL\s+[^>]*>")
 

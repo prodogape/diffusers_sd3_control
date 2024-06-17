@@ -8,7 +8,7 @@ on:
       - v*-release
       - v*-patch
     paths:
-      - "src/diffusers/**.py"
+      - "src/diffusers_sd3_control/**.py"
       - "examples/**"
       - "docs/**"
 
@@ -18,10 +18,10 @@ jobs:
     with:
       commit_sha: ${{ github.sha }}
       install_libgl1: true
-      package: diffusers
+      package: diffusers_sd3_control
       notebook_folder: diffusers_doc
       languages: en ko zh ja pt
-      custom_container: diffusers/diffusers-doc-builder
+      custom_container: diffusers_sd3_control/diffusers_sd3_control-doc-builder
     secrets:
       token: ${{ secrets.HUGGINGFACE_PUSH }}
       hf_token: ${{ secrets.HF_DOC_BUILD_PUSH }}

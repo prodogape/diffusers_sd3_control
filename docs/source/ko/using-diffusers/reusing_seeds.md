@@ -23,7 +23,7 @@ prompt = "Labrador in the style of Vermeer"
 (가능하다면) 파이프라인을 [`DiffusionPipeline.from_pretrained`]로 인스턴스화하여 GPU에 배치합니다.
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
 >>> pipe = pipe.to("cuda")

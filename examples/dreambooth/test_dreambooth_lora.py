@@ -24,7 +24,7 @@ import safetensors
 sys.path.append("..")
 from test_examples_utils import ExamplesTestsAccelerate, run_command  # noqa: E402
 
-from diffusers import DiffusionPipeline  # noqa: E402
+from diffusers_sd3_control import DiffusionPipeline  # noqa: E402
 
 
 logging.basicConfig(level=logging.DEBUG)

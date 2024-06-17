@@ -27,7 +27,7 @@ PROMPT = "ghibli style, a fantasy landscape with castles"
 BASE_PATH = os.getenv("BASE_PATH", ".")
 TOTAL_GPU_MEMORY = float(os.getenv("TOTAL_GPU_MEMORY", torch.cuda.get_device_properties(0).total_memory / (1024**3)))
 
-REPO_ID = "diffusers/benchmarks"
+REPO_ID = "diffusers_sd3_control/benchmarks"
 FINAL_CSV_FILE = "collated_results.csv"
 
 

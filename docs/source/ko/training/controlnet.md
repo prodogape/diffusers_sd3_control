@@ -30,7 +30,7 @@ specific language governing permissions and limitations under the License.
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -301,8 +301,8 @@ accelerate launch train_controlnet.py \
 `--output_dir` 는 학습 스크립트에 개별적으로 지정됩니다.
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
+from diffusers_sd3_control.utils import load_image
 import torch
 
 base_model_path = "path to model"

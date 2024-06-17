@@ -31,8 +31,8 @@ You'll use the SVD-XT checkpoint for this guide.
 ```python
 import torch
 
-from diffusers import StableVideoDiffusionPipeline
-from diffusers.utils import load_image, export_to_video
+from diffusers_sd3_control import StableVideoDiffusionPipeline
+from diffusers_sd3_control.utils import load_image, export_to_video
 
 pipe = StableVideoDiffusionPipeline.from_pretrained(
     "stabilityai/stable-video-diffusion-img2vid-xt", torch_dtype=torch.float16, variant="fp16"
@@ -101,8 +101,8 @@ For example, to generate a video with more motion, use the `motion_bucket_id` an
 ```python
 import torch
 
-from diffusers import StableVideoDiffusionPipeline
-from diffusers.utils import load_image, export_to_video
+from diffusers_sd3_control import StableVideoDiffusionPipeline
+from diffusers_sd3_control.utils import load_image, export_to_video
 
 pipe = StableVideoDiffusionPipeline.from_pretrained(
   "stabilityai/stable-video-diffusion-img2vid-xt", torch_dtype=torch.float16, variant="fp16"

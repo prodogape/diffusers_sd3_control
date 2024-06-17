@@ -24,8 +24,8 @@ import numpy as np
 import torch
 from huggingface_hub import delete_repo
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     CMStochasticIterativeScheduler,
     DDIMScheduler,
     DEISMultistepScheduler,
@@ -38,10 +38,10 @@ from diffusers import (
     UniPCMultistepScheduler,
     VQDiffusionScheduler,
 )
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.schedulers.scheduling_utils import SchedulerMixin
-from diffusers.utils import logging
-from diffusers.utils.testing_utils import CaptureLogger, torch_device
+from diffusers_sd3_control.configuration_utils import ConfigMixin, register_to_config
+from diffusers_sd3_control.schedulers.scheduling_utils import SchedulerMixin
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.testing_utils import CaptureLogger, torch_device
 
 from ..others.test_utils import TOKEN, USER, is_staging_test
 
@@ -102,9 +102,9 @@ class SchedulerBaseTests(unittest.TestCase):
     def test_save_load_from_different_config(self):
         obj = SchedulerObject()
 
-        # mock add obj class to `diffusers`
-        setattr(diffusers, "SchedulerObject", SchedulerObject)
-        logger = logging.get_logger("diffusers.configuration_utils")
+        # mock add obj class to `diffusers_sd3_control`
+        setattr(diffusers_sd3_control, "SchedulerObject", SchedulerObject)
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
 
         with tempfile.TemporaryDirectory() as tmpdirname:
             obj.save_config(tmpdirname)
@@ -147,10 +147,10 @@ class SchedulerBaseTests(unittest.TestCase):
 
         obj = SchedulerObject()
 
-        # mock add obj class to `diffusers`
-        setattr(diffusers, "SchedulerObject", SchedulerObject)
-        setattr(diffusers, "SchedulerObject2", SchedulerObject2)
-        logger = logging.get_logger("diffusers.configuration_utils")
+        # mock add obj class to `diffusers_sd3_control`
+        setattr(diffusers_sd3_control, "SchedulerObject", SchedulerObject)
+        setattr(diffusers_sd3_control, "SchedulerObject2", SchedulerObject2)
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
 
         with tempfile.TemporaryDirectory() as tmpdirname:
             obj.save_config(tmpdirname)
@@ -184,12 +184,12 @@ class SchedulerBaseTests(unittest.TestCase):
 
         obj = SchedulerObject()
 
-        # mock add obj class to `diffusers`
-        setattr(diffusers, "SchedulerObject", SchedulerObject)
-        setattr(diffusers, "SchedulerObject2", SchedulerObject2)
-        setattr(diffusers, "SchedulerObject3", SchedulerObject3)
-        logger = logging.get_logger("diffusers.configuration_utils")
-        logger.setLevel(diffusers.logging.INFO)
+        # mock add obj class to `diffusers_sd3_control`
+        setattr(diffusers_sd3_control, "SchedulerObject", SchedulerObject)
+        setattr(diffusers_sd3_control, "SchedulerObject2", SchedulerObject2)
+        setattr(diffusers_sd3_control, "SchedulerObject3", SchedulerObject3)
+        logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
+        logger.setLevel(diffusers_sd3_control.logging.INFO)
 
         with tempfile.TemporaryDirectory() as tmpdirname:
             obj.save_config(tmpdirname)
@@ -771,7 +771,7 @@ class SchedulerCommonTest(unittest.TestCase):
             scheduler.dummy_attribute = 5
             scheduler.register_to_config(test_attribute=5)
 
-            logger = logging.get_logger("diffusers.configuration_utils")
+            logger = logging.get_logger("diffusers_sd3_control.configuration_utils")
             # 30 for warning
             logger.setLevel(30)
             with CaptureLogger(logger) as cap_logger:
@@ -782,7 +782,7 @@ class SchedulerCommonTest(unittest.TestCase):
             # no warning should be thrown
             assert cap_logger.out == ""
 
-            logger = logging.get_logger("diffusers.schedulers.scheduling_utils")
+            logger = logging.get_logger("diffusers_sd3_control.schedulers.scheduling_utils")
             # 30 for warning
             logger.setLevel(30)
             with CaptureLogger(logger) as cap_logger:

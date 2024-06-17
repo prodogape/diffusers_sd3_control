@@ -23,7 +23,7 @@ import torch
 import PIL
 from PIL import Image
 
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
 

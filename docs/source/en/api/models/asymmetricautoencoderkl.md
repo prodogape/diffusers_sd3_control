@@ -28,8 +28,8 @@ Evaluation results can be found in section 4.1 of the original paper.
 ## Example Usage
 
 ```python
-from diffusers import AsymmetricAutoencoderKL, StableDiffusionInpaintPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AsymmetricAutoencoderKL, StableDiffusionInpaintPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 
 prompt = "a photo of a person with beard"

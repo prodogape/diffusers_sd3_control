@@ -29,15 +29,15 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DPMSolverMultistepScheduler,
     LEditsPPPipelineStableDiffusionXL,
     UNet2DConditionModel,
 )
 
-# from diffusers.image_processor import VaeImageProcessor
-from diffusers.utils.testing_utils import (
+# from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

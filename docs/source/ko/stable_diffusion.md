@@ -23,7 +23,7 @@ specific language governing permissions and limitations under the License.
 [`runwayml/stable-diffusion-v1-5`](https://huggingface.co/runwayml/stable-diffusion-v1-5) 모델을 불러와서 시작합니다:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 pipeline = DiffusionPipeline.from_pretrained(model_id)
@@ -119,7 +119,7 @@ pipeline.scheduler.compatibles
 Stable Diffusion 모델은 일반적으로 약 50개의 추론 단계가 필요한 [`PNDMScheduler`]를 기본으로 사용하지만, [`DPMSolverMultistepScheduler`]와 같이 성능이 더 뛰어난 스케줄러는 약 20개 또는 25개의 추론 단계만 필요로 합니다. 새 스케줄러를 로드하려면 [`ConfigMixin.from_config`] 메서드를 사용합니다:
 
 ```python
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
 ```
@@ -211,9 +211,8 @@ image_grid(images, rows=2, cols=4)
 
 현재 파이프라인 구성 요소를 최신 버전으로 교체해 볼 수도 있습니다. Stability AI의 최신 [autodecoder](https://huggingface.co/stabilityai/stable-diffusion-2-1/tree/main/vae)를 파이프라인에 로드하고 몇 가지 이미지를 생성해 보겠습니다:
 
-
 ```python
-from diffusers import AutoencoderKL
+from diffusers_sd3_control import AutoencoderKL
 
 vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16).to("cuda")
 pipeline.vae = vae

@@ -14,7 +14,7 @@ To make sure you can successfully run the latest versions of the example scripts
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -94,8 +94,8 @@ Our experiments were conducted on a single 40GB A100 GPU.
 Once training is done, we can perform inference like so:
 
 ```python
-from diffusers import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteSchedulerTest
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionXLAdapterPipeline, T2IAdapter, EulerAncestralDiscreteSchedulerTest
+from diffusers_sd3_control.utils import load_image
 import torch
 
 base_model_path = "stabilityai/stable-diffusion-xl-base-1.0"

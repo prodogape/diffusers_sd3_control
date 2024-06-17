@@ -23,7 +23,7 @@ The abstract from the paper is:
 Use the `safety_concept` property of [`StableDiffusionPipelineSafe`] to check and edit the current safety concept:
 
 ```python
->>> from diffusers import StableDiffusionPipelineSafe
+>>> from diffusers_sd3_control import StableDiffusionPipelineSafe
 
 >>> pipeline = StableDiffusionPipelineSafe.from_pretrained("AIML-TUDA/stable-diffusion-safe")
 >>> pipeline.safety_concept
@@ -34,8 +34,8 @@ For each image generation the active concept is also contained in [`StableDiffus
 There are 4 configurations (`SafetyConfig.WEAK`, `SafetyConfig.MEDIUM`, `SafetyConfig.STRONG`, and `SafetyConfig.MAX`) that can be applied:
 
 ```python
->>> from diffusers import StableDiffusionPipelineSafe
->>> from diffusers.pipelines.stable_diffusion_safe import SafetyConfig
+>>> from diffusers_sd3_control import StableDiffusionPipelineSafe
+>>> from diffusers_sd3_control.pipelines.stable_diffusion_safe import SafetyConfig
 
 >>> pipeline = StableDiffusionPipelineSafe.from_pretrained("AIML-TUDA/stable-diffusion-safe")
 >>> prompt = "the four horsewomen of the apocalypse, painting by tom of finland, gaston bussiere, craig mullins, j. c. leyendecker"

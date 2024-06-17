@@ -19,14 +19,14 @@ import torch.nn as nn
 import torch.utils.checkpoint
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
-from diffusers.configuration_utils import register_to_config
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.models.autoencoders import AutoencoderKL
-from diffusers.models.unets.unet_2d_condition import UNet2DConditionModel, UNet2DConditionOutput
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipeline
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import USE_PEFT_BACKEND, deprecate, logging, scale_lora_layers, unscale_lora_layers
+from diffusers_sd3_control.configuration_utils import register_to_config
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.models.autoencoders import AutoencoderKL
+from diffusers_sd3_control.models.unets.unet_2d_condition import UNet2DConditionModel, UNet2DConditionOutput
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import USE_PEFT_BACKEND, deprecate, logging, scale_lora_layers, unscale_lora_layers
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -102,7 +102,7 @@ class UNet2DConditionModelHighResFix(UNet2DConditionModel):
             cross_attention_kwargs (`dict`, *optional*):
                 A kwargs dictionary that if specified is passed along to the `AttentionProcessor` as defined under
                 `self.processor` in
-                [diffusers.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
+                [diffusers_sd3_control.models.attention_processor](https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention_processor.py).
             added_cond_kwargs: (`dict`, *optional*):
                 A kwargs dictionary containing additional embeddings that if specified are added to the embeddings that
                 are passed along to the UNet blocks.
@@ -227,7 +227,7 @@ class UNet2DConditionModelHighResFix(UNet2DConditionModel):
                 "T2I should not use down_block_additional_residuals",
                 "1.3.0",
                 "Passing intrablock residual connections with `down_block_additional_residuals` is deprecated \
-                       and will be removed in diffusers 1.3.0.  `down_block_additional_residuals` should only be used \
+                       and will be removed in diffusers_sd3_control 1.3.0.  `down_block_additional_residuals` should only be used \
                        for ControlNet. Please make sure use `down_intrablock_additional_residuals` instead. ",
                 standard_warn=False,
             )
@@ -371,7 +371,7 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> import torch
-        >>> from diffusers import DiffusionPipeline
+        >>> from diffusers_sd3_control import DiffusionPipeline
 
         >>> pipe = DiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4",
                                          custom_pipeline="kohya_hires_fix",

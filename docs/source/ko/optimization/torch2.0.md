@@ -21,7 +21,7 @@ specific language governing permissions and limitations under the License.
 가속화된 어텐션 구현과 및 `torch.compile()`을 사용하기 위해, pip에서 최신 버전의 PyTorch 2.0을 설치되어 있고 diffusers 0.13.0. 버전 이상인지 확인하세요. 아래 설명된 바와 같이, PyTorch 2.0이 활성화되어 있을 때 diffusers는 최적화된 어텐션 프로세서([`AttnProcessor2_0`](https://github.com/huggingface/diffusers/blob/1a5797c6d4491a879ea5285c4efc377664e0332d/src/diffusers/models/attention_processor.py#L798))를 사용합니다.
 
 ```bash
-pip install --upgrade torch diffusers
+pip install --upgrade torch diffusers_sd3_control
 ```
 
 ## 가속화된 트랜스포머와 `torch.compile` 사용하기.
@@ -35,7 +35,7 @@ pip install --upgrade torch diffusers
 
     ```Python
     import torch
-    from diffusers import DiffusionPipeline
+    from diffusers_sd3_control import DiffusionPipeline
 
     pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
     pipe = pipe.to("cuda")
@@ -64,8 +64,8 @@ pip install --upgrade torch diffusers
 
     ```Python
     import torch
-    from diffusers import DiffusionPipeline
-    from diffusers.models.attention_processor import AttnProcessor
+    from diffusers_sd3_control import DiffusionPipeline
+    from diffusers_sd3_control.models.attention_processor import AttnProcessor
 
     pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16).to("cuda")
     pipe.unet.set_default_attn_processor()

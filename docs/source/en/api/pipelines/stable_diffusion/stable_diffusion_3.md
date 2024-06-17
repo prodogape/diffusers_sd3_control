@@ -35,12 +35,11 @@ The SD3 pipeline uses three text encoders to generate an image. Model offloading
 
 </Tip>
 
-
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 
-pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
+pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers_sd3_control", torch_dtype=torch.float16)
 pipe.to("cuda")
 
 image = pipe(
@@ -65,9 +64,9 @@ The most basic memory optimization available in Diffusers allows you to offload 
 
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 
-pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers", torch_dtype=torch.float16)
+pipe = StableDiffusion3Pipeline.from_pretrained("stabilityai/stable-diffusion-3-medium-diffusers_sd3_control", torch_dtype=torch.float16)
 pipe.enable_model_cpu_offload()
 
 image = pipe(
@@ -88,10 +87,10 @@ Removing the memory-intensive 4.7B parameter T5-XXL text encoder during inferenc
 
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 
 pipe = StableDiffusion3Pipeline.from_pretrained(
-    "stabilityai/stable-diffusion-3-medium-diffusers",
+    "stabilityai/stable-diffusion-3-medium-diffusers_sd3_control",
     text_encoder_3=None,
     tokenizer_3=None,
     torch_dtype=torch.float16
@@ -124,12 +123,12 @@ Then load the T5-XXL model using the `BitsAndBytesConfig`.
 
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 from transformers import T5EncoderModel, BitsAndBytesConfig
 
 quantization_config = BitsAndBytesConfig(load_in_8bit=True)
 
-model_id = "stabilityai/stable-diffusion-3-medium-diffusers"
+model_id = "stabilityai/stable-diffusion-3-medium-diffusers_sd3_control"
 text_encoder = T5EncoderModel.from_pretrained(
     model_id,
     subfolder="text_encoder_3",
@@ -164,7 +163,7 @@ Using compiled components in the SD3 pipeline can speed up inference by as much 
 
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 
 torch.set_float32_matmul_precision("high")
 
@@ -174,7 +173,7 @@ torch._inductor.config.epilogue_fusion = False
 torch._inductor.config.coordinate_descent_check_all_directions = True
 
 pipe = StableDiffusion3Pipeline.from_pretrained(
-    "stabilityai/stable-diffusion-3-medium-diffusers",
+    "stabilityai/stable-diffusion-3-medium-diffusers_sd3_control",
     torch_dtype=torch.float16
 ).to("cuda")
 pipe.set_progress_bar_config(disable=True)
@@ -204,7 +203,7 @@ The `SD3Transformer2DModel` and `StableDiffusion3Pipeline` classes support loadi
 ## Loading the original checkpoints for the `SD3Transformer2DModel`
 
 ```python
-from diffusers import SD3Transformer2DModel
+from diffusers_sd3_control import SD3Transformer2DModel
 
 model = SD3Transformer2DModel.from_single_file("https://huggingface.co/stabilityai/stable-diffusion-3-medium/blob/main/sd3_medium.safetensors")
 ```
@@ -215,7 +214,7 @@ model = SD3Transformer2DModel.from_single_file("https://huggingface.co/stability
 
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 
 pipe = StableDiffusion3Pipeline.from_single_file(
     "https://huggingface.co/stabilityai/stable-diffusion-3-medium/blob/main/sd3_medium_incl_clips.safetensors",
@@ -232,7 +231,7 @@ image.save('sd3-single-file.png')
 
 ```python
 import torch
-from diffusers import StableDiffusion3Pipeline
+from diffusers_sd3_control import StableDiffusion3Pipeline
 
 pipe = StableDiffusion3Pipeline.from_single_file(
     "https://huggingface.co/stabilityai/stable-diffusion-3-medium/blob/main/sd3_medium_incl_clips_t5xxlfp8.safetensors",

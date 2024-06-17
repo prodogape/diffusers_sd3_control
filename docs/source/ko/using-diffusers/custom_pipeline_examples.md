@@ -43,7 +43,7 @@ pipe = DiffusionPipeline.from_pretrained(
 다음 코드는 약 12GB의 GPU RAM이 필요합니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import CLIPImageProcessor, CLIPModel
 import torch
 
@@ -92,7 +92,7 @@ for i, img in enumerate(images):
 예시 "one-step-unet"는 다음과 같이 실행할 수 있습니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("google/ddpm-cifar10-32", custom_pipeline="one_step_unet")
 pipe()
@@ -105,7 +105,7 @@ pipe()
 다음 코드는 최소 8GB VRAM의 GPU에서 실행할 수 있으며 약 5분 정도 소요됩니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -136,9 +136,10 @@ walk(...)` 함수의 출력은 `output_dir`에 정의된 대로 폴더에 저장
 ### Stable Diffusion Mega
 
 The Stable Diffusion Mega 파이프라인을 사용하면 Stable Diffusion 파이프라인의 주요 사용 사례를 단일 클래스에서 사용할 수 있습니다.
+
 ```python
 #!/usr/bin/env python3
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import PIL
 import requests
 from io import BytesIO
@@ -194,7 +195,7 @@ images = pipe.inpaint(prompt=prompt, image=init_image, mask_image=mask_image, st
 #### pytorch
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -211,7 +212,7 @@ pipe.text2img(prompt, negative_prompt=neg_prompt, width=512, height=512, max_emb
 #### onnxruntime
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -231,12 +232,13 @@ pipe.text2img(prompt, negative_prompt=neg_prompt, width=512, height=512, max_emb
 ### Speech to Image
 
 다음 코드는 사전학습된 OpenAI whisper-small과 Stable Diffusion을 사용하여 오디오 샘플에서 이미지를 생성할 수 있습니다.
+
 ```Python
 import torch
 
 import matplotlib.pyplot as plt
 from datasets import load_dataset
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import (
     WhisperForConditionalGeneration,
     WhisperProcessor,

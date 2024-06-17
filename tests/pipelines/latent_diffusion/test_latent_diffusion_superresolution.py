@@ -19,9 +19,9 @@ import unittest
 import numpy as np
 import torch
 
-from diffusers import DDIMScheduler, LDMSuperResolutionPipeline, UNet2DModel, VQModel
-from diffusers.utils import PIL_INTERPOLATION
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import DDIMScheduler, LDMSuperResolutionPipeline, UNet2DModel, VQModel
+from diffusers_sd3_control.utils import PIL_INTERPOLATION
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

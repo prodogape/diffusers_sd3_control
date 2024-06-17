@@ -23,7 +23,7 @@ Before you begin, make sure you have the following libraries installed:
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install -q diffusers transformers accelerate
+#!pip install -q diffusers_sd3_control transformers accelerate
 ```
 
 ## Load model checkpoints
@@ -31,7 +31,7 @@ Before you begin, make sure you have the following libraries installed:
 Model weights may be stored in separate subfolders on the Hub or locally, in which case, you should use the [`~StableDiffusionXLPipeline.from_pretrained`] method:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/sdxl-turbo", torch_dtype=torch.float16, variant="fp16")
@@ -41,7 +41,7 @@ pipeline = pipeline.to("cuda")
 You can also use the [`~StableDiffusionXLPipeline.from_single_file`] method to load a model checkpoint stored in a single file format (`.ckpt` or `.safetensors`) from the Hub or locally. For this loading method, you need to set `timestep_spacing="trailing"` (feel free to experiment with the other scheduler config values to get better results):
 
 ```py
-from diffusers import StableDiffusionXLPipeline, EulerAncestralDiscreteScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, EulerAncestralDiscreteScheduler
 import torch
 
 pipeline = StableDiffusionXLPipeline.from_single_file(
@@ -59,7 +59,7 @@ Make sure to set `guidance_scale` to 0.0 to disable, as the model was trained wi
 Increasing the number of steps to 2, 3 or 4 should improve image quality.
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline_text2image = AutoPipelineForText2Image.from_pretrained("stabilityai/sdxl-turbo", torch_dtype=torch.float16, variant="fp16")
@@ -82,8 +82,8 @@ The image-to-image pipeline will run for `int(num_inference_steps * strength)` s
 our example below.
 
 ```py
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 # use from_pipe to avoid consuming additional memory when loading a checkpoint
 pipeline_image2image = AutoPipelineForImage2Image.from_pipe(pipeline_text2image).to("cuda")

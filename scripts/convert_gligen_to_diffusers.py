@@ -10,14 +10,14 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     StableDiffusionGLIGENPipeline,
     StableDiffusionGLIGENTextImagePipeline,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.stable_diffusion.convert_from_ckpt import (
+from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt import (
     assign_to_checkpoint,
     conv_attn_to_linear,
     protected,

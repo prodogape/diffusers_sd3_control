@@ -19,7 +19,7 @@ import importlib
 
 import torch
 
-from diffusers.pipelines.stable_diffusion.convert_from_ckpt import download_from_original_stable_diffusion_ckpt
+from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt import download_from_original_stable_diffusion_ckpt
 
 
 if __name__ == "__main__":
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.pipeline_class_name is not None:
-        library = importlib.import_module("diffusers")
+        library = importlib.import_module("diffusers_sd3_control")
         class_obj = getattr(library, args.pipeline_class_name)
         pipeline_class = class_obj
     else:

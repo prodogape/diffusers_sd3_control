@@ -28,7 +28,7 @@ Unconditional 이미지 생성은 학습에 사용된 데이터셋과 유사한 
 시작 전에, 🤗 Datasets을 불러오고 전처리하기 위해 데이터셋이 설치되어 있는지 다수 GPU에서 학습을 간소화하기 위해 🤗 Accelerate 가 설치되어 있는지 확인하세요. 그 후 학습 메트릭을 시각화하기 위해 [TensorBoard](https://www.tensorflow.org/tensorboard)를 또한 설치하세요. (또한 학습 추적을 위해 [Weights & Biases](https://docs.wandb.ai/)를 사용할 수 있습니다.)
 
 ```bash
-!pip install diffusers[training]
+!pip install diffusers_sd3_control[training]
 ```
 
 커뮤니티에 모델을 공유할 것을 권장하며, 이를 위해서 Hugging Face 계정에 로그인을 해야 합니다. (계정이 없다면 [여기](https://hf.co/join)에서 만들 수 있습니다.) 노트북에서 로그인할 수 있으며 메시지가 표시되면 토큰을 입력할 수 있습니다.
@@ -156,7 +156,7 @@ huggingface-cli login
 🧨 Diffusers에 사전학습된 모델들은 모델 클래스에서 원하는 파라미터로 쉽게 생성할 수 있습니다. 예를 들어, [`UNet2DModel`]를 생성하려면:
 
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> model = UNet2DModel(
 ...     sample_size=config.image_size,  # 타겟 이미지 해상도
@@ -206,7 +206,7 @@ Output shape: torch.Size([1, 3, 128, 128])
 ```py
 >>> import torch
 >>> from PIL import Image
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> noise_scheduler = DDPMScheduler(num_train_timesteps=1000)
 >>> noise = torch.randn(sample_image.shape)
@@ -234,7 +234,7 @@ Output shape: torch.Size([1, 3, 128, 128])
 우선 옵티마이저(optimizer)와 학습률 스케줄러(learning rate scheduler)가 필요할 것입니다:
 
 ```py
->>> from diffusers.optimization import get_cosine_schedule_with_warmup
+>>> from diffusers_sd3_control.optimization import get_cosine_schedule_with_warmup
 
 >>> optimizer = torch.optim.AdamW(model.parameters(), lr=config.learning_rate)
 >>> lr_scheduler = get_cosine_schedule_with_warmup(
@@ -247,7 +247,7 @@ Output shape: torch.Size([1, 3, 128, 128])
 그 후, 모델을 평가하는 방법이 필요합니다. 평가를 위해, `DDPMPipeline`을 사용해 배치의 이미지 샘플들을 생성하고 그리드 형태로 저장할 수 있습니다:
 
 ```py
->>> from diffusers import DDPMPipeline
+>>> from diffusers_sd3_control import DDPMPipeline
 >>> import math
 >>> import os
 

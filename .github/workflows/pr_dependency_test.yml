@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "src/diffusers/**.py"
+      - "src/diffusers_sd3_control/**.py"
   push:
     branches:
       - main

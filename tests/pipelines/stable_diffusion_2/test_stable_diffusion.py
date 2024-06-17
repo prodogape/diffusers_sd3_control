@@ -20,7 +20,7 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -32,7 +32,7 @@ from diffusers import (
     UNet2DConditionModel,
     logging,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     CaptureLogger,
     backend_empty_cache,
     enable_full_determinism,
@@ -270,7 +270,7 @@ class StableDiffusion2PipelineFastTests(
         do_classifier_free_guidance = True
         negative_prompt = None
         num_images_per_prompt = 1
-        logger = logging.get_logger("diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion")
+        logger = logging.get_logger("diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion")
         logger.setLevel(logging.WARNING)
 
         prompt = 25 * "@"

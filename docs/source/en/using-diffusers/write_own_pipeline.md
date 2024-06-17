@@ -23,7 +23,7 @@ In this tutorial, you'll learn how to use models and schedulers to assemble a di
 A pipeline is a quick and easy way to run a model for inference, requiring no more than four lines of code to generate an image:
 
 ```py
->>> from diffusers import DDPMPipeline
+>>> from diffusers_sd3_control import DDPMPipeline
 
 >>> ddpm = DDPMPipeline.from_pretrained("google/ddpm-cat-256", use_safetensors=True).to("cuda")
 >>> image = ddpm(num_inference_steps=25).images[0]
@@ -43,7 +43,7 @@ To recreate the pipeline with the model and scheduler separately, let's write ou
 1. Load the model and scheduler:
 
 ```py
->>> from diffusers import DDPMScheduler, UNet2DModel
+>>> from diffusers_sd3_control import DDPMScheduler, UNet2DModel
 
 >>> scheduler = DDPMScheduler.from_pretrained("google/ddpm-cat-256")
 >>> model = UNet2DModel.from_pretrained("google/ddpm-cat-256", use_safetensors=True).to("cuda")
@@ -122,7 +122,7 @@ Now that you know what you need for the Stable Diffusion pipeline, load all thes
 >>> from PIL import Image
 >>> import torch
 >>> from transformers import CLIPTextModel, CLIPTokenizer
->>> from diffusers import AutoencoderKL, UNet2DConditionModel, PNDMScheduler
+>>> from diffusers_sd3_control import AutoencoderKL, UNet2DConditionModel, PNDMScheduler
 
 >>> vae = AutoencoderKL.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="vae", use_safetensors=True)
 >>> tokenizer = CLIPTokenizer.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="tokenizer")
@@ -137,7 +137,7 @@ Now that you know what you need for the Stable Diffusion pipeline, load all thes
 Instead of the default [`PNDMScheduler`], exchange it for the [`UniPCMultistepScheduler`] to see how easy it is to plug a different scheduler in:
 
 ```py
->>> from diffusers import UniPCMultistepScheduler
+>>> from diffusers_sd3_control import UniPCMultistepScheduler
 
 >>> scheduler = UniPCMultistepScheduler.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="scheduler")
 ```

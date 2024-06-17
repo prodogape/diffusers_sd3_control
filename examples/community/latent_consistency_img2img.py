@@ -24,13 +24,13 @@ import PIL.Image
 import torch
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, ConfigMixin, DiffusionPipeline, SchedulerMixin, UNet2DConditionModel, logging
-from diffusers.configuration_utils import register_to_config
-from diffusers.image_processor import PipelineImageInput, VaeImageProcessor
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.utils import BaseOutput
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control import AutoencoderKL, ConfigMixin, DiffusionPipeline, SchedulerMixin, UNet2DConditionModel, logging
+from diffusers_sd3_control.configuration_utils import register_to_config
+from diffusers_sd3_control.image_processor import PipelineImageInput, VaeImageProcessor
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.utils import BaseOutput
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -390,7 +390,7 @@ class LatentConsistencyModelImg2ImgPipeline(DiffusionPipeline):
 
 
 @dataclass
-# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->DDIM
+# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->DDIM
 class LCMSchedulerOutput(BaseOutput):
     """
     Output class for the scheduler's `step` function output.
@@ -407,7 +407,7 @@ class LCMSchedulerOutput(BaseOutput):
     denoised: Optional[torch.Tensor] = None
 
 
-# Copied from diffusers.schedulers.scheduling_ddpm.betas_for_alpha_bar
+# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.betas_for_alpha_bar
 def betas_for_alpha_bar(
     num_diffusion_timesteps,
     max_beta=0.999,
@@ -612,7 +612,7 @@ class LCMSchedulerWithTimestamp(SchedulerMixin, ConfigMixin):
 
         return variance
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler._threshold_sample
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler._threshold_sample
     def _threshold_sample(self, sample: torch.Tensor) -> torch.Tensor:
         """
         "Dynamic thresholding: At each sampling step we set s to a certain percentile absolute pixel value in xt0 (the
@@ -774,7 +774,7 @@ class LCMSchedulerWithTimestamp(SchedulerMixin, ConfigMixin):
 
         return LCMSchedulerOutput(prev_sample=prev_sample, denoised=denoised)
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler.add_noise
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler.add_noise
     def add_noise(
         self,
         original_samples: torch.Tensor,
@@ -798,7 +798,7 @@ class LCMSchedulerWithTimestamp(SchedulerMixin, ConfigMixin):
         noisy_samples = sqrt_alpha_prod * original_samples + sqrt_one_minus_alpha_prod * noise
         return noisy_samples
 
-    # Copied from diffusers.schedulers.scheduling_ddpm.DDPMScheduler.get_velocity
+    # Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMScheduler.get_velocity
     def get_velocity(self, sample: torch.Tensor, noise: torch.Tensor, timesteps: torch.IntTensor) -> torch.Tensor:
         # Make sure alphas_cumprod and timestep have same device and dtype as sample
         alphas_cumprod = self.alphas_cumprod.to(device=sample.device, dtype=sample.dtype)

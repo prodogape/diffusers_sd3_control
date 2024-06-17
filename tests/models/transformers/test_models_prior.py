@@ -20,8 +20,8 @@ import unittest
 import torch
 from parameterized import parameterized
 
-from diffusers import PriorTransformer
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import PriorTransformer
+from diffusers_sd3_control.utils.testing_utils import (
     backend_empty_cache,
     enable_full_determinism,
     floats_tensor,

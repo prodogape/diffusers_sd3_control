@@ -38,12 +38,12 @@ The following example demonstrates how to use PIA to generate a video from a sin
 
 ```python
 import torch
-from diffusers import (
+from diffusers_sd3_control import (
     EulerDiscreteScheduler,
     MotionAdapter,
     PIAPipeline,
 )
-from diffusers.utils import export_to_gif, load_image
+from diffusers_sd3_control.utils import export_to_gif, load_image
 
 adapter = MotionAdapter.from_pretrained("openmmlab/PIA-condition-adapter")
 pipe = PIAPipeline.from_pretrained("SG161222/Realistic_Vision_V6.0_B1_noVAE", motion_adapter=adapter, torch_dtype=torch.float16)
@@ -96,12 +96,12 @@ The following example demonstrates the usage of FreeInit.
 
 ```python
 import torch
-from diffusers import (
+from diffusers_sd3_control import (
     DDIMScheduler,
     MotionAdapter,
     PIAPipeline,
 )
-from diffusers.utils import export_to_gif, load_image
+from diffusers_sd3_control.utils import export_to_gif, load_image
 
 adapter = MotionAdapter.from_pretrained("openmmlab/PIA-condition-adapter")
 pipe = PIAPipeline.from_pretrained("SG161222/Realistic_Vision_V6.0_B1_noVAE", motion_adapter=adapter)

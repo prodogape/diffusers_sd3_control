@@ -18,14 +18,14 @@ import unittest
 import torch
 from huggingface_hub import ModelCard
 
-from diffusers import (
+from diffusers_sd3_control import (
     DDPMScheduler,
     DiffusionPipeline,
     KandinskyV22CombinedPipeline,
     KandinskyV22Pipeline,
     KandinskyV22PriorPipeline,
 )
-from diffusers.pipelines.pipeline_utils import CONNECTED_PIPES_KEYS
+from diffusers_sd3_control.pipelines.pipeline_utils import CONNECTED_PIPES_KEYS
 
 
 def state_dicts_almost_equal(sd1, sd2):

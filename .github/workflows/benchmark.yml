@@ -19,10 +19,10 @@ jobs:
       max-parallel: 1
     runs-on: [single-gpu, nvidia-gpu, a10, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
       options: --shm-size "16gb" --ipc host -v /mnt/hf_cache:/mnt/cache/ --gpus 0
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2

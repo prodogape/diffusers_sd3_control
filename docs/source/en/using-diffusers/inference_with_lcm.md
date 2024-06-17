@@ -36,7 +36,7 @@ A couple of notes to keep in mind when using LCMs are:
 * The ideal range for `guidance_scale` is [3., 13.] because that is what the UNet was trained with. However, disabling `guidance_scale` with a value of 1.0 is also effective in most cases.
 
 ```python
-from diffusers import StableDiffusionXLPipeline, UNet2DConditionModel, LCMScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, UNet2DConditionModel, LCMScheduler
 import torch
 
 unet = UNet2DConditionModel.from_pretrained(
@@ -74,7 +74,7 @@ A couple of notes to keep in mind when using LCM-LoRAs are:
 
 ```py
 import torch
-from diffusers import DiffusionPipeline, LCMScheduler
+from diffusers_sd3_control import DiffusionPipeline, LCMScheduler
 
 pipe = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
@@ -111,8 +111,8 @@ To use LCMs for image-to-image, you need to load the LCM checkpoint for your sup
 
 ```python
 import torch
-from diffusers import AutoPipelineForImage2Image, UNet2DConditionModel, LCMScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image, UNet2DConditionModel, LCMScheduler
+from diffusers_sd3_control.utils import load_image
 
 unet = UNet2DConditionModel.from_pretrained(
     "SimianLuo/LCM_Dreamshaper_v7",
@@ -163,8 +163,8 @@ To use LCM-LoRAs for image-to-image, you need to replace the scheduler with the 
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image, LCMScheduler
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image, LCMScheduler
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipe = AutoPipelineForImage2Image.from_pretrained(
     "Lykon/dreamshaper-7",
@@ -211,8 +211,8 @@ To use LCM-LoRAs for inpainting, you need to replace the scheduler with the [`LC
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting, LCMScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting, LCMScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipe = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting",
@@ -265,7 +265,7 @@ LCMs are compatible with adapters like LoRA, ControlNet, T2I-Adapter, and Animat
 Load the LCM checkpoint for your supported model into [`UNet2DConditionModel`] and replace the scheduler with the [`LCMScheduler`]. Then you can use the [`~loaders.LoraLoaderMixin.load_lora_weights`] method to load the LoRA weights into the LCM and generate a styled image in a few steps.
 
 ```python
-from diffusers import StableDiffusionXLPipeline, UNet2DConditionModel, LCMScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, UNet2DConditionModel, LCMScheduler
 import torch
 
 unet = UNet2DConditionModel.from_pretrained(
@@ -298,7 +298,7 @@ Replace the scheduler with the [`LCMScheduler`]. Then you can use the [`~loaders
 
 ```py
 import torch
-from diffusers import DiffusionPipeline, LCMScheduler
+from diffusers_sd3_control import DiffusionPipeline, LCMScheduler
 
 pipe = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
@@ -346,8 +346,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, LCMScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel, LCMScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 image = load_image(
     "https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png"
@@ -400,8 +400,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, LCMScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel, LCMScheduler
+from diffusers_sd3_control.utils import load_image
 
 image = load_image(
     "https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png"
@@ -467,8 +467,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from diffusers import StableDiffusionXLAdapterPipeline, UNet2DConditionModel, T2IAdapter, LCMScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionXLAdapterPipeline, UNet2DConditionModel, T2IAdapter, LCMScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 # detect the canny map in low resolution to avoid high-frequency details
 image = load_image(
@@ -533,8 +533,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from diffusers import StableDiffusionXLAdapterPipeline, UNet2DConditionModel, T2IAdapter, LCMScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionXLAdapterPipeline, UNet2DConditionModel, T2IAdapter, LCMScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 # detect the canny map in low resolution to avoid high-frequency details
 image = load_image(
@@ -595,8 +595,8 @@ Load a [`AnimateDiffPipeline`] and pass a [`MotionAdapter`] to it. Then replace 
 
 ```py
 import torch
-from diffusers import MotionAdapter, AnimateDiffPipeline, DDIMScheduler, LCMScheduler
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import MotionAdapter, AnimateDiffPipeline, DDIMScheduler, LCMScheduler
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5")
 pipe = AnimateDiffPipeline.from_pretrained(

@@ -11,15 +11,15 @@ from lavis.models import load_model_and_preprocess
 from transformers import CLIPTokenizer
 from transformers.models.blip_2.configuration_blip_2 import Blip2Config
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     PNDMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.pipelines import BlipDiffusionPipeline
-from diffusers.pipelines.blip_diffusion.blip_image_processing import BlipImageProcessor
-from diffusers.pipelines.blip_diffusion.modeling_blip2 import Blip2QFormerModel
-from diffusers.pipelines.blip_diffusion.modeling_ctx_clip import ContextCLIPTextModel
+from diffusers_sd3_control.pipelines import BlipDiffusionPipeline
+from diffusers_sd3_control.pipelines.blip_diffusion.blip_image_processing import BlipImageProcessor
+from diffusers_sd3_control.pipelines.blip_diffusion.modeling_blip2 import Blip2QFormerModel
+from diffusers_sd3_control.pipelines.blip_diffusion.modeling_ctx_clip import ContextCLIPTextModel
 
 
 BLIP2_CONFIG = {

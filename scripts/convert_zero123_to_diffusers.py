@@ -2,7 +2,7 @@
 This script modified from
 https://github.com/huggingface/diffusers/blob/bc691231360a4cbc7d19a58742ebb8ed0f05e027/scripts/convert_original_stable_diffusion_to_diffusers.py
 
-Convert original Zero1to3 checkpoint to diffusers checkpoint.
+Convert original Zero1to3 checkpoint to diffusers_sd3_control checkpoint.
 
 # run the convert script
 $ python convert_zero123_to_diffusers.py \
@@ -24,12 +24,12 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers.models import (
+from diffusers_sd3_control.models import (
     AutoencoderKL,
     UNet2DConditionModel,
 )
-from diffusers.schedulers import DDIMScheduler
-from diffusers.utils import logging
+from diffusers_sd3_control.schedulers import DDIMScheduler
+from diffusers_sd3_control.utils import logging
 
 
 logger = logging.get_logger(__name__)
@@ -37,7 +37,7 @@ logger = logging.get_logger(__name__)
 
 def create_unet_diffusers_config(original_config, image_size: int, controlnet=False):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers_sd3_control based on the config of the LDM model.
     """
     if controlnet:
         unet_params = original_config["model"]["params"]["control_stage_config"]["params"]
@@ -492,7 +492,7 @@ def convert_ldm_unet_checkpoint(
 
 def create_vae_diffusers_config(original_config, image_size: int):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers_sd3_control based on the config of the LDM model.
     """
     vae_params = original_config["model"]["params"]["first_stage_config"]["params"]["ddconfig"]
     _ = original_config["model"]["params"]["first_stage_config"]["params"]["embed_dim"]
@@ -742,10 +742,10 @@ def convert_from_original_zero123_ckpt(checkpoint_path, original_config_file, ex
         set_module_tensor_to_device(vae, param_name, "cpu", value=param)
 
     feature_extractor = CLIPImageProcessor.from_pretrained(
-        "lambdalabs/sd-image-variations-diffusers", subfolder="feature_extractor"
+        "lambdalabs/sd-image-variations-diffusers_sd3_control", subfolder="feature_extractor"
     )
     image_encoder = CLIPVisionModelWithProjection.from_pretrained(
-        "lambdalabs/sd-image-variations-diffusers", subfolder="image_encoder"
+        "lambdalabs/sd-image-variations-diffusers_sd3_control", subfolder="image_encoder"
     )
 
     cc_projection = CCProjection()

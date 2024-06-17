@@ -29,7 +29,7 @@ from transformers import (
     CLIPTokenizer,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -42,7 +42,7 @@ from diffusers import (
     UNet2DConditionModel,
     logging,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     CaptureLogger,
     enable_full_determinism,
     load_image,
@@ -260,7 +260,7 @@ class StableDiffusionPipelineFastTests(
         assert np.abs(image_slice.flatten() - expected_slice).max() < 1e-2
 
     def test_stable_diffusion_ays(self):
-        from diffusers.schedulers import AysSchedules
+        from diffusers_sd3_control.schedulers import AysSchedules
 
         timestep_schedule = AysSchedules["StableDiffusionTimesteps"]
         sigma_schedule = AysSchedules["StableDiffusionSigmas"]
@@ -648,7 +648,7 @@ class StableDiffusionPipelineFastTests(
         do_classifier_free_guidance = True
         negative_prompt = None
         num_images_per_prompt = 1
-        logger = logging.get_logger("diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion")
+        logger = logging.get_logger("diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion")
         logger.setLevel(logging.WARNING)
 
         prompt = 100 * "@"

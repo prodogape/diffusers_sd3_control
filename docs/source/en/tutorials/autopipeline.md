@@ -27,7 +27,7 @@ Under the hood, [AutoPipeline](../api/pipelines/auto_pipeline):
 <hfoption id="text-to-image">
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipe_txt2img = AutoPipelineForText2Image.from_pretrained(
@@ -48,8 +48,8 @@ image
 <hfoption id="image-to-image">
 
 ```py
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipe_img2img = AutoPipelineForImage2Image.from_pretrained(
@@ -82,8 +82,8 @@ You can learn more about the [`~DiffusionPipeline.from_pipe`] method in the [Reu
 <hfoption id="inpainting">
 
 ```py
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
@@ -113,7 +113,7 @@ The [AutoPipeline](../api/pipelines/auto_pipeline) supports [Stable Diffusion](.
 If you try to load an unsupported checkpoint, you'll get an error.
 
 ```py
-from diffusers import AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForImage2Image
 import torch
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(

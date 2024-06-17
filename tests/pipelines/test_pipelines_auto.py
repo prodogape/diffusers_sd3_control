@@ -23,19 +23,19 @@ from pathlib import Path
 import torch
 from transformers import CLIPVisionConfig, CLIPVisionModelWithProjection
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoPipelineForImage2Image,
     AutoPipelineForInpainting,
     AutoPipelineForText2Image,
     ControlNetModel,
     DiffusionPipeline,
 )
-from diffusers.pipelines.auto_pipeline import (
+from diffusers_sd3_control.pipelines.auto_pipeline import (
     AUTO_IMAGE2IMAGE_PIPELINES_MAPPING,
     AUTO_INPAINT_PIPELINES_MAPPING,
     AUTO_TEXT2IMAGE_PIPELINES_MAPPING,
 )
-from diffusers.utils.testing_utils import slow
+from diffusers_sd3_control.utils.testing_utils import slow
 
 
 PRETRAINED_MODEL_REPO_MAPPING = OrderedDict(

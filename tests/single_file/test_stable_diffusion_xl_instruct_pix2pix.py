@@ -3,8 +3,8 @@ import unittest
 
 import torch
 
-from diffusers import StableDiffusionXLInstructPix2PixPipeline
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import StableDiffusionXLInstructPix2PixPipeline
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     require_torch_gpu,
     slow,
@@ -20,7 +20,7 @@ class StableDiffusionXLInstructPix2PixPipeline(unittest.TestCase):
     pipeline_class = StableDiffusionXLInstructPix2PixPipeline
     ckpt_path = "https://huggingface.co/stabilityai/cosxl/blob/main/cosxl_edit.safetensors"
     original_config = None
-    repo_id = "diffusers/sdxl-instructpix2pix-768"
+    repo_id = "diffusers_sd3_control/sdxl-instructpix2pix-768"
 
     def setUp(self):
         super().setUp()

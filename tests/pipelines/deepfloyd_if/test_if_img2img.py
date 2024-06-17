@@ -19,10 +19,10 @@ import unittest
 
 import torch
 
-from diffusers import IFImg2ImgPipeline
-from diffusers.models.attention_processor import AttnAddedKVProcessor
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import floats_tensor, load_numpy, require_torch_gpu, skip_mps, slow, torch_device
+from diffusers_sd3_control import IFImg2ImgPipeline
+from diffusers_sd3_control.models.attention_processor import AttnAddedKVProcessor
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import floats_tensor, load_numpy, require_torch_gpu, skip_mps, slow, torch_device
 
 from ..pipeline_params import (
     TEXT_GUIDED_IMAGE_VARIATION_BATCH_PARAMS,

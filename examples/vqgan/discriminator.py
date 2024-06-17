@@ -5,8 +5,8 @@ Ported from Paella
 import torch
 from torch import nn
 
-from diffusers.configuration_utils import ConfigMixin, register_to_config
-from diffusers.models.modeling_utils import ModelMixin
+from diffusers_sd3_control.configuration_utils import ConfigMixin, register_to_config
+from diffusers_sd3_control.models.modeling_utils import ModelMixin
 
 
 # Discriminator model ported from Paella https://github.com/dome272/Paella/blob/main/src_distributed/vqgan.py

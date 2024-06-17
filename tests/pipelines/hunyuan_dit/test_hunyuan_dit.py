@@ -21,13 +21,13 @@ import numpy as np
 import torch
 from transformers import AutoTokenizer, BertModel, T5EncoderModel
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     HunyuanDiT2DModel,
     HunyuanDiTPipeline,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     numpy_cosine_similarity_distance,
     require_torch_gpu,

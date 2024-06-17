@@ -27,7 +27,7 @@ Now use the [`~accelerate.PartialState.split_between_processes`] utility as a co
 ```py
 import torch
 from accelerate import PartialState
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True
@@ -133,7 +133,7 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 sd = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True

@@ -3,9 +3,9 @@ from typing import Optional, Tuple, Union
 import torch
 from einops import rearrange, reduce
 
-from diffusers import DDIMScheduler, DDPMScheduler, DiffusionPipeline, ImagePipelineOutput, UNet2DConditionModel
-from diffusers.schedulers.scheduling_ddim import DDIMSchedulerOutput
-from diffusers.schedulers.scheduling_ddpm import DDPMSchedulerOutput
+from diffusers_sd3_control import DDIMScheduler, DDPMScheduler, DiffusionPipeline, ImagePipelineOutput, UNet2DConditionModel
+from diffusers_sd3_control.schedulers.scheduling_ddim import DDIMSchedulerOutput
+from diffusers_sd3_control.schedulers.scheduling_ddpm import DDPMSchedulerOutput
 
 
 BITS = 8

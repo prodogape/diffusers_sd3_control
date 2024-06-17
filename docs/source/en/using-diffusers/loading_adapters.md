@@ -31,7 +31,7 @@ Feel free to browse the [Stable Diffusion Conceptualizer](https://huggingface.co
 Let's load the [herge_style](https://huggingface.co/sd-dreambooth-library/herge-style) checkpoint, which is trained on just 10 images drawn by Hergé, to generate images in that style. For it to work, you need to include the special word `herge_style` in your prompt to trigger the checkpoint:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("sd-dreambooth-library/herge-style", torch_dtype=torch.float16).to("cuda")
@@ -51,7 +51,7 @@ image
 Because textual inversion creates embeddings, it cannot be used on its own like DreamBooth and requires another model.
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16).to("cuda")
@@ -110,7 +110,7 @@ LoRA is a very general training technique that can be used with other training m
 LoRAs also need to be used with another model:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -137,7 +137,7 @@ The [`~loaders.LoraLoaderMixin.load_lora_weights`] method loads LoRA weights int
 But if you only need to load LoRA weights into the UNet, then you can use the [`~loaders.UNet2DConditionLoadersMixin.load_attn_procs`] method. Let's load the [jbilcke-hf/sdxl-cinematic-1](https://huggingface.co/jbilcke-hf/sdxl-cinematic-1) LoRA:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -206,7 +206,7 @@ To load a Kohya LoRA, let's download the [Blueprintify SD XL 1.0](https://civita
 Load the LoRA checkpoint with the [`~loaders.LoraLoaderMixin.load_lora_weights`] method, and specify the filename in the `weight_name` parameter:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -237,7 +237,7 @@ Some limitations of using Kohya LoRAs with 🤗 Diffusers include:
 Loading a checkpoint from TheLastBen is very similar. For example, to load the [TheLastBen/William_Eggleston_Style_SDXL](https://huggingface.co/TheLastBen/William_Eggleston_Style_SDXL) checkpoint:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -265,9 +265,9 @@ You can learn more about how to use IP-Adapter for different tasks and specific 
 To start, load a Stable Diffusion checkpoint.
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 pipeline = AutoPipelineForText2Image.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16).to("cuda")
 ```

@@ -56,7 +56,7 @@ import torch
 from controlnet_aux import ZoeDetector
 from PIL import Image, ImageOps
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     ControlNetModel,
     StableDiffusionXLControlNetPipeline,
@@ -114,7 +114,7 @@ controlnets = [
         "destitech/controlnet-inpaint-dreamer-sdxl", torch_dtype=torch.float16, variant="fp16"
     ),
     ControlNetModel.from_pretrained(
-        "diffusers/controlnet-zoe-depth-sdxl-1.0", torch_dtype=torch.float16
+        "diffusers_sd3_control/controlnet-zoe-depth-sdxl-1.0", torch_dtype=torch.float16
     ),
 ]
 vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16).to("cuda")

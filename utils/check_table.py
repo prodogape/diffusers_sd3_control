@@ -22,7 +22,7 @@ import re
 
 # All paths are set with the intent you should run this script from the root of the repo with the command
 # python utils/check_table.py
-TRANSFORMERS_PATH = "src/diffusers"
+TRANSFORMERS_PATH = "src/diffusers_sd3_control"
 PATH_TO_DOCS = "docs/source/en"
 REPO_PATH = "."
 
@@ -62,9 +62,9 @@ _re_flax_models = re.compile(r"Flax(.*)(?:Model|Encoder|Decoder|ForConditionalGe
 _re_pt_models = re.compile(r"(.*)(?:Model|Encoder|Decoder|ForConditionalGeneration)")
 
 
-# This is to make sure the diffusers module imported is the one in the repo.
+# This is to make sure the diffusers_sd3_control module imported is the one in the repo.
 spec = importlib.util.spec_from_file_location(
-    "diffusers",
+    "diffusers_sd3_control",
     os.path.join(TRANSFORMERS_PATH, "__init__.py"),
     submodule_search_locations=[TRANSFORMERS_PATH],
 )
@@ -103,7 +103,7 @@ def get_model_table_from_auto_modules():
     tf_models = collections.defaultdict(bool)
     flax_models = collections.defaultdict(bool)
 
-    # Let's lookup through all diffusers object (once).
+    # Let's lookup through all diffusers_sd3_control object (once).
     for attr_name in dir(diffusers_module):
         lookup_dict = None
         if attr_name.endswith("Tokenizer"):

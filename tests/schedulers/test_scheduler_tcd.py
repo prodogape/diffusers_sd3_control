@@ -1,6 +1,6 @@
 import torch
 
-from diffusers import TCDScheduler
+from diffusers_sd3_control import TCDScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

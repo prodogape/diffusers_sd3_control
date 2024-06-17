@@ -11,12 +11,12 @@ from packaging import version
 from polygraphy.backend.onnx.loader import fold_constants
 from torch.onnx import export
 
-from diffusers import (
+from diffusers_sd3_control import (
     ControlNetModel,
     StableDiffusionControlNetImg2ImgPipeline,
 )
-from diffusers.models.attention_processor import AttnProcessor
-from diffusers.pipelines.controlnet.pipeline_controlnet_sd_xl import StableDiffusionXLControlNetPipeline
+from diffusers_sd3_control.models.attention_processor import AttnProcessor
+from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet_sd_xl import StableDiffusionXLControlNetPipeline
 
 
 is_torch_less_than_1_11 = version.parse(version.parse(torch.__version__).base_version) < version.parse("1.11")
@@ -253,7 +253,7 @@ def convert_models(
         vae_encoder/model.onnx
         vae_decoder/model.onnx
 
-        run test script in diffusers/examples/community
+        run test script in diffusers_sd3_control/examples/community
         python test_onnx_controlnet.py
         --sd_model danbrown/RevAnimated-v1-2-2
         --onnx_model_dir path-to-models-stable_diffusion/RevAnimated-v1-2-2
@@ -480,7 +480,7 @@ if __name__ == "__main__":
         "--model_path",
         type=str,
         required=True,
-        help="Path to the `diffusers` checkpoint to convert (either a local directory or on the Hub).",
+        help="Path to the `diffusers_sd3_control` checkpoint to convert (either a local directory or on the Hub).",
     )
 
     parser.add_argument(

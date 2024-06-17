@@ -4,7 +4,7 @@ import fnmatch
 
 from safetensors.torch import load_file
 
-from diffusers import Kandinsky3UNet
+from diffusers_sd3_control import Kandinsky3UNet
 
 
 MAPPING = {

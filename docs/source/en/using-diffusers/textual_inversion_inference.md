@@ -22,8 +22,8 @@ Import the necessary libraries:
 
 ```py
 import torch
-from diffusers import StableDiffusionPipeline
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control import StableDiffusionPipeline
+from diffusers_sd3_control.utils import make_image_grid
 ```
 
 ## Stable Diffusion 1 and 2
@@ -102,7 +102,7 @@ Now you can load each tensor separately by passing them along with the correct t
 to [`~loaders.TextualInversionLoaderMixin.load_textual_inversion`]:
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipe = AutoPipelineForText2Image.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", variant="fp16", torch_dtype=torch.float16)

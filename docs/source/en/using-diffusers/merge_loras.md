@@ -19,7 +19,7 @@ This guide will show you how to merge LoRAs using the [`~loaders.UNet2DCondition
 For this guide, load a Stable Diffusion XL (SDXL) checkpoint and the [KappaNeuro/studio-ghibli-style]() and [Norod78/sdxl-chalkboarddrawing-lora]() LoRAs with the [`~loaders.LoraLoaderMixin.load_lora_weights`] method. You'll need to assign each LoRA an `adapter_name` to combine them later.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -52,7 +52,7 @@ image
 The [`~peft.LoraModel.add_weighted_adapter`] method provides access to more efficient merging method such as [TIES and DARE](https://huggingface.co/docs/peft/developer_guides/model_merging). To use these merging methods, make sure you have the latest stable version of Diffusers and PEFT installed.
 
 ```bash
-pip install -U diffusers peft
+pip install -U diffusers_sd3_control peft
 ```
 
 There are three steps to merge LoRAs with the [`~peft.LoraModel.add_weighted_adapter`] method:
@@ -66,7 +66,7 @@ Let's dive deeper into what these steps entail.
 1. Load a UNet that corresponds to the UNet in the LoRA checkpoint. In this case, both LoRAs use the SDXL UNet as their base model.
 
 ```python
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 import torch
 
 unet = UNet2DConditionModel.from_pretrained(
@@ -81,7 +81,7 @@ unet = UNet2DConditionModel.from_pretrained(
 Load the SDXL pipeline and the LoRA checkpoints, starting with the [ostris/ikea-instructions-lora-sdxl](https://huggingface.co/ostris/ikea-instructions-lora-sdxl) LoRA.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
@@ -189,7 +189,7 @@ You can use PEFT to easily fuse/unfuse multiple adapters directly into the model
 For example, if you have a base model and adapters loaded and set as active with the following adapter weights:
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16).to("cuda")
@@ -237,7 +237,7 @@ pipeline.unfuse_lora()
 [torch.compile](../optimization/torch2.0#torchcompile) can speed up your pipeline even more, but the LoRA weights must be fused first and then unloaded. Typically, the UNet is compiled because it is such a computationally intensive component of the pipeline.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 # load base model and LoRAs

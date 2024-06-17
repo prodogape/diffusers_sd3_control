@@ -6,7 +6,7 @@ Before you begin, make sure you install T-GATE.
 
 ```bash
 pip install tgate
-pip install -U torch diffusers transformers accelerate DeepCache
+pip install -U torch diffusers_sd3_control transformers accelerate DeepCache
 ```
 
 
@@ -31,7 +31,7 @@ Accelerate `PixArtAlphaPipeline` with T-GATE:
 
 ```py
 import torch
-from diffusers import PixArtAlphaPipeline
+from diffusers_sd3_control import PixArtAlphaPipeline
 from tgate import TgatePixArtLoader
 
 pipe = PixArtAlphaPipeline.from_pretrained("PixArt-alpha/PixArt-XL-2-1024-MS", torch_dtype=torch.float16)
@@ -57,8 +57,8 @@ Accelerate `StableDiffusionXLPipeline` with T-GATE:
 
 ```py
 import torch
-from diffusers import StableDiffusionXLPipeline
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 from tgate import TgateSDXLLoader
 
 pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -90,8 +90,8 @@ Accelerate `StableDiffusionXLPipeline` with [DeepCache](https://github.com/horse
 
 ```py
 import torch
-from diffusers import StableDiffusionXLPipeline
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 from tgate import TgateSDXLDeepCacheLoader
 
 pipe = StableDiffusionXLPipeline.from_pretrained(
@@ -123,9 +123,9 @@ Accelerate `latent-consistency/lcm-sdxl` with T-GATE:
 
 ```py
 import torch
-from diffusers import StableDiffusionXLPipeline
-from diffusers import UNet2DConditionModel, LCMScheduler
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline
+from diffusers_sd3_control import UNet2DConditionModel, LCMScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 from tgate import TgateSDXLLoader
 
 unet = UNet2DConditionModel.from_pretrained(

@@ -23,7 +23,7 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
     StableDiffusionPipeline,
@@ -31,9 +31,9 @@ from diffusers import (
     StableDiffusionXLInpaintPipeline,
     StableDiffusionXLPipeline,
 )
-from diffusers.image_processor import IPAdapterMaskProcessor
-from diffusers.utils import load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.image_processor import IPAdapterMaskProcessor
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     is_flaky,
     load_pt,

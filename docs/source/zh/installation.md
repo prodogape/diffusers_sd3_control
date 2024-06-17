@@ -44,13 +44,13 @@ source .env/bin/activate
 **PyTorch**
 
 ```bash
-pip install diffusers["torch"]
+pip install diffusers_sd3_control["torch"]
 ```
 
 **Flax**
 
 ```bash
-pip install diffusers["flax"]
+pip install diffusers_sd3_control["flax"]
 ```
 
 ## 从源代码安装
@@ -90,7 +90,7 @@ pip install git+https://github.com/huggingface/diffusers
 
 ```bash
 git clone https://github.com/huggingface/diffusers.git
-cd diffusers
+cd diffusers_sd3_control
 ```
 
 **PyTorch**
@@ -119,7 +119,7 @@ pip install -e ".[flax]"
 现在你可以用下面的命令轻松地将你克隆的 🤗 Diffusers 库更新到最新版本。
 
 ```bash
-cd ~/diffusers/
+cd ~/diffusers_sd3_control/
 git pull
 ```
 

@@ -22,23 +22,23 @@ from packaging import version
 from safetensors import safe_open
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
-from diffusers.configuration_utils import FrozenDict
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.loaders import FromSingleFileMixin, IPAdapterMixin, LoraLoaderMixin, TextualInversionLoaderMixin
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control.configuration_utils import FrozenDict
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.loaders import FromSingleFileMixin, IPAdapterMixin, LoraLoaderMixin, TextualInversionLoaderMixin
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.models.attention_processor import (
     AttnProcessor,
     AttnProcessor2_0,
     IPAdapterAttnProcessor,
     IPAdapterAttnProcessor2_0,
 )
-from diffusers.models.embeddings import MultiIPAdapterImageProjection
-from diffusers.models.lora import adjust_lora_scale_text_encoder
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion.pipeline_output import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.schedulers import KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control.models.embeddings import MultiIPAdapterImageProjection
+from diffusers_sd3_control.models.lora import adjust_lora_scale_text_encoder
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_output import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.schedulers import KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     USE_PEFT_BACKEND,
     _get_model_file,
     deprecate,
@@ -46,7 +46,7 @@ from diffusers.utils import (
     scale_lora_layers,
     unscale_lora_layers,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -55,7 +55,7 @@ logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 class IPAdapterFullImageProjection(nn.Module):
     def __init__(self, image_embed_dim=1024, cross_attention_dim=1024, mult=1, num_tokens=1):
         super().__init__()
-        from diffusers.models.attention import FeedForward
+        from diffusers_sd3_control.models.attention import FeedForward
 
         self.num_tokens = num_tokens
         self.cross_attention_dim = cross_attention_dim
@@ -217,7 +217,7 @@ class IPAdapterFaceIDStableDiffusionPipeline(
             logger.warning(
                 f"You have disabled the safety checker for {self.__class__} by passing `safety_checker=None`. Ensure"
                 " that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered"
-                " results in services or applications open to the public. Both the diffusers team and Hugging Face"
+                " results in services or applications open to the public. Both the diffusers_sd3_control team and Hugging Face"
                 " strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling"
                 " it only for use-cases that involve analyzing network behavior or auditing its results. For more"
                 " information, please have a look at https://github.com/huggingface/diffusers/pull/254 ."
@@ -432,7 +432,7 @@ class IPAdapterFaceIDStableDiffusionPipeline(
         self.load_lora_weights(lora_dict, adapter_name="faceid")
         self.set_adapters(["faceid"], adapter_weights=[1.0])
 
-        # convert IP-Adapter Image Projection layers to diffusers
+        # convert IP-Adapter Image Projection layers to diffusers_sd3_control
         image_projection = self.convert_ip_adapter_image_proj_to_diffusers(state_dict["image_proj"])
         image_projection_layers = [image_projection.to(device=self.device, dtype=self.dtype)]
 
@@ -774,7 +774,7 @@ class IPAdapterFaceIDStableDiffusionPipeline(
         latents = latents * self.scheduler.init_noise_sigma
         return latents
 
-    # Copied from diffusers.pipelines.latent_consistency_models.pipeline_latent_consistency_text2img.LatentConsistencyModelPipeline.get_guidance_scale_embedding
+    # Copied from diffusers_sd3_control.pipelines.latent_consistency_models.pipeline_latent_consistency_text2img.LatentConsistencyModelPipeline.get_guidance_scale_embedding
     def get_guidance_scale_embedding(self, w, embedding_dim=512, dtype=torch.float32):
         """
         See https://github.com/google-research/vdm/blob/dc27b98a554f65cdc654b800da5aa1846545d41b/model_vdm.py#L298

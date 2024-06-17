@@ -36,7 +36,7 @@ LABELS_TO_EXEMPT = [
 
 def main():
     g = Github(os.environ["GITHUB_TOKEN"])
-    repo = g.get_repo("huggingface/diffusers")
+    repo = g.get_repo("huggingface/diffusers_sd3_control")
     open_issues = repo.get_issues(state="open")
 
     for issue in open_issues:

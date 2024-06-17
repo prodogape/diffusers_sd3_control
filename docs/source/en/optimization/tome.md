@@ -52,7 +52,7 @@ We didn’t notice any significant decrease in the quality of the generated samp
 We also benchmarked the impact of `tomesd` on the [`StableDiffusionPipeline`] with [xFormers](https://huggingface.co/docs/diffusers/optimization/xformers) enabled across several image resolutions. The results are obtained from A100 and V100 GPUs in the following development environment:
 
 ```bash
-- `diffusers` version: 0.15.1
+- `diffusers_sd3_control` version: 0.15.1
 - Python version: 3.8.16
 - PyTorch version (GPU?): 1.13.1+cu116 (True)
 - Huggingface_hub version: 0.13.2

@@ -16,11 +16,10 @@ python convert_original_promptdiffusion_to_diffusers.py --checkpoint_path path-t
 
 To learn about how to convert the fine-tuned stable diffusion model, see the [Load different Stable Diffusion formats guide](https://huggingface.co/docs/diffusers/main/en/using-diffusers/other-formats).
 
-
 ```py
 import torch
-from diffusers import UniPCMultistepScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import UniPCMultistepScheduler
+from diffusers_sd3_control.utils import load_image
 from promptdiffusioncontrolnet import PromptDiffusionControlNetModel
 from pipeline_prompt_diffusion import PromptDiffusionPipeline
 
@@ -34,9 +33,9 @@ query = ImageOps.invert(load_image("https://github.com/Zhendong-Wang/Prompt-Diff
 
 # load prompt diffusion controlnet and prompt diffusion
 
-controlnet = PromptDiffusionControlNetModel.from_pretrained("iczaw/prompt-diffusion-diffusers", subfolder="controlnet", torch_dtype=torch.float16)
+controlnet = PromptDiffusionControlNetModel.from_pretrained("iczaw/prompt-diffusion-diffusers_sd3_control", subfolder="controlnet", torch_dtype=torch.float16)
 model_id = "path-to-model"
-pipe = PromptDiffusionPipeline.from_pretrained("iczaw/prompt-diffusion-diffusers", subfolder="base", controlnet=controlnet, torch_dtype=torch.float16, variant="fp16")
+pipe = PromptDiffusionPipeline.from_pretrained("iczaw/prompt-diffusion-diffusers_sd3_control", subfolder="base", controlnet=controlnet, torch_dtype=torch.float16, variant="fp16")
 
 # speed up diffusion process with faster scheduler and memory optimization
 pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)

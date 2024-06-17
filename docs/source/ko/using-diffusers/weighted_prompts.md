@@ -38,7 +38,7 @@ Diffusion 모델은 문맥화된 텍스트 임베딩으로 diffusion 모델의 c
 다음과 같이 `"공을 갖고 노는 붉은색 고양이"` 이미지를 생성하고 싶습니다:
 
 ```py
-from diffusers import StableDiffusionPipeline, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionPipeline, UniPCMultistepScheduler
 
 pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4")
 pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)

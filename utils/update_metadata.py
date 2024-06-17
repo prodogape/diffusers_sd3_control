@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Utility that updates the metadata of the Diffusers library in the repository `huggingface/diffusers-metadata`.
+Utility that updates the metadata of the Diffusers library in the repository `huggingface/diffusers_sd3_control-metadata`.
 
 Usage for an update (as used by the GitHub action `update_metadata`):
 
@@ -33,7 +33,7 @@ import pandas as pd
 from datasets import Dataset
 from huggingface_hub import hf_hub_download, upload_folder
 
-from diffusers.pipelines.auto_pipeline import (
+from diffusers_sd3_control.pipelines.auto_pipeline import (
     AUTO_IMAGE2IMAGE_PIPELINES_MAPPING,
     AUTO_INPAINT_PIPELINES_MAPPING,
     AUTO_TEXT2IMAGE_PIPELINES_MAPPING,
@@ -74,7 +74,7 @@ def get_supported_pipeline_table() -> dict:
 
 def update_metadata(commit_sha: str):
     """
-    Update the metadata for the Diffusers repo in `huggingface/diffusers-metadata`.
+    Update the metadata for the Diffusers repo in `huggingface/diffusers_sd3_control-metadata`.
 
     Args:
         commit_sha (`str`): The commit SHA on Diffusers corresponding to this update.
@@ -84,7 +84,7 @@ def update_metadata(commit_sha: str):
     pipelines_dataset = Dataset.from_pandas(pipelines_table)
 
     hub_pipeline_tags_json = hf_hub_download(
-        repo_id="huggingface/diffusers-metadata",
+        repo_id="huggingface/diffusers_sd3_control-metadata",
         filename=PIPELINE_TAG_JSON,
         repo_type="dataset",
     )
@@ -111,7 +111,7 @@ def update_metadata(commit_sha: str):
             commit_message = "Update"
 
         upload_folder(
-            repo_id="huggingface/diffusers-metadata",
+            repo_id="huggingface/diffusers_sd3_control-metadata",
             folder_path=tmp_dir,
             repo_type="dataset",
             commit_message=commit_message,

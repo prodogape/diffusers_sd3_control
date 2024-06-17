@@ -13,7 +13,7 @@
 보다 명시적인 제어를 위해 선택적으로 `사용_세이프텐서=True`를 설정할 수 있습니다(`세이프텐서`가 설치되지 않은 경우 설치하라는 오류 메시지가 표시됨):
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -21,7 +21,7 @@ pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", u
 그러나 모델 가중치가 위의 예시처럼 반드시 별도의 하위 폴더에 저장되는 것은 아닙니다. 모든 가중치가 하나의 '.safetensors` 파일에 저장되는 경우도 있습니다. 이 경우 가중치가 Stable Diffusion 가중치인 경우 [`~diffusers.loaders.FromCkptMixin.from_ckpt`] 메서드를 사용하여 파일을 직접 로드할 수 있습니다:
 
 ```py
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipeline = StableDiffusionPipeline.from_ckpt(
     "https://huggingface.co/WarriorMama777/OrangeMixs/blob/main/Models/AbyssOrangeMix/AbyssOrangeMix.safetensors"
@@ -35,7 +35,7 @@ pipeline = StableDiffusionPipeline.from_ckpt(
 개정` 매개변수에 풀 리퀘스트에 대한 참조를 지정하여 새로운 '.safetensors` 가중치가 적용된 모델을 사용할 수 있습니다(허브의 [Check PR](https://huggingface.co/spaces/diffusers/check_pr) 공간에서 테스트할 수도 있음)(예: `refs/pr/22`):
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1", revision="refs/pr/22")
 ```

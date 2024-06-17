@@ -20,8 +20,8 @@ import numpy as np
 import torch
 from PIL import Image
 
-from diffusers import DDPMScheduler, DiffusionPipeline, ImagePipelineOutput, UNet2DModel
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control import DDPMScheduler, DiffusionPipeline, ImagePipelineOutput, UNet2DModel
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 class DPSPipeline(DiffusionPipeline):
@@ -85,7 +85,7 @@ class DPSPipeline(DiffusionPipeline):
         Example:
 
         ```py
-        >>> from diffusers import DDPMPipeline
+        >>> from diffusers_sd3_control import DDPMPipeline
 
         >>> # load model and scheduler
         >>> pipe = DDPMPipeline.from_pretrained("google/ddpm-cat-256")

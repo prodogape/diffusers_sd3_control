@@ -1,11 +1,11 @@
 """
-This script ports models from VQ-diffusion (https://github.com/microsoft/VQ-Diffusion) to diffusers.
+This script ports models from VQ-diffusion (https://github.com/microsoft/VQ-Diffusion) to diffusers_sd3_control.
 
 It currently only supports porting the ITHQ dataset.
 
 ITHQ dataset:
 ```sh
-# From the root directory of diffusers.
+# From the root directory of diffusers_sd3_control.
 
 # Download the VQVAE checkpoint
 $ wget https://facevcstandard.blob.core.windows.net/v-zhictang/Improved-VQ-Diffusion_model_release/ithq_vqvae.pth?sv=2020-10-02&st=2022-05-30T15%3A17%3A18Z&se=2030-05-31T15%3A17%3A00Z&sr=b&sp=r&sig=1jVavHFPpUjDs%2FTO1V3PTezaNbPp2Nx8MxiWI7y6fEY%3D -O ithq_vqvae.pth
@@ -41,8 +41,8 @@ from accelerate import init_empty_weights, load_checkpoint_and_dispatch
 from transformers import CLIPTextModel, CLIPTokenizer
 from yaml.loader import FullLoader
 
-from diffusers import Transformer2DModel, VQDiffusionPipeline, VQDiffusionScheduler, VQModel
-from diffusers.pipelines.vq_diffusion.pipeline_vq_diffusion import LearnedClassifierFreeSamplingEmbeddings
+from diffusers_sd3_control import Transformer2DModel, VQDiffusionPipeline, VQDiffusionScheduler, VQModel
+from diffusers_sd3_control.pipelines.vq_diffusion.pipeline_vq_diffusion import LearnedClassifierFreeSamplingEmbeddings
 
 
 # vqvae model
@@ -53,7 +53,7 @@ PORTED_VQVAES = ["image_synthesis.modeling.codecs.image_codec.patch_vqgan.PatchV
 def vqvae_model_from_original_config(original_config):
     assert (
         original_config["target"] in PORTED_VQVAES
-    ), f"{original_config['target']} has not yet been ported to diffusers."
+    ), f"{original_config['target']} has not yet been ported to diffusers_sd3_control."
 
     original_config = original_config["params"]
 
@@ -233,7 +233,7 @@ def vqvae_encoder_to_diffusers_checkpoint(model, checkpoint):
         # There is no downsample on the last down block
         if down_block_idx != len(model.encoder.down_blocks) - 1:
             # There's a single downsample in the original checkpoint but a list of downsamples
-            # in the diffusers model.
+            # in the diffusers_sd3_control model.
             diffusers_downsample_prefix = f"{diffusers_down_block_prefix}.downsamplers.0.conv"
             downsample_prefix = f"{down_block_prefix}.downsample.conv"
             diffusers_checkpoint.update(
@@ -336,7 +336,7 @@ def vqvae_decoder_to_diffusers_checkpoint(model, checkpoint):
         # there is no up sample on the last up block
         if diffusers_up_block_idx != len(model.decoder.up_blocks) - 1:
             # There's a single upsample in the VQ-diffusion checkpoint but a list of downsamples
-            # in the diffusers model.
+            # in the diffusers_sd3_control model.
             diffusers_downsample_prefix = f"{diffusers_up_block_prefix}.upsamplers.0.conv"
             downsample_prefix = f"{up_block_prefix}.upsample.conv"
             diffusers_checkpoint.update(
@@ -466,13 +466,13 @@ def transformer_model_from_original_config(
 ):
     assert (
         original_diffusion_config["target"] in PORTED_DIFFUSIONS
-    ), f"{original_diffusion_config['target']} has not yet been ported to diffusers."
+    ), f"{original_diffusion_config['target']} has not yet been ported to diffusers_sd3_control."
     assert (
         original_transformer_config["target"] in PORTED_TRANSFORMERS
-    ), f"{original_transformer_config['target']} has not yet been ported to diffusers."
+    ), f"{original_transformer_config['target']} has not yet been ported to diffusers_sd3_control."
     assert (
         original_content_embedding_config["target"] in PORTED_CONTENT_EMBEDDINGS
-    ), f"{original_content_embedding_config['target']} has not yet been ported to diffusers."
+    ), f"{original_content_embedding_config['target']} has not yet been ported to diffusers_sd3_control."
 
     original_diffusion_config = original_diffusion_config["params"]
     original_transformer_config = original_transformer_config["params"]

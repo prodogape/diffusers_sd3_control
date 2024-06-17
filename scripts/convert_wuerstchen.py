@@ -5,13 +5,13 @@ import torch
 from transformers import AutoTokenizer, CLIPTextModel
 from vqgan import VQModel
 
-from diffusers import (
+from diffusers_sd3_control import (
     DDPMWuerstchenScheduler,
     WuerstchenCombinedPipeline,
     WuerstchenDecoderPipeline,
     WuerstchenPriorPipeline,
 )
-from diffusers.pipelines.wuerstchen import PaellaVQModel, WuerstchenDiffNeXt, WuerstchenPrior
+from diffusers_sd3_control.pipelines.wuerstchen import PaellaVQModel, WuerstchenDiffNeXt, WuerstchenPrior
 
 
 model_path = "models/"

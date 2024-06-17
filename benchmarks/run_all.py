@@ -82,7 +82,7 @@ def main():
 
         elif file in ["benchmark_controlnet.py", "benchmark_t2i_adapter.py"]:
             sdxl_ckpt = (
-                "diffusers/controlnet-canny-sdxl-1.0"
+                "diffusers_sd3_control/controlnet-canny-sdxl-1.0"
                 if "controlnet" in file
                 else "TencentARC/t2i-adapter-canny-sdxl-1.0"
             )

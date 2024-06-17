@@ -11,10 +11,10 @@ from huggingface_hub.utils import insecure_hashlib
 from safetensors.torch import load_file as stl
 from tqdm import tqdm
 
-from diffusers import AutoencoderKL, ConsistencyDecoderVAE, DiffusionPipeline, StableDiffusionPipeline, UNet2DModel
-from diffusers.models.autoencoders.vae import Encoder
-from diffusers.models.embeddings import TimestepEmbedding
-from diffusers.models.unets.unet_2d_blocks import ResnetDownsampleBlock2D, ResnetUpsampleBlock2D, UNetMidBlock2D
+from diffusers_sd3_control import AutoencoderKL, ConsistencyDecoderVAE, DiffusionPipeline, StableDiffusionPipeline, UNet2DModel
+from diffusers_sd3_control.models.autoencoders.vae import Encoder
+from diffusers_sd3_control.models.embeddings import TimestepEmbedding
+from diffusers_sd3_control.models.unets.unet_2d_blocks import ResnetDownsampleBlock2D, ResnetUpsampleBlock2D, UNetMidBlock2D
 
 
 args = ArgumentParser()
@@ -160,7 +160,7 @@ class ConsistencyDecoder:
 
             import torch.nn.functional as F
 
-            from diffusers import UNet2DModel
+            from diffusers_sd3_control import UNet2DModel
 
             if isinstance(self.ckpt, UNet2DModel):
                 input = torch.concat([c_in * x_start, F.upsample_nearest(features, scale_factor=8)], dim=1)
@@ -1066,7 +1066,7 @@ add_state_dict("conv_out", conv_out)
 
 unet.load_state_dict(unet_state_dict)
 
-print("running with diffusers unet")
+print("running with diffusers_sd3_control unet")
 
 unet.to("cuda")
 
@@ -1077,7 +1077,7 @@ save_image(sample_consistency_new_2, "con_new_2.png")
 
 assert (sample_consistency_orig == sample_consistency_new_2).all()
 
-print("running with diffusers model")
+print("running with diffusers_sd3_control model")
 
 Encoder.old_constructor = Encoder.__init__
 
@@ -1114,7 +1114,7 @@ print("total difference")
 print((sample_consistency_orig - sample_consistency_new_3).abs().sum())
 # assert (sample_consistency_orig == sample_consistency_new_3).all()
 
-print("running with diffusers pipeline")
+print("running with diffusers_sd3_control pipeline")
 
 pipe = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", vae=consistency_vae, torch_dtype=torch.float16

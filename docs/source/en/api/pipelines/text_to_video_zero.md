@@ -37,9 +37,10 @@ You can find additional information about Text2Video-Zero on the [project page](
 ### Text-To-Video
 
 To generate a video from prompt, run the following Python code:
+
 ```python
 import torch
-from diffusers import TextToVideoZeroPipeline
+from diffusers_sd3_control import TextToVideoZeroPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 pipe = TextToVideoZeroPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
@@ -58,9 +59,10 @@ You can change these parameters in the pipeline call:
     * `video_length`, the number of frames video_length to be generated. Default: `video_length=8`
 
 We can also generate longer videos by doing the processing in a chunk-by-chunk manner:
+
 ```python
 import torch
-from diffusers import TextToVideoZeroPipeline
+from diffusers_sd3_control import TextToVideoZeroPipeline
 import numpy as np
 
 model_id = "runwayml/stable-diffusion-v1-5"
@@ -97,7 +99,7 @@ In order to use the SDXL model when generating a video from prompt, use the `Tex
 
 ```python
 import torch
-from diffusers import TextToVideoZeroSDXLPipeline
+from diffusers_sd3_control import TextToVideoZeroSDXLPipeline
 
 model_id = "stabilityai/stable-diffusion-xl-base-1.0"
 pipe = TextToVideoZeroSDXLPipeline.from_pretrained(
@@ -134,8 +136,8 @@ To generate a video from prompt with additional pose control
 
     ```python
     import torch
-    from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-    from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+    from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+    from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
 
     model_id = "runwayml/stable-diffusion-v1-5"
     controlnet = ControlNetModel.from_pretrained("lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16)
@@ -157,30 +159,30 @@ To generate a video from prompt with additional pose control
 - #### SDXL Support
 	
 	Since our attention processor also works with SDXL, it can be utilized to generate a video from prompt using ControlNet models powered by SDXL:
-	```python
-	import torch
-	from diffusers import StableDiffusionXLControlNetPipeline, ControlNetModel
-	from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
-	
-	controlnet_model_id = 'thibaud/controlnet-openpose-sdxl-1.0'
-	model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
-	
-	controlnet = ControlNetModel.from_pretrained(controlnet_model_id, torch_dtype=torch.float16)
-	pipe = StableDiffusionControlNetPipeline.from_pretrained(
-		model_id, controlnet=controlnet, torch_dtype=torch.float16
-	).to('cuda')
-	
-	# Set the attention processor
-	pipe.unet.set_attn_processor(CrossFrameAttnProcessor(batch_size=2))
-	pipe.controlnet.set_attn_processor(CrossFrameAttnProcessor(batch_size=2))
-	
-	# fix latents for all frames
-	latents = torch.randn((1, 4, 128, 128), device="cuda", dtype=torch.float16).repeat(len(pose_images), 1, 1, 1)
-	
-	prompt = "Darth Vader dancing in a desert"
-	result = pipe(prompt=[prompt] * len(pose_images), image=pose_images, latents=latents).images
-	imageio.mimsave("video.mp4", result, fps=4)
-	```
+  ```python
+  import torch
+  from diffusers_sd3_control import StableDiffusionXLControlNetPipeline, ControlNetModel
+  from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+  
+  controlnet_model_id = 'thibaud/controlnet-openpose-sdxl-1.0'
+  model_id = 'stabilityai/stable-diffusion-xl-base-1.0'
+  
+  controlnet = ControlNetModel.from_pretrained(controlnet_model_id, torch_dtype=torch.float16)
+  pipe = StableDiffusionControlNetPipeline.from_pretrained(
+      model_id, controlnet=controlnet, torch_dtype=torch.float16
+  ).to('cuda')
+  
+  # Set the attention processor
+  pipe.unet.set_attn_processor(CrossFrameAttnProcessor(batch_size=2))
+  pipe.controlnet.set_attn_processor(CrossFrameAttnProcessor(batch_size=2))
+  
+  # fix latents for all frames
+  latents = torch.randn((1, 4, 128, 128), device="cuda", dtype=torch.float16).repeat(len(pose_images), 1, 1, 1)
+  
+  prompt = "Darth Vader dancing in a desert"
+  result = pipe(prompt=[prompt] * len(pose_images), image=pose_images, latents=latents).images
+  imageio.mimsave("video.mp4", result, fps=4)
+  ```
 
 ### Text-To-Video with Edge Control
 
@@ -214,8 +216,8 @@ To perform text-guided video editing (with [InstructPix2Pix](pix2pix)):
 3. Run `StableDiffusionInstructPix2PixPipeline` with our custom attention processor
     ```python
     import torch
-    from diffusers import StableDiffusionInstructPix2PixPipeline
-    from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+    from diffusers_sd3_control import StableDiffusionInstructPix2PixPipeline
+    from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
 
     model_id = "timbrooks/instruct-pix2pix"
     pipe = StableDiffusionInstructPix2PixPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")
@@ -257,8 +259,8 @@ can run with custom [DreamBooth](../../training/dreambooth) models, as shown bel
 3. Run `StableDiffusionControlNetPipeline` with custom trained DreamBooth model
     ```python
     import torch
-    from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-    from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+    from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+    from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
 
     # set model id to custom model
     model_id = "PAIR/text2video-zero-controlnet-canny-avatar"

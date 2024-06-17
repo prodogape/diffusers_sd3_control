@@ -41,8 +41,8 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     ControlNetModel,
     DDPMScheduler,
@@ -50,17 +50,17 @@ from diffusers import (
     UNet2DConditionModel,
     UniPCMultistepScheduler,
 )
-from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version, is_wandb_available, make_image_grid
-from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
-from diffusers.utils.import_utils import is_torch_npu_available, is_xformers_available
-from diffusers.utils.torch_utils import is_compiled_module
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available, make_image_grid
+from diffusers_sd3_control.utils.hub_utils import load_or_create_model_card, populate_model_card
+from diffusers_sd3_control.utils.import_utils import is_torch_npu_available, is_xformers_available
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module
 
 
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__)
@@ -244,11 +244,11 @@ These are controlnet weights trained on {base_model} with new type of conditioni
 
     tags = [
         "stable-diffusion-xl",
-        "stable-diffusion-xl-diffusers",
+        "stable-diffusion-xl-diffusers_sd3_control",
         "text-to-image",
-        "diffusers",
+        "diffusers_sd3_control",
         "controlnet",
-        "diffusers-training",
+        "diffusers_sd3_control-training",
     ]
     model_card = populate_model_card(model_card, tags=tags)
 
@@ -828,10 +828,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:
@@ -925,7 +925,7 @@ def main(args):
                 # pop models so that they are not loaded again
                 model = models.pop()
 
-                # load diffusers style into model
+                # load diffusers_sd3_control style into model
                 load_model = ControlNetModel.from_pretrained(input_dir, subfolder="controlnet")
                 model.register_to_config(**load_model.config)
 

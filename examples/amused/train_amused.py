@@ -39,10 +39,10 @@ from transformers import (
     CLIPTokenizer,
 )
 
-import diffusers.optimization
-from diffusers import AmusedPipeline, AmusedScheduler, EMAModel, UVit2DModel, VQModel
-from diffusers.loaders import LoraLoaderMixin
-from diffusers.utils import is_wandb_available
+import diffusers_sd3_control.optimization
+from diffusers_sd3_control import AmusedPipeline, AmusedScheduler, EMAModel, UVit2DModel, VQModel
+from diffusers_sd3_control.loaders import LoraLoaderMixin
+from diffusers_sd3_control.utils import is_wandb_available
 
 
 if is_wandb_available():
@@ -662,7 +662,7 @@ def main(args):
     )
     train_dataloader.num_batches = len(train_dataloader)
 
-    lr_scheduler = diffusers.optimization.get_scheduler(
+    lr_scheduler = diffusers_sd3_control.optimization.get_scheduler(
         args.lr_scheduler,
         optimizer=optimizer,
         num_training_steps=args.max_train_steps * accelerator.num_processes,

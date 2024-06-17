@@ -20,15 +20,15 @@ from importlib import import_module
 class DependencyTester(unittest.TestCase):
     def test_diffusers_import(self):
         try:
-            import diffusers  # noqa: F401
+            import diffusers_sd3_control  # noqa: F401
         except ImportError:
             assert False
 
     def test_backend_registration(self):
-        import diffusers
-        from diffusers.dependency_versions_table import deps
+        import diffusers_sd3_control
+        from diffusers_sd3_control.dependency_versions_table import deps
 
-        all_classes = inspect.getmembers(diffusers, inspect.isclass)
+        all_classes = inspect.getmembers(diffusers_sd3_control, inspect.isclass)
 
         for cls_name, cls_module in all_classes:
             if "dummy_" in cls_module.__module__:
@@ -40,11 +40,11 @@ class DependencyTester(unittest.TestCase):
                     assert backend in deps, f"{backend} is not in the deps table!"
 
     def test_pipeline_imports(self):
-        import diffusers
-        import diffusers.pipelines
+        import diffusers_sd3_control
+        import diffusers_sd3_control.pipelines
 
-        all_classes = inspect.getmembers(diffusers, inspect.isclass)
+        all_classes = inspect.getmembers(diffusers_sd3_control, inspect.isclass)
         for cls_name, cls_module in all_classes:
-            if hasattr(diffusers.pipelines, cls_name):
+            if hasattr(diffusers_sd3_control.pipelines, cls_name):
                 pipeline_folder_module = ".".join(str(cls_module.__module__).split(".")[:3])
                 _ = import_module(pipeline_folder_module, str(cls_name))

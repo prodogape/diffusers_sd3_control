@@ -43,19 +43,19 @@ from polygraphy.backend.trt import (
 from polygraphy.backend.trt import util as trt_util
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer, CLIPVisionModelWithProjection
 
-from diffusers.models import AutoencoderKL, UNet2DConditionModel
-from diffusers.pipelines.stable_diffusion import (
+from diffusers_sd3_control.models import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.stable_diffusion import (
     StableDiffusionPipeline,
     StableDiffusionPipelineOutput,
     StableDiffusionSafetyChecker,
 )
-from diffusers.schedulers import DDIMScheduler
-from diffusers.utils import logging
+from diffusers_sd3_control.schedulers import DDIMScheduler
+from diffusers_sd3_control.utils import logging
 
 
 """
 Installation instructions
-python3 -m pip install --upgrade transformers diffusers>=0.16.0
+python3 -m pip install --upgrade transformers diffusers_sd3_control>=0.16.0
 python3 -m pip install --upgrade tensorrt>=8.6.1
 python3 -m pip install --upgrade polygraphy>=0.47.0 onnx-graphsurgeon --extra-index-url https://pypi.ngc.nvidia.com
 python3 -m pip install onnxruntime

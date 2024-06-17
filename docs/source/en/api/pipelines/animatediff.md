@@ -41,8 +41,8 @@ The following example demonstrates how to use a *MotionAdapter* checkpoint with 
 
 ```python
 import torch
-from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 # Load the motion adapter
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
@@ -107,9 +107,9 @@ AnimateDiff can also be used with SDXL models. This is currently an experimental
 
 ```python
 import torch
-from diffusers.models import MotionAdapter
-from diffusers import AnimateDiffSDXLPipeline, DDIMScheduler
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control.models import MotionAdapter
+from diffusers_sd3_control import AnimateDiffSDXLPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-sdxl-beta", torch_dtype=torch.float16)
 
@@ -156,8 +156,8 @@ AnimateDiff can also be used to generate visually similar videos or enable style
 import imageio
 import requests
 import torch
-from diffusers import AnimateDiffVideoToVideoPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffVideoToVideoPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 from io import BytesIO
 from PIL import Image
 
@@ -262,8 +262,8 @@ Motion LoRAs are a collection of LoRAs that work with the `guoyww/animatediff-mo
 
 ```python
 import torch
-from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 # Load the motion adapter
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
@@ -332,8 +332,8 @@ Then you can use the following code to combine Motion LoRAs.
 
 ```python
 import torch
-from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 # Load the motion adapter
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
@@ -342,10 +342,10 @@ model_id = "SG161222/Realistic_Vision_V5.1_noVAE"
 pipe = AnimateDiffPipeline.from_pretrained(model_id, motion_adapter=adapter, torch_dtype=torch.float16)
 
 pipe.load_lora_weights(
-    "diffusers/animatediff-motion-lora-zoom-out", adapter_name="zoom-out",
+    "diffusers_sd3_control/animatediff-motion-lora-zoom-out", adapter_name="zoom-out",
 )
 pipe.load_lora_weights(
-    "diffusers/animatediff-motion-lora-pan-left", adapter_name="pan-left",
+    "diffusers_sd3_control/animatediff-motion-lora-pan-left", adapter_name="pan-left",
 )
 pipe.set_adapters(["zoom-out", "pan-left"], adapter_weights=[1.0, 1.0])
 
@@ -403,8 +403,8 @@ The following example demonstrates the usage of FreeInit.
 
 ```python
 import torch
-from diffusers import MotionAdapter, AnimateDiffPipeline, DDIMScheduler
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import MotionAdapter, AnimateDiffPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2")
 model_id = "SG161222/Realistic_Vision_V5.1_noVAE"
@@ -484,8 +484,8 @@ Make sure to check out the Schedulers [guide](../../using-diffusers/schedulers) 
 
 ```python
 import torch
-from diffusers import AnimateDiffPipeline, LCMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, LCMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("wangfuyun/AnimateLCM")
 pipe = AnimateDiffPipeline.from_pretrained("emilianJR/epiCRealism", motion_adapter=adapter)
@@ -524,8 +524,8 @@ AnimateLCM is also compatible with existing [Motion LoRAs](https://huggingface.c
 
 ```python
 import torch
-from diffusers import AnimateDiffPipeline, LCMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, LCMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("wangfuyun/AnimateLCM")
 pipe = AnimateDiffPipeline.from_pretrained("emilianJR/epiCRealism", motion_adapter=adapter)

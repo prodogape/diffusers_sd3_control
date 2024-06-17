@@ -12,7 +12,7 @@ We accelereate the fine-tuning for textual inversion with Intel Extension for Py
 
 We start the inference acceleration with Bfloat16 using Intel Extension for PyTorch. The [script](inference_bf16.py) is generally designed to support standard Stable Diffusion models with Bfloat16 support.
 ```bash
-pip install diffusers transformers accelerate scipy safetensors
+pip install diffusers_sd3_control transformers accelerate scipy safetensors
 
 export KMP_BLOCKTIME=1
 export KMP_SETTINGS=1

@@ -29,15 +29,15 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     ControlNetModel,
     EulerDiscreteScheduler,
     StableDiffusionXLControlNetInpaintPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import enable_full_determinism, floats_tensor, require_torch_gpu, torch_device
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, floats_tensor, require_torch_gpu, torch_device
 
 from ..pipeline_params import (
     IMAGE_TO_IMAGE_IMAGE_PARAMS,

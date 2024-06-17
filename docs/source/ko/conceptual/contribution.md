@@ -192,7 +192,7 @@ GitHub에서 이슈에 대한 답변을 하기 위해서는 Diffusers에 대한 
     또한 [`~DiffusionPipeline.save_pretrained`]를 사용하여 파이프라인과 그 구성 요소를 저장할 수 있도록 `register_modules` 함수를 추가해야 합니다.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
@@ -205,7 +205,7 @@ class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
 1. forward 패스에서 (`__call__`로 정의하는 것을 추천합니다), 원하는 어떤 기능이든 추가할 수 있습니다. "one-step" 파이프라인의 경우, 무작위 이미지를 생성하고 `timestep=1`로 설정하여 UNet과 스케줄러를 한 번 호출합니다.
 
 ```py
-  from diffusers import DiffusionPipeline
+  from diffusers_sd3_control import DiffusionPipeline
   import torch
 
   class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
@@ -229,7 +229,7 @@ class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
 이제 UNet과 스케줄러를 전달하여 파이프라인을 실행하거나, 파이프라인 구조가 동일한 경우 사전 학습된 가중치를 로드할 수 있습니다.
 
 ```py
-from diffusers import DDPMScheduler, UNet2DModel
+from diffusers_sd3_control import DDPMScheduler, UNet2DModel
 
 scheduler = DDPMScheduler()
 unet = UNet2DModel()
@@ -330,7 +330,7 @@ PR에서 막힌 경우나 도움이 필요한 경우, 첫 번째 리뷰나 도�
 예를 들어, 아래 코드 예제에서 [`~diffusers.pipelines.stable_diffusion.StableDiffusionPipelineOutput`]은 원래 코드이며, `AltDiffusionPipelineOutput`은 `# Copied from mechanism`을 사용하여 복사합니다. 유일한 차이점은 클래스 접두사를 `Stable`에서 `Alt`로 변경한 것입니다.
 
 ```py
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_output.StableDiffusionPipelineOutput with Stable->Alt
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_output.StableDiffusionPipelineOutput with Stable->Alt
 class AltDiffusionPipelineOutput(BaseOutput):
     """
     Output class for Alt Diffusion pipelines.
@@ -390,8 +390,8 @@ CircleCI는 느린 테스트를 실행하지 않지만, GitHub Actions는 매일
 2. 포크한 저장소를 로컬 디스크에 클론하고, 기본 저장소를 원격으로 추가하세요:
 
  ```bash
- $ git clone git@github.com:<your GitHub handle>/diffusers.git
- $ cd diffusers
+ $ git clone git@github.com:<your GitHub handle>/diffusers_sd3_control.git
+ $ cd diffusers_sd3_control
  $ git remote add upstream https://github.com/huggingface/diffusers.git
  ```
 

@@ -24,7 +24,7 @@ By default the [`ControlNetModel`] should be loaded with [`~ModelMixin.from_pret
 from the original format using [`FromOriginalControlnetMixin.from_single_file`] as follows:
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
 
 url = "https://huggingface.co/lllyasviel/ControlNet-v1-1/blob/main/control_v11p_sd15_canny.pth"  # can also be a local path
 controlnet = ControlNetModel.from_single_file(url)

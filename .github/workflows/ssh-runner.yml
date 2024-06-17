@@ -25,10 +25,10 @@ jobs:
     runs-on: [single-gpu, nvidia-gpu, "${{ github.event.inputs.runner_type }}", ci]
     container:
       image: ${{ github.event.inputs.docker_image }}
-      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers:/mnt/cache/ --gpus 0 --privileged
+      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers_sd3_control:/mnt/cache/ --gpus 0 --privileged
 
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2

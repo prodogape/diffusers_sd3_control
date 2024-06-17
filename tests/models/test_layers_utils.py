@@ -20,11 +20,11 @@ import numpy as np
 import torch
 from torch import nn
 
-from diffusers.models.attention import GEGLU, AdaLayerNorm, ApproximateGELU
-from diffusers.models.embeddings import get_timestep_embedding
-from diffusers.models.resnet import Downsample2D, ResnetBlock2D, Upsample2D
-from diffusers.models.transformers.transformer_2d import Transformer2DModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.models.attention import GEGLU, AdaLayerNorm, ApproximateGELU
+from diffusers_sd3_control.models.embeddings import get_timestep_embedding
+from diffusers_sd3_control.models.resnet import Downsample2D, ResnetBlock2D, Upsample2D
+from diffusers_sd3_control.models.transformers.transformer_2d import Transformer2DModel
+from diffusers_sd3_control.utils.testing_utils import (
     backend_manual_seed,
     require_torch_accelerator_with_fp64,
     torch_device,

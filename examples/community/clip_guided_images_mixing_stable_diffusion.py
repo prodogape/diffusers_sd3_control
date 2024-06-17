@@ -9,7 +9,7 @@ from torch.nn import functional as F
 from torchvision import transforms
 from transformers import CLIPFeatureExtractor, CLIPModel, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -17,10 +17,10 @@ from diffusers import (
     PNDMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.utils import PIL_INTERPOLATION
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.utils import PIL_INTERPOLATION
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 def preprocess(image, w, h):

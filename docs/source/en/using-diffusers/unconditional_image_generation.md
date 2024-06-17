@@ -19,7 +19,7 @@ Unconditional image generation generates images that look like a random sample f
 To get started, use the [`DiffusionPipeline`] to load the [anton-l/ddpm-butterflies-128](https://huggingface.co/anton-l/ddpm-butterflies-128) checkpoint to generate images of butterflies. The [`DiffusionPipeline`] downloads and caches all the model components required to generate an image.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 generator = DiffusionPipeline.from_pretrained("anton-l/ddpm-butterflies-128").to("cuda")
 image = generator().images[0]

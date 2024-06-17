@@ -39,10 +39,10 @@ To load a Hugging Face Hub community pipeline, pass the repository id of the com
 > By loading a community pipeline from the Hugging Face Hub, you are trusting that the code you are loading is safe. Make sure to inspect the code online before loading and running it automatically!
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
-    "google/ddpm-cifar10-32", custom_pipeline="hf-internal-testing/diffusers-dummy-pipeline", use_safetensors=True
+    "google/ddpm-cifar10-32", custom_pipeline="hf-internal-testing/diffusers_sd3_control-dummy-pipeline", use_safetensors=True
 )
 ```
 
@@ -52,7 +52,7 @@ pipeline = DiffusionPipeline.from_pretrained(
 To load a GitHub community pipeline, pass the repository id of the community pipeline to the `custom_pipeline` argument and the model repository where you you'd like to load the pipeline weights and components from. You can also load model components directly. The example below loads the community [CLIP Guided Stable Diffusion](https://github.com/huggingface/diffusers/tree/main/examples/community#clip-guided-stable-diffusion) pipeline and the CLIP model components.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import CLIPImageProcessor, CLIPModel
 
 clip_model_id = "laion/CLIP-ViT-B-32-laion2B-s34B-b79K"
@@ -133,7 +133,7 @@ For example, let's load a community pipeline that supports [long prompts with we
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe_sd = DiffusionPipeline.from_pretrained("emilianJR/CyberRealistic_V3", torch_dtype=torch.float16)
 pipe_sd.to("cuda")
@@ -186,8 +186,8 @@ This section showcases a couple of the community pipelines and hopefully it'll i
 ```py
 import torch
 from PIL import Image
-from diffusers import DiffusionPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import load_image
 
 pipeline = DiffusionPipeline.from_pretrained(
     "prs-eth/marigold-lcm-v1-0",
@@ -231,8 +231,8 @@ depth_colored.save("./depth_colored.png")
 
 ```py
 import torch
-from diffusers import DiffusionPipeline, DDIMScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import load_image
 
 pipeline = DiffusionPipeline.from_pretrained(
     "Lykon/dreamshaper-8-inpainting",
@@ -281,7 +281,7 @@ text_encoder = T5EncoderModel.from_pretrained(pipe_id, subfolder="text_encoder")
 2. Load a scheduler:
 
 ```python
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 scheduler = DPMSolverMultistepScheduler.from_pretrained(pipe_id, subfolder="scheduler")
 ```
@@ -347,7 +347,7 @@ To run inference, add the `trust_remote_code` argument while initializing the pi
 > As an additional precaution with `trust_remote_code=True`, we strongly encourage you to pass a commit hash to the `revision` parameter in [`~DiffusionPipeline.from_pretrained`] to make sure the code hasn't been updated with some malicious new lines of code (unless you fully trust the model owners).
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained(
@@ -375,7 +375,7 @@ video_frames = pipeline(
 As an additional reference, take a look at the repository structure of [stabilityai/japanese-stable-diffusion-xl](https://huggingface.co/stabilityai/japanese-stable-diffusion-xl/) which also uses the `trust_remote_code` feature.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained(

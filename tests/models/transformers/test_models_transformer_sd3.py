@@ -17,8 +17,8 @@ import unittest
 
 import torch
 
-from diffusers import SD3Transformer2DModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import SD3Transformer2DModel
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     torch_device,
 )

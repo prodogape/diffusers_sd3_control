@@ -10,7 +10,7 @@ from audio_diffusion.models import DiffusionAttnUnet1D
 from diffusion import sampling
 from torch import nn
 
-from diffusers import DanceDiffusionPipeline, IPNDMScheduler, UNet1DModel
+from diffusers_sd3_control import DanceDiffusionPipeline, IPNDMScheduler, UNet1DModel
 
 
 MODELS_MAP = {

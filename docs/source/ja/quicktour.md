@@ -34,7 +34,7 @@ specific language governing permissions and limitations under the License.
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install --upgrade diffusers accelerate transformers
+#!pip install --upgrade diffusers_sd3_control accelerate transformers
 ```
 
 - [🤗 Accelerate](https://huggingface.co/docs/accelerate/index)生成とトレーニングのためのモデルのロードを高速化します
@@ -65,7 +65,7 @@ specific language governing permissions and limitations under the License.
 モデルを[`~DiffusionPipeline.from_pretrained`]メソッドでロードします：
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -78,16 +78,16 @@ StableDiffusionPipeline {
   "_diffusers_version": "0.13.1",
   ...,
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   ...,
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -139,7 +139,7 @@ PyTorchと同じように、ジェネレータオブジェクトをGPUに移す�
 スケジューラーによって、ノイズ除去のスピードや品質のトレードオフが異なります。どれが自分に最適かを知る最善の方法は、実際に試してみることです！Diffusers 🧨の主な機能の1つは、スケジューラを簡単に切り替えることができることです。例えば、デフォルトの[`PNDMScheduler`]を[`EulerDiscreteScheduler`]に置き換えるには、[`~diffusers.ConfigMixin.from_config`]メソッドでロードできます：
 
 ```py
->>> from diffusers import EulerDiscreteScheduler
+>>> from diffusers_sd3_control import EulerDiscreteScheduler
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 >>> pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -156,7 +156,7 @@ PyTorchと同じように、ジェネレータオブジェクトをGPUに移す�
 モデルは[`~ModelMixin.from_pretrained`]メソッドで開始されます。このメソッドはモデルをローカルにキャッシュするので、次にモデルをロードするときに高速になります。この案内では、[`UNet2DModel`]をロードします。これは基本的な画像生成モデルであり、猫画像で学習されたチェックポイントを使います：
 
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> repo_id = "google/ddpm-cat-256"
 >>> model = UNet2DModel.from_pretrained(repo_id, use_safetensors=True)
@@ -213,7 +213,7 @@ torch.Size([1, 3, 256, 256])
 この案内では、[`DDPMScheduler`]を[`~diffusers.ConfigMixin.from_config`]メソッドでインスタンス化します：
 
 ```py
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> scheduler = DDPMScheduler.from_config(repo_id)
 >>> scheduler

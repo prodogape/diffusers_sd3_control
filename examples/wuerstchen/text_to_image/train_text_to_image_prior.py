@@ -38,19 +38,19 @@ from tqdm import tqdm
 from transformers import CLIPTextModel, PreTrainedTokenizerFast
 from transformers.utils import ContextManagers
 
-from diffusers import AutoPipelineForText2Image, DDPMWuerstchenScheduler
-from diffusers.optimization import get_scheduler
-from diffusers.pipelines.wuerstchen import DEFAULT_STAGE_C_TIMESTEPS, WuerstchenPrior
-from diffusers.training_utils import EMAModel
-from diffusers.utils import check_min_version, is_wandb_available, make_image_grid
-from diffusers.utils.logging import set_verbosity_error, set_verbosity_info
+from diffusers_sd3_control import AutoPipelineForText2Image, DDPMWuerstchenScheduler
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.pipelines.wuerstchen import DEFAULT_STAGE_C_TIMESTEPS, WuerstchenPrior
+from diffusers_sd3_control.training_utils import EMAModel
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available, make_image_grid
+from diffusers_sd3_control.utils.logging import set_verbosity_error, set_verbosity_info
 
 
 if is_wandb_available():
     import wandb
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
@@ -561,7 +561,7 @@ def main():
                 # pop models so that they are not loaded again
                 model = models.pop()
 
-                # load diffusers style into model
+                # load diffusers_sd3_control style into model
                 load_model = WuerstchenPrior.from_pretrained(input_dir, subfolder="prior")
                 model.register_to_config(**load_model.config)
 

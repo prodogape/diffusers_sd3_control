@@ -3,11 +3,11 @@ import unittest
 
 import torch
 
-from diffusers import (
+from diffusers_sd3_control import (
     StableDiffusionImg2ImgPipeline,
 )
-from diffusers.utils import load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     require_torch_gpu,
     slow,

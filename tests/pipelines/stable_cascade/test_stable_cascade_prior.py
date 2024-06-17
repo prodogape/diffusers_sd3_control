@@ -22,12 +22,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 from transformers import CLIPTextConfig, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import DDPMWuerstchenScheduler, StableCascadePriorPipeline
-from diffusers.loaders import AttnProcsLayers
-from diffusers.models import StableCascadeUNet
-from diffusers.models.attention_processor import LoRAAttnProcessor, LoRAAttnProcessor2_0
-from diffusers.utils.import_utils import is_peft_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import DDPMWuerstchenScheduler, StableCascadePriorPipeline
+from diffusers_sd3_control.loaders import AttnProcsLayers
+from diffusers_sd3_control.models import StableCascadeUNet
+from diffusers_sd3_control.models.attention_processor import LoRAAttnProcessor, LoRAAttnProcessor2_0
+from diffusers_sd3_control.utils.import_utils import is_peft_available
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_numpy,
     numpy_cosine_similarity_distance,

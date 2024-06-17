@@ -25,9 +25,9 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import AutoencoderKL, DDIMScheduler, TextToVideoZeroSDXLPipeline, UNet2DConditionModel
-from diffusers.utils.import_utils import is_accelerate_available, is_accelerate_version
-from diffusers.utils.testing_utils import enable_full_determinism, nightly, require_torch_gpu, torch_device
+from diffusers_sd3_control import AutoencoderKL, DDIMScheduler, TextToVideoZeroSDXLPipeline, UNet2DConditionModel
+from diffusers_sd3_control.utils.import_utils import is_accelerate_available, is_accelerate_version
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, nightly, require_torch_gpu, torch_device
 
 from ..pipeline_params import TEXT_TO_IMAGE_BATCH_PARAMS, TEXT_TO_IMAGE_IMAGE_PARAMS, TEXT_TO_IMAGE_PARAMS
 from ..test_pipelines_common import PipelineFromPipeTesterMixin, PipelineTesterMixin

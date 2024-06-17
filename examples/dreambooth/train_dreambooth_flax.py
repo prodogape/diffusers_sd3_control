@@ -23,18 +23,18 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPImageProcessor, CLIPTokenizer, FlaxCLIPTextModel, set_seed
 
-from diffusers import (
+from diffusers_sd3_control import (
     FlaxAutoencoderKL,
     FlaxDDPMScheduler,
     FlaxPNDMScheduler,
     FlaxStableDiffusionPipeline,
     FlaxUNet2DConditionModel,
 )
-from diffusers.pipelines.stable_diffusion import FlaxStableDiffusionSafetyChecker
-from diffusers.utils import check_min_version
+from diffusers_sd3_control.pipelines.stable_diffusion import FlaxStableDiffusionSafetyChecker
+from diffusers_sd3_control.utils import check_min_version
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 # Cache compiled models across invocations of this script.

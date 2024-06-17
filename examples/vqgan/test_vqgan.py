@@ -23,8 +23,8 @@ import tempfile
 
 import torch
 
-from diffusers import VQModel
-from diffusers.utils.testing_utils import require_timm
+from diffusers_sd3_control import VQModel
+from diffusers_sd3_control.utils.testing_utils import require_timm
 
 
 sys.path.append("..")

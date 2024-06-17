@@ -46,7 +46,7 @@ Safetensors stores weights in a safetensors file. Diffusers loads safetensors fi
 Use the [`~DiffusionPipeline.from_pretrained`] method to load a model with safetensors files stored in multiple folders.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -60,7 +60,7 @@ pipeline = DiffusionPipeline.from_pretrained(
 Use the [`~loaders.FromSingleFileMixin.from_single_file`] method to load a model with all the weights stored in a single safetensors file.
 
 ```py
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipeline = StableDiffusionPipeline.from_single_file(
     "https://huggingface.co/WarriorMama777/OrangeMixs/blob/main/Models/AbyssOrangeMix/AbyssOrangeMix.safetensors"
@@ -77,7 +77,7 @@ pipeline = StableDiffusionPipeline.from_single_file(
 LoRAs are loaded into a base model with the [`~loaders.LoraLoaderMixin.load_lora_weights`] method.
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 import torch
 
 # base model
@@ -115,7 +115,7 @@ PyTorch's [torch.save](https://pytorch.org/docs/stable/generated/torch.save.html
 Use the [`~loaders.FromSingleFileMixin.from_single_file`] method to directly load a ckpt file.
 
 ```py
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipeline = StableDiffusionPipeline.from_single_file(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/blob/main/v1-5-pruned.ckpt"
@@ -144,7 +144,7 @@ The Diffusers-multifolder layout is the default storage layout for Diffusers. Ea
 To load from Diffusers-multifolder layout, use the [`~DiffusionPipeline.from_pretrained`] method.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
@@ -161,7 +161,7 @@ Benefits of using the Diffusers-multifolder layout include:
 
     ```py
     import torch
-    from diffusers import StableDiffusionXLPipeline, UNet2DConditionModel, EulerDiscreteScheduler
+    from diffusers_sd3_control import StableDiffusionXLPipeline, UNet2DConditionModel, EulerDiscreteScheduler
 
     # download one model
     sdxl_pipeline = StableDiffusionXLPipeline.from_pretrained(
@@ -199,7 +199,7 @@ Benefits of using the Diffusers-multifolder layout include:
 4. Flexibility to replace a component in the model with a newer or better version.
 
     ```py
-    from diffusers import DiffusionPipeline, AutoencoderKL
+    from diffusers_sd3_control import DiffusionPipeline, AutoencoderKL
 
     vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16, use_safetensors=True)
     pipeline = DiffusionPipeline.from_pretrained(
@@ -225,7 +225,7 @@ To load from a single-file layout, use the [`~loaders.FromSingleFileMixin.from_s
 
 ```py
 import torch
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 pipeline = StableDiffusionXLPipeline.from_single_file(
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0.safetensors",
@@ -258,7 +258,7 @@ python convert_diffusers_to_original_sdxl.py --model_path path/to/model/to/conve
 You can also save a model to Diffusers-multifolder layout with the [`~DiffusionPipeline.save_pretrained`] method. This creates a directory for you if it doesn't already exist, and it also saves the files as a safetensors file by default.
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 pipeline = StableDiffusionXLPipeline.from_single_file(
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0.safetensors",
@@ -280,7 +280,7 @@ Pass the file path of the pipeline or model to the [`~loaders.FromSingleFileMixi
 <hfoption id="pipeline">
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 ckpt_path = "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0_0.9vae.safetensors"
 pipeline = StableDiffusionXLPipeline.from_single_file(ckpt_path)
@@ -290,7 +290,7 @@ pipeline = StableDiffusionXLPipeline.from_single_file(ckpt_path)
 <hfoption id="model">
 
 ```py
-from diffusers import StableCascadeUNet
+from diffusers_sd3_control import StableCascadeUNet
 
 ckpt_path = "https://huggingface.co/stabilityai/stable-cascade/blob/main/stage_b_lite.safetensors"
 model = StableCascadeUNet.from_single_file(ckpt_path)
@@ -302,7 +302,7 @@ model = StableCascadeUNet.from_single_file(ckpt_path)
 Customize components in the pipeline by passing them directly to the [`~loaders.FromSingleFileMixin.from_single_file`] method. For example, you can use a different scheduler in a pipeline.
 
 ```py
-from diffusers import StableDiffusionXLPipeline, DDIMScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, DDIMScheduler
 
 ckpt_path = "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0_0.9vae.safetensors"
 scheduler = DDIMScheduler()
@@ -312,7 +312,7 @@ pipeline = StableDiffusionXLPipeline.from_single_file(ckpt_path, scheduler=sched
 Or you could use a ControlNet model in the pipeline.
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
 
 ckpt_path = "https://huggingface.co/runwayml/stable-diffusion-v1-5/blob/main/v1-5-pruned-emaonly.safetensors"
 controlnet = ControlNetModel.from_pretrained("lllyasviel/control_v11p_sd15_canny")
@@ -334,7 +334,7 @@ These configuration files can be found in the models Hub repository or another l
 The [`~loaders.FromSingleFileMixin.from_single_file`] method automatically determines the configuration to use from the configuration file in the model repository. You could also explicitly specify the configuration to use by providing the repository id to the `config` parameter.
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 ckpt_path = "https://huggingface.co/segmind/SSD-1B/blob/main/SSD-1B.safetensors"
 repo_id = "segmind/SSD-1B"
@@ -350,7 +350,7 @@ The model loads the configuration file for the [UNet](https://huggingface.co/seg
 The [`~loaders.FromSingleFileMixin.from_single_file`] method can also load the original configuration file of a pipeline that is stored elsewhere. Pass a local path or URL of the original configuration file to the `original_config` parameter.
 
 ```py
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 ckpt_path = "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0_0.9vae.safetensors"
 original_config = "https://raw.githubusercontent.com/Stability-AI/generative-models/main/configs/inference/sd_xl_base.yaml"
@@ -374,10 +374,10 @@ While the configuration files specify the pipeline or models default parameters,
 For example, to scale the image latents in [`StableDiffusionXLInstructPix2PixPipeline`] pass the `is_cosxl_edit` parameter.
 
 ```python
-from diffusers import StableDiffusionXLInstructPix2PixPipeline
+from diffusers_sd3_control import StableDiffusionXLInstructPix2PixPipeline
 
 ckpt_path = "https://huggingface.co/stabilityai/cosxl/blob/main/cosxl_edit.safetensors"
-pipeline = StableDiffusionXLInstructPix2PixPipeline.from_single_file(ckpt_path, config="diffusers/sdxl-instructpix2pix-768", is_cosxl_edit=True)
+pipeline = StableDiffusionXLInstructPix2PixPipeline.from_single_file(ckpt_path, config="diffusers_sd3_control/sdxl-instructpix2pix-768", is_cosxl_edit=True)
 ```
 
 </hfoption>
@@ -386,7 +386,7 @@ pipeline = StableDiffusionXLInstructPix2PixPipeline.from_single_file(ckpt_path, 
 For example, to upcast the attention dimensions in a [`UNet2DConditionModel`] pass the `upcast_attention` parameter.
 
 ```python
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 
 ckpt_path = "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/sd_xl_base_1.0_0.9vae.safetensors"
 model = UNet2DConditionModel.from_single_file(ckpt_path, upcast_attention=True)

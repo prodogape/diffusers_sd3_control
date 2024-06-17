@@ -20,7 +20,7 @@ import argparse
 import torch
 from safetensors.torch import load_file
 
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 
 def convert(base_model_path, checkpoint_path, LORA_PREFIX_UNET, LORA_PREFIX_TEXT_ENCODER, alpha):
@@ -32,7 +32,7 @@ def convert(base_model_path, checkpoint_path, LORA_PREFIX_UNET, LORA_PREFIX_TEXT
 
     visited = []
 
-    # directly update weight in diffusers model
+    # directly update weight in diffusers_sd3_control model
     for key in state_dict:
         # it is suggested to print out the key, it usually will be something like below
         # "lora_te_text_model_encoder_layers_0_self_attn_k_proj.lora_down.weight"
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "--base_model_path", default=None, type=str, required=True, help="Path to the base model in diffusers format."
+        "--base_model_path", default=None, type=str, required=True, help="Path to the base model in diffusers_sd3_control format."
     )
     parser.add_argument(
         "--checkpoint_path", default=None, type=str, required=True, help="Path to the checkpoint to convert."

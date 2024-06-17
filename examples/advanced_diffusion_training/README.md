@@ -36,7 +36,7 @@ Before running the scripts, make sure to install the library's training dependen
 To make sure you can successfully run the latest versions of the example scripts, we highly recommend **installing from source** and keeping the install up to date as we update the example scripts frequently and install some example-specific requirements. To do this, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -170,11 +170,12 @@ Our experiments were conducted on a single 40GB A100 GPU.
 
 Once training is done, we can perform inference like so:
 1. starting with loading the unet lora weights
+
 ```python
 import torch
 from huggingface_hub import hf_hub_download, upload_file
-from diffusers import DiffusionPipeline
-from diffusers.models import AutoencoderKL
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.models import AutoencoderKL
 from safetensors.torch import load_file
 
 username = "linoyts"
@@ -343,7 +344,7 @@ The inference is a bit different:
 
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline, AutoencoderKL
+from diffusers_sd3_control import StableDiffusionXLPipeline, AutoencoderKL
 
 # taken & modified from B-LoRA repo - https://github.com/yardenfren1996/B-LoRA/blob/main/blora_utils.py
 def is_belong_to_blocks(key, blocks):
@@ -405,10 +406,11 @@ e.g:
 > If you wish to experiment with different blocks, specify `--lora_unet_blocks` only.
 
 **Inference** 
-Inference is the same as for B-LoRAs, except the input targeted blocks should be modified based on your training configuration. 
+Inference is the same as for B-LoRAs, except the input targeted blocks should be modified based on your training configuration.
+
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline, AutoencoderKL
+from diffusers_sd3_control import StableDiffusionXLPipeline, AutoencoderKL
 
 # taken & modified from B-LoRA repo - https://github.com/yardenfren1996/B-LoRA/blob/main/blora_utils.py
 def is_belong_to_blocks(key, blocks):

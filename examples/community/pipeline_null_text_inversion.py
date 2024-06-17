@@ -8,8 +8,8 @@ from PIL import Image
 from torch.optim.adam import Adam
 from tqdm import tqdm
 
-from diffusers import StableDiffusionPipeline
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control import StableDiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
 
 
 def retrieve_timesteps(

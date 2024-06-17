@@ -19,11 +19,11 @@ env:
 jobs:
   setup_torch_cuda_pipeline_matrix:
     name: Setup Torch Pipelines Matrix
-    runs-on: diffusers/diffusers-pytorch-cpu
+    runs-on: diffusers_sd3_control/diffusers_sd3_control-pytorch-cpu
     outputs:
       pipeline_test_matrix: ${{ steps.fetch_pipeline_matrix.outputs.pipeline_test_matrix }}
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -58,10 +58,10 @@ jobs:
         module: ${{ fromJson(needs.setup_torch_cuda_pipeline_matrix.outputs.pipeline_test_matrix) }}
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
-      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers:/mnt/cache/ --gpus 0
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
+      options: --shm-size "16gb" --ipc host -v /mnt/cache/.cache/huggingface/diffusers_sd3_control:/mnt/cache/ --gpus 0
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -114,7 +114,7 @@ jobs:
     name: Torch Non-Pipelines CUDA Nightly Tests
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
       options: --shm-size "16gb" --ipc host -v /mnt/hf_cache:/mnt/cache/ --gpus 0
     defaults:
       run:
@@ -123,7 +123,7 @@ jobs:
       matrix:
         module: [models, schedulers, others, examples]
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -187,13 +187,13 @@ jobs:
     name: Nightly LoRA Tests with PEFT and TORCH
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-pytorch-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda
       options: --shm-size "16gb" --ipc host -v /mnt/hf_cache:/mnt/cache/ --gpus 0
     defaults:
       run:
         shell: bash
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -246,13 +246,13 @@ jobs:
     if: github.event_name == 'schedule'
 
     container:
-      image: diffusers/diffusers-flax-tpu
+      image: diffusers_sd3_control/diffusers_sd3_control-flax-tpu
       options: --shm-size "16gb" --ipc host -v /mnt/hf_cache:/mnt/cache/ --privileged
     defaults:
       run:
         shell: bash
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -300,11 +300,11 @@ jobs:
     name: Nightly ONNXRuntime CUDA tests on Ubuntu
     runs-on: [single-gpu, nvidia-gpu, t4, ci]
     container:
-      image: diffusers/diffusers-onnxruntime-cuda
+      image: diffusers_sd3_control/diffusers_sd3_control-onnxruntime-cuda
       options: --gpus 0 --shm-size "16gb" --ipc host -v /mnt/hf_cache:/mnt/cache/
 
     steps:
-    - name: Checkout diffusers
+    - name: Checkout diffusers_sd3_control
       uses: actions/checkout@v3
       with:
         fetch-depth: 2
@@ -357,7 +357,7 @@ jobs:
     if: github.event_name == 'schedule'
 
     steps:
-      - name: Checkout diffusers
+      - name: Checkout diffusers_sd3_control
         uses: actions/checkout@v3
         with:
           fetch-depth: 2

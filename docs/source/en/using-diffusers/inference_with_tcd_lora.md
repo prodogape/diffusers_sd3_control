@@ -60,7 +60,7 @@ A few tips to keep in mind for TCD-LoRA inference are to:
 
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline, TCDScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, TCDScheduler
 
 device = "cuda"
 base_model_id = "stabilityai/stable-diffusion-xl-base-1.0"
@@ -91,11 +91,11 @@ image = pipe(
 
 ```python
 import torch
-from diffusers import AutoPipelineForInpainting, TCDScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting, TCDScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 device = "cuda"
-base_model_id = "diffusers/stable-diffusion-xl-1.0-inpainting-0.1"
+base_model_id = "diffusers_sd3_control/stable-diffusion-xl-1.0-inpainting-0.1"
 tcd_lora_id = "h1t/TCD-SDXL-LoRA"
 
 pipe = AutoPipelineForInpainting.from_pretrained(base_model_id, torch_dtype=torch.float16, variant="fp16").to(device)
@@ -138,7 +138,7 @@ TCD-LoRA also works with many community finetuned models and plugins. For exampl
 
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline, TCDScheduler
+from diffusers_sd3_control import StableDiffusionXLPipeline, TCDScheduler
 
 device = "cuda"
 base_model_id = "cagliostrolab/animagine-xl-3.0"
@@ -170,7 +170,7 @@ TCD-LoRA also supports other LoRAs trained on different styles. For example, let
 
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 from scheduling_tcd import TCDScheduler
 
 device = "cuda"
@@ -213,8 +213,8 @@ import torch
 import numpy as np
 from PIL import Image
 from transformers import DPTFeatureExtractor, DPTForDepthEstimation
-from diffusers import ControlNetModel, StableDiffusionXLControlNetPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import ControlNetModel, StableDiffusionXLControlNetPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 from scheduling_tcd import TCDScheduler
 
 device = "cuda"
@@ -242,7 +242,7 @@ def get_depth_map(image):
     return image
 
 base_model_id = "stabilityai/stable-diffusion-xl-base-1.0"
-controlnet_id = "diffusers/controlnet-depth-sdxl-1.0"
+controlnet_id = "diffusers_sd3_control/controlnet-depth-sdxl-1.0"
 tcd_lora_id = "h1t/TCD-SDXL-LoRA"
 
 controlnet = ControlNetModel.from_pretrained(
@@ -286,15 +286,16 @@ grid_image = make_image_grid([depth_image, image], rows=1, cols=2)
 ![](https://github.com/jabir-zheng/TCD/raw/main/assets/controlnet_depth_tcd.png)
 
 ### Canny ControlNet
+
 ```python
 import torch
-from diffusers import ControlNetModel, StableDiffusionXLControlNetPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import ControlNetModel, StableDiffusionXLControlNetPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 from scheduling_tcd import TCDScheduler
 
 device = "cuda"
 base_model_id = "stabilityai/stable-diffusion-xl-base-1.0"
-controlnet_id = "diffusers/controlnet-canny-sdxl-1.0"
+controlnet_id = "diffusers_sd3_control/controlnet-canny-sdxl-1.0"
 tcd_lora_id = "h1t/TCD-SDXL-LoRA"
 
 controlnet = ControlNetModel.from_pretrained(
@@ -346,8 +347,8 @@ This example shows how to use the TCD-LoRA with the [IP-Adapter](https://github.
 
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionXLPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 from ip_adapter import IPAdapterXL
 from scheduling_tcd import TCDScheduler
@@ -399,9 +400,9 @@ grid_image = make_image_grid([ref_image, image], rows=1, cols=2)
 
 ```python
 import torch
-from diffusers import MotionAdapter, AnimateDiffPipeline, DDIMScheduler
+from diffusers_sd3_control import MotionAdapter, AnimateDiffPipeline, DDIMScheduler
 from scheduling_tcd import TCDScheduler
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5")
 pipe = AnimateDiffPipeline.from_pretrained(

@@ -14,8 +14,8 @@
 # limitations under the License.
 import unittest
 
-from diffusers.models.unets.unet_2d_blocks import *  # noqa F403
-from diffusers.utils.testing_utils import torch_device
+from diffusers_sd3_control.models.unets.unet_2d_blocks import *  # noqa F403
+from diffusers_sd3_control.utils.testing_utils import torch_device
 
 from .test_unet_blocks_common import UNetBlockTesterMixin
 

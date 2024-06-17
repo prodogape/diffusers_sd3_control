@@ -9,8 +9,8 @@ import torch.nn as nn
 from music_spectrogram_diffusion import inference
 from t5x import checkpoints
 
-from diffusers import DDPMScheduler, OnnxRuntimeModel, SpectrogramDiffusionPipeline
-from diffusers.pipelines.spectrogram_diffusion import SpectrogramContEncoder, SpectrogramNotesEncoder, T5FilmDecoder
+from diffusers_sd3_control import DDPMScheduler, OnnxRuntimeModel, SpectrogramDiffusionPipeline
+from diffusers_sd3_control.pipelines.spectrogram_diffusion import SpectrogramContEncoder, SpectrogramNotesEncoder, T5FilmDecoder
 
 
 MODEL = "base_with_context"

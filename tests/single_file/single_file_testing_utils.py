@@ -5,8 +5,8 @@ import requests
 import torch
 from huggingface_hub import hf_hub_download, snapshot_download
 
-from diffusers.models.attention_processor import AttnProcessor
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.models.attention_processor import AttnProcessor
+from diffusers_sd3_control.utils.testing_utils import (
     numpy_cosine_similarity_distance,
     torch_device,
 )

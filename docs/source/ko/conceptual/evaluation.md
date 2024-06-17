@@ -116,7 +116,7 @@ images = sd_pipeline(sample_prompts, num_images_per_prompt=1, generator=generato
 [`StableDiffusionPipeline`]을 일단 로드해봅시다:
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_ckpt = "CompVis/stable-diffusion-v1-4"
@@ -266,7 +266,7 @@ dataset[idx]["image"]
 [`StableDiffusionInstructPix2PixPipeline`]를 먼저 로드합니다:
 
 ```python
-from diffusers import StableDiffusionInstructPix2PixPipeline
+from diffusers_sd3_control import StableDiffusionInstructPix2PixPipeline
 
 instruct_pix2pix_pipeline = StableDiffusionInstructPix2PixPipeline.from_pretrained(
     "timbrooks/instruct-pix2pix", torch_dtype=torch.float16
@@ -481,7 +481,7 @@ print(real_images.shape)
 이제 위에서 언급한 클래스에 따라 조건화 된 이미지를 생성하기 위해 [`DiTPipeline`](https://huggingface.co/docs/diffusers/api/pipelines/dit)를 로드합니다.
 
 ```python
-from diffusers import DiTPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control import DiTPipeline, DPMSolverMultistepScheduler
 
 dit_pipeline = DiTPipeline.from_pretrained("facebook/DiT-XL-2-256", torch_dtype=torch.float16)
 dit_pipeline.scheduler = DPMSolverMultistepScheduler.from_config(dit_pipeline.scheduler.config)

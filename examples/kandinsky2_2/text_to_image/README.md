@@ -16,7 +16,7 @@ Before running the scripts, make sure to install the library's training dependen
 To make sure you can successfully run the latest versions of the example scripts, we highly recommend **installing from source** and keeping the install up to date as we update the example scripts frequently and install some example-specific requirements. To do this, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -105,7 +105,7 @@ accelerate launch --mixed_precision="fp16" train_text_to_image_decoder.py \
 Once the training is finished the model will be saved in the `output_dir` specified in the command. In this example it's `kandi22-decoder-naruto-model`. To load the fine-tuned model for inference just pass that path to `AutoPipelineForText2Image`
 
 ```python
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipe = AutoPipelineForText2Image.from_pretrained(output_dir, torch_dtype=torch.float16)
@@ -117,8 +117,9 @@ images[0].save("robot-naruto.png")
 ```
 
 Checkpoints only save the unet, so to run inference from a checkpoint, just load the unet
+
 ```python
-from diffusers import AutoPipelineForText2Image, UNet2DConditionModel
+from diffusers_sd3_control import AutoPipelineForText2Image, UNet2DConditionModel
 
 model_path = "path_to_saved_model"
 
@@ -162,7 +163,7 @@ accelerate launch --mixed_precision="fp16"  train_text_to_image_prior.py \
 To perform inference with the fine-tuned prior model, you will need to first create a prior pipeline by passing the `output_dir` to `DiffusionPipeline`. Then create a `KandinskyV22CombinedPipeline` from a pretrained or fine-tuned decoder checkpoint along with all the modules of the prior pipeline you just created.
 
 ```python
-from diffusers import AutoPipelineForText2Image, DiffusionPipeline
+from diffusers_sd3_control import AutoPipelineForText2Image, DiffusionPipeline
 import torch
 
 pipe_prior = DiffusionPipeline.from_pretrained(output_dir, torch_dtype=torch.float16)
@@ -276,9 +277,8 @@ accelerate launch --mixed_precision="fp16" train_text_to_image_prior_lora.py \
 
 Once you have trained a Kandinsky decoder model using the above command, inference can be done with the `AutoPipelineForText2Image` after loading the trained LoRA weights.  You need to pass the `output_dir` for loading the LoRA weights, which in this case is `kandi22-decoder-naruto-lora`.
 
-
 ```python
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipe = AutoPipelineForText2Image.from_pretrained("kandinsky-community/kandinsky-2-2-decoder", torch_dtype=torch.float16)
@@ -293,7 +293,7 @@ image.save("robot_naruto.png")
 #### Inference using fine-tuned LoRA checkpoint for prior
 
 ```python
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipe = AutoPipelineForText2Image.from_pretrained("kandinsky-community/kandinsky-2-2-decoder", torch_dtype=torch.float16)

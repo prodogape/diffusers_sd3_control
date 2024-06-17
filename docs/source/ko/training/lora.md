@@ -95,7 +95,7 @@ accelerate launch train_dreambooth_lora.py \
 
 ```py
 >>> import torch
->>> from diffusers import StableDiffusionPipeline
+>>> from diffusers_sd3_control import StableDiffusionPipeline
 
 >>> model_base = "runwayml/stable-diffusion-v1-5"
 

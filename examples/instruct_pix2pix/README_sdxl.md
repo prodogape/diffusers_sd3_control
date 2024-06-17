@@ -107,7 +107,7 @@ accelerate launch --mixed_precision="fp16" --multi_gpu train_instruct_pix2pix_sd
 import PIL
 import requests
 import torch
-from diffusers import StableDiffusionXLInstructPix2PixPipeline
+from diffusers_sd3_control import StableDiffusionXLInstructPix2PixPipeline
 
 model_id = "your_model_id" # <- replace this 
 pipe = StableDiffusionXLInstructPix2PixPipeline.from_pretrained(model_id, torch_dtype=torch.float16).to("cuda")

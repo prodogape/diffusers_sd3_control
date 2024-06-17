@@ -7,9 +7,9 @@ import torch
 from huggingface_hub import snapshot_download
 from huggingface_hub.utils import validate_hf_hub_args
 
-from diffusers import DiffusionPipeline, __version__
-from diffusers.schedulers.scheduling_utils import SCHEDULER_CONFIG_NAME
-from diffusers.utils import CONFIG_NAME, ONNX_WEIGHTS_NAME, WEIGHTS_NAME
+from diffusers_sd3_control import DiffusionPipeline, __version__
+from diffusers_sd3_control.schedulers.scheduling_utils import SCHEDULER_CONFIG_NAME
+from diffusers_sd3_control.utils import CONFIG_NAME, ONNX_WEIGHTS_NAME, WEIGHTS_NAME
 
 
 class CheckpointMergerPipeline(DiffusionPipeline):
@@ -152,7 +152,7 @@ class CheckpointMergerPipeline(DiffusionPipeline):
                 DiffusionPipeline.config_name,
             ]
             requested_pipeline_class = config_dict.get("_class_name")
-            user_agent = {"diffusers": __version__, "pipeline_class": requested_pipeline_class}
+            user_agent = {"diffusers_sd3_control": __version__, "pipeline_class": requested_pipeline_class}
 
             cached_folder = (
                 pretrained_model_name_or_path

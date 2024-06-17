@@ -28,7 +28,7 @@ REPLACE_PATTERNS = {
     "doc": (re.compile(r'^(\s*)release\s*=\s*"[^"]+"$', re.MULTILINE), 'release = "VERSION"\n'),
 }
 REPLACE_FILES = {
-    "init": "src/diffusers/__init__.py",
+    "init": "src/diffusers_sd3_control/__init__.py",
     "setup": "setup.py",
 }
 README_FILE = "README.md"

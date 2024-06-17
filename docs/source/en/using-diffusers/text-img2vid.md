@@ -31,8 +31,8 @@ Begin by loading the [`StableVideoDiffusionPipeline`] and passing an initial ima
 
 ```py
 import torch
-from diffusers import StableVideoDiffusionPipeline
-from diffusers.utils import load_image, export_to_video
+from diffusers_sd3_control import StableVideoDiffusionPipeline
+from diffusers_sd3_control.utils import load_image, export_to_video
 
 pipeline = StableVideoDiffusionPipeline.from_pretrained(
     "stabilityai/stable-video-diffusion-img2vid-xt", torch_dtype=torch.float16, variant="fp16"
@@ -66,8 +66,8 @@ You can use I2VGen-XL by loading the [`I2VGenXLPipeline`], and passing a text an
 
 ```py
 import torch
-from diffusers import I2VGenXLPipeline
-from diffusers.utils import export_to_gif, load_image
+from diffusers_sd3_control import I2VGenXLPipeline
+from diffusers_sd3_control.utils import export_to_gif, load_image
 
 pipeline = I2VGenXLPipeline.from_pretrained("ali-vilab/i2vgen-xl", torch_dtype=torch.float16, variant="fp16")
 pipeline.enable_model_cpu_offload()
@@ -109,8 +109,8 @@ Start by loading a [`MotionAdapter`].
 
 ```py
 import torch
-from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
 ```
@@ -165,8 +165,8 @@ Load a ModelScopeT2V checkpoint into the [`DiffusionPipeline`] along with a prom
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import export_to_video
 
 pipeline = DiffusionPipeline.from_pretrained("damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16")
 pipeline.enable_model_cpu_offload()
@@ -191,8 +191,8 @@ The `num_frames` parameter determines how many video frames are generated per se
 
 ```py
 import torch
-from diffusers import StableVideoDiffusionPipeline
-from diffusers.utils import load_image, export_to_video
+from diffusers_sd3_control import StableVideoDiffusionPipeline
+from diffusers_sd3_control.utils import load_image, export_to_video
 
 pipeline = StableVideoDiffusionPipeline.from_pretrained(
     "stabilityai/stable-video-diffusion-img2vid", torch_dtype=torch.float16, variant="fp16"
@@ -230,8 +230,8 @@ SVD uses the `min_guidance_scale` and `max_guidance_scale` parameters for applyi
 
 ```py
 import torch
-from diffusers import I2VGenXLPipeline
-from diffusers.utils import export_to_gif, load_image
+from diffusers_sd3_control import I2VGenXLPipeline
+from diffusers_sd3_control.utils import export_to_gif, load_image
 
 pipeline = I2VGenXLPipeline.from_pretrained("ali-vilab/i2vgen-xl", torch_dtype=torch.float16, variant="fp16")
 pipeline.enable_model_cpu_offload()
@@ -271,8 +271,8 @@ A negative prompt deters the model from generating things you don’t want it to
 
 ```py
 import torch
-from diffusers import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control import AnimateDiffPipeline, DDIMScheduler, MotionAdapter
+from diffusers_sd3_control.utils import export_to_gif
 
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2", torch_dtype=torch.float16)
 
@@ -362,8 +362,8 @@ Load a [`ControlNetModel`] for pose estimation and a checkpoint into the [`Stabl
 
 ```py
 import torch
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
 
 model_id = "runwayml/stable-diffusion-v1-5"
 controlnet = ControlNetModel.from_pretrained("lllyasviel/sd-controlnet-openpose", torch_dtype=torch.float16)
@@ -408,8 +408,8 @@ Load a [`ControlNetModel`] for canny edge and a checkpoint into the [`StableDiff
 
 ```py
 import torch
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
 
 model_id = "runwayml/stable-diffusion-v1-5"
 controlnet = ControlNetModel.from_pretrained("lllyasviel/sd-controlnet-canny", torch_dtype=torch.float16)
@@ -454,8 +454,8 @@ Load the [`StableDiffusionInstructPix2PixPipeline`] and set the [`~pipelines.tex
 
 ```py
 import torch
-from diffusers import StableDiffusionInstructPix2PixPipeline
-from diffusers.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
+from diffusers_sd3_control import StableDiffusionInstructPix2PixPipeline
+from diffusers_sd3_control.pipelines.text_to_video_synthesis.pipeline_text_to_video_zero import CrossFrameAttnProcessor
 
 pipeline = StableDiffusionInstructPix2PixPipeline.from_pretrained("timbrooks/instruct-pix2pix", torch_dtype=torch.float16).to("cuda")
 pipeline.unet.set_attn_processor(CrossFrameAttnProcessor(batch_size=3))

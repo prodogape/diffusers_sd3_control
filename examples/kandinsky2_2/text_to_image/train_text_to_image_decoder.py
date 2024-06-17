@@ -39,19 +39,19 @@ from tqdm import tqdm
 from transformers import CLIPImageProcessor, CLIPVisionModelWithProjection
 from transformers.utils import ContextManagers
 
-import diffusers
-from diffusers import AutoPipelineForText2Image, DDPMScheduler, UNet2DConditionModel, VQModel
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import EMAModel, compute_snr
-from diffusers.utils import check_min_version, is_wandb_available, make_image_grid
-from diffusers.utils.import_utils import is_xformers_available
+import diffusers_sd3_control
+from diffusers_sd3_control import AutoPipelineForText2Image, DDPMScheduler, UNet2DConditionModel, VQModel
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import EMAModel, compute_snr
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available, make_image_grid
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
 if is_wandb_available():
     import wandb
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
@@ -80,8 +80,8 @@ prior:
 tags:
 - kandinsky
 - text-to-image
-- diffusers
-- diffusers-training
+- diffusers_sd3_control
+- diffusers_sd3_control-training
 inference: true
 ---
     """
@@ -96,7 +96,7 @@ This pipeline was finetuned from **{args.pretrained_decoder_model_name_or_path}*
 You can use the pipeline like so:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("{repo_id}", torch_dtype=torch.float16)
@@ -472,11 +472,11 @@ def main():
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         datasets.utils.logging.set_verbosity_error()
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:
@@ -569,7 +569,7 @@ def main():
                 # pop models so that they are not loaded again
                 model = models.pop()
 
-                # load diffusers style into model
+                # load diffusers_sd3_control style into model
                 load_model = UNet2DConditionModel.from_pretrained(input_dir, subfolder="unet")
                 model.register_to_config(**load_model.config)
 

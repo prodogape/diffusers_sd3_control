@@ -22,9 +22,9 @@ import torch
 from PIL import Image
 from transformers import CLIPImageProcessor, CLIPVisionConfig
 
-from diffusers import AutoencoderKL, PaintByExamplePipeline, PNDMScheduler, UNet2DConditionModel
-from diffusers.pipelines.paint_by_example import PaintByExampleImageEncoder
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import AutoencoderKL, PaintByExamplePipeline, PNDMScheduler, UNet2DConditionModel
+from diffusers_sd3_control.pipelines.paint_by_example import PaintByExampleImageEncoder
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

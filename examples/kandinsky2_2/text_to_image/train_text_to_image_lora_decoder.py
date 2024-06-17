@@ -36,16 +36,16 @@ from PIL import Image
 from tqdm import tqdm
 from transformers import CLIPImageProcessor, CLIPVisionModelWithProjection
 
-import diffusers
-from diffusers import AutoPipelineForText2Image, DDPMScheduler, UNet2DConditionModel, VQModel
-from diffusers.loaders import AttnProcsLayers
-from diffusers.models.attention_processor import LoRAAttnAddedKVProcessor
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import compute_snr
-from diffusers.utils import check_min_version, is_wandb_available
+import diffusers_sd3_control
+from diffusers_sd3_control import AutoPipelineForText2Image, DDPMScheduler, UNet2DConditionModel, VQModel
+from diffusers_sd3_control.loaders import AttnProcsLayers
+from diffusers_sd3_control.models.attention_processor import LoRAAttnAddedKVProcessor
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import compute_snr
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
@@ -363,11 +363,11 @@ def main():
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         datasets.utils.logging.set_verbosity_error()
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

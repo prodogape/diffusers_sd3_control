@@ -45,7 +45,7 @@ Use [`torch.compile`](https://huggingface.co/docs/diffusers/main/en/tutorials/fa
 First, load the pipeline:
 
 ```python
-from diffusers import HunyuanDiTPipeline
+from diffusers_sd3_control import HunyuanDiTPipeline
 import torch 
 
 pipeline = HunyuanDiTPipeline.from_pretrained(

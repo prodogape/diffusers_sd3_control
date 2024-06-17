@@ -5,11 +5,11 @@ import torch
 from transformers import CLIPTextModelWithProjection, CLIPTokenizer
 from transformers.models.clip.modeling_clip import CLIPTextModelOutput
 
-from diffusers.models import PriorTransformer
-from diffusers.pipelines import DiffusionPipeline, StableDiffusionImageVariationPipeline
-from diffusers.schedulers import UnCLIPScheduler
-from diffusers.utils import logging
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.models import PriorTransformer
+from diffusers_sd3_control.pipelines import DiffusionPipeline, StableDiffusionImageVariationPipeline
+from diffusers_sd3_control.schedulers import UnCLIPScheduler
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -52,7 +52,7 @@ class StableUnCLIPPipeline(DiffusionPipeline):
         decoder_pipe_kwargs["torch_dtype"] = decoder_pipe_kwargs.get("torch_dtype", None) or prior.dtype
 
         self.decoder_pipe = StableDiffusionImageVariationPipeline.from_pretrained(
-            "lambdalabs/sd-image-variations-diffusers", **decoder_pipe_kwargs
+            "lambdalabs/sd-image-variations-diffusers_sd3_control", **decoder_pipe_kwargs
         )
 
         # replace `_encode_image` method

@@ -17,8 +17,8 @@ import unittest
 
 import numpy as np
 
-from diffusers import KandinskyCombinedPipeline, KandinskyImg2ImgCombinedPipeline, KandinskyInpaintCombinedPipeline
-from diffusers.utils.testing_utils import enable_full_determinism, require_torch_gpu, torch_device
+from diffusers_sd3_control import KandinskyCombinedPipeline, KandinskyImg2ImgCombinedPipeline, KandinskyInpaintCombinedPipeline
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, require_torch_gpu, torch_device
 
 from ..test_pipelines_common import PipelineTesterMixin
 from .test_kandinsky import Dummies

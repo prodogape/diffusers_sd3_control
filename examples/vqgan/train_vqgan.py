@@ -40,16 +40,16 @@ from timm.data.transforms_factory import create_transform
 from torchvision import transforms
 from tqdm import tqdm
 
-from diffusers import VQModel
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import EMAModel
-from diffusers.utils import check_min_version, is_wandb_available
+from diffusers_sd3_control import VQModel
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import EMAModel
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
 
 
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")

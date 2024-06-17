@@ -6,7 +6,7 @@ from PIL import Image
 from retriever import Retriever, normalize_images, preprocess_images
 from transformers import CLIPFeatureExtractor, CLIPModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DiffusionPipeline,
@@ -18,10 +18,10 @@ from diffusers import (
     PNDMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.pipelines.pipeline_utils import StableDiffusionMixin
-from diffusers.utils import logging
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.pipelines.pipeline_utils import StableDiffusionMixin
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name

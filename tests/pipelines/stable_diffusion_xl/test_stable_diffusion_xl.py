@@ -22,7 +22,7 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -34,7 +34,7 @@ from diffusers import (
     UNet2DConditionModel,
     UniPCMultistepScheduler,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_image,
     numpy_cosine_similarity_distance,
@@ -215,7 +215,7 @@ class StableDiffusionXLPipelineFastTests(
         assert np.abs(image_slice.flatten() - expected_slice).max() < 1e-2
 
     def test_stable_diffusion_ays(self):
-        from diffusers.schedulers import AysSchedules
+        from diffusers_sd3_control.schedulers import AysSchedules
 
         timestep_schedule = AysSchedules["StableDiffusionXLTimesteps"]
         sigma_schedule = AysSchedules["StableDiffusionXLSigmas"]

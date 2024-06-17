@@ -11,16 +11,16 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKLTemporalDecoder,
     EulerDiscreteScheduler,
     StableVideoDiffusionPipeline,
     UNetSpatioTemporalConditionModel,
 )
-from diffusers.utils import is_accelerate_available, is_accelerate_version, load_image, logging
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils import is_accelerate_available, is_accelerate_version, load_image, logging
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import (
     CaptureLogger,
     enable_full_determinism,
     floats_tensor,
@@ -166,7 +166,7 @@ class StableVideoDiffusionPipelineFastTests(PipelineTesterMixin, unittest.TestCa
         inputs["generator"] = torch.Generator("cpu").manual_seed(0)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # batchify inputs
         batched_inputs = {}
@@ -344,8 +344,8 @@ class StableVideoDiffusionPipelineFastTests(PipelineTesterMixin, unittest.TestCa
         inputs = self.get_dummy_inputs(torch_device)
         output = pipe(**inputs).frames[0]
 
-        logger = logging.get_logger("diffusers.pipelines.pipeline_utils")
-        logger.setLevel(diffusers.logging.INFO)
+        logger = logging.get_logger("diffusers_sd3_control.pipelines.pipeline_utils")
+        logger.setLevel(diffusers_sd3_control.logging.INFO)
 
         with tempfile.TemporaryDirectory() as tmpdir:
             pipe.save_pretrained(tmpdir, safe_serialization=False)

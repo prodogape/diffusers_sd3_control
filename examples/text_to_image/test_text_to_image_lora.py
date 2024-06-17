@@ -21,7 +21,7 @@ import tempfile
 
 import safetensors
 
-from diffusers import DiffusionPipeline  # noqa: E402
+from diffusers_sd3_control import DiffusionPipeline  # noqa: E402
 
 
 sys.path.append("..")

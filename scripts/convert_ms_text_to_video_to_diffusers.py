@@ -18,7 +18,7 @@ import argparse
 
 import torch
 
-from diffusers import UNet3DConditionModel
+from diffusers_sd3_control import UNet3DConditionModel
 
 
 def assign_to_checkpoint(

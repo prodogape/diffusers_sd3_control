@@ -22,7 +22,7 @@ Stable Diffusion 파이프라인은 [일반적인 디퓨전 노이즈 스케줄�
 2. `timestep_spacing="trailing"`, 마지막 타임스텝부터 샘플링 시작
 
 ```py
->>> from diffusers import DiffusionPipeline, DDIMScheduler
+>>> from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
 
 >>> pipeline = DiffusionPipeline.from_pretrained("ptx0/pseudo-journey-v2")
 # switch the scheduler in the pipeline to use the DDIMScheduler

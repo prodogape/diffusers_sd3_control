@@ -42,13 +42,13 @@ source .env/bin/activate
 **PyTorch의 경우**
 
 ```bash
-pip install diffusers["torch"]
+pip install diffusers_sd3_control["torch"]
 ```
 
 **Flax의 경우**
 
 ```bash
-pip install diffusers["flax"]
+pip install diffusers_sd3_control["flax"]
 ```
 
 ## 소스로부터 설치
@@ -88,7 +88,7 @@ pip install git+https://github.com/huggingface/diffusers
 
 ```bash
 git clone https://github.com/huggingface/diffusers.git
-cd diffusers
+cd diffusers_sd3_control
 ```
 
 **PyTorch의 경우**
@@ -116,7 +116,7 @@ Python은 이제 일반 라이브러리 경로에 더하여 복제한 폴더 내
 이제 다음 명령어를 사용하여 최신 버전의 🤗 Diffusers로 쉽게 업데이트할 수 있습니다:
 
 ```bash
-cd ~/diffusers/
+cd ~/diffusers_sd3_control/
 git pull
 ```
 

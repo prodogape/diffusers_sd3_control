@@ -8,14 +8,14 @@ import torch
 from packaging import version
 from transformers import CLIPImageProcessor, CLIPTokenizer
 
-import diffusers
-from diffusers import OnnxRuntimeModel, OnnxStableDiffusionPipeline, SchedulerMixin
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.utils import logging
+import diffusers_sd3_control
+from diffusers_sd3_control import OnnxRuntimeModel, OnnxStableDiffusionPipeline, SchedulerMixin
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.utils import logging
 
 
 try:
-    from diffusers.pipelines.onnx_utils import ORT_TO_NP_TYPE
+    from diffusers_sd3_control.pipelines.onnx_utils import ORT_TO_NP_TYPE
 except ImportError:
     ORT_TO_NP_TYPE = {
         "tensor(bool)": np.bool_,
@@ -33,7 +33,7 @@ except ImportError:
     }
 
 try:
-    from diffusers.utils import PIL_INTERPOLATION
+    from diffusers_sd3_control.utils import PIL_INTERPOLATION
 except ImportError:
     if version.parse(version.parse(PIL.__version__).base_version) >= version.parse("9.1.0"):
         PIL_INTERPOLATION = {
@@ -434,7 +434,7 @@ class OnnxStableDiffusionLongPromptWeightingPipeline(OnnxStableDiffusionPipeline
     library implements for all the pipelines (such as downloading or saving, running on a particular device, etc.)
     """
 
-    if version.parse(version.parse(diffusers.__version__).base_version) >= version.parse("0.9.0"):
+    if version.parse(version.parse(diffusers_sd3_control.__version__).base_version) >= version.parse("0.9.0"):
 
         def __init__(
             self,

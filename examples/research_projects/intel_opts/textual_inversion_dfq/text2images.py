@@ -7,7 +7,7 @@ from neural_compressor.utils.pytorch import load
 from PIL import Image
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, StableDiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control import AutoencoderKL, StableDiffusionPipeline, UNet2DConditionModel
 
 
 def parse_args():

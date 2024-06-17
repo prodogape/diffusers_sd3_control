@@ -35,7 +35,7 @@ notebook_login()
 To push a model to the Hub, call [`~diffusers.utils.PushToHubMixin.push_to_hub`] and specify the repository id of the model to be stored on the Hub:
 
 ```py
-from diffusers import ControlNetModel
+from diffusers_sd3_control import ControlNetModel
 
 controlnet = ControlNetModel(
     block_out_channels=(32, 64),
@@ -67,7 +67,7 @@ model = ControlNetModel.from_pretrained("your-namespace/my-controlnet-model")
 To push a scheduler to the Hub, call [`~diffusers.utils.PushToHubMixin.push_to_hub`] and specify the repository id of the scheduler to be stored on the Hub:
 
 ```py
-from diffusers import DDIMScheduler
+from diffusers_sd3_control import DDIMScheduler
 
 scheduler = DDIMScheduler(
     beta_start=0.00085,
@@ -92,7 +92,7 @@ scheduler = DDIMScheduler.from_pretrained("your-namepsace/my-controlnet-schedule
 You can also push an entire pipeline with all it's components to the Hub. For example, initialize the components of a [`StableDiffusionPipeline`] with the parameters you want:
 
 ```py
-from diffusers import (
+from diffusers_sd3_control import (
     UNet2DConditionModel,
     AutoencoderKL,
     DDIMScheduler,

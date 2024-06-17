@@ -22,7 +22,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -336,8 +336,8 @@ python3 train_controlnet_flax.py \
 Once training is complete, you can use your newly trained model for inference!
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control.utils import load_image
 import torch
 
 controlnet = ControlNetModel.from_pretrained("path/to/controlnet", torch_dtype=torch.float16)

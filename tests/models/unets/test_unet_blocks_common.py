@@ -16,14 +16,14 @@ from typing import Tuple
 
 import torch
 
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     floats_tensor,
     require_torch,
     require_torch_accelerator_with_training,
     torch_all_close,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 @require_torch

@@ -18,10 +18,10 @@ import unittest
 
 import torch
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_hf_numpy,
     numpy_cosine_similarity_distance,

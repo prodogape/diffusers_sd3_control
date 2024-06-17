@@ -3,7 +3,7 @@ import argparse
 import torch
 from safetensors.torch import load_file
 
-from diffusers import MotionAdapter
+from diffusers_sd3_control import MotionAdapter
 
 
 def convert_motion_module(original_state_dict):

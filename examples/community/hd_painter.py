@@ -6,15 +6,15 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from diffusers.image_processor import PipelineImageInput
-from diffusers.models import AsymmetricAutoencoderKL, ImageProjection
-from diffusers.models.attention_processor import Attention, AttnProcessor
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_inpaint import (
+from diffusers_sd3_control.image_processor import PipelineImageInput
+from diffusers_sd3_control.models import AsymmetricAutoencoderKL, ImageProjection
+from diffusers_sd3_control.models.attention_processor import Attention, AttnProcessor
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_inpaint import (
     StableDiffusionInpaintPipeline,
     retrieve_timesteps,
 )
-from diffusers.utils import deprecate
+from diffusers_sd3_control.utils import deprecate
 
 
 class RASGAttnProcessor:
@@ -445,7 +445,7 @@ class StableDiffusionHDPainterPipeline(StableDiffusionInpaintPipeline):
 
         self.unet.set_attn_processor(attn_processors)
         # import json
-        # with open('/home/hayk.manukyan/repos/diffusers/debug.txt', 'a')  as f:
+        # with open('/home/hayk.manukyan/repos/diffusers_sd3_control/debug.txt', 'a')  as f:
         #     json.dump({x:str(y) for x,y in self.unet.attn_processors.items()}, f, indent=4)
 
     @torch.no_grad()

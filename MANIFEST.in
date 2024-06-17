@@ -1,2 +1,2 @@
 include LICENSE
-include src/diffusers/utils/model_card_template.md
+include src/diffusers_sd3_control/utils/model_card_template.md

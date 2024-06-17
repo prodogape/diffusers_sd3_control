@@ -22,7 +22,7 @@ Before running the script, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -221,7 +221,7 @@ accelerate launch train_lcm_distill_sd_wds.py \
 Once training is complete, you can use your new LCM for inference.
 
 ```py
-from diffusers import UNet2DConditionModel, DiffusionPipeline, LCMScheduler
+from diffusers_sd3_control import UNet2DConditionModel, DiffusionPipeline, LCMScheduler
 import torch
 
 unet = UNet2DConditionModel.from_pretrained("your-username/your-model", torch_dtype=torch.float16, variant="fp16")

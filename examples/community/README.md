@@ -97,8 +97,8 @@ You can find additional information about Differential Diffusion in the [paper](
 import torch
 from torchvision import transforms
 
-from diffusers import DPMSolverMultistepScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import DPMSolverMultistepScheduler
+from diffusers_sd3_control.utils import load_image
 from examples.community.pipeline_stable_diffusion_xl_differential_img2img import (
     StableDiffusionXLDifferentialImg2ImgPipeline,
 )
@@ -179,8 +179,8 @@ You can find additional information about Text2Video-Zero in the [paper](https:/
 
 ```python
 import torch
-from diffusers import DiffusionPipeline, DDIMScheduler
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipe = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-inpainting",
@@ -210,8 +210,8 @@ This depth estimation pipeline processes a single input image through multiple d
 import numpy as np
 import torch
 from PIL import Image
-from diffusers import DiffusionPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import load_image
 
 # Original DDIM version (higher quality)
 pipe = DiffusionPipeline.from_pretrained(
@@ -280,7 +280,7 @@ The following code has been tested on 1x RTX 4090, but it should also support GP
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained(
     "longlian/lmd_plus",
@@ -316,7 +316,7 @@ images[0].save("./lmd_plus_generation.jpg")
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained(
     "longlian/lmd_plus",
@@ -352,7 +352,7 @@ by guiding stable diffusion at every denoising step with an additional CLIP mode
 The following code requires roughly 12GB of GPU RAM.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import CLIPImageProcessor, CLIPModel
 import torch
 
@@ -403,7 +403,7 @@ Generated images tend to be of higher qualtiy than natively using stable diffusi
 The dummy "one-step-unet" can be run as follows:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("google/ddpm-cifar10-32", custom_pipeline="one_step_unet")
 pipe()
@@ -416,7 +416,7 @@ pipe()
 The following code can be run on a GPU of at least 8GB VRAM and should take approximately 5 minutes.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -451,7 +451,7 @@ The Stable Diffusion Mega Pipeline lets you use the main use cases of the stable
 
 ```python
 #!/usr/bin/env python3
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import PIL
 import requests
 from io import BytesIO
@@ -514,7 +514,7 @@ You can run this custom pipeline as so:
 #### pytorch
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -535,7 +535,7 @@ pipe.text2img(prompt, negative_prompt=neg_prompt, width=512,height=512,max_embed
 #### onnxruntime
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -563,7 +563,7 @@ import torch
 
 import matplotlib.pyplot as plt
 from datasets import load_dataset
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import (
     WhisperForConditionalGeneration,
     WhisperProcessor,
@@ -641,7 +641,7 @@ bench
 ```
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -670,7 +670,7 @@ import torch as th
 import numpy as np
 import torchvision.utils as tvu
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 import argparse
 
@@ -720,7 +720,7 @@ from PIL import Image
 from io import BytesIO
 import torch
 import os
-from diffusers import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
 has_cuda = torch.cuda.is_available()
 device = torch.device('cpu' if not has_cuda else 'cuda')
 pipe = DiffusionPipeline.from_pretrained(
@@ -759,7 +759,7 @@ Test seed resizing. Originally generate an image in 512 by 512, then generate im
 ```python
 import torch as th
 import numpy as np
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 has_cuda = th.cuda.is_available()
 device = th.device('cpu' if not has_cuda else 'cuda')
@@ -801,7 +801,7 @@ generator = th.Generator("cuda").manual_seed(0)
 
 pipe = DiffusionPipeline.from_pretrained(
     "CompVis/stable-diffusion-v1-4",
-    custom_pipeline="/home/mark/open_source/diffusers/examples/community/"
+    custom_pipeline="/home/mark/open_source/diffusers_sd3_control/examples/community/"
 ).to(device)
 
 width = 512
@@ -819,7 +819,7 @@ image.save('./seed_resize/seed_resize_{w}_{h}_image.png'.format(w=width, h=heigh
 
 pipe_compare = DiffusionPipeline.from_pretrained(
     "CompVis/stable-diffusion-v1-4",
-    custom_pipeline="/home/mark/open_source/diffusers/examples/community/"
+    custom_pipeline="/home/mark/open_source/diffusers_sd3_control/examples/community/"
 ).to(device)
 
 res = pipe_compare(
@@ -844,7 +844,7 @@ from PIL import Image
 
 import torch
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import (
     pipeline,
     MBart50TokenizerFast,
@@ -916,7 +916,7 @@ import torch
 
 from transformers import AutoModel, AutoTokenizer
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 if __name__ == "__main__":
     device = "cuda"
@@ -961,7 +961,7 @@ For example, this could be used to place a logo on a shirt and make it blend sea
 import PIL
 import torch
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 image_path = "./path-to-image.png"
 inner_image_path = "./path-to-inner-image.png"
@@ -992,7 +992,7 @@ Currently uses the CLIPSeg model for mask generation, then calls the standard St
 
 ```python
 from transformers import CLIPSegProcessor, CLIPSegForImageSegmentation
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 from PIL import Image
 import requests
@@ -1022,7 +1022,7 @@ image = pipe(image=image, text=text, prompt=prompt).images[0]
 Based <https://arxiv.org/abs/2208.04202>, this is used for diffusion on discrete data - eg, discreate image data, DNA sequence data. An unconditional discreate image can be generated like this:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 pipe = DiffusionPipeline.from_pretrained("google/ddpm-cifar10-32", custom_pipeline="bit_diffusion")
 image = pipe().images[0]
 
@@ -1039,7 +1039,7 @@ pip install k-diffusion
 You can use the community pipeline as follows:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", custom_pipeline="sd_text2img_k_diffusion")
 pipe = pipe.to("cuda")
@@ -1057,7 +1057,7 @@ To make sure that K Diffusion and `diffusers` yield the same results:
 **Diffusers**:
 
 ```python
-from diffusers import DiffusionPipeline, EulerDiscreteScheduler
+from diffusers_sd3_control import DiffusionPipeline, EulerDiscreteScheduler
 
 seed = 33
 
@@ -1074,7 +1074,7 @@ image = pipe(prompt, generator=generator, num_inference_steps=50).images[0]
 **K Diffusion**:
 
 ```python
-from diffusers import DiffusionPipeline, EulerDiscreteScheduler
+from diffusers_sd3_control import DiffusionPipeline, EulerDiscreteScheduler
 
 seed = 33
 
@@ -1099,7 +1099,7 @@ on colab you might run out of the 12GB memory even while merging two checkpoints
 Usage:-
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 #Return a CheckpointMergerPipeline class that allows you to merge checkpoints.
 #The checkpoint passed here is ignored. But still pass one of the checkpoints you plan to
@@ -1148,7 +1148,7 @@ This Community Pipeline enables the comparison between the 4 checkpoints that ex
 4. [Stable Diffusion v1.4](https://huggingface.co/CompVis/stable-diffusion-v1-4)
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import matplotlib.pyplot as plt
 
 pipe = DiffusionPipeline.from_pretrained('CompVis/stable-diffusion-v1-4', custom_pipeline='suvadityamuk/StableDiffusionComparison')
@@ -1191,7 +1191,7 @@ There are 3 parameters for the method-
 Here is an example usage-
 
 ```python
-from diffusers import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
 from PIL import Image
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -1232,7 +1232,7 @@ StableDiffusionImageVariationPipeline("lambdalabs/sd-image-variations-diffusers"
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 device = torch.device("cpu" if not torch.cuda.is_available() else "cuda")
 
@@ -1267,7 +1267,7 @@ image.save("./shiba-inu.jpg")
 # `pipeline.decoder_pipe` is a regular StableDiffusionImageVariationPipeline instance.
 # It is used to convert clip image embedding to latents, then fed into VAE decoder.
 print(pipeline.decoder_pipe.__class__)
-# <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_image_variation.StableDiffusionImageVariationPipeline'>
+# <class 'diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion_image_variation.StableDiffusionImageVariationPipeline'>
 
 # this pipeline only use prior module in "kakaobrain/karlo-v1-alpha"
 # It is used to convert clip text embedding to clip image embedding.
@@ -1276,11 +1276,11 @@ print(pipeline)
 #   "_class_name": "StableUnCLIPPipeline",
 #   "_diffusers_version": "0.12.0.dev0",
 #   "prior": [
-#     "diffusers",
+#     "diffusers_sd3_control",
 #     "PriorTransformer"
 #   ],
 #   "prior_scheduler": [
-#     "diffusers",
+#     "diffusers_sd3_control",
 #     "UnCLIPScheduler"
 #   ],
 #   "text_encoder": [
@@ -1316,7 +1316,7 @@ This Diffusion Pipeline takes two prompts and interpolates between the two input
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 device = torch.device("cpu" if not torch.cuda.is_available() else "cuda")
 
@@ -1353,7 +1353,7 @@ This Diffusion Pipeline takes two images or an image_embeddings tensor of size 2
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from PIL import Image
 
 device = torch.device("cpu" if not torch.cuda.is_available() else "cuda")
@@ -1445,7 +1445,7 @@ The following code requires roughly 12GB of GPU RAM.
 from io import BytesIO
 import requests
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from PIL import Image
 from transformers import CLIPFeatureExtractor, CLIPModel
 feature_extractor = CLIPFeatureExtractor.from_pretrained(
@@ -1457,7 +1457,7 @@ clip_model = CLIPModel.from_pretrained(
 guided_pipeline = DiffusionPipeline.from_pretrained(
     "CompVis/stable-diffusion-v1-4",
     # custom_pipeline="clip_guided_stable_diffusion",
-    custom_pipeline="/home/njindal/diffusers/examples/community/clip_guided_stable_diffusion.py",
+    custom_pipeline="/home/njindal/diffusers_sd3_control/examples/community/clip_guided_stable_diffusion.py",
     clip_model=clip_model,
     feature_extractor=feature_extractor,
     torch_dtype=torch.float16,
@@ -1497,8 +1497,8 @@ NOTE: The ONNX conversions and TensorRT engine build may take up to 30 minutes.
 
 ```python
 import torch
-from diffusers import DDIMScheduler
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipeline
+from diffusers_sd3_control import DDIMScheduler
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipeline
 
 # Use the DDIMScheduler scheduler here instead
 scheduler = DDIMScheduler.from_pretrained("stabilityai/stable-diffusion-2-1",
@@ -1529,7 +1529,7 @@ This pipeline implements the text-guided image editing approach from the paper [
 - `target_prompt`: the text prompt describing with the edits.
 
 ```python
-from diffusers import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
 from transformers import CLIPTextModel
 import torch, PIL, requests
 from io import BytesIO
@@ -1621,7 +1621,7 @@ import PIL
 import requests
 import torch
 from io import BytesIO
-from diffusers import StableDiffusionPipeline, RePaintScheduler
+from diffusers_sd3_control import StableDiffusionPipeline, RePaintScheduler
 def download_image(url):
     response = requests.get(url)
     return PIL.Image.open(BytesIO(response.content)).convert("RGB")
@@ -1650,8 +1650,8 @@ import requests
 from io import BytesIO
 from PIL import Image
 import torch
-from diffusers import DDIMScheduler
-from diffusers.pipelines.stable_diffusion import StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import DDIMScheduler
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionImg2ImgPipeline
 
 # Use the DDIMScheduler scheduler here instead
 scheduler = DDIMScheduler.from_pretrained("stabilityai/stable-diffusion-2-1",
@@ -1750,8 +1750,8 @@ Based on [this issue](https://github.com/huggingface/diffusers/issues/3566),
 
 ```py
 import torch
-from diffusers import UniPCMultistepScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import UniPCMultistepScheduler
+from diffusers_sd3_control.utils import load_image
 
 input_image = load_image("https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png")
 
@@ -1800,8 +1800,8 @@ import cv2
 import torch
 import numpy as np
 from PIL import Image
-from diffusers import UniPCMultistepScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import UniPCMultistepScheduler
+from diffusers_sd3_control.utils import load_image
 
 input_image = load_image("https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png")
 
@@ -1891,7 +1891,7 @@ The following code compares the performance of the original stable diffusion pip
 ```python
 import torch
 import intel_extension_for_pytorch as ipex
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import time
 
 prompt = "sailing ship in storm by Rembrandt"
@@ -1998,7 +1998,7 @@ code-named Sapphire Rapids.
 
 ```python
 import torch
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 from pipeline_stable_diffusion_xl_ipex import StableDiffusionXLPipelineIpex
 import time
 
@@ -2066,8 +2066,8 @@ This SDXL pipeline support unlimited length prompt and negative prompt, compatib
 You can provide both `prompt` and `prompt_2`. If only one prompt is provided, `prompt_2` will be a copy of the provided `prompt`. Here is a sample code to use this pipeline.
 
 ```python
-from diffusers import DiffusionPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
@@ -2134,7 +2134,7 @@ import PIL
 import torch
 import open_clip
 from open_clip import SimpleTokenizer
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 from transformers import CLIPFeatureExtractor, CLIPModel
 
 
@@ -2205,7 +2205,7 @@ pipe_images = mixing_pipeline(
 This pipeline uses the Mixture. Refer to the [Mixture](https://arxiv.org/abs/2302.02412) paper for more details.
 
 ```python
-from diffusers import LMSDiscreteScheduler, DiffusionPipeline
+from diffusers_sd3_control import LMSDiscreteScheduler, DiffusionPipeline
 
 # Creater scheduler and model (similar to StableDiffusionPipeline)
 scheduler = LMSDiscreteScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", num_train_timesteps=1000)
@@ -2242,8 +2242,8 @@ import requests
 from io import BytesIO
 from PIL import Image
 import torch
-from diffusers import PNDMScheduler
-from diffusers.pipelines.stable_diffusion import StableDiffusionInpaintPipeline
+from diffusers_sd3_control import PNDMScheduler
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionInpaintPipeline
 
 # Use the PNDMScheduler scheduler here instead
 scheduler = PNDMScheduler.from_pretrained("stabilityai/stable-diffusion-2-inpainting", subfolder="scheduler")
@@ -2280,8 +2280,8 @@ This pipeline uses the Mixture. Refer to the [Mixture](https://arxiv.org/abs/230
 
 ```python
 from PIL import Image
-from diffusers import LMSDiscreteScheduler, DiffusionPipeline
-from diffusers.pipelines.pipeline_utils import Image2ImageRegion, Text2ImageRegion, preprocess_image
+from diffusers_sd3_control import LMSDiscreteScheduler, DiffusionPipeline
+from diffusers_sd3_control.pipelines.pipeline_utils import Image2ImageRegion, Text2ImageRegion, preprocess_image
 
 
 # Load and preprocess guide image
@@ -2378,7 +2378,7 @@ The following code shows how to use the Zero1to3 pipeline to generate novel view
 import os
 import torch
 from pipeline_zero1to3 import Zero1to3StableDiffusionPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 
 model_id = "kxic/zero123-165000" # zero123-105000, zero123-165000, zero123-xl
 
@@ -2454,9 +2454,9 @@ This pipeline uses the Reference . Refer to the [stable_diffusion_reference](htt
 ```py
 import torch
 from PIL import Image
-from diffusers.utils import load_image
-from diffusers import DiffusionPipeline
-from diffusers.schedulers import UniPCMultistepScheduler
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.schedulers import UniPCMultistepScheduler
 input_image = load_image("https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png")
 
 # pipe = DiffusionPipeline.from_pretrained(
@@ -2524,7 +2524,7 @@ import torch
 from PIL import Image
 from io import BytesIO
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 # load the pipeline
 # make sure you're logged in with `huggingface-cli login`
@@ -2628,7 +2628,7 @@ Here's a full example for `ReplaceEdit``:
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", custom_pipeline="pipeline_prompt2prompt").to("cuda")
 
@@ -2716,7 +2716,7 @@ The model can be used with `diffusers` as follows:
 - *1. Load the model from the community pipeline.*
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained("SimianLuo/LCM_Dreamshaper_v7", custom_pipeline="latent_consistency_txt2img", custom_revision="main")
@@ -2745,7 +2745,7 @@ You can also try this pipeline directly in the [🚀 official spaces](https://hu
 This pipeline extends the Latent Consistency Pipeline to allow it to take an input image.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained("SimianLuo/LCM_Dreamshaper_v7", custom_pipeline="latent_consistency_img2img")
@@ -2778,7 +2778,7 @@ This pipeline extends the Latent Consistency Pipeline to allow for interpolation
 import torch
 import numpy as np
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("SimianLuo/LCM_Dreamshaper_v7", custom_pipeline="latent_consistency_interpolate")
 
@@ -2871,15 +2871,15 @@ import torch
 from controlnet_aux.midas import MidasDetector
 from PIL import Image
 
-from diffusers import AutoencoderKL, ControlNetModel, MultiAdapter, T2IAdapter
-from diffusers.pipelines.controlnet.multicontrolnet import MultiControlNetModel
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoencoderKL, ControlNetModel, MultiAdapter, T2IAdapter
+from diffusers_sd3_control.pipelines.controlnet.multicontrolnet import MultiControlNetModel
+from diffusers_sd3_control.utils import load_image
 from examples.community.pipeline_stable_diffusion_xl_controlnet_adapter import (
     StableDiffusionXLControlNetAdapterPipeline,
 )
 
 controlnet_depth = ControlNetModel.from_pretrained(
-    "diffusers/controlnet-depth-sdxl-1.0",
+    "diffusers_sd3_control/controlnet-depth-sdxl-1.0",
     torch_dtype=torch.float16,
     variant="fp16",
     use_safetensors=True
@@ -2937,15 +2937,15 @@ import torch
 from controlnet_aux.midas import MidasDetector
 from PIL import Image
 
-from diffusers import AutoencoderKL, ControlNetModel, MultiAdapter, T2IAdapter
-from diffusers.pipelines.controlnet.multicontrolnet import MultiControlNetModel
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoencoderKL, ControlNetModel, MultiAdapter, T2IAdapter
+from diffusers_sd3_control.pipelines.controlnet.multicontrolnet import MultiControlNetModel
+from diffusers_sd3_control.utils import load_image
 from examples.community.pipeline_stable_diffusion_xl_controlnet_adapter_inpaint import (
     StableDiffusionXLControlNetAdapterInpaintPipeline,
 )
 
 controlnet_depth = ControlNetModel.from_pretrained(
-    "diffusers/controlnet-depth-sdxl-1.0",
+    "diffusers_sd3_control/controlnet-depth-sdxl-1.0",
     torch_dtype=torch.float16,
     variant="fp16",
     use_safetensors=True
@@ -2956,7 +2956,7 @@ adapter_depth = T2IAdapter.from_pretrained(
 vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16, use_safetensors=True)
 
 pipe = StableDiffusionXLControlNetAdapterInpaintPipeline.from_pretrained(
-    "diffusers/stable-diffusion-xl-1.0-inpainting-0.1",
+    "diffusers_sd3_control/stable-diffusion-xl-1.0-inpainting-0.1",
     controlnet=controlnet_depth,
     adapter=adapter_depth,
     vae=vae,
@@ -3368,9 +3368,9 @@ This pipeline combines AnimateDiff and ControlNet. Enjoy precise motion control 
 
 ```py
 import torch
-from diffusers import AutoencoderKL, ControlNetModel, MotionAdapter
-from diffusers.pipelines import DiffusionPipeline
-from diffusers.schedulers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import AutoencoderKL, ControlNetModel, MotionAdapter
+from diffusers_sd3_control.pipelines import DiffusionPipeline
+from diffusers_sd3_control.schedulers import DPMSolverMultistepScheduler
 from PIL import Image
 
 motion_id = "guoyww/animatediff-motion-adapter-v1-5-2"
@@ -3406,7 +3406,7 @@ result = pipe(
     num_inference_steps=20,
 ).frames[0]
 
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control.utils import export_to_gif
 export_to_gif(result.frames[0], "result.gif")
 ```
 
@@ -3431,9 +3431,9 @@ You can also use multiple controlnets at once!
 
 ```python
 import torch
-from diffusers import AutoencoderKL, ControlNetModel, MotionAdapter
-from diffusers.pipelines import DiffusionPipeline
-from diffusers.schedulers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import AutoencoderKL, ControlNetModel, MotionAdapter
+from diffusers_sd3_control.pipelines import DiffusionPipeline
+from diffusers_sd3_control.schedulers import DPMSolverMultistepScheduler
 from PIL import Image
 
 motion_id = "guoyww/animatediff-motion-adapter-v1-5-2"
@@ -3496,7 +3496,7 @@ result = pipe(
     num_inference_steps=20,
 )
 
-from diffusers.utils import export_to_gif
+from diffusers_sd3_control.utils import export_to_gif
 export_to_gif(result.frames[0], "result.gif")
 ```
 
@@ -3530,7 +3530,7 @@ The original repo can be found at [repo](https://github.com/PRIS-CV/DemoFusion).
   Determine whether to show intermediate results during generation.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
@@ -3600,7 +3600,7 @@ See [paper](https://arxiv.org/abs/2311.01410), [paper page](https://ml-gsai.gith
 ```py
 import PIL
 import torch
-from diffusers import DDIMScheduler, DiffusionPipeline
+from diffusers_sd3_control import DDIMScheduler, DiffusionPipeline
 
 # Load the pipeline
 model_path = "runwayml/stable-diffusion-v1-5"
@@ -3633,7 +3633,7 @@ output_image.save("./output.png")
 InstaFlow is an ultra-fast, one-step image generator that achieves image quality close to Stable Diffusion, significantly reducing the demand of computational resources. This efficiency is made possible through a recent [Rectified Flow](https://github.com/gnobitab/RectifiedFlow) technique, which trains probability flows with straight trajectories, hence inherently requiring only a single step for fast inference.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 
@@ -3652,7 +3652,7 @@ images[0].save("./image.png")
 You can also combine it with LORA out of the box, like <https://huggingface.co/artificialguybr/logo-redmond-1-5v-logo-lora-for-liberteredmond-sd-1-5>, to unlock cool use cases in single step!
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 
@@ -3682,7 +3682,7 @@ This pipeline provides null-text inversion for editing real images. It enables n
     ```}
 
 ```py
-from diffusers.schedulers import DDIMScheduler
+from diffusers_sd3_control.schedulers import DDIMScheduler
 from examples.community.pipeline_null_text_inversion import NullTextPipeline
 import torch
 
@@ -3717,8 +3717,8 @@ import sys
 gmflow_dir = "/path/to/gmflow"
 sys.path.insert(0, gmflow_dir)
 
-from diffusers import ControlNetModel, AutoencoderKL, DDIMScheduler
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import ControlNetModel, AutoencoderKL, DDIMScheduler
+from diffusers_sd3_control.utils import export_to_video
 import numpy as np
 import torch
 
@@ -3803,7 +3803,7 @@ This pipeline is the implementation of [Style Aligned Image Generation via Share
 from typing import List
 
 import torch
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
 from PIL import Image
 
 model_id = "a-r-r-o-w/dreamshaper-xl-turbo"
@@ -3859,8 +3859,8 @@ This pipeline relies on a "hack" discovered by the community that allows the gen
 
 ```py
 import torch
-from diffusers import MotionAdapter, DiffusionPipeline, DDIMScheduler
-from diffusers.utils import export_to_gif, load_image
+from diffusers_sd3_control import MotionAdapter, DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control.utils import export_to_gif, load_image
 
 model_id = "SG161222/Realistic_Vision_V5.1_noVAE"
 adapter = MotionAdapter.from_pretrained("guoyww/animatediff-motion-adapter-v1-5-2")
@@ -3886,12 +3886,12 @@ You must pass the image embedding tensor as `image_embeds` to the StableDiffusio
 You can find more results [here](https://github.com/huggingface/diffusers/pull/6276).
 
 ```py
-import diffusers
+import diffusers_sd3_control
 import torch
-from diffusers.utils import load_image
+from diffusers_sd3_control.utils import load_image
 import cv2
 import numpy as np
-from diffusers import DiffusionPipeline, AutoencoderKL, DDIMScheduler
+from diffusers_sd3_control import DiffusionPipeline, AutoencoderKL, DDIMScheduler
 from insightface.app import FaceAnalysis
 
 
@@ -3943,9 +3943,9 @@ InstantID is a new state-of-the-art tuning-free method to achieve ID-Preserving 
 
 ```py
 # !pip install opencv-python transformers accelerate insightface
-import diffusers
-from diffusers.utils import load_image
-from diffusers.models import ControlNetModel
+import diffusers_sd3_control
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.models import ControlNetModel
 
 import cv2
 import torch
@@ -4013,7 +4013,7 @@ image = pipe(
 
 ```py
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 from scheduling_ufogen import UFOGenScheduler
 
@@ -4046,7 +4046,7 @@ import cv2
 import torch
 import numpy as np
 
-from diffusers import ControlNetModel,DDIMScheduler, DiffusionPipeline
+from diffusers_sd3_control import ControlNetModel,DDIMScheduler, DiffusionPipeline
 import sys
 gmflow_dir = "/path/to/gmflow"
 sys.path.insert(0, gmflow_dir)
@@ -4137,9 +4137,9 @@ import torch
 
 from accelerate.utils import set_seed
 
-from diffusers import StableDiffusionPipeline
-from diffusers.utils import load_image, make_image_grid
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control import StableDiffusionPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 pipe = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",

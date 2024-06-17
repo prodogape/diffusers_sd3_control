@@ -6,17 +6,17 @@ import numpy as np
 import PIL.Image
 import torch
 
-from diffusers import StableDiffusionXLPipeline
-from diffusers.models.attention import BasicTransformerBlock
-from diffusers.models.unets.unet_2d_blocks import (
+from diffusers_sd3_control import StableDiffusionXLPipeline
+from diffusers_sd3_control.models.attention import BasicTransformerBlock
+from diffusers_sd3_control.models.unets.unet_2d_blocks import (
     CrossAttnDownBlock2D,
     CrossAttnUpBlock2D,
     DownBlock2D,
     UpBlock2D,
 )
-from diffusers.pipelines.stable_diffusion_xl import StableDiffusionXLPipelineOutput
-from diffusers.utils import PIL_INTERPOLATION, logging
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.pipelines.stable_diffusion_xl import StableDiffusionXLPipelineOutput
+from diffusers_sd3_control.utils import PIL_INTERPOLATION, logging
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -25,8 +25,8 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> import torch
-        >>> from diffusers import UniPCMultistepScheduler
-        >>> from diffusers.utils import load_image
+        >>> from diffusers_sd3_control import UniPCMultistepScheduler
+        >>> from diffusers_sd3_control.utils import load_image
 
         >>> input_image = load_image("https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png")
 
@@ -55,7 +55,7 @@ def torch_dfs(model: torch.nn.Module):
     return result
 
 
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.rescale_noise_cfg
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.rescale_noise_cfg
 
 
 def rescale_noise_cfg(noise_cfg, noise_pred_text, guidance_rescale=0.0):

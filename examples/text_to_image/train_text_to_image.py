@@ -42,21 +42,21 @@ from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 from transformers.utils import ContextManagers
 
-import diffusers
-from diffusers import AutoencoderKL, DDPMScheduler, StableDiffusionPipeline, UNet2DConditionModel
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import EMAModel, compute_dream_and_update_latents, compute_snr
-from diffusers.utils import check_min_version, deprecate, is_wandb_available, make_image_grid
-from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.torch_utils import is_compiled_module
+import diffusers_sd3_control
+from diffusers_sd3_control import AutoencoderKL, DDPMScheduler, StableDiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import EMAModel, compute_dream_and_update_latents, compute_snr
+from diffusers_sd3_control.utils import check_min_version, deprecate, is_wandb_available, make_image_grid
+from diffusers_sd3_control.utils.hub_utils import load_or_create_model_card, populate_model_card
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module
 
 
 if is_wandb_available():
     import wandb
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__, log_level="INFO")
@@ -89,7 +89,7 @@ This pipeline was finetuned from **{args.pretrained_model_name_or_path}** on the
 You can use the pipeline like so:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained("{repo_id}", torch_dtype=torch.float16)
@@ -132,7 +132,7 @@ More information on all the CLI arguments and the environment are available on y
         inference=True,
     )
 
-    tags = ["stable-diffusion", "stable-diffusion-diffusers", "text-to-image", "diffusers", "diffusers-training"]
+    tags = ["stable-diffusion", "stable-diffusion-diffusers_sd3_control", "text-to-image", "diffusers_sd3_control", "diffusers_sd3_control-training"]
     model_card = populate_model_card(model_card, tags=tags)
 
     model_card.save(os.path.join(repo_folder, "README.md"))
@@ -557,11 +557,11 @@ def main():
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         datasets.utils.logging.set_verbosity_error()
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:
@@ -664,7 +664,7 @@ def main():
                 # pop models so that they are not loaded again
                 model = models.pop()
 
-                # load diffusers style into model
+                # load diffusers_sd3_control style into model
                 load_model = UNet2DConditionModel.from_pretrained(input_dir, subfolder="unet")
                 model.register_to_config(**load_model.config)
 

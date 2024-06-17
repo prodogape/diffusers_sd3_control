@@ -40,15 +40,15 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTokenizer, FlaxCLIPTextModel, set_seed
 
-from diffusers import (
+from diffusers_sd3_control import (
     FlaxAutoencoderKL,
     FlaxControlNetModel,
     FlaxDDPMScheduler,
     FlaxStableDiffusionControlNetPipeline,
     FlaxUNet2DConditionModel,
 )
-from diffusers.utils import check_min_version, is_wandb_available, make_image_grid
-from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available, make_image_grid
+from diffusers_sd3_control.utils.hub_utils import load_or_create_model_card, populate_model_card
 
 
 # To prevent an error that occurs when there are abnormally large compressed data chunk in the png image
@@ -59,7 +59,7 @@ PngImagePlugin.MAX_TEXT_CHUNK = LARGE_ENOUGH_NUMBER * (1024**2)
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = logging.getLogger(__name__)
@@ -164,12 +164,12 @@ These are controlnet weights trained on {base_model} with new type of conditioni
 
     tags = [
         "stable-diffusion",
-        "stable-diffusion-diffusers",
+        "stable-diffusion-diffusers_sd3_control",
         "text-to-image",
-        "diffusers",
+        "diffusers_sd3_control",
         "controlnet",
-        "jax-diffusers-event",
-        "diffusers-training",
+        "jax-diffusers_sd3_control-event",
+        "diffusers_sd3_control-training",
     ]
     model_card = populate_model_card(model_card, tags=tags)
 

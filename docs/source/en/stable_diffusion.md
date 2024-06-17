@@ -23,7 +23,7 @@ This tutorial walks you through how to generate faster and better with the [`Dif
 Begin by loading the [`runwayml/stable-diffusion-v1-5`](https://huggingface.co/runwayml/stable-diffusion-v1-5) model:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 pipeline = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
@@ -119,7 +119,7 @@ pipeline.scheduler.compatibles
 The Stable Diffusion model uses the [`PNDMScheduler`] by default which usually requires ~50 inference steps, but more performant schedulers like [`DPMSolverMultistepScheduler`], require only ~20 or 25 inference steps. Use the [`~ConfigMixin.from_config`] method to load a new scheduler:
 
 ```python
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
 ```
@@ -156,7 +156,7 @@ def get_inputs(batch_size=1):
 Start with `batch_size=4` and see how much memory you've consumed:
 
 ```python
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control.utils import make_image_grid
 
 images = pipeline(**get_inputs(batch_size=4)).images
 make_image_grid(images, 2, 2)
@@ -196,7 +196,7 @@ As the field grows, there are more and more high-quality checkpoints finetuned t
 You can also try replacing the current pipeline components with a newer version. Let's try loading the latest [autoencoder](https://huggingface.co/stabilityai/stable-diffusion-2-1/tree/main/vae) from Stability AI into the pipeline, and generate some images:
 
 ```python
-from diffusers import AutoencoderKL
+from diffusers_sd3_control import AutoencoderKL
 
 vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16).to("cuda")
 pipeline.vae = vae

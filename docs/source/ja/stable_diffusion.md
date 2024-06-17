@@ -23,7 +23,7 @@ specific language governing permissions and limitations under the License.
 まず、[`runwayml/stable-diffusion-v1-5`](https://huggingface.co/runwayml/stable-diffusion-v1-5)モデルをロードします：
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 pipeline = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
@@ -118,7 +118,7 @@ pipeline.scheduler.compatibles
 Stable Diffusionモデルはデフォルトで[`PNDMScheduler`]を使用します。このスケジューラは通常~50の推論ステップを必要としますが、[`DPMSolverMultistepScheduler`]のような高性能なスケジューラでは~20または25の推論ステップで済みます。[`ConfigMixin.from_config`]メソッドを使用すると、新しいスケジューラをロードすることができます：
 
 ```python
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
 ```
@@ -155,7 +155,7 @@ def get_inputs(batch_size=1):
 `batch_size=4`で開始し、どれだけメモリを消費したかを確認します：
 
 ```python
-from diffusers.utils import make_image_grid 
+from diffusers_sd3_control.utils import make_image_grid 
 
 images = pipeline(**get_inputs(batch_size=4)).images
 make_image_grid(images, 2, 2)
@@ -195,7 +195,7 @@ make_image_grid(images, rows=2, cols=4)
 現在のパイプラインコンポーネントを新しいバージョンに置き換えてみることもできます。Stability AIが提供する最新の[autodecoder](https://huggingface.co/stabilityai/stable-diffusion-2-1/tree/main/vae)をパイプラインにロードし、画像を生成してみましょう：
 
 ```python
-from diffusers import AutoencoderKL
+from diffusers_sd3_control import AutoencoderKL
 
 vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16).to("cuda")
 pipeline.vae = vae

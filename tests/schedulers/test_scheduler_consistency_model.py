@@ -1,6 +1,6 @@
 import torch
 
-from diffusers import CMStochasticIterativeScheduler
+from diffusers_sd3_control import CMStochasticIterativeScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

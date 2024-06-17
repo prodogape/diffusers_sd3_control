@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import torch
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 
 class UnetSchedulerOneForwardPipeline(DiffusionPipeline):

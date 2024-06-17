@@ -1,7 +1,7 @@
 import torch
 
-from diffusers import SASolverScheduler
-from diffusers.utils.testing_utils import require_torchsde, torch_device
+from diffusers_sd3_control import SASolverScheduler
+from diffusers_sd3_control.utils.testing_utils import require_torchsde, torch_device
 
 from .test_schedulers import SchedulerCommonTest
 

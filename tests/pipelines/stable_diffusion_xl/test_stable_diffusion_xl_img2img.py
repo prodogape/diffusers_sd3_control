@@ -28,7 +28,7 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     AutoencoderTiny,
     EulerDiscreteScheduler,
@@ -36,7 +36,7 @@ from diffusers import (
     StableDiffusionXLImg2ImgPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     require_torch_gpu,

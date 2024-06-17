@@ -52,8 +52,8 @@ from torchvision.transforms.functional import crop
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, PretrainedConfig
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     DPMSolverMultistepScheduler,
@@ -62,10 +62,10 @@ from diffusers import (
     StableDiffusionXLPipeline,
     UNet2DConditionModel,
 )
-from diffusers.loaders import LoraLoaderMixin
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import _set_state_dict_into_text_encoder, cast_training_params, compute_snr
-from diffusers.utils import (
+from diffusers_sd3_control.loaders import LoraLoaderMixin
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import _set_state_dict_into_text_encoder, cast_training_params, compute_snr
+from diffusers_sd3_control.utils import (
     check_min_version,
     convert_all_state_dict_to_peft,
     convert_state_dict_to_diffusers,
@@ -73,11 +73,11 @@ from diffusers.utils import (
     convert_unet_state_dict_to_peft,
     is_wandb_available,
 )
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.torch_utils import is_compiled_module
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__)
@@ -163,10 +163,10 @@ to trigger concept `{key}` → use `{tokens}` in your prompt \n
     yaml = f"""---
 tags:
 - stable-diffusion-xl
-- stable-diffusion-xl-diffusers
-- diffusers-training
+- stable-diffusion-xl-diffusers_sd3_control
+- diffusers_sd3_control-training
 - text-to-image
-- diffusers
+- diffusers_sd3_control
 - {lora}
 - template:sd-lora
 {img_str}
@@ -194,10 +194,10 @@ license: openrail++
     - On AUTOMATIC1111, load the LoRA by adding `<lora:{repo_folder}:1>` to your prompt. On ComfyUI just [load it as a regular LoRA](https://comfyanonymous.github.io/ComfyUI_examples/lora/).
 {webui_example_pivotal}
 
-## Use it with the [🧨 diffusers library](https://github.com/huggingface/diffusers)
+## Use it with the [🧨 diffusers_sd3_control library](https://github.com/huggingface/diffusers)
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 {diffusers_imports_pivotal}
 pipeline = AutoPipelineForText2Image.from_pretrained('stabilityai/stable-diffusion-xl-base-1.0', torch_dtype=torch.float16).to('cuda')
@@ -206,7 +206,7 @@ pipeline.load_lora_weights('{repo_id}', weight_name='pytorch_lora_weights.safete
 image = pipeline('{validation_prompt if validation_prompt else instance_prompt}').images[0]
 ```
 
-For more details, including weighting, merging and fusing LoRAs, check the [documentation on loading LoRAs in diffusers](https://huggingface.co/docs/diffusers/main/en/using-diffusers/loading_adapters)
+For more details, including weighting, merging and fusing LoRAs, check the [documentation on loading LoRAs in diffusers_sd3_control](https://huggingface.co/docs/diffusers/main/en/using-diffusers/loading_adapters)
 
 ## Trigger words
 
@@ -215,7 +215,7 @@ For more details, including weighting, merging and fusing LoRAs, check the [docu
 ## Details
 All [Files & versions](/{repo_id}/tree/main).
 
-The weights were trained using [🧨 diffusers Advanced Dreambooth Training Script](https://github.com/huggingface/diffusers/blob/main/examples/advanced_diffusion_training/train_dreambooth_lora_sdxl_advanced.py).
+The weights were trained using [🧨 diffusers_sd3_control Advanced Dreambooth Training Script](https://github.com/huggingface/diffusers/blob/main/examples/advanced_diffusion_training/train_dreambooth_lora_sdxl_advanced.py).
 
 LoRA for the text encoder was enabled. {train_text_encoder}.
 
@@ -859,7 +859,7 @@ class TokenEmbeddingsHandler:
 
             # New tokens for each text encoder are saved under "clip_l" (for text_encoder 0), "clip_g" (for
             # text_encoder 1) to keep compatible with the ecosystem.
-            # Note: When loading with diffusers, any name can work - simply specify in inference
+            # Note: When loading with diffusers_sd3_control, any name can work - simply specify in inference
             tensors[idx_to_text_encoder_name[idx]] = new_token_embeddings
             # tensors[f"text_encoders_{idx}"] = new_token_embeddings
 
@@ -1229,10 +1229,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

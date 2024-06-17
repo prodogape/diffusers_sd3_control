@@ -34,7 +34,7 @@ Antes de começar, certifique-se de ter todas as bibliotecas necessárias instal
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install --upgrade diffusers accelerate transformers
+#!pip install --upgrade diffusers_sd3_control accelerate transformers
 ```
 
 - [🤗 Accelerate](https://huggingface.co/docs/accelerate/index) acelera o carregamento do modelo para geração e treinamento.
@@ -65,7 +65,7 @@ Para os modelos de [Stable Diffusion](https://huggingface.co/CompVis/stable-diff
 Para carregar o modelo com o método [`~DiffusionPipeline.from_pretrained`]:
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 ```
@@ -79,16 +79,16 @@ StableDiffusionPipeline {
   "_diffusers_version": "0.13.1",
   ...,
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   ...,
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -140,7 +140,7 @@ Agora você pode rodar o pipeline como você faria na seção acima.
 Agendadores diferentes tem diferentes velocidades de retirar o ruído e compensações de qualidade. A melhor forma de descobrir qual funciona melhor para você é testar eles! Uma das principais características do 🧨 Diffusers é permitir que você troque facilmente entre agendadores. Por exemplo, para substituir o [`PNDMScheduler`] padrão com o [`EulerDiscreteScheduler`], carregue ele com o método [`~diffusers.ConfigMixin.from_config`]:
 
 ```py
->>> from diffusers import EulerDiscreteScheduler
+>>> from diffusers_sd3_control import EulerDiscreteScheduler
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True)
 >>> pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -157,7 +157,7 @@ A maioria dos modelos recebe uma amostra de ruído, e em cada _timestep_ ele pre
 Modelos são inicializados com o método [`~ModelMixin.from_pretrained`] que também armazena em cache localmente os pesos do modelo para que seja mais rápido na próxima vez que você carregar o modelo. Para o tour rápido, você irá carregar o [`UNet2DModel`], um modelo básico de geração de imagem incondicional com um checkpoint treinado em imagens de gato:
 
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> repo_id = "google/ddpm-cat-256"
 >>> model = UNet2DModel.from_pretrained(repo_id, use_safetensors=True)
@@ -213,7 +213,7 @@ Agendadores gerenciam a retirada do ruído de uma amostra ruidosa para uma amost
 Para o tour rápido, você irá instanciar o [`DDPMScheduler`] com o método [`~diffusers.ConfigMixin.from_config`]:
 
 ```py
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> scheduler = DDPMScheduler.from_config(repo_id)
 >>> scheduler

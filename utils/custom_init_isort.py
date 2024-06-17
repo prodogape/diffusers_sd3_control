@@ -42,7 +42,7 @@ from typing import Any, Callable, List, Optional
 
 
 # Path is defined with the intent you should run this script from the root of the repo.
-PATH_TO_TRANSFORMERS = "src/diffusers"
+PATH_TO_TRANSFORMERS = "src/diffusers_sd3_control"
 
 # Pattern that looks at the indentation in a line.
 _re_indent = re.compile(r"^(\s*)\S")

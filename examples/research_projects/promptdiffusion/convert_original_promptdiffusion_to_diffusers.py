@@ -36,18 +36,18 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers.models import (
+from diffusers_sd3_control.models import (
     AutoencoderKL,
     ControlNetModel,
     PriorTransformer,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.latent_diffusion.pipeline_latent_diffusion import LDMBertConfig, LDMBertModel
-from diffusers.pipelines.paint_by_example import PaintByExampleImageEncoder
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline
-from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-from diffusers.pipelines.stable_diffusion.stable_unclip_image_normalizer import StableUnCLIPImageNormalizer
-from diffusers.schedulers import (
+from diffusers_sd3_control.pipelines.latent_diffusion.pipeline_latent_diffusion import LDMBertConfig, LDMBertModel
+from diffusers_sd3_control.pipelines.paint_by_example import PaintByExampleImageEncoder
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+from diffusers_sd3_control.pipelines.stable_diffusion.stable_unclip_image_normalizer import StableUnCLIPImageNormalizer
+from diffusers_sd3_control.schedulers import (
     DDIMScheduler,
     DDPMScheduler,
     DPMSolverMultistepScheduler,
@@ -58,7 +58,7 @@ from diffusers.schedulers import (
     PNDMScheduler,
     UnCLIPScheduler,
 )
-from diffusers.utils import is_accelerate_available, logging
+from diffusers_sd3_control.utils import is_accelerate_available, logging
 
 
 if is_accelerate_available():
@@ -236,7 +236,7 @@ def conv_attn_to_linear(checkpoint):
 
 def create_unet_diffusers_config(original_config, image_size: int, controlnet=False):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers_sd3_control based on the config of the LDM model.
     """
     if controlnet:
         unet_params = original_config["model"]["params"]["control_stage_config"]["params"]
@@ -345,7 +345,7 @@ def create_unet_diffusers_config(original_config, image_size: int, controlnet=Fa
 
 def create_vae_diffusers_config(original_config, image_size: int):
     """
-    Creates a config for the diffusers based on the config of the LDM model.
+    Creates a config for the diffusers_sd3_control based on the config of the LDM model.
     """
     vae_params = original_config["model"]["params"]["first_stage_config"]["params"]["ddconfig"]
     _ = original_config["model"]["params"]["first_stage_config"]["params"]["embed_dim"]
@@ -1351,7 +1351,7 @@ def download_from_original_stable_diffusion_ckpt(
     """
 
     # import pipelines here to avoid circular import error when using from_single_file method
-    from diffusers import (
+    from diffusers_sd3_control import (
         LDMTextToImagePipeline,
         PaintByExamplePipeline,
         StableDiffusionControlNetPipeline,

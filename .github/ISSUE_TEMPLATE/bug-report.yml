@@ -46,7 +46,7 @@ body:
     id: system-info
     attributes:
       label: System Info
-      description: Please share your system info with us. You can run the command `diffusers-cli env` and copy-paste its output below.
+      description: Please share your system info with us. You can run the command `diffusers_sd3_control-cli env` and copy-paste its output below.
       placeholder: Diffusers version, platform, Python version, ...
     validations:
       required: true

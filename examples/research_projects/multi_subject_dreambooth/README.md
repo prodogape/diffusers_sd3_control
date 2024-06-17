@@ -13,7 +13,7 @@ Before running the script, make sure to install the library's training dependenc
 To start, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -138,7 +138,7 @@ You can use the helper from the script to get a better sense of each parameter.
 Once you have trained a model using above command, the inference can be done simply using the `StableDiffusionPipeline`. Make sure to include the `identifier`(e.g. sks in above example) in your prompt.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_id = "path-to-your-trained-model"

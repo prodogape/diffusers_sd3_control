@@ -51,12 +51,12 @@ class CopyCheckTester(unittest.TestCase):
         os.makedirs(os.path.join(self.diffusers_dir, "schedulers/"))
         check_copies.DIFFUSERS_PATH = self.diffusers_dir
         shutil.copy(
-            os.path.join(git_repo_path, "src/diffusers/schedulers/scheduling_ddpm.py"),
+            os.path.join(git_repo_path, "src/diffusers_sd3_control/schedulers/scheduling_ddpm.py"),
             os.path.join(self.diffusers_dir, "schedulers/scheduling_ddpm.py"),
         )
 
     def tearDown(self):
-        check_copies.DIFFUSERS_PATH = "src/diffusers"
+        check_copies.DIFFUSERS_PATH = "src/diffusers_sd3_control"
         shutil.rmtree(self.diffusers_dir)
 
     def check_copy_consistency(self, comment, class_name, class_code, overwrite_result=None):
@@ -81,21 +81,21 @@ class CopyCheckTester(unittest.TestCase):
     def test_is_copy_consistent(self):
         # Base copy consistency
         self.check_copy_consistency(
-            "# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput",
+            "# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput",
             "DDPMSchedulerOutput",
             REFERENCE_CODE + "\n",
         )
 
         # With no empty line at the end
         self.check_copy_consistency(
-            "# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput",
+            "# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput",
             "DDPMSchedulerOutput",
             REFERENCE_CODE,
         )
 
         # Copy consistency with rename
         self.check_copy_consistency(
-            "# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->Test",
+            "# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->Test",
             "TestSchedulerOutput",
             re.sub("DDPM", "Test", REFERENCE_CODE),
         )
@@ -103,14 +103,14 @@ class CopyCheckTester(unittest.TestCase):
         # Copy consistency with a really long name
         long_class_name = "TestClassWithAReallyLongNameBecauseSomePeopleLikeThatForSomeReason"
         self.check_copy_consistency(
-            f"# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->{long_class_name}",
+            f"# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->{long_class_name}",
             f"{long_class_name}SchedulerOutput",
             re.sub("Bert", long_class_name, REFERENCE_CODE),
         )
 
         # Copy consistency with overwrite
         self.check_copy_consistency(
-            "# Copied from diffusers.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->Test",
+            "# Copied from diffusers_sd3_control.schedulers.scheduling_ddpm.DDPMSchedulerOutput with DDPM->Test",
             "TestSchedulerOutput",
             REFERENCE_CODE,
             overwrite_result=re.sub("DDPM", "Test", REFERENCE_CODE),

@@ -4,7 +4,7 @@ import huggingface_hub
 import k_diffusion as K
 import torch
 
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 
 
 UPSCALER_REPO = "pcuenq/k-upscaler"
@@ -276,7 +276,7 @@ def main(args):
     print(f"loading original model configuration from {orig_config_path}")
     print(f"loading original model checkpoint from {orig_weights_path}")
 
-    print("converting to diffusers unet")
+    print("converting to diffusers_sd3_control unet")
     orig_config = K.config.load_config(open(orig_config_path))["model"]
     model = unet_model_from_original_config(orig_config)
 

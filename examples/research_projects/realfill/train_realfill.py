@@ -26,23 +26,23 @@ from torch.utils.data import Dataset
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer, CLIPTextModel
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     DPMSolverMultistepScheduler,
     StableDiffusionInpaintPipeline,
     UNet2DConditionModel,
 )
-from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version, is_wandb_available
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.20.1")
 
 logger = get_logger(__name__)
@@ -83,11 +83,11 @@ base_model: {base_model}
 prompt: "a photo of sks"
 tags:
 - stable-diffusion-inpainting
-- stable-diffusion-inpainting-diffusers
+- stable-diffusion-inpainting-diffusers_sd3_control
 - text-to-image
-- diffusers
+- diffusers_sd3_control
 - realfill
-- diffusers-training
+- diffusers_sd3_control-training
 inference: true
 ---
     """
@@ -563,10 +563,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

@@ -57,7 +57,7 @@ pip install diffusers["flax"] transformers
 After activating your virtual environment, with `conda` (maintained by the community):
 
 ```bash
-conda install -c conda-forge diffusers
+conda install -c conda-forge diffusers_sd3_control
 ```
 
 ## Install from source
@@ -94,7 +94,7 @@ Clone the repository and install 🤗 Diffusers with the following commands:
 
 ```bash
 git clone https://github.com/huggingface/diffusers.git
-cd diffusers
+cd diffusers_sd3_control
 ```
 
 <frameworkcontent>
@@ -123,7 +123,7 @@ You must keep the `diffusers` folder if you want to keep using the library.
 Now you can easily update your clone to the latest version of 🤗 Diffusers with the following command:
 
 ```bash
-cd ~/diffusers/
+cd ~/diffusers_sd3_control/
 git pull
 ```
 

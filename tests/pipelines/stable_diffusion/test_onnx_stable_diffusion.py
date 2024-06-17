@@ -18,7 +18,7 @@ import unittest
 
 import numpy as np
 
-from diffusers import (
+from diffusers_sd3_control import (
     DDIMScheduler,
     DPMSolverMultistepScheduler,
     EulerAncestralDiscreteScheduler,
@@ -27,7 +27,7 @@ from diffusers import (
     OnnxStableDiffusionPipeline,
     PNDMScheduler,
 )
-from diffusers.utils.testing_utils import is_onnx_available, nightly, require_onnxruntime, require_torch_gpu
+from diffusers_sd3_control.utils.testing_utils import is_onnx_available, nightly, require_onnxruntime, require_torch_gpu
 
 from ..test_pipelines_onnx_common import OnnxPipelineTesterMixin
 

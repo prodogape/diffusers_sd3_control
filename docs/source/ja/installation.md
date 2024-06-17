@@ -88,7 +88,7 @@ pip install git+https://github.com/huggingface/diffusers
 
 ```bash
 git clone https://github.com/huggingface/diffusers.git
-cd diffusers
+cd diffusers_sd3_control
 ```
 
 <frameworkcontent>
@@ -117,7 +117,7 @@ Python は通常のライブラリパスに加えて、クローンしたフォ�
 これで、以下のコマンドで簡単にクローンを最新版の🤗 Diffusersにアップデートできます：
 
 ```bash
-cd ~/diffusers/
+cd ~/diffusers_sd3_control/
 git pull
 ```
 

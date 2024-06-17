@@ -1,7 +1,7 @@
 import torch
 
-from diffusers import HeunDiscreteScheduler
-from diffusers.utils.testing_utils import torch_device
+from diffusers_sd3_control import HeunDiscreteScheduler
+from diffusers_sd3_control.utils.testing_utils import torch_device
 
 from .test_schedulers import SchedulerCommonTest
 

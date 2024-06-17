@@ -28,15 +28,15 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     DiffusionPipeline,
     UnCLIPImageVariationPipeline,
     UnCLIPScheduler,
     UNet2DConditionModel,
     UNet2DModel,
 )
-from diffusers.pipelines.unclip.text_proj import UnCLIPTextProjModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.pipelines.unclip.text_proj import UnCLIPTextProjModel
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

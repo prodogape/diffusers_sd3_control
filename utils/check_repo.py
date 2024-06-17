@@ -22,13 +22,13 @@ from collections import OrderedDict
 from difflib import get_close_matches
 from pathlib import Path
 
-from diffusers.models.auto import get_values
-from diffusers.utils import ENV_VARS_TRUE_VALUES, is_flax_available, is_torch_available
+from diffusers_sd3_control.models.auto import get_values
+from diffusers_sd3_control.utils import ENV_VARS_TRUE_VALUES, is_flax_available, is_torch_available
 
 
 # All paths are set with the intent you should run this script from the root of the repo with the command
 # python utils/check_repo.py
-PATH_TO_DIFFUSERS = "src/diffusers"
+PATH_TO_DIFFUSERS = "src/diffusers_sd3_control"
 PATH_TO_TESTS = "tests"
 PATH_TO_DOC = "docs/source/en"
 
@@ -199,7 +199,7 @@ MODEL_TYPE_TO_DOC_MAPPING = OrderedDict(
 
 # This is to make sure the transformers module imported is the one in the repo.
 spec = importlib.util.spec_from_file_location(
-    "diffusers",
+    "diffusers_sd3_control",
     os.path.join(PATH_TO_DIFFUSERS, "__init__.py"),
     submodule_search_locations=[PATH_TO_DIFFUSERS],
 )
@@ -208,7 +208,7 @@ diffusers = spec.loader.load_module()
 
 def check_model_list():
     """Check the model list inside the transformers library."""
-    # Get the models from the directory structure of `src/diffusers/models/`
+    # Get the models from the directory structure of `src/diffusers_sd3_control/models/`
     models_dir = os.path.join(PATH_TO_DIFFUSERS, "models")
     _models = []
     for model in os.listdir(models_dir):

@@ -19,9 +19,9 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import DDPMWuerstchenScheduler, WuerstchenCombinedPipeline
-from diffusers.pipelines.wuerstchen import PaellaVQModel, WuerstchenDiffNeXt, WuerstchenPrior
-from diffusers.utils.testing_utils import enable_full_determinism, require_torch_gpu, torch_device
+from diffusers_sd3_control import DDPMWuerstchenScheduler, WuerstchenCombinedPipeline
+from diffusers_sd3_control.pipelines.wuerstchen import PaellaVQModel, WuerstchenDiffNeXt, WuerstchenPrior
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, require_torch_gpu, torch_device
 
 from ..test_pipelines_common import PipelineTesterMixin
 

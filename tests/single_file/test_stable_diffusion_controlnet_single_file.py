@@ -4,9 +4,9 @@ import unittest
 
 import torch
 
-from diffusers import ControlNetModel, StableDiffusionControlNetPipeline
-from diffusers.utils import load_image
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import ControlNetModel, StableDiffusionControlNetPipeline
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     numpy_cosine_similarity_distance,
     require_torch_gpu,

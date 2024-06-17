@@ -25,7 +25,7 @@ specific language governing permissions and limitations under the License.
 首先，加载 [`runwayml/stable-diffusion-v1-5`](https://huggingface.co/runwayml/stable-diffusion-v1-5) 模型:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 pipeline = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
@@ -121,7 +121,7 @@ pipeline.scheduler.compatibles
 Stable Diffusion 模型默认使用的是 [`PNDMScheduler`] ，通常要大概50步推理, 但是像 [`DPMSolverMultistepScheduler`] 这样更高效的调度器只要大概 20 或 25 步推理. 使用 [`ConfigMixin.from_config`] 方法加载新的调度器:
 
 ```python
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
 ```
@@ -159,7 +159,7 @@ def get_inputs(batch_size=1):
 设置 `batch_size=4` ，然后看一看我们消耗了多少内存:
 
 ```python
-from diffusers.utils import make_image_grid 
+from diffusers_sd3_control.utils import make_image_grid 
 
 images = pipeline(**get_inputs(batch_size=4)).images
 make_image_grid(images, 2, 2)
@@ -199,7 +199,7 @@ make_image_grid(images, rows=2, cols=4)
 也可以尝试用新版本替换当前 pipeline 组件。让我们加载最新的 [autodecoder](https://huggingface.co/stabilityai/stable-diffusion-2-1/tree/main/vae) 从 Stability AI 加载到 pipeline, 并生成一些图像:
 
 ```python
-from diffusers import AutoencoderKL
+from diffusers_sd3_control import AutoencoderKL
 
 vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16).to("cuda")
 pipeline.vae = vae

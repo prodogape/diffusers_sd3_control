@@ -4,8 +4,8 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AnimateDiffSDXLPipeline,
     AutoencoderKL,
     DDIMScheduler,
@@ -13,8 +13,8 @@ from diffusers import (
     UNet2DConditionModel,
     UNetMotionModel,
 )
-from diffusers.utils import is_xformers_available, logging
-from diffusers.utils.testing_utils import torch_device
+from diffusers_sd3_control.utils import is_xformers_available, logging
+from diffusers_sd3_control.utils.testing_utils import torch_device
 
 from ..pipeline_params import TEXT_TO_IMAGE_BATCH_PARAMS, TEXT_TO_IMAGE_CALLBACK_CFG_PARAMS, TEXT_TO_IMAGE_PARAMS
 from ..test_pipelines_common import (
@@ -176,7 +176,7 @@ class AnimateDiffPipelineSDXLFastTests(
         inputs["generator"] = self.get_generator(0)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # batchify inputs
         batched_inputs = {}

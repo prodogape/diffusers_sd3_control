@@ -19,7 +19,7 @@ import shutil
 import sys
 import tempfile
 
-from diffusers import DiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control import DiffusionPipeline, UNet2DConditionModel
 
 
 sys.path.append("..")

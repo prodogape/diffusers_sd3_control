@@ -18,21 +18,21 @@ from packaging import version
 from PIL import Image
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, UNet2DConditionModel
-from diffusers.configuration_utils import FrozenDict
-from diffusers.image_processor import VaeImageProcessor
-from diffusers.loaders import LoraLoaderMixin, TextualInversionLoaderMixin
-from diffusers.models.attention import BasicTransformerBlock
-from diffusers.models.attention_processor import LoRAAttnProcessor
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline
-from diffusers.pipelines.stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.schedulers import EulerAncestralDiscreteScheduler, KarrasDiffusionSchedulers
-from diffusers.utils import (
+from diffusers_sd3_control import AutoencoderKL, UNet2DConditionModel
+from diffusers_sd3_control.configuration_utils import FrozenDict
+from diffusers_sd3_control.image_processor import VaeImageProcessor
+from diffusers_sd3_control.loaders import LoraLoaderMixin, TextualInversionLoaderMixin
+from diffusers_sd3_control.models.attention import BasicTransformerBlock
+from diffusers_sd3_control.models.attention_processor import LoRAAttnProcessor
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.schedulers import EulerAncestralDiscreteScheduler, KarrasDiffusionSchedulers
+from diffusers_sd3_control.utils import (
     deprecate,
     logging,
     replace_example_docstring,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -40,7 +40,7 @@ logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
 EXAMPLE_DOC_STRING = """
     Examples:
         ```py
-        >>> from diffusers import DiffusionPipeline
+        >>> from diffusers_sd3_control import DiffusionPipeline
         >>> import torch
 
         >>> model_id = "dreamlike-art/dreamlike-photoreal-2.0"
@@ -182,7 +182,7 @@ class FabricPipeline(DiffusionPipeline):
         self.vae_scale_factor = 2 ** (len(self.vae.config.block_out_channels) - 1)
         self.image_processor = VaeImageProcessor(vae_scale_factor=self.vae_scale_factor)
 
-    # Copied from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline._encode_prompt
+    # Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline._encode_prompt
     def _encode_prompt(
         self,
         prompt,

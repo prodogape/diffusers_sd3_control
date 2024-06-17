@@ -25,7 +25,7 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -36,7 +36,7 @@ from diffusers import (
     UNet2DConditionModel,
     VersatileDiffusionPipeline,
 )
-from diffusers.pipelines.versatile_diffusion.modeling_text_unet import UNetFlatConditionModel
+from diffusers_sd3_control.pipelines.versatile_diffusion.modeling_text_unet import UNetFlatConditionModel
 
 
 SCHEDULER_CONFIG = Namespace(
@@ -258,7 +258,7 @@ def conv_attn_to_linear(checkpoint):
 
 def create_image_unet_diffusers_config(unet_params):
     """
-    Creates a config for the diffusers based on the config of the VD model.
+    Creates a config for the diffusers_sd3_control based on the config of the VD model.
     """
 
     block_out_channels = [unet_params.model_channels * mult for mult in unet_params.channel_mult]
@@ -297,7 +297,7 @@ def create_image_unet_diffusers_config(unet_params):
 
 def create_text_unet_diffusers_config(unet_params):
     """
-    Creates a config for the diffusers based on the config of the VD model.
+    Creates a config for the diffusers_sd3_control based on the config of the VD model.
     """
 
     block_out_channels = [unet_params.model_channels * mult for mult in unet_params.channel_mult]
@@ -336,7 +336,7 @@ def create_text_unet_diffusers_config(unet_params):
 
 def create_vae_diffusers_config(vae_params):
     """
-    Creates a config for the diffusers based on the config of the VD model.
+    Creates a config for the diffusers_sd3_control based on the config of the VD model.
     """
 
     block_out_channels = [vae_params.ch * mult for mult in vae_params.ch_mult]

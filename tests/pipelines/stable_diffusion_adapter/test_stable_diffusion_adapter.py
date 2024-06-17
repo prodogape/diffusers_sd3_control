@@ -22,8 +22,8 @@ import torch
 from parameterized import parameterized
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     LCMScheduler,
     MultiAdapter,
@@ -32,9 +32,9 @@ from diffusers import (
     T2IAdapter,
     UNet2DConditionModel,
 )
-from diffusers.utils import logging
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,
@@ -423,7 +423,7 @@ class StableDiffusionMultiAdapterPipelineFastTests(AdapterTests, PipelineTesterM
         inputs = self.get_dummy_inputs(torch_device)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # batchify inputs
         for batch_size in batch_sizes:
@@ -474,7 +474,7 @@ class StableDiffusionMultiAdapterPipelineFastTests(AdapterTests, PipelineTesterM
 
             assert output.shape[0] == batch_size
 
-        logger.setLevel(level=diffusers.logging.WARNING)
+        logger.setLevel(level=diffusers_sd3_control.logging.WARNING)
 
     def test_num_images_per_prompt(self):
         components = self.get_dummy_components()
@@ -531,7 +531,7 @@ class StableDiffusionMultiAdapterPipelineFastTests(AdapterTests, PipelineTesterM
         inputs = self.get_dummy_inputs(torch_device)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # batchify inputs
         batched_inputs = {}
@@ -575,7 +575,7 @@ class StableDiffusionMultiAdapterPipelineFastTests(AdapterTests, PipelineTesterM
 
         output = pipe(**inputs)
 
-        logger.setLevel(level=diffusers.logging.WARNING)
+        logger.setLevel(level=diffusers_sd3_control.logging.WARNING)
         if test_max_difference:
             if relax_max_difference:
                 # Taking the median of the largest <n> differences

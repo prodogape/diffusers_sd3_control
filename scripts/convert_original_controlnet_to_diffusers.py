@@ -16,7 +16,7 @@
 
 import argparse
 
-from diffusers.pipelines.stable_diffusion.convert_from_ckpt import download_controlnet_from_original_ckpt
+from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt import download_controlnet_from_original_ckpt
 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ import os
 import torch
 from transformers.file_utils import has_file
 
-from diffusers import UNet2DConditionModel, UNet2DModel
+from diffusers_sd3_control import UNet2DConditionModel, UNet2DModel
 
 
 do_only_config = False

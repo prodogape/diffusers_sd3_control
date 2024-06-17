@@ -33,7 +33,7 @@ from transformers import (
     T5EncoderModel,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AudioLDM2Pipeline,
     AudioLDM2ProjectionModel,
     AudioLDM2UNet2DConditionModel,
@@ -46,11 +46,11 @@ from diffusers import (
     LMSDiscreteScheduler,
     PNDMScheduler,
 )
-from diffusers.utils import is_safetensors_available
-from diffusers.utils.import_utils import BACKENDS_MAPPING
+from diffusers_sd3_control.utils import is_safetensors_available
+from diffusers_sd3_control.utils.import_utils import BACKENDS_MAPPING
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.shave_segments
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.shave_segments
 def shave_segments(path, n_shave_prefix_segments=1):
     """
     Removes segments. Positive values shave the first segments, negative shave the last segments.
@@ -61,7 +61,7 @@ def shave_segments(path, n_shave_prefix_segments=1):
         return ".".join(path.split(".")[:n_shave_prefix_segments])
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.renew_resnet_paths
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.renew_resnet_paths
 def renew_resnet_paths(old_list, n_shave_prefix_segments=0):
     """
     Updates paths inside resnets to the new naming scheme (local renaming)
@@ -84,7 +84,7 @@ def renew_resnet_paths(old_list, n_shave_prefix_segments=0):
     return mapping
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.renew_vae_resnet_paths
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.renew_vae_resnet_paths
 def renew_vae_resnet_paths(old_list, n_shave_prefix_segments=0):
     """
     Updates paths inside resnets to the new naming scheme (local renaming)
@@ -101,7 +101,7 @@ def renew_vae_resnet_paths(old_list, n_shave_prefix_segments=0):
     return mapping
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.renew_attention_paths
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.renew_attention_paths
 def renew_attention_paths(old_list):
     """
     Updates paths inside attentions to the new naming scheme (local renaming)
@@ -211,7 +211,7 @@ def conv_attn_to_linear(checkpoint):
 
 def create_unet_diffusers_config(original_config, image_size: int):
     """
-    Creates a UNet config for diffusers based on the config of the original AudioLDM2 model.
+    Creates a UNet config for diffusers_sd3_control based on the config of the original AudioLDM2 model.
     """
     unet_params = original_config["model"]["params"]["unet_config"]["params"]
     vae_params = original_config["model"]["params"]["first_stage_config"]["params"]["ddconfig"]
@@ -254,11 +254,11 @@ def create_unet_diffusers_config(original_config, image_size: int):
     return config
 
 
-# Adapted from diffusers.pipelines.stable_diffusion.convert_from_ckpt.create_vae_diffusers_config
+# Adapted from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.create_vae_diffusers_config
 def create_vae_diffusers_config(original_config, checkpoint, image_size: int):
     """
-    Creates a VAE config for diffusers based on the config of the original AudioLDM2 model. Compared to the original
-    Stable Diffusion conversion, this function passes a *learnt* VAE scaling factor to the diffusers VAE.
+    Creates a VAE config for diffusers_sd3_control based on the config of the original AudioLDM2 model. Compared to the original
+    Stable Diffusion conversion, this function passes a *learnt* VAE scaling factor to the diffusers_sd3_control VAE.
     """
     vae_params = original_config["model"]["params"]["first_stage_config"]["params"]["ddconfig"]
     _ = original_config["model"]["params"]["first_stage_config"]["params"]["embed_dim"]
@@ -283,7 +283,7 @@ def create_vae_diffusers_config(original_config, checkpoint, image_size: int):
     return config
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.create_diffusers_schedular
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.create_diffusers_schedular
 def create_diffusers_schedular(original_config):
     schedular = DDIMScheduler(
         num_train_timesteps=original_config["model"]["params"]["timesteps"],
@@ -1034,7 +1034,7 @@ def load_pipeline_from_original_AudioLDM2_ckpt(
     converted_projection_checkpoint = convert_projection_checkpoint(checkpoint)
     projection_model.load_state_dict(converted_projection_checkpoint)
 
-    # Instantiate the diffusers pipeline
+    # Instantiate the diffusers_sd3_control pipeline
     pipe = AudioLDM2Pipeline(
         vae=vae,
         text_encoder=clap_model,

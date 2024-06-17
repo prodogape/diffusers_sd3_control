@@ -21,7 +21,7 @@ Before you begin, make sure you have the necessary libraries installed:
 ```py
 # uncomment to install the necessary libraries in Colab
 #!pip install -q jax==0.3.25 jaxlib==0.3.25 flax transformers ftfy
-#!pip install -q diffusers
+#!pip install -q diffusers_sd3_control
 ```
 
 You should also make sure you're using a TPU backend. While JAX does not run exclusively on TPUs, you'll get the best performance on a TPU because each server has 8 TPU accelerators working in parallel.
@@ -52,7 +52,7 @@ from jax import pmap
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard
 
-from diffusers import FlaxStableDiffusionPipeline
+from diffusers_sd3_control import FlaxStableDiffusionPipeline
 ```
 
 ## Load a model
@@ -139,7 +139,7 @@ images = pipeline(prompt_ids, p_params, rng, jit=True)[0]
 The returned array has shape `(8, 1, 512, 512, 3)` which should be reshaped to remove the second dimension and get 8 images of `512 × 512 × 3`. Then you can use the [`~utils.numpy_to_pil`] function to convert the arrays into images.
 
 ```python
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control.utils import make_image_grid
 
 images = images.reshape((images.shape[0] * images.shape[1],) + images.shape[-3:])
 images = pipeline.numpy_to_pil(images)

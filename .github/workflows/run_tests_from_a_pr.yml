@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       docker_image:
-        default: 'diffusers/diffusers-pytorch-cuda'
+        default: 'diffusers_sd3_control/diffusers_sd3_control-pytorch-cuda'
         description: 'Name of the Docker image'
         required: true
       branch: 

@@ -61,7 +61,7 @@ image = pipe(prompt, guidance_rescale=0.7).images[0]
 For example:
 
 ```py
-from diffusers import DiffusionPipeline, DDIMScheduler
+from diffusers_sd3_control import DiffusionPipeline, DDIMScheduler
 import torch
 
 pipe = DiffusionPipeline.from_pretrained("ptx0/pseudo-journey-v2", torch_dtype=torch.float16)

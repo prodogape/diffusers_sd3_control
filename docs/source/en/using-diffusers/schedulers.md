@@ -20,7 +20,7 @@ This guide will show you how to load schedulers and models to customize a pipeli
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True
@@ -54,7 +54,7 @@ Schedulers are defined by a configuration file that can be used by a variety of 
 For example, to load the [`DDIMScheduler`]:
 
 ```py
-from diffusers import DDIMScheduler, DiffusionPipeline
+from diffusers_sd3_control import DDIMScheduler, DiffusionPipeline
 
 ddim = DDIMScheduler.from_pretrained("runwayml/stable-diffusion-v1-5", subfolder="scheduler")
 ```
@@ -75,7 +75,7 @@ Let's compare the [`LMSDiscreteScheduler`], [`EulerDiscreteScheduler`], [`EulerA
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True
@@ -93,7 +93,7 @@ To change the pipelines scheduler, use the [`~ConfigMixin.from_config`] method t
 [`LMSDiscreteScheduler`] typically generates higher quality images than the default scheduler.
 
 ```py
-from diffusers import LMSDiscreteScheduler
+from diffusers_sd3_control import LMSDiscreteScheduler
 
 pipeline.scheduler = LMSDiscreteScheduler.from_config(pipeline.scheduler.config)
 image = pipeline(prompt, generator=generator).images[0]
@@ -106,7 +106,7 @@ image
 [`EulerDiscreteScheduler`] can generate higher quality images in just 30 steps.
 
 ```py
-from diffusers import EulerDiscreteScheduler
+from diffusers_sd3_control import EulerDiscreteScheduler
 
 pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
 image = pipeline(prompt, generator=generator).images[0]
@@ -119,7 +119,7 @@ image
 [`EulerAncestralDiscreteScheduler`] can generate higher quality images in just 30 steps.
 
 ```py
-from diffusers import EulerAncestralDiscreteScheduler
+from diffusers_sd3_control import EulerAncestralDiscreteScheduler
 
 pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(pipeline.scheduler.config)
 image = pipeline(prompt, generator=generator).images[0]
@@ -132,7 +132,7 @@ image
 [`DPMSolverMultistepScheduler`] provides a balance between speed and quality and can generate higher quality images in just 20 steps.
 
 ```py
-from diffusers import DPMSolverMultistepScheduler
+from diffusers_sd3_control import DPMSolverMultistepScheduler
 
 pipeline.scheduler = DPMSolverMultistepScheduler.from_config(pipeline.scheduler.config)
 image = pipeline(prompt, generator=generator).images[0]
@@ -177,7 +177,7 @@ import jax
 import numpy as np
 from flax.jax_utils import replicate
 from flax.training.common_utils import shard
-from diffusers import FlaxStableDiffusionPipeline, FlaxDPMSolverMultistepScheduler
+from diffusers_sd3_control import FlaxStableDiffusionPipeline, FlaxDPMSolverMultistepScheduler
 
 scheduler, scheduler_state = FlaxDPMSolverMultistepScheduler.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
@@ -219,7 +219,7 @@ Models are loaded from the [`ModelMixin.from_pretrained`] method, which download
 Models can be loaded from a subfolder with the `subfolder` argument. For example, the model weights for [runwayml/stable-diffusion-v1-5](https://hf.co/runwayml/stable-diffusion-v1-5) are stored in the [unet](https://hf.co/runwayml/stable-diffusion-v1-5/tree/main/unet) subfolder.
 
 ```python
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 
 unet = UNet2DConditionModel.from_pretrained("runwayml/stable-diffusion-v1-5", subfolder="unet", use_safetensors=True)
 ```
@@ -227,7 +227,7 @@ unet = UNet2DConditionModel.from_pretrained("runwayml/stable-diffusion-v1-5", su
 They can also be directly loaded from a [repository](https://huggingface.co/google/ddpm-cifar10-32/tree/main).
 
 ```python
-from diffusers import UNet2DModel
+from diffusers_sd3_control import UNet2DModel
 
 unet = UNet2DModel.from_pretrained("google/ddpm-cifar10-32", use_safetensors=True)
 ```
@@ -235,7 +235,7 @@ unet = UNet2DModel.from_pretrained("google/ddpm-cifar10-32", use_safetensors=Tru
 To load and save model variants, specify the `variant` argument in [`ModelMixin.from_pretrained`] and [`ModelMixin.save_pretrained`].
 
 ```python
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 
 unet = UNet2DConditionModel.from_pretrained(
     "runwayml/stable-diffusion-v1-5", subfolder="unet", variant="non_ema", use_safetensors=True

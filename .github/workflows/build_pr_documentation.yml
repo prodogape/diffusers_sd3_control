@@ -3,7 +3,7 @@ name: Build PR Documentation
 on:
   pull_request:
     paths:
-      - "src/diffusers/**.py"
+      - "src/diffusers_sd3_control/**.py"
       - "examples/**"
       - "docs/**"
 
@@ -18,6 +18,6 @@ jobs:
       commit_sha: ${{ github.event.pull_request.head.sha }}
       pr_number: ${{ github.event.number }}
       install_libgl1: true
-      package: diffusers
+      package: diffusers_sd3_control
       languages: en ko zh ja pt
-      custom_container: diffusers/diffusers-doc-builder
+      custom_container: diffusers_sd3_control/diffusers_sd3_control-doc-builder

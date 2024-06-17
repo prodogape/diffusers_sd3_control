@@ -5,8 +5,8 @@ import torch
 from PIL import Image
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AnimateDiffVideoToVideoPipeline,
     AutoencoderKL,
     DDIMScheduler,
@@ -14,8 +14,8 @@ from diffusers import (
     UNet2DConditionModel,
     UNetMotionModel,
 )
-from diffusers.utils import is_xformers_available, logging
-from diffusers.utils.testing_utils import torch_device
+from diffusers_sd3_control.utils import is_xformers_available, logging
+from diffusers_sd3_control.utils.testing_utils import torch_device
 
 from ..pipeline_params import TEXT_TO_IMAGE_PARAMS, VIDEO_TO_VIDEO_BATCH_PARAMS
 from ..test_pipelines_common import IPAdapterTesterMixin, PipelineFromPipeTesterMixin, PipelineTesterMixin
@@ -184,7 +184,7 @@ class AnimateDiffVideoToVideoPipelineFastTests(
         inputs["generator"] = self.get_generator(0)
 
         logger = logging.get_logger(pipe.__module__)
-        logger.setLevel(level=diffusers.logging.FATAL)
+        logger.setLevel(level=diffusers_sd3_control.logging.FATAL)
 
         # batchify inputs
         batched_inputs = {}

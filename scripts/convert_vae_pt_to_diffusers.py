@@ -5,8 +5,8 @@ import requests
 import torch
 import yaml
 
-from diffusers import AutoencoderKL
-from diffusers.pipelines.stable_diffusion.convert_from_ckpt import (
+from diffusers_sd3_control import AutoencoderKL
+from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt import (
     assign_to_checkpoint,
     conv_attn_to_linear,
     create_vae_diffusers_config,

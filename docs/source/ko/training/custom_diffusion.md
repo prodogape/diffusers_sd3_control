@@ -30,7 +30,7 @@ specific language governing permissions and limitations under the License.
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -219,7 +219,7 @@ accelerate launch train_custom_diffusion.py \
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", torch_dtype=torch.float16).to("cuda")
 pipe.unet.load_attn_procs("path-to-save-model", weight_name="pytorch_custom_diffusion_weights.bin")
@@ -239,7 +239,7 @@ image.save("cat.png")
 ```python
 import torch
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "sayakpaul/custom-diffusion-cat"
 card = RepoCard.load(model_id)
@@ -263,7 +263,7 @@ image.save("cat.png")
 ```python
 import torch
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "sayakpaul/custom-diffusion-cat-wooden-pot"
 card = RepoCard.load(model_id)

@@ -210,7 +210,7 @@ Contributing a community pipeline is a great way to share your creativity and wo
     You should also add the `register_modules` function to ensure your pipeline and its components can be saved with [`~DiffusionPipeline.save_pretrained`].
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
@@ -223,7 +223,7 @@ class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
 1. In the forward pass (which we recommend defining as `__call__`), you can add any feature you'd like. For the "one-step" pipeline, create a random image and call the UNet and scheduler once by setting `timestep=1`.
 
 ```py
-  from diffusers import DiffusionPipeline
+  from diffusers_sd3_control import DiffusionPipeline
   import torch
 
   class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
@@ -247,7 +247,7 @@ class UnetSchedulerOneForwardPipeline(DiffusionPipeline):
 Now you can run the pipeline by passing a UNet and scheduler to it or load pretrained weights if the pipeline structure is identical.
 
 ```py
-from diffusers import DDPMScheduler, UNet2DModel
+from diffusers_sd3_control import DDPMScheduler, UNet2DModel
 
 scheduler = DDPMScheduler()
 unet = UNet2DModel()
@@ -354,7 +354,7 @@ A unique and important feature to understand when adding any pipeline, model or 
 For example, in the code example below, [`~diffusers.pipelines.stable_diffusion.StableDiffusionPipelineOutput`] is the original code and `AltDiffusionPipelineOutput` uses the `# Copied from` mechanism to copy it. The only difference is changing the class prefix from `Stable` to `Alt`.
 
 ```py
-# Copied from diffusers.pipelines.stable_diffusion.pipeline_output.StableDiffusionPipelineOutput with Stable->Alt
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_output.StableDiffusionPipelineOutput with Stable->Alt
 class AltDiffusionPipelineOutput(BaseOutput):
     """
     Output class for Alt Diffusion pipelines.
@@ -427,8 +427,8 @@ under your GitHub user account.
 2. Clone your fork to your local disk, and add the base repository as a remote:
 
  ```bash
- $ git clone git@github.com:<your GitHub handle>/diffusers.git
- $ cd diffusers
+ $ git clone git@github.com:<your GitHub handle>/diffusers_sd3_control.git
+ $ cd diffusers_sd3_control
  $ git remote add upstream https://github.com/huggingface/diffusers.git
  ```
 

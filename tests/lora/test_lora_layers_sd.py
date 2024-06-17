@@ -23,7 +23,7 @@ from huggingface_hub import hf_hub_download
 from huggingface_hub.repocard import RepoCard
 from safetensors.torch import load_file
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoPipelineForImage2Image,
     AutoPipelineForText2Image,
     DDIMScheduler,
@@ -31,8 +31,8 @@ from diffusers import (
     LCMScheduler,
     StableDiffusionPipeline,
 )
-from diffusers.utils.import_utils import is_accelerate_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.import_utils import is_accelerate_available
+from diffusers_sd3_control.utils.testing_utils import (
     load_image,
     numpy_cosine_similarity_distance,
     require_peft_backend,

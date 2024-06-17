@@ -34,8 +34,8 @@ Let's start by generating a short video with the default length of 16 frames (2s
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import export_to_video
 
 pipe = DiffusionPipeline.from_pretrained("damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16")
 pipe = pipe.to("cuda")
@@ -54,8 +54,8 @@ Let's generate a video of 8 seconds (64 frames) on the same GPU using CPU offloa
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import export_to_video
 
 pipe = DiffusionPipeline.from_pretrained("damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16")
 pipe.enable_model_cpu_offload()
@@ -75,8 +75,8 @@ We can also use a different scheduler easily, using the same method we'd use for
 
 ```python
 import torch
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control.utils import export_to_video
 
 pipe = DiffusionPipeline.from_pretrained("damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16, variant="fp16")
 pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
@@ -115,11 +115,10 @@ Zeroscope are watermark-free model and have been trained on specific sizes such 
 One should first generate a video using the lower resolution checkpoint [`cerspense/zeroscope_v2_576w`](https://huggingface.co/cerspense/zeroscope_v2_576w) with [`TextToVideoSDPipeline`],
 which can then be upscaled using [`VideoToVideoSDPipeline`] and [`cerspense/zeroscope_v2_XL`](https://huggingface.co/cerspense/zeroscope_v2_XL).
 
-
 ```py
 import torch
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers_sd3_control.utils import export_to_video
 from PIL import Image
 
 pipe = DiffusionPipeline.from_pretrained("cerspense/zeroscope_v2_576w", torch_dtype=torch.float16)

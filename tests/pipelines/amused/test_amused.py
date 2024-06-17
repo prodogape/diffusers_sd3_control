@@ -20,8 +20,8 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import AmusedPipeline, AmusedScheduler, UVit2DModel, VQModel
-from diffusers.utils.testing_utils import enable_full_determinism, require_torch_gpu, slow, torch_device
+from diffusers_sd3_control import AmusedPipeline, AmusedScheduler, UVit2DModel, VQModel
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, require_torch_gpu, slow, torch_device
 
 from ..pipeline_params import TEXT_TO_IMAGE_BATCH_PARAMS, TEXT_TO_IMAGE_PARAMS
 from ..test_pipelines_common import PipelineTesterMixin

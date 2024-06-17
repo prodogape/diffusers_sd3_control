@@ -19,7 +19,7 @@ import json
 
 import torch
 
-from diffusers import ScoreSdeVePipeline, ScoreSdeVeScheduler, UNet2DModel
+from diffusers_sd3_control import ScoreSdeVePipeline, ScoreSdeVeScheduler, UNet2DModel
 
 
 def convert_ncsnpp_checkpoint(checkpoint, config):
@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--checkpoint_path",
-        default="/Users/arthurzucker/Work/diffusers/ArthurZ/diffusion_pytorch_model.bin",
+        default="/Users/arthurzucker/Work/diffusers_sd3_control/ArthurZ/diffusion_pytorch_model.bin",
         type=str,
         required=False,
         help="Path to the checkpoint to convert.",
@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--config_file",
-        default="/Users/arthurzucker/Work/diffusers/ArthurZ/config.json",
+        default="/Users/arthurzucker/Work/diffusers_sd3_control/ArthurZ/config.json",
         type=str,
         required=False,
         help="The config json file corresponding to the architecture.",
@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--dump_path",
-        default="/Users/arthurzucker/Work/diffusers/ArthurZ/diffusion_model_new.pt",
+        default="/Users/arthurzucker/Work/diffusers_sd3_control/ArthurZ/diffusion_model_new.pt",
         type=str,
         required=False,
         help="Path to the output model.",

@@ -35,7 +35,7 @@ Before you begin, make sure you have the following libraries installed:
 
 ```py
 # uncomment to install the necessary libraries in Colab
-#!pip install -q diffusers transformers accelerate opencv-python
+#!pip install -q diffusers_sd3_control transformers accelerate opencv-python
 ```
 
 ## Text-to-image
@@ -45,7 +45,7 @@ For text-to-image, you normally pass a text prompt to the model. But with Contro
 Load an image and use the [opencv-python](https://github.com/opencv/opencv-python) library to extract the canny image:
 
 ```py
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils import load_image, make_image_grid
 from PIL import Image
 import cv2
 import numpy as np
@@ -79,7 +79,7 @@ canny_image = Image.fromarray(image)
 Next, load a ControlNet model conditioned on canny edge detection and pass it to the [`StableDiffusionControlNetPipeline`]. Use the faster [`UniPCMultistepScheduler`] and enable model offloading to speed up inference and reduce memory usage.
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
 import torch
 
 controlnet = ControlNetModel.from_pretrained("lllyasviel/sd-controlnet-canny", torch_dtype=torch.float16, use_safetensors=True)
@@ -117,7 +117,7 @@ import torch
 import numpy as np
 
 from transformers import pipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 image = load_image(
     "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet-img2img.jpg"
@@ -139,7 +139,7 @@ depth_map = get_depth_map(image, depth_estimator).unsqueeze(0).half().to("cuda")
 Next, load a ControlNet model conditioned on depth maps and pass it to the [`StableDiffusionControlNetImg2ImgPipeline`]. Use the faster [`UniPCMultistepScheduler`] and enable model offloading to speed up inference and reduce memory usage.
 
 ```py
-from diffusers import StableDiffusionControlNetImg2ImgPipeline, ControlNetModel, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionControlNetImg2ImgPipeline, ControlNetModel, UniPCMultistepScheduler
 import torch
 
 controlnet = ControlNetModel.from_pretrained("lllyasviel/control_v11f1p_sd15_depth", torch_dtype=torch.float16, use_safetensors=True)
@@ -178,7 +178,7 @@ For inpainting, you need an initial image, a mask image, and a prompt describing
 Load an initial image and a mask image:
 
 ```py
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 init_image = load_image(
     "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet-inpaint.jpg"
@@ -225,7 +225,7 @@ control_image = make_inpaint_condition(init_image, mask_image)
 Load a ControlNet model conditioned on inpainting and pass it to the [`StableDiffusionControlNetInpaintPipeline`]. Use the faster [`UniPCMultistepScheduler`] and enable model offloading to speed up inference and reduce memory usage.
 
 ```py
-from diffusers import StableDiffusionControlNetInpaintPipeline, ControlNetModel, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionControlNetInpaintPipeline, ControlNetModel, UniPCMultistepScheduler
 
 controlnet = ControlNetModel.from_pretrained("lllyasviel/control_v11p_sd15_inpaint", torch_dtype=torch.float16, use_safetensors=True)
 pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
@@ -269,8 +269,8 @@ Guess mode does not have any impact on prompt conditioning and you can still pro
 Set `guess_mode=True` in the pipeline, and it is [recommended](https://github.com/lllyasviel/ControlNet#guess-mode--non-prompt-mode) to set the `guidance_scale` value between 3.0 and 5.0.
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers_sd3_control.utils import load_image, make_image_grid
 import numpy as np
 import torch
 from PIL import Image
@@ -313,8 +313,8 @@ There aren't too many ControlNet models compatible with Stable Diffusion XL (SDX
 Let's use a SDXL ControlNet conditioned on canny images to generate an image. Start by loading an image and prepare the canny image:
 
 ```py
-from diffusers import StableDiffusionXLControlNetPipeline, ControlNetModel, AutoencoderKL
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionXLControlNetPipeline, ControlNetModel, AutoencoderKL
+from diffusers_sd3_control.utils import load_image, make_image_grid
 from PIL import Image
 import cv2
 import numpy as np
@@ -351,7 +351,7 @@ Load a SDXL ControlNet model conditioned on canny edge detection and pass it to 
 
 ```py
 controlnet = ControlNetModel.from_pretrained(
-    "diffusers/controlnet-canny-sdxl-1.0",
+    "diffusers_sd3_control/controlnet-canny-sdxl-1.0",
     torch_dtype=torch.float16,
     use_safetensors=True
 )
@@ -394,8 +394,8 @@ make_image_grid([original_image, canny_image, image], rows=1, cols=3)
 You can use [`StableDiffusionXLControlNetPipeline`] in guess mode as well by setting the parameter to `True`:
 
 ```py
-from diffusers import StableDiffusionXLControlNetPipeline, ControlNetModel, AutoencoderKL
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import StableDiffusionXLControlNetPipeline, ControlNetModel, AutoencoderKL
+from diffusers_sd3_control.utils import load_image, make_image_grid
 import numpy as np
 import torch
 import cv2
@@ -409,7 +409,7 @@ original_image = load_image(
 )
 
 controlnet = ControlNetModel.from_pretrained(
-    "diffusers/controlnet-canny-sdxl-1.0", torch_dtype=torch.float16, use_safetensors=True
+    "diffusers_sd3_control/controlnet-canny-sdxl-1.0", torch_dtype=torch.float16, use_safetensors=True
 )
 vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16, use_safetensors=True)
 pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
@@ -468,7 +468,7 @@ In this example, you'll combine a canny image and a human pose estimation image 
 Prepare the canny image conditioning:
 
 ```py
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils import load_image, make_image_grid
 from PIL import Image
 import numpy as np
 import cv2
@@ -539,7 +539,7 @@ make_image_grid([original_image, openpose_image], rows=1, cols=2)
 Load a list of ControlNet models that correspond to each conditioning, and pass them to the [`StableDiffusionXLControlNetPipeline`]. Use the faster [`UniPCMultistepScheduler`] and enable model offloading to reduce memory usage.
 
 ```py
-from diffusers import StableDiffusionXLControlNetPipeline, ControlNetModel, AutoencoderKL, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionXLControlNetPipeline, ControlNetModel, AutoencoderKL, UniPCMultistepScheduler
 import torch
 
 controlnets = [
@@ -547,7 +547,7 @@ controlnets = [
         "thibaud/controlnet-openpose-sdxl-1.0", torch_dtype=torch.float16
     ),
     ControlNetModel.from_pretrained(
-        "diffusers/controlnet-canny-sdxl-1.0", torch_dtype=torch.float16, use_safetensors=True
+        "diffusers_sd3_control/controlnet-canny-sdxl-1.0", torch_dtype=torch.float16, use_safetensors=True
     ),
 ]
 

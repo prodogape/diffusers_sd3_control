@@ -17,7 +17,7 @@ All model outputs are subclasses of [`~utils.BaseOutput`], data structures conta
 For example:
 
 ```python
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 
 pipeline = DDIMPipeline.from_pretrained("google/ddpm-cifar10-32")
 outputs = pipeline()

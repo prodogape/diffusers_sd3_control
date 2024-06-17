@@ -21,7 +21,7 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     ControlNetModel,
     EulerDiscreteScheduler,
@@ -31,17 +31,17 @@ from diffusers import (
     StableDiffusionXLImg2ImgPipeline,
     UNet2DConditionModel,
 )
-from diffusers.models.unets.unet_2d_blocks import UNetMidBlock2D
-from diffusers.pipelines.controlnet.pipeline_controlnet import MultiControlNetModel
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.models.unets.unet_2d_blocks import UNetMidBlock2D
+from diffusers_sd3_control.pipelines.controlnet.pipeline_controlnet import MultiControlNetModel
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_image,
     require_torch_gpu,
     slow,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ..pipeline_params import (
     IMAGE_TO_IMAGE_IMAGE_PARAMS,
@@ -903,7 +903,7 @@ class ControlNetSDXLPipelineSlowTests(unittest.TestCase):
         torch.cuda.empty_cache()
 
     def test_canny(self):
-        controlnet = ControlNetModel.from_pretrained("diffusers/controlnet-canny-sdxl-1.0")
+        controlnet = ControlNetModel.from_pretrained("diffusers_sd3_control/controlnet-canny-sdxl-1.0")
 
         pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0", controlnet=controlnet
@@ -926,7 +926,7 @@ class ControlNetSDXLPipelineSlowTests(unittest.TestCase):
         assert np.allclose(original_image, expected_image, atol=1e-04)
 
     def test_depth(self):
-        controlnet = ControlNetModel.from_pretrained("diffusers/controlnet-depth-sdxl-1.0")
+        controlnet = ControlNetModel.from_pretrained("diffusers_sd3_control/controlnet-depth-sdxl-1.0")
 
         pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0", controlnet=controlnet

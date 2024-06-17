@@ -20,9 +20,9 @@ import numpy as np
 import torch
 from torch import nn
 
-from diffusers import ControlNetXSAdapter, UNet2DConditionModel, UNetControlNetXSModel
-from diffusers.utils import logging
-from diffusers.utils.testing_utils import enable_full_determinism, floats_tensor, is_flaky, torch_device
+from diffusers_sd3_control import ControlNetXSAdapter, UNet2DConditionModel, UNetControlNetXSModel
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, floats_tensor, is_flaky, torch_device
 
 from ..test_modeling_common import ModelTesterMixin, UNetTesterMixin
 

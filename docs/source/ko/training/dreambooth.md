@@ -24,7 +24,7 @@ specific language governing permissions and limitations under the License.
 
 ```bash
 pip install git+https://github.com/huggingface/diffusers
-pip install -U -r diffusers/examples/dreambooth/requirements.txt
+pip install -U -r diffusers_sd3_control/examples/dreambooth/requirements.txt
 ```
 
 xFormers는 학습에 필요한 요구 사항은 아니지만, 가능하면 [설치](../optimization/xformers)하는 것이 좋습니다. 학습 속도를 높이고 메모리 사용량을 줄일 수 있기 때문입니다.
@@ -268,7 +268,7 @@ Dreambooth로 훈련하는 동안 과적합하기 쉬우므로, 때때로 학습
 **`"accelerate>=0.16.0"`**이 설치된 경우 다음 코드를 사용하여 중간 체크포인트에서 추론을 실행합니다.
 
 ```python
-from diffusers import DiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control import DiffusionPipeline, UNet2DConditionModel
 from transformers import CLIPTextModel
 import torch
 
@@ -291,7 +291,7 @@ If you have **`"accelerate<0.16.0"`** installed, you need to convert it to an in
 
 ```python
 from accelerate import Accelerator
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 # 학습에 사용된 것과 동일한 인수(model, revision)로 파이프라인을 불러옵니다.
 model_id = "CompVis/stable-diffusion-v1-4"
@@ -459,7 +459,7 @@ accelerate launch train_dreambooth.py \
 **`"accelerate>=0.16.0"`**이 설치되어 있는 경우 다음 코드를 사용하여 중간 체크포인트에서 추론을 실행할 수 있습니다:
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_id = "path_to_saved_model"

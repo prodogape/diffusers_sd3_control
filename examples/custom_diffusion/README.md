@@ -15,7 +15,7 @@ To make sure you can successfully run the latest versions of the example scripts
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -193,7 +193,7 @@ Once you have trained a model using the above command, you can run inference usi
 
 ```python
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained(
     "CompVis/stable-diffusion-v1-4", torch_dtype=torch.float16
@@ -217,7 +217,7 @@ It's possible to directly load these parameters from a Hub repository:
 ```python
 import torch
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "sayakpaul/custom-diffusion-cat"
 card = RepoCard.load(model_id)
@@ -242,7 +242,7 @@ Here is an example of performing inference with multiple concepts:
 ```python
 import torch
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 model_id = "sayakpaul/custom-diffusion-cat-wooden-pot"
 card = RepoCard.load(model_id)

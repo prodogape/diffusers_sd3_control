@@ -19,8 +19,8 @@ import requests
 
 
 # Configuration
-LIBRARY_NAME = "diffusers"
-GITHUB_REPO = "huggingface/diffusers"
+LIBRARY_NAME = "diffusers_sd3_control"
+GITHUB_REPO = "huggingface/diffusers_sd3_control"
 SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
 
 

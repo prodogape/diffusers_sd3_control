@@ -45,28 +45,28 @@ from torchvision.transforms.functional import crop
 from tqdm.auto import tqdm
 from transformers import CLIPTokenizer, PretrainedConfig, T5TokenizerFast
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     FlowMatchEulerDiscreteScheduler,
     SD3Transformer2DModel,
     StableDiffusion3Pipeline,
 )
-from diffusers.optimization import get_scheduler
-from diffusers.training_utils import cast_training_params
-from diffusers.utils import (
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.training_utils import cast_training_params
+from diffusers_sd3_control.utils import (
     check_min_version,
     convert_unet_state_dict_to_peft,
     is_wandb_available,
 )
-from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
-from diffusers.utils.torch_utils import is_compiled_module
+from diffusers_sd3_control.utils.hub_utils import load_or_create_model_card, populate_model_card
+from diffusers_sd3_control.utils.torch_utils import is_compiled_module
 
 
 if is_wandb_available():
     import wandb
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__)
@@ -122,10 +122,10 @@ Please adhere to the licensing terms as described `[here](https://huggingface.co
     )
     tags = [
         "text-to-image",
-        "diffusers-training",
-        "diffusers",
+        "diffusers_sd3_control-training",
+        "diffusers_sd3_control",
         "sd3",
-        "sd3-diffusers",
+        "sd3-diffusers_sd3_control",
         "template:sd-lora",
     ]
 
@@ -979,10 +979,10 @@ def main(args):
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

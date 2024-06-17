@@ -1,4 +1,4 @@
-# Run this script to convert the Stable Cascade model weights to a diffusers pipeline.
+# Run this script to convert the Stable Cascade model weights to a diffusers_sd3_control pipeline.
 import argparse
 from contextlib import nullcontext
 
@@ -12,23 +12,23 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     DDPMWuerstchenScheduler,
     StableCascadeCombinedPipeline,
     StableCascadeDecoderPipeline,
     StableCascadePriorPipeline,
 )
-from diffusers.loaders.single_file_utils import convert_stable_cascade_unet_single_file_to_diffusers
-from diffusers.models import StableCascadeUNet
-from diffusers.models.modeling_utils import load_model_dict_into_meta
-from diffusers.pipelines.wuerstchen import PaellaVQModel
-from diffusers.utils import is_accelerate_available
+from diffusers_sd3_control.loaders.single_file_utils import convert_stable_cascade_unet_single_file_to_diffusers
+from diffusers_sd3_control.models import StableCascadeUNet
+from diffusers_sd3_control.models.modeling_utils import load_model_dict_into_meta
+from diffusers_sd3_control.pipelines.wuerstchen import PaellaVQModel
+from diffusers_sd3_control.utils import is_accelerate_available
 
 
 if is_accelerate_available():
     from accelerate import init_empty_weights
 
-parser = argparse.ArgumentParser(description="Convert Stable Cascade model weights to a diffusers pipeline")
+parser = argparse.ArgumentParser(description="Convert Stable Cascade model weights to a diffusers_sd3_control pipeline")
 parser.add_argument("--model_path", type=str, help="Location of Stable Cascade weights")
 parser.add_argument("--stage_c_name", type=str, default="stage_c.safetensors", help="Name of stage c checkpoint file")
 parser.add_argument("--stage_b_name", type=str, default="stage_b.safetensors", help="Name of stage b checkpoint file")

@@ -55,7 +55,7 @@ If it is not possible to install PyTorch 2.2.0 or higher in your environment, th
 
 ```python
 import torch
-from diffusers import StableCascadeDecoderPipeline, StableCascadePriorPipeline
+from diffusers_sd3_control import StableCascadeDecoderPipeline, StableCascadePriorPipeline
 
 prompt = "an image of a shiba inu, donning a spacesuit and helmet"
 negative_prompt = ""
@@ -90,7 +90,7 @@ decoder_output.save("cascade.png")
 
 ```python
 import torch
-from diffusers import (
+from diffusers_sd3_control import (
     StableCascadeDecoderPipeline,
     StableCascadePriorPipeline,
     StableCascadeUNet,
@@ -134,7 +134,7 @@ Loading the original format checkpoints is supported via `from_single_file` meth
 
 ```python
 import torch
-from diffusers import (
+from diffusers_sd3_control import (
     StableCascadeDecoderPipeline,
     StableCascadePriorPipeline,
     StableCascadeUNet,

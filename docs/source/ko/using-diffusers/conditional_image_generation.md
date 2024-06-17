@@ -23,7 +23,7 @@ specific language governing permissions and limitations under the License.
 이 가이드에서는 [잠재 Diffusion](https://huggingface.co/CompVis/ldm-text2im-large-256)과 함께 텍스트-이미지 생성에 [`DiffusionPipeline`]을 사용합니다:
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> generator = DiffusionPipeline.from_pretrained("CompVis/ldm-text2im-large-256")
 ```

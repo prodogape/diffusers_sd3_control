@@ -1,4 +1,4 @@
-# Convert the original UniDiffuser checkpoints into diffusers equivalents.
+# Convert the original UniDiffuser checkpoints into diffusers_sd3_control equivalents.
 
 import argparse
 from argparse import Namespace
@@ -14,7 +14,7 @@ from transformers import (
     GPT2Tokenizer,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DPMSolverMultistepScheduler,
     UniDiffuserModel,
@@ -33,7 +33,7 @@ SCHEDULER_CONFIG = Namespace(
 )
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.shave_segments
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.shave_segments
 def shave_segments(path, n_shave_prefix_segments=1):
     """
     Removes segments. Positive values shave the first segments, negative shave the last segments.
@@ -44,7 +44,7 @@ def shave_segments(path, n_shave_prefix_segments=1):
         return ".".join(path.split(".")[:n_shave_prefix_segments])
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.renew_vae_resnet_paths
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.renew_vae_resnet_paths
 def renew_vae_resnet_paths(old_list, n_shave_prefix_segments=0):
     """
     Updates paths inside resnets to the new naming scheme (local renaming)
@@ -61,7 +61,7 @@ def renew_vae_resnet_paths(old_list, n_shave_prefix_segments=0):
     return mapping
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.renew_vae_attention_paths
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.renew_vae_attention_paths
 def renew_vae_attention_paths(old_list, n_shave_prefix_segments=0):
     """
     Updates paths inside attentions to the new naming scheme (local renaming)
@@ -92,7 +92,7 @@ def renew_vae_attention_paths(old_list, n_shave_prefix_segments=0):
     return mapping
 
 
-# Copied from diffusers.pipelines.stable_diffusion.convert_from_ckpt.conv_attn_to_linear
+# Copied from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.conv_attn_to_linear
 def conv_attn_to_linear(checkpoint):
     keys = list(checkpoint.keys())
     attn_keys = ["query.weight", "key.weight", "value.weight"]
@@ -105,7 +105,7 @@ def conv_attn_to_linear(checkpoint):
                 checkpoint[key] = checkpoint[key][:, :, 0]
 
 
-# Modified from diffusers.pipelines.stable_diffusion.convert_from_ckpt.assign_to_checkpoint
+# Modified from diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.assign_to_checkpoint
 # config.num_head_channels => num_head_channels
 def assign_to_checkpoint(
     paths,
@@ -344,10 +344,10 @@ def create_text_decoder_config_big():
     return text_decoder_config
 
 
-# Based on diffusers.pipelines.stable_diffusion.convert_from_ckpt.convert_ldm_vae_checkpoint
+# Based on diffusers_sd3_control.pipelines.stable_diffusion.convert_from_ckpt.convert_ldm_vae_checkpoint
 def convert_vae_to_diffusers(ckpt, diffusers_model, num_head_channels=1):
     """
-    Converts a UniDiffuser autoencoder_kl.pth checkpoint to a diffusers AutoencoderKL.
+    Converts a UniDiffuser autoencoder_kl.pth checkpoint to a diffusers_sd3_control AutoencoderKL.
     """
     # autoencoder_kl.pth ckpt is a torch state dict
     vae_state_dict = torch.load(ckpt, map_location="cpu")
@@ -501,7 +501,7 @@ def convert_uvit_block_to_diffusers_block(
     skip_connection=False,
 ):
     """
-    Maps the keys in a UniDiffuser transformer block (`Block`) to the keys in a diffusers transformer block
+    Maps the keys in a UniDiffuser transformer block (`Block`) to the keys in a diffusers_sd3_control transformer block
     (`UTransformerBlock`/`UniDiffuserBlock`).
     """
     prefix = new_prefix + block_prefix
@@ -538,7 +538,7 @@ def convert_uvit_block_to_diffusers_block(
 
 def convert_uvit_to_diffusers(ckpt, diffusers_model):
     """
-    Converts a UniDiffuser uvit_v*.pth checkpoint to a diffusers UniDiffusersModel.
+    Converts a UniDiffuser uvit_v*.pth checkpoint to a diffusers_sd3_control UniDiffusersModel.
     """
     # uvit_v*.pth ckpt is a torch state dict
     uvit_state_dict = torch.load(ckpt, map_location="cpu")
@@ -601,7 +601,7 @@ def convert_uvit_to_diffusers(ckpt, diffusers_model):
 
 def convert_caption_decoder_to_diffusers(ckpt, diffusers_model):
     """
-    Converts a UniDiffuser caption_decoder.pth checkpoint to a diffusers UniDiffuserTextDecoder.
+    Converts a UniDiffuser caption_decoder.pth checkpoint to a diffusers_sd3_control UniDiffuserTextDecoder.
     """
     # caption_decoder.pth ckpt is a torch state dict
     checkpoint_state_dict = torch.load(ckpt, map_location="cpu")

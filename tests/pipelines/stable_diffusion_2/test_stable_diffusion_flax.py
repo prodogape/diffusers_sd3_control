@@ -16,9 +16,9 @@
 import gc
 import unittest
 
-from diffusers import FlaxDPMSolverMultistepScheduler, FlaxStableDiffusionPipeline
-from diffusers.utils import is_flax_available
-from diffusers.utils.testing_utils import nightly, require_flax
+from diffusers_sd3_control import FlaxDPMSolverMultistepScheduler, FlaxStableDiffusionPipeline
+from diffusers_sd3_control.utils import is_flax_available
+from diffusers_sd3_control.utils.testing_utils import nightly, require_flax
 
 
 if is_flax_available():

@@ -23,7 +23,7 @@ specific language governing permissions and limitations under the License.
 파이프라인은 추론을 위해 모델을 실행하는 빠르고 쉬운 방법으로, 이미지를 생성하는 데 코드가 4줄 이상 필요하지 않습니다:
 
 ```py
->>> from diffusers import DDPMPipeline
+>>> from diffusers_sd3_control import DDPMPipeline
 
 >>> ddpm = DDPMPipeline.from_pretrained("google/ddpm-cat-256").to("cuda")
 >>> image = ddpm(num_inference_steps=25).images[0]
@@ -43,7 +43,7 @@ specific language governing permissions and limitations under the License.
 1. 모델과 스케줄러를 불러옵니다:
 
     ```py
-    >>> from diffusers import DDPMScheduler, UNet2DModel
+    >>> from diffusers_sd3_control import DDPMScheduler, UNet2DModel
 
     >>> scheduler = DDPMScheduler.from_pretrained("google/ddpm-cat-256")
     >>> model = UNet2DModel.from_pretrained("google/ddpm-cat-256").to("cuda")
@@ -122,7 +122,7 @@ Stable Diffusion 은 text-to-image *latent diffusion* 모델입니다. latent di
 >>> from PIL import Image
 >>> import torch
 >>> from transformers import CLIPTextModel, CLIPTokenizer
->>> from diffusers import AutoencoderKL, UNet2DConditionModel, PNDMScheduler
+>>> from diffusers_sd3_control import AutoencoderKL, UNet2DConditionModel, PNDMScheduler
 
 >>> vae = AutoencoderKL.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="vae")
 >>> tokenizer = CLIPTokenizer.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="tokenizer")
@@ -133,7 +133,7 @@ Stable Diffusion 은 text-to-image *latent diffusion* 모델입니다. latent di
 기본 [`PNDMScheduler`] 대신, [`UniPCMultistepScheduler`]로 교체하여 다른 스케줄러를 얼마나 쉽게 연결할 수 있는지 확인합니다:
 
 ```py
->>> from diffusers import UniPCMultistepScheduler
+>>> from diffusers_sd3_control import UniPCMultistepScheduler
 
 >>> scheduler = UniPCMultistepScheduler.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="scheduler")
 ```

@@ -54,13 +54,13 @@ We recommend installing 🤗 Diffusers in a virtual environment from PyPI or Con
 With `pip` (official package):
 
 ```bash
-pip install --upgrade diffusers[torch]
+pip install --upgrade diffusers_sd3_control[torch]
 ```
 
 With `conda` (maintained by the community):
 
 ```sh
-conda install -c conda-forge diffusers
+conda install -c conda-forge diffusers_sd3_control
 ```
 
 ### Flax
@@ -68,7 +68,7 @@ conda install -c conda-forge diffusers
 With `pip` (official package):
 
 ```bash
-pip install --upgrade diffusers[flax]
+pip install --upgrade diffusers_sd3_control[flax]
 ```
 
 ### Apple Silicon (M1/M2) support
@@ -80,7 +80,7 @@ Please refer to the [How to use Stable Diffusion in Apple Silicon](https://huggi
 Generating outputs is super easy with 🤗 Diffusers. To generate an image from text, use the `from_pretrained` method to load any pretrained diffusion model (browse the [Hub](https://huggingface.co/models?library=diffusers&sort=downloads) for 25.000+ checkpoints):
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
@@ -91,7 +91,7 @@ pipeline("An image of a squirrel in Picasso style").images[0]
 You can also dig into the models and schedulers toolbox to build your own diffusion system:
 
 ```python
-from diffusers import DDPMScheduler, UNet2DModel
+from diffusers_sd3_control import DDPMScheduler, UNet2DModel
 from PIL import Image
 import torch
 

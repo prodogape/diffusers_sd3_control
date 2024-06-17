@@ -3,7 +3,7 @@ import argparse
 import intel_extension_for_pytorch as ipex
 import torch
 
-from diffusers import DPMSolverMultistepScheduler, StableDiffusionPipeline
+from diffusers_sd3_control import DPMSolverMultistepScheduler, StableDiffusionPipeline
 
 
 parser = argparse.ArgumentParser("Stable Diffusion script with intel optimization", add_help=False)

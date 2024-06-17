@@ -15,7 +15,7 @@ Before running the scripts, make sure to install the library's training dependen
 To make sure you can successfully run the latest versions of the example scripts, we highly recommend **installing from source** and keeping the install up to date as we update the example scripts frequently and install some example-specific requirements. To do this, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -57,7 +57,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./dog"
 snapshot_download(
-    "diffusers/dog-example",
+    "diffusers_sd3_control/dog-example",
     local_dir=local_dir, repo_type="dataset",
     ignore_patterns=".gitattributes",
 )
@@ -278,7 +278,7 @@ export MODEL_NAME="CompVis/stable-diffusion-v1-4" --> export MODEL_NAME="BAAI/Al
 Once you have trained a model using the above command, you can run inference simply using the `StableDiffusionPipeline`. Make sure to include the `identifier` (e.g. sks in above example) in your prompt.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_id = "path-to-your-trained-model"
@@ -376,7 +376,7 @@ After training, LoRA weights can be loaded very easily into the original pipelin
 load the original pipeline:
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 pipe = DiffusionPipeline.from_pretrained("base-model-name").to("cuda")
 ```
 
@@ -412,7 +412,7 @@ weights. For example:
 
 ```python
 from huggingface_hub.repocard import RepoCard
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 lora_model_id = "sayakpaul/dreambooth-text-encoder-test"
@@ -541,7 +541,7 @@ variance schedule. The full finetuning scripts will update the scheduler config 
 must also update the pipeline's scheduler config.
 
 ```py
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipe = DiffusionPipeline.from_pretrained("DeepFloyd/IF-I-XL-v1.0")
 
@@ -587,7 +587,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./dog_downsized"
 snapshot_download(
-    "diffusers/dog-example-downsized",
+    "diffusers_sd3_control/dog-example-downsized",
     local_dir=local_dir,
     repo_type="dataset",
     ignore_patterns=".gitattributes",

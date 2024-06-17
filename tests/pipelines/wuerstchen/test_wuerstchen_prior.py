@@ -21,15 +21,15 @@ import torch.nn as nn
 import torch.nn.functional as F
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import DDPMWuerstchenScheduler, WuerstchenPriorPipeline
-from diffusers.loaders import AttnProcsLayers
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control import DDPMWuerstchenScheduler, WuerstchenPriorPipeline
+from diffusers_sd3_control.loaders import AttnProcsLayers
+from diffusers_sd3_control.models.attention_processor import (
     LoRAAttnProcessor,
     LoRAAttnProcessor2_0,
 )
-from diffusers.pipelines.wuerstchen import WuerstchenPrior
-from diffusers.utils.import_utils import is_peft_available
-from diffusers.utils.testing_utils import enable_full_determinism, require_peft_backend, skip_mps, torch_device
+from diffusers_sd3_control.pipelines.wuerstchen import WuerstchenPrior
+from diffusers_sd3_control.utils.import_utils import is_peft_available
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, require_peft_backend, skip_mps, torch_device
 
 
 if is_peft_available():

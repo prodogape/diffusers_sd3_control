@@ -35,7 +35,7 @@ from accelerate.logging import get_logger
 from accelerate.utils import ProjectConfiguration, set_seed
 from huggingface_hub import create_repo, upload_folder
 
-# TODO: remove and import from diffusers.utils when the new version of diffusers is released
+# TODO: remove and import from diffusers_sd3_control.utils when the new version of diffusers_sd3_control is released
 from packaging import version
 from PIL import Image
 from torch.utils.data import Dataset
@@ -43,8 +43,8 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-import diffusers
-from diffusers import (
+import diffusers_sd3_control
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDPMScheduler,
     DiffusionPipeline,
@@ -52,10 +52,10 @@ from diffusers import (
     StableDiffusionPipeline,
     UNet2DConditionModel,
 )
-from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version, is_wandb_available
-from diffusers.utils.hub_utils import load_or_create_model_card, populate_model_card
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import check_min_version, is_wandb_available
+from diffusers_sd3_control.utils.hub_utils import load_or_create_model_card, populate_model_card
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
 if is_wandb_available():
@@ -80,7 +80,7 @@ else:
 # ------------------------------------------------------------------------------
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.30.0.dev0")
 
 logger = get_logger(__name__)
@@ -108,11 +108,11 @@ These are textual inversion adaption weights for {base_model}. You can find some
 
     tags = [
         "stable-diffusion",
-        "stable-diffusion-diffusers",
+        "stable-diffusion-diffusers_sd3_control",
         "text-to-image",
-        "diffusers",
+        "diffusers_sd3_control",
         "textual_inversion",
-        "diffusers-training",
+        "diffusers_sd3_control-training",
     ]
     model_card = populate_model_card(model_card, tags=tags)
 
@@ -623,10 +623,10 @@ def main():
     logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         transformers.utils.logging.set_verbosity_warning()
-        diffusers.utils.logging.set_verbosity_info()
+        diffusers_sd3_control.utils.logging.set_verbosity_info()
     else:
         transformers.utils.logging.set_verbosity_error()
-        diffusers.utils.logging.set_verbosity_error()
+        diffusers_sd3_control.utils.logging.set_verbosity_error()
 
     # If passed along, set the training seed now.
     if args.seed is not None:

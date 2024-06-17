@@ -10,9 +10,9 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, DiffusionPipeline, DPMSolverMultistepScheduler, UNet2DConditionModel
-from diffusers.loaders import AttnProcsLayers, LoraLoaderMixin
-from diffusers.models.attention_processor import (
+from diffusers_sd3_control import AutoencoderKL, DiffusionPipeline, DPMSolverMultistepScheduler, UNet2DConditionModel
+from diffusers_sd3_control.loaders import AttnProcsLayers, LoraLoaderMixin
+from diffusers_sd3_control.models.attention_processor import (
     AttnAddedKVProcessor,
     AttnAddedKVProcessor2_0,
     LoRAAttnAddedKVProcessor,
@@ -20,7 +20,7 @@ from diffusers.models.attention_processor import (
     LoRAAttnProcessor2_0,
     SlicedAttnAddedKVProcessor,
 )
-from diffusers.optimization import get_scheduler
+from diffusers_sd3_control.optimization import get_scheduler
 
 
 class SdeDragPipeline(DiffusionPipeline):
@@ -111,7 +111,7 @@ class SdeDragPipeline(DiffusionPipeline):
         ```py
         >>> import PIL
         >>> import torch
-        >>> from diffusers import DDIMScheduler, DiffusionPipeline
+        >>> from diffusers_sd3_control import DDIMScheduler, DiffusionPipeline
 
         >>> # Load the pipeline
         >>> model_path = "runwayml/stable-diffusion-v1-5"

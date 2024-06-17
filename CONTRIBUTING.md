@@ -364,8 +364,8 @@ under your GitHub user account.
 2. Clone your fork to your local disk, and add the base repository as a remote:
 
  ```bash
- $ git clone git@github.com:<your GitHub handle>/diffusers.git
- $ cd diffusers
+ $ git clone git@github.com:<your GitHub handle>/diffusers_sd3_control.git
+ $ cd diffusers_sd3_control
  $ git remote add upstream https://github.com/huggingface/diffusers.git
  ```
 

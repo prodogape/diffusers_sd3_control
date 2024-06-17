@@ -6,7 +6,7 @@ from pathlib import Path
 
 from huggingface_hub import HfApi, ModelFilter
 
-import diffusers
+import diffusers_sd3_control
 
 
 PATH_TO_REPO = Path(__file__).parent.parent.resolve()
@@ -27,7 +27,7 @@ PIPELINE_USAGE_CUTOFF = int(os.getenv("PIPELINE_USAGE_CUTOFF", 50000))
 
 logger = logging.getLogger(__name__)
 api = HfApi()
-filter = ModelFilter(library="diffusers")
+filter = ModelFilter(library="diffusers_sd3_control")
 
 
 def filter_pipelines(usage_dict, usage_cutoff=10000):
@@ -36,7 +36,7 @@ def filter_pipelines(usage_dict, usage_cutoff=10000):
         if usage < usage_cutoff:
             continue
 
-        is_diffusers_pipeline = hasattr(diffusers.pipelines, diffusers_object)
+        is_diffusers_pipeline = hasattr(diffusers_sd3_control.pipelines, diffusers_object)
         if not is_diffusers_pipeline:
             continue
 
@@ -52,9 +52,9 @@ def fetch_pipeline_objects():
     for model in models:
         is_counted = False
         for tag in model.tags:
-            if tag.startswith("diffusers:"):
+            if tag.startswith("diffusers_sd3_control:"):
                 is_counted = True
-                downloads[tag[len("diffusers:") :]] += model.downloads
+                downloads[tag[len("diffusers_sd3_control:") :]] += model.downloads
 
         if not is_counted:
             downloads["other"] += model.downloads
@@ -75,7 +75,7 @@ def fetch_pipeline_modules_to_test():
 
     test_modules = []
     for pipeline_name in pipeline_objects:
-        module = getattr(diffusers, pipeline_name)
+        module = getattr(diffusers_sd3_control, pipeline_name)
 
         test_module = module.__module__.split(".")[-2].strip()
         test_modules.append(test_module)

@@ -5,7 +5,7 @@ import torch
 from PIL import Image, ImageFilter
 from transformers import CLIPTextModel
 
-from diffusers import DPMSolverMultistepScheduler, StableDiffusionInpaintPipeline, UNet2DConditionModel
+from diffusers_sd3_control import DPMSolverMultistepScheduler, StableDiffusionInpaintPipeline, UNet2DConditionModel
 
 
 parser = argparse.ArgumentParser(description="Inference")

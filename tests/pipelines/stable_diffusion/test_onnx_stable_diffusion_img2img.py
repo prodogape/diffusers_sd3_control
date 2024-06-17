@@ -18,7 +18,7 @@ import unittest
 
 import numpy as np
 
-from diffusers import (
+from diffusers_sd3_control import (
     DPMSolverMultistepScheduler,
     EulerAncestralDiscreteScheduler,
     EulerDiscreteScheduler,
@@ -26,7 +26,7 @@ from diffusers import (
     OnnxStableDiffusionImg2ImgPipeline,
     PNDMScheduler,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     floats_tensor,
     is_onnx_available,
     load_image,

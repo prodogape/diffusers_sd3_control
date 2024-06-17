@@ -22,8 +22,8 @@ With 🤗 Diffusers, this is as easy as 1-2-3:
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "kandinsky-community/kandinsky-2-2-decoder", torch_dtype=torch.float16, use_safetensors=True
@@ -74,8 +74,8 @@ Stable Diffusion v1.5 is a latent diffusion model initialized from an earlier ch
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -112,8 +112,8 @@ SDXL is a more powerful version of the Stable Diffusion model. It uses a larger 
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "stabilityai/stable-diffusion-xl-refiner-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -152,8 +152,8 @@ The simplest way to use Kandinsky 2.2 is:
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "kandinsky-community/kandinsky-2-2-decoder", torch_dtype=torch.float16, use_safetensors=True
@@ -199,8 +199,8 @@ The `strength` and `num_inference_steps` parameters are related because `strengt
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -243,8 +243,8 @@ You can combine `guidance_scale` with `strength` for even more precise control o
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -285,8 +285,8 @@ A negative prompt conditions the model to *not* include things in an image, and 
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "stabilityai/stable-diffusion-xl-refiner-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -329,9 +329,9 @@ Chaining a text-to-image and image-to-image pipeline allows you to generate an i
 Start by generating an image with the text-to-image pipeline:
 
 ```py
-from diffusers import AutoPipelineForText2Image, AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForText2Image, AutoPipelineForImage2Image
 import torch
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control.utils import make_image_grid
 
 pipeline = AutoPipelineForText2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -366,8 +366,8 @@ Start by generating an image:
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -429,8 +429,8 @@ Start with an image-to-image pipeline:
 
 ```py
 import torch
-from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import make_image_grid, load_image
+from diffusers_sd3_control import AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import make_image_grid, load_image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -458,7 +458,7 @@ It is important to specify `output_type="latent"` in the pipeline to keep all th
 Chain it to an upscaler pipeline to increase the image resolution:
 
 ```py
-from diffusers import StableDiffusionLatentUpscalePipeline
+from diffusers_sd3_control import StableDiffusionLatentUpscalePipeline
 
 upscaler = StableDiffusionLatentUpscalePipeline.from_pretrained(
     "stabilityai/sd-x2-latent-upscaler", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -472,7 +472,7 @@ image_2 = upscaler(prompt, image=image_1, output_type="latent").images[0]
 Finally, chain it to a super-resolution pipeline to further enhance the resolution:
 
 ```py
-from diffusers import StableDiffusionUpscalePipeline
+from diffusers_sd3_control import StableDiffusionUpscalePipeline
 
 super_res = StableDiffusionUpscalePipeline.from_pretrained(
     "stabilityai/stable-diffusion-x4-upscaler", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -495,7 +495,7 @@ Prompt weighting allows you to scale the representation of each concept in a pro
 [`AutoPipelineForImage2Image`] has a `prompt_embeds` (and `negative_prompt_embeds` if you're using a negative prompt) parameter where you can pass the embeddings which replaces the `prompt` parameter.
 
 ```py
-from diffusers import AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForImage2Image
 import torch
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
@@ -518,7 +518,7 @@ ControlNets provide a more flexible and accurate way to control image generation
 For example, let's condition an image with a depth map to keep the spatial information in the image.
 
 ```py
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 # prepare image
 url = "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-init.png"
@@ -531,7 +531,7 @@ make_image_grid([init_image, depth_image], rows=1, cols=2)
 Load a ControlNet model conditioned on depth maps and the [`AutoPipelineForImage2Image`]:
 
 ```py
-from diffusers import ControlNetModel, AutoPipelineForImage2Image
+from diffusers_sd3_control import ControlNetModel, AutoPipelineForImage2Image
 import torch
 
 controlnet = ControlNetModel.from_pretrained("lllyasviel/control_v11f1p_sd15_depth", torch_dtype=torch.float16, variant="fp16", use_safetensors=True)

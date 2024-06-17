@@ -1,6 +1,6 @@
 import torch
 
-from diffusers import UnCLIPScheduler
+from diffusers_sd3_control import UnCLIPScheduler
 
 from .test_schedulers import SchedulerCommonTest
 

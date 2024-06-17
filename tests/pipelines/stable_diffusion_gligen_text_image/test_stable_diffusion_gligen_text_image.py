@@ -26,16 +26,16 @@ from transformers import (
     CLIPVisionModelWithProjection,
 )
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     EulerAncestralDiscreteScheduler,
     StableDiffusionGLIGENTextImagePipeline,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.stable_diffusion import CLIPImageProjection
-from diffusers.utils import load_image
-from diffusers.utils.testing_utils import enable_full_determinism, torch_device
+from diffusers_sd3_control.pipelines.stable_diffusion import CLIPImageProjection
+from diffusers_sd3_control.utils import load_image
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, torch_device
 
 from ..pipeline_params import (
     TEXT_TO_IMAGE_BATCH_PARAMS,

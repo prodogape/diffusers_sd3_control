@@ -29,8 +29,8 @@ Stable unCLIP can be leveraged for text-to-image generation by pipelining it wit
 
 ```python
 import torch
-from diffusers import UnCLIPScheduler, DDPMScheduler, StableUnCLIPPipeline
-from diffusers.models import PriorTransformer
+from diffusers_sd3_control import UnCLIPScheduler, DDPMScheduler, StableUnCLIPPipeline
+from diffusers_sd3_control.models import PriorTransformer
 from transformers import CLIPTokenizer, CLIPTextModelWithProjection
 
 prior_model_id = "kakaobrain/karlo-v1-alpha"
@@ -70,8 +70,8 @@ For text-to-image we use `stabilityai/stable-diffusion-2-1-unclip-small` as it w
 ### Text guided Image-to-Image Variation
 
 ```python
-from diffusers import StableUnCLIPImg2ImgPipeline
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableUnCLIPImg2ImgPipeline
+from diffusers_sd3_control.utils import load_image
 import torch
 
 pipe = StableUnCLIPImg2ImgPipeline.from_pretrained(

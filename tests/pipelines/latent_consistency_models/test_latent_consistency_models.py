@@ -6,13 +6,13 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     LatentConsistencyModelPipeline,
     LCMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     require_torch_gpu,
     slow,

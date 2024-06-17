@@ -18,12 +18,12 @@ import unittest
 
 import torch
 
-from diffusers import (
+from diffusers_sd3_control import (
     IFPipeline,
 )
-from diffusers.models.attention_processor import AttnAddedKVProcessor
-from diffusers.utils.import_utils import is_xformers_available
-from diffusers.utils.testing_utils import load_numpy, require_torch_gpu, skip_mps, slow, torch_device
+from diffusers_sd3_control.models.attention_processor import AttnAddedKVProcessor
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
+from diffusers_sd3_control.utils.testing_utils import load_numpy, require_torch_gpu, skip_mps, slow, torch_device
 
 from ..pipeline_params import TEXT_TO_IMAGE_BATCH_PARAMS, TEXT_TO_IMAGE_PARAMS
 from ..test_pipelines_common import PipelineTesterMixin, assert_mean_pixel_difference

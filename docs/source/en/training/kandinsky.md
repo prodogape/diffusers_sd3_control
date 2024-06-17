@@ -28,7 +28,7 @@ Before running the scripts, make sure you install the library from source:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 
@@ -271,7 +271,7 @@ Once training is finished, you can use your newly trained model for inference!
 <hfoption id="prior model">
 
 ```py
-from diffusers import AutoPipelineForText2Image, DiffusionPipeline
+from diffusers_sd3_control import AutoPipelineForText2Image, DiffusionPipeline
 import torch
 
 prior_pipeline = DiffusionPipeline.from_pretrained(output_dir, torch_dtype=torch.float16)
@@ -293,7 +293,7 @@ Feel free to replace `kandinsky-community/kandinsky-2-2-decoder` with your own t
 <hfoption id="decoder model">
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 
 pipeline = AutoPipelineForText2Image.from_pretrained("path/to/saved/model", torch_dtype=torch.float16)
@@ -306,7 +306,7 @@ image = pipeline(prompt=prompt).images[0]
 For the decoder model, you can also perform inference from a saved checkpoint which can be useful for viewing intermediate results. In this case, load the checkpoint into the UNet:
 
 ```py
-from diffusers import AutoPipelineForText2Image, UNet2DConditionModel
+from diffusers_sd3_control import AutoPipelineForText2Image, UNet2DConditionModel
 
 unet = UNet2DConditionModel.from_pretrained("path/to/saved/model" + "/checkpoint-<N>/unet")
 

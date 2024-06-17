@@ -17,8 +17,8 @@ import unittest
 
 import torch
 
-from diffusers import UNet1DModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import UNet1DModel
+from diffusers_sd3_control.utils.testing_utils import (
     backend_manual_seed,
     floats_tensor,
     slow,

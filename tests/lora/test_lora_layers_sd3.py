@@ -21,13 +21,13 @@ import numpy as np
 import torch
 from transformers import AutoTokenizer, CLIPTextConfig, CLIPTextModelWithProjection, CLIPTokenizer, T5EncoderModel
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     FlowMatchEulerDiscreteScheduler,
     SD3Transformer2DModel,
     StableDiffusion3Pipeline,
 )
-from diffusers.utils.testing_utils import is_peft_available, require_peft_backend, torch_device
+from diffusers_sd3_control.utils.testing_utils import is_peft_available, require_peft_backend, torch_device
 
 
 if is_peft_available():

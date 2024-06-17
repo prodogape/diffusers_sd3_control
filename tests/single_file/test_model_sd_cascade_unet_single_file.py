@@ -18,9 +18,9 @@ import unittest
 
 import torch
 
-from diffusers import StableCascadeUNet
-from diffusers.utils import logging
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import StableCascadeUNet
+from diffusers_sd3_control.utils import logging
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     require_torch_gpu,
     slow,

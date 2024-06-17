@@ -58,24 +58,24 @@ To create the package for PyPI.
    twine upload dist/* -r pypitest --repository-url=https://test.pypi.org/legacy/
 
    Check that you can install it in a virtualenv by running:
-   pip install -i https://testpypi.python.org/pypi diffusers
+   pip install -i https://testpypi.python.org/pypi diffusers_sd3_control
 
    If you are testing from a Colab Notebook, for instance, then do:
-   pip install diffusers && pip uninstall diffusers
-   pip install -i https://testpypi.python.org/pypi diffusers
+   pip install diffusers_sd3_control && pip uninstall diffusers_sd3_control
+   pip install -i https://testpypi.python.org/pypi diffusers_sd3_control
 
    Check you can run the following commands:
-   python -c "from diffusers import __version__; print(__version__)"
-   python -c "from diffusers import DiffusionPipeline; pipe = DiffusionPipeline.from_pretrained('fusing/unet-ldm-dummy-update'); pipe()"
-   python -c "from diffusers import DiffusionPipeline; pipe = DiffusionPipeline.from_pretrained('hf-internal-testing/tiny-stable-diffusion-pipe', safety_checker=None); pipe('ah suh du')"
-   python -c "from diffusers import *"
+   python -c "from diffusers_sd3_control import __version__; print(__version__)"
+   python -c "from diffusers_sd3_control import DiffusionPipeline; pipe = DiffusionPipeline.from_pretrained('fusing/unet-ldm-dummy-update'); pipe()"
+   python -c "from diffusers_sd3_control import DiffusionPipeline; pipe = DiffusionPipeline.from_pretrained('hf-internal-testing/tiny-stable-diffusion-pipe', safety_checker=None); pipe('ah suh du')"
+   python -c "from diffusers_sd3_control import *"
 
 9. Upload the final version to the actual PyPI:
    twine upload dist/* -r pypi
 
 10. Prepare the release notes and publish them on GitHub once everything is looking hunky-dory. You can use the following
     Space to fetch all the commits applicable for the release: https://huggingface.co/spaces/lysandre/github-release. Repo should
-    be `huggingface/diffusers`. `tag` should be the previous release tag (v0.26.1, for example), and `branch` should be
+    be `huggingface/diffusers_sd3_control`. `tag` should be the previous release tag (v0.26.1, for example), and `branch` should be
     the latest release branch (v0.27.0-release, for example). It denotes all commits that have happened on branch
     v0.27.0-release after the tag v0.26.1 was created.
 
@@ -92,7 +92,7 @@ from setuptools import Command, find_packages, setup
 
 # IMPORTANT:
 # 1. all dependencies should be listed here with their version requirements if any
-# 2. once modified, run: `make deps_table_update` to update src/diffusers/dependency_versions_table.py
+# 2. once modified, run: `make deps_table_update` to update src/diffusers_sd3_control/dependency_versions_table.py
 _deps = [
     "Pillow",  # keep the PIL.Image.Resampling deprecation away
     "accelerate>=0.29.3",
@@ -145,19 +145,19 @@ _deps = [
 # some of the values are versioned whereas others aren't.
 deps = {b: a for a, b in (re.findall(r"^(([^!=<>~]+)(?:[!=<>~].*)?$)", x)[0] for x in _deps)}
 
-# since we save this data in src/diffusers/dependency_versions_table.py it can be easily accessed from
+# since we save this data in src/diffusers_sd3_control/dependency_versions_table.py it can be easily accessed from
 # anywhere. If you need to quickly access the data from this table in a shell, you can do so easily with:
 #
-# python -c 'import sys; from diffusers.dependency_versions_table import deps; \
+# python -c 'import sys; from diffusers_sd3_control.dependency_versions_table import deps; \
 # print(" ".join([deps[x] for x in sys.argv[1:]]))' tokenizers datasets
 #
 # Just pass the desired package names to that script as it's shown with 2 packages above.
 #
-# If diffusers is not yet installed and the work is done from the cloned repo remember to add `PYTHONPATH=src` to the script above
+# If diffusers_sd3_control is not yet installed and the work is done from the cloned repo remember to add `PYTHONPATH=src` to the script above
 #
 # You can then feed this for example to `pip`:
 #
-# pip install -U $(python -c 'import sys; from diffusers.dependency_versions_table import deps; \
+# pip install -U $(python -c 'import sys; from diffusers_sd3_control.dependency_versions_table import deps; \
 # print(" ".join([deps[x] for x in sys.argv[1:]]))' tokenizers datasets)
 #
 
@@ -178,7 +178,7 @@ class DepsTableUpdateCommand(Command):
         (
             "dep-table-update",
             None,
-            "updates src/diffusers/dependency_versions_table.py",
+            "updates src/diffusers_sd3_control/dependency_versions_table.py",
         ),
     ]
 
@@ -199,7 +199,7 @@ class DepsTableUpdateCommand(Command):
             "}",
             "",
         ]
-        target = "src/diffusers/dependency_versions_table.py"
+        target = "src/diffusers_sd3_control/dependency_versions_table.py"
         print(f"updating {target}")
         with open(target, "w", encoding="utf-8", newline="\n") as f:
             f.write("\n".join(content))
@@ -253,7 +253,7 @@ install_requires = [
 version_range_max = max(sys.version_info[1], 10) + 1
 
 setup(
-    name="diffusers",
+    name="diffusers_sd3_control",
     version="0.30.0.dev0",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
     description="State-of-the-art diffusion in PyTorch and JAX.",
     long_description=open("README.md", "r", encoding="utf-8").read(),
@@ -261,16 +261,16 @@ setup(
     keywords="deep learning diffusion jax pytorch stable diffusion audioldm",
     license="Apache 2.0 License",
     author="The Hugging Face team (past and future) with the help of all our contributors (https://github.com/huggingface/diffusers/graphs/contributors)",
-    author_email="diffusers@huggingface.co",
+    author_email="diffusers_sd3_control@huggingface.co",
     url="https://github.com/huggingface/diffusers",
     package_dir={"": "src"},
     packages=find_packages("src"),
-    package_data={"diffusers": ["py.typed"]},
+    package_data={"diffusers_sd3_control": ["py.typed"]},
     include_package_data=True,
     python_requires=">=3.8.0",
     install_requires=list(install_requires),
     extras_require=extras,
-    entry_points={"console_scripts": ["diffusers-cli=diffusers.commands.diffusers_cli:main"]},
+    entry_points={"console_scripts": ["diffusers_sd3_control-cli=diffusers_sd3_control.commands.diffusers_cli:main"]},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

@@ -20,10 +20,10 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import DDPMWuerstchenScheduler, StableCascadeDecoderPipeline
-from diffusers.models import StableCascadeUNet
-from diffusers.pipelines.wuerstchen import PaellaVQModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import DDPMWuerstchenScheduler, StableCascadeDecoderPipeline
+from diffusers_sd3_control.models import StableCascadeUNet
+from diffusers_sd3_control.pipelines.wuerstchen import PaellaVQModel
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     load_numpy,
     load_pt,
@@ -33,7 +33,7 @@ from diffusers.utils.testing_utils import (
     slow,
     torch_device,
 )
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 from ..test_pipelines_common import PipelineTesterMixin
 

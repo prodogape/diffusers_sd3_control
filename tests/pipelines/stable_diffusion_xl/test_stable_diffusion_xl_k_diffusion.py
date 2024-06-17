@@ -19,8 +19,8 @@ import unittest
 import numpy as np
 import torch
 
-from diffusers import StableDiffusionXLKDiffusionPipeline
-from diffusers.utils.testing_utils import enable_full_determinism, require_torch_gpu, slow, torch_device
+from diffusers_sd3_control import StableDiffusionXLKDiffusionPipeline
+from diffusers_sd3_control.utils.testing_utils import enable_full_determinism, require_torch_gpu, slow, torch_device
 
 
 enable_full_determinism()

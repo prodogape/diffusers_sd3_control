@@ -18,7 +18,7 @@ To make sure you can successfully run the latest versions of the example scripts
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -60,7 +60,7 @@ from huggingface_hub import snapshot_download
 
 local_dir = "./dog"
 snapshot_download(
-    "diffusers/dog-example",
+    "diffusers_sd3_control/dog-example",
     local_dir=local_dir, repo_type="dataset",
     ignore_patterns=".gitattributes",
 )
@@ -128,7 +128,7 @@ Once training is done, we can perform inference like so:
 
 ```python
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 import torch
 
 lora_model_id = <"lora-sdxl-dreambooth-id">
@@ -146,7 +146,7 @@ We can further refine the outputs with the [Refiner](https://huggingface.co/stab
 
 ```python
 from huggingface_hub.repocard import RepoCard
-from diffusers import DiffusionPipeline, StableDiffusionXLImg2ImgPipeline
+from diffusers_sd3_control import DiffusionPipeline, StableDiffusionXLImg2ImgPipeline
 import torch
 
 lora_model_id = <"lora-sdxl-dreambooth-id">

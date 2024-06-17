@@ -20,8 +20,8 @@ import unittest
 import numpy as np
 import torch
 
-from diffusers import DDIMScheduler, KandinskyV22Pipeline, KandinskyV22PriorPipeline, UNet2DConditionModel, VQModel
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control import DDIMScheduler, KandinskyV22Pipeline, KandinskyV22PriorPipeline, UNet2DConditionModel, VQModel
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_numpy,

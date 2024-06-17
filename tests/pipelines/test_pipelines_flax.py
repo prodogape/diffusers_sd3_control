@@ -19,8 +19,8 @@ import unittest
 
 import numpy as np
 
-from diffusers.utils import is_flax_available
-from diffusers.utils.testing_utils import require_flax, slow
+from diffusers_sd3_control.utils import is_flax_available
+from diffusers_sd3_control.utils.testing_utils import require_flax, slow
 
 
 if is_flax_available():
@@ -29,7 +29,7 @@ if is_flax_available():
     from flax.jax_utils import replicate
     from flax.training.common_utils import shard
 
-    from diffusers import FlaxDDIMScheduler, FlaxDiffusionPipeline, FlaxStableDiffusionPipeline
+    from diffusers_sd3_control import FlaxDDIMScheduler, FlaxDiffusionPipeline, FlaxStableDiffusionPipeline
 
 
 @require_flax

@@ -38,8 +38,8 @@ To set up a callback, you need to specify the number of denoising steps after wh
 ```python
 import torch
 
-from diffusers import DPMSolverMultistepScheduler, StableDiffusionXLPipeline
-from diffusers.callbacks import SDXLCFGCutoffCallback
+from diffusers_sd3_control import DPMSolverMultistepScheduler, StableDiffusionXLPipeline
+from diffusers_sd3_control.callbacks import SDXLCFGCutoffCallback
 
 
 callback = SDXLCFGCutoffCallback(cutoff_step_ratio=0.4)
@@ -107,7 +107,7 @@ Now, you can pass the callback function to the `callback_on_step_end` parameter 
 
 ```py
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
 pipeline = pipeline.to("cuda")
@@ -137,7 +137,7 @@ This callback function should take the following arguments: `pipeline`, `i`, `t`
 In this example, the diffusion process is stopped after 10 steps even though `num_inference_steps` is set to 50.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 pipeline.enable_model_cpu_offload()
@@ -198,7 +198,7 @@ def decode_tensors(pipe, step, timestep, callback_kwargs):
 3. Pass the `decode_tensors` function to the `callback_on_step_end` parameter to decode the tensors after each step. You also need to specify what you want to modify in the `callback_on_step_end_tensor_inputs` parameter, which in this case are the latents.
 
 ```py
-from diffusers import AutoPipelineForText2Image
+from diffusers_sd3_control import AutoPipelineForText2Image
 import torch
 from PIL import Image
 

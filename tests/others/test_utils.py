@@ -18,9 +18,9 @@ import unittest
 
 import pytest
 
-from diffusers import __version__
-from diffusers.utils import deprecate
-from diffusers.utils.testing_utils import str_to_bool
+from diffusers_sd3_control import __version__
+from diffusers_sd3_control.utils import deprecate
+from diffusers_sd3_control.utils.testing_utils import str_to_bool
 
 
 # Used to test the hub
@@ -165,7 +165,7 @@ class DeprecateTester(unittest.TestCase):
 
         assert (
             str(error.exception)
-            == "The deprecation tuple ('wrong_arg', '0.0.1', 'message') should be removed since diffusers' version"
+            == "The deprecation tuple ('wrong_arg', '0.0.1', 'message') should be removed since diffusers_sd3_control' version"
             f" {__version__} is >= {self.lower_version}"
         )
 
@@ -179,7 +179,7 @@ class DeprecateTester(unittest.TestCase):
         with self.assertWarns(FutureWarning) as warning:
             deprecate(("deprecated_arg", self.higher_version, "This message is better!!!"), standard_warn=False)
         assert str(warning.warning) == "This message is better!!!"
-        assert "diffusers/tests/others/test_utils.py" in warning.filename
+        assert "diffusers_sd3_control/tests/others/test_utils.py" in warning.filename
 
 
 def parse_flag_from_env(key, default=False):

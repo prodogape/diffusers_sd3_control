@@ -24,7 +24,7 @@ import requests
 import torch
 from io import BytesIO
 
-from diffusers import StableDiffusionInpaintPipeline
+from diffusers_sd3_control import StableDiffusionInpaintPipeline
 
 pipeline = StableDiffusionInpaintPipeline.from_pretrained(
     "runwayml/stable-diffusion-inpainting",

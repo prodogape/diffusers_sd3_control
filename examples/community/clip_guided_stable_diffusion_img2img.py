@@ -9,7 +9,7 @@ from torch.nn import functional as F
 from torchvision import transforms
 from transformers import CLIPFeatureExtractor, CLIPModel, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     DPMSolverMultistepScheduler,
@@ -17,10 +17,10 @@ from diffusers import (
     PNDMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
-from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipelineOutput
-from diffusers.utils import PIL_INTERPOLATION, deprecate
-from diffusers.utils.torch_utils import randn_tensor
+from diffusers_sd3_control.pipelines.pipeline_utils import DiffusionPipeline, StableDiffusionMixin
+from diffusers_sd3_control.pipelines.stable_diffusion.pipeline_stable_diffusion import StableDiffusionPipelineOutput
+from diffusers_sd3_control.utils import PIL_INTERPOLATION, deprecate
+from diffusers_sd3_control.utils.torch_utils import randn_tensor
 
 
 EXAMPLE_DOC_STRING = """
@@ -30,7 +30,7 @@ EXAMPLE_DOC_STRING = """
 
         import requests
         import torch
-        from diffusers import DiffusionPipeline
+        from diffusers_sd3_control import DiffusionPipeline
         from PIL import Image
         from transformers import CLIPFeatureExtractor, CLIPModel
 
@@ -45,7 +45,7 @@ EXAMPLE_DOC_STRING = """
         guided_pipeline = DiffusionPipeline.from_pretrained(
             "CompVis/stable-diffusion-v1-4",
             # custom_pipeline="clip_guided_stable_diffusion",
-            custom_pipeline="/home/njindal/diffusers/examples/community/clip_guided_stable_diffusion.py",
+            custom_pipeline="/home/njindal/diffusers_sd3_control/examples/community/clip_guided_stable_diffusion.py",
             clip_model=clip_model,
             feature_extractor=feature_extractor,
             torch_dtype=torch.float16,

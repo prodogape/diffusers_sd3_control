@@ -27,7 +27,7 @@ Use the [`~pipelines.StableDiffusionMixin.enable_freeu`] method on your pipeline
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, safety_checker=None
@@ -55,7 +55,7 @@ image
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-1", torch_dtype=torch.float16, safety_checker=None
@@ -83,7 +83,7 @@ image
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16,
@@ -111,8 +111,8 @@ image
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
-from diffusers.utils import export_to_video
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import export_to_video
 
 pipeline = DiffusionPipeline.from_pretrained(
     "damo-vilab/text-to-video-ms-1.7b", torch_dtype=torch.float16

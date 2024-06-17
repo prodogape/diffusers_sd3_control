@@ -39,16 +39,16 @@ diffusion 모델의 훈련과 추론에 필요한 모든 것은 [`DiffusionPipel
 [`DiffusionPipeline`] 클래스는 diffusion 모델을 [허브](https://huggingface.co/models?library=diffusers)로부터 불러오는 가장 심플하면서 보편적인 방식입니다. [`DiffusionPipeline.from_pretrained`] 메서드는 적합한 파이프라인 클래스를 자동으로 탐지하고, 필요한 구성요소(configuration)와 가중치(weight) 파일들을 다운로드하고 캐싱한 다음, 해당 파이프라인 인스턴스를 반환합니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 pipe = DiffusionPipeline.from_pretrained(repo_id)
 ```
 
-물론 [`DiffusionPipeline`] 클래스를 사용하지 않고, 명시적으로 직접 해당 파이프라인 클래스를 불러오는 것도 가능합니다. 아래 예시 코드는 위 예시와 동일한 인스턴스를 반환합니다. 
+물론 [`DiffusionPipeline`] 클래스를 사용하지 않고, 명시적으로 직접 해당 파이프라인 클래스를 불러오는 것도 가능합니다. 아래 예시 코드는 위 예시와 동일한 인스턴스를 반환합니다.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 pipe = StableDiffusionPipeline.from_pretrained(repo_id)
@@ -57,7 +57,7 @@ pipe = StableDiffusionPipeline.from_pretrained(repo_id)
 [CompVis/stable-diffusion-v1-4](https://huggingface.co/CompVis/stable-diffusion-v1-4)이나 [runwayml/stable-diffusion-v1-5](https://huggingface.co/runwayml/stable-diffusion-v1-5) 같은 체크포인트들의 경우, 하나 이상의 다양한 태스크에 활용될 수 있습니다. (예를 들어 위의 두 체크포인트의 경우, text-to-image와 image-to-image에 모두 활용될 수 있습니다.)  만약 이러한 체크포인트들을 기본 설정 태스크가 아닌 다른 태스크에 활용하고자 한다면, 해당 태스크에 대응되는 파이프라인(task-specific pipeline)을 사용해야 합니다.
 
 ```python
-from diffusers import StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionImg2ImgPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 pipe = StableDiffusionImg2ImgPipeline.from_pretrained(repo_id)
@@ -77,7 +77,7 @@ git clone https://huggingface.co/runwayml/stable-diffusion-v1-5
 그런 다음 해당 로컬 경로를 [`~DiffusionPipeline.from_pretrained`] 메서드에 전달합니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 repo_id = "./stable-diffusion-v1-5"
 stable_diffusion = DiffusionPipeline.from_pretrained(repo_id)
@@ -98,7 +98,7 @@ stable_diffusion = DiffusionPipeline.from_pretrained(repo_id)
 어떤 스케줄러들이 호환가능한지는 `compatibles` 속성을 통해 확인할 수 있습니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 stable_diffusion = DiffusionPipeline.from_pretrained(repo_id)
@@ -110,7 +110,7 @@ stable_diffusion.scheduler.compatibles
 그 다음 새롭게 생성한 [`EulerDiscreteScheduler`] 인스턴스를 [`DiffusionPipeline`]의 `scheduler` 인자에 전달합니다.
 
 ```python
-from diffusers import DiffusionPipeline, EulerDiscreteScheduler, DPMSolverMultistepScheduler
+from diffusers_sd3_control import DiffusionPipeline, EulerDiscreteScheduler, DPMSolverMultistepScheduler
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 
@@ -124,7 +124,7 @@ stable_diffusion = DiffusionPipeline.from_pretrained(repo_id, scheduler=schedule
 스테이블 diffusion과 같은 diffusion 모델들은 유해한 이미지를 생성할 수도 있습니다. 이를 예방하기 위해 디퓨저스는 생성된 이미지의 유해성을 판단하는 [세이프티 체커(safety checker)](https://github.com/huggingface/diffusers/blob/main/src/diffusers/pipelines/stable_diffusion/safety_checker.py) 기능을 지원하고 있습니다. 만약 세이프티 체커의 사용을 원하지 않는다면, `safety_checker` 인자에 `None`을 전달해주시면 됩니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 stable_diffusion = DiffusionPipeline.from_pretrained(repo_id, safety_checker=None)
@@ -135,7 +135,7 @@ stable_diffusion = DiffusionPipeline.from_pretrained(repo_id, safety_checker=Non
 복수의 파이프라인에 동일한 모델이 반복적으로 사용한다면, 굳이 해당 모델의 동일한 가중치를 중복으로 RAM에 불러올 필요는 없을 것입니다.  [`~DiffusionPipeline.components`] 속성을 통해 파이프라인 내부의 컴포넌트들을 참조할 수 있는데, 이번 단락에서는 이를 통해 동일한 모델 가중치를 RAM에 중복으로 불러오는 것을 방지하는 법에 대해 알아보겠습니다.
 
 ```python
-from diffusers import StableDiffusionPipeline, StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionPipeline, StableDiffusionImg2ImgPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 stable_diffusion_txt2img = StableDiffusionPipeline.from_pretrained(model_id)
@@ -149,10 +149,10 @@ components = stable_diffusion_txt2img.components
 stable_diffusion_img2img = StableDiffusionImg2ImgPipeline(**components)
 ```
 
-물론 각각의 컴포넌트들을 따로 따로 파이프라인에 전달할 수도 있습니다.  예를 들어 `stable_diffusion_txt2img` 파이프라인 안의 컴포넌트들 가운데서 세이프티 체커(`safety_checker`)와 피쳐 익스트랙터(`feature_extractor`)를 제외한 컴포넌트들만 `stable_diffusion_img2img` 파이프라인에서 재사용하는 방식 역시 가능합니다. 
+물론 각각의 컴포넌트들을 따로 따로 파이프라인에 전달할 수도 있습니다.  예를 들어 `stable_diffusion_txt2img` 파이프라인 안의 컴포넌트들 가운데서 세이프티 체커(`safety_checker`)와 피쳐 익스트랙터(`feature_extractor`)를 제외한 컴포넌트들만 `stable_diffusion_img2img` 파이프라인에서 재사용하는 방식 역시 가능합니다.
 
 ```python
-from diffusers import StableDiffusionPipeline, StableDiffusionImg2ImgPipeline
+from diffusers_sd3_control import StableDiffusionPipeline, StableDiffusionImg2ImgPipeline
 
 model_id = "runwayml/stable-diffusion-v1-5"
 stable_diffusion_txt2img = StableDiffusionPipeline.from_pretrained(model_id)
@@ -193,7 +193,7 @@ variant를 로드할 때 2개의 중요한 argument가 있습니다.
 * `variant` 인자는 리포지토리에서 어떤 variant를 불러올 것인가를 정의합니다. 가령  [`diffusers/stable-diffusion-variants`](https://huggingface.co/diffusers/stable-diffusion-variants/tree/main/unet) 리포지토리로부터 `non_ema` 체크포인트를 불러오고자 한다면, `variant="non_ema"` 인자를 전달해야 합니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 # load fp16 variant
 stable_diffusion = DiffusionPipeline.from_pretrained(
@@ -206,7 +206,7 @@ stable_diffusion = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-
 다른 부동소수점 타입의 가중치 혹은 non-EMA 가중치를 사용하는 체크포인트를 저장하기 위해서는, [`DiffusionPipeline.save_pretrained`] 메서드를 사용해야 하며, 이 때 `variant` 인자를 명시해줘야 합니다. 원래의 체크포인트와 동일한 폴더에 variant를 저장해야 하며, 이렇게 하면 동일한 폴더에서 오리지널 체크포인트과 variant를 모두 불러올 수 있습니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 # save as fp16 variant
 stable_diffusion.save_pretrained("runwayml/stable-diffusion-v1-5", variant="fp16")
@@ -232,25 +232,25 @@ stable_diffusion = DiffusionPipeline.from_pretrained(
 모델은 `subfolder` 인자에 명시된 하위 폴더로부터 로드됩니다. 예를 들어 `runwayml/stable-diffusion-v1-5`의 UNet 모델의 가중치는 [`unet`](https://huggingface.co/runwayml/stable-diffusion-v1-5/tree/main/unet) 폴더에 저장되어 있습니다.
 
 ```python
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 model = UNet2DConditionModel.from_pretrained(repo_id, subfolder="unet")
 ```
 
-혹은 [해당 모델의 리포지토리](https://huggingface.co/google/ddpm-cifar10-32/tree/main)로부터 다이렉트로 가져오는 것 역시 가능합니다. 
+혹은 [해당 모델의 리포지토리](https://huggingface.co/google/ddpm-cifar10-32/tree/main)로부터 다이렉트로 가져오는 것 역시 가능합니다.
 
 ```python
-from diffusers import UNet2DModel
+from diffusers_sd3_control import UNet2DModel
 
 repo_id = "google/ddpm-cifar10-32"
 model = UNet2DModel.from_pretrained(repo_id)
 ```
 
-또한 앞서 봤던 `variant` 인자를 명시함으로써, Non-EMA나 `fp16`의 가중치를 가져오는 것 역시 가능합니다. 
+또한 앞서 봤던 `variant` 인자를 명시함으로써, Non-EMA나 `fp16`의 가중치를 가져오는 것 역시 가능합니다.
 
 ```python
-from diffusers import UNet2DConditionModel
+from diffusers_sd3_control import UNet2DConditionModel
 
 model = UNet2DConditionModel.from_pretrained("runwayml/stable-diffusion-v1-5", subfolder="unet", variant="non-ema")
 model.save_pretrained("./local-unet", variant="non-ema")
@@ -263,8 +263,8 @@ model.save_pretrained("./local-unet", variant="non-ema")
 여러개의 스케줄러를 불러온다고 해서 많은 메모리를 소모하는 것은 아니며, 다양한 스케줄러들에 동일한 스케줄러 configration을  적용하는 것 역시 가능합니다. 다음 예시 코드에서 불러오는 스케줄러들은 모두 [`StableDiffusionPipeline`]과 호환되는데, 이는 곧 해당 스케줄러들에 동일한 스케줄러 configration 파일을 적용할 수 있음을 의미합니다.
 
 ```python
-from diffusers import StableDiffusionPipeline
-from diffusers import (
+from diffusers_sd3_control import StableDiffusionPipeline
+from diffusers_sd3_control import (
     DDPMScheduler,
     DDIMScheduler,
     PNDMScheduler,
@@ -298,7 +298,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(repo_id, scheduler=dpm)
 파이프라인의 폴더 구조는 해당 파이프라인 클래스의 구조와 직접적으로 일치합니다. 예를 들어 [`StableDiffusionPipeline`] 클래스는 [`runwayml/stable-diffusion-v1-5`](https://huggingface.co/runwayml/stable-diffusion-v1-5) 리포지토리와 대응되는 구조를 갖습니다.
 
 ```python
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 repo_id = "runwayml/stable-diffusion-v1-5"
 pipeline = DiffusionPipeline.from_pretrained(repo_id)
@@ -326,7 +326,7 @@ StableDiffusionPipeline {
     "StableDiffusionSafetyChecker"
   ],
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   "text_encoder": [
@@ -338,11 +338,11 @@ StableDiffusionPipeline {
     "CLIPTokenizer"
   ],
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -418,7 +418,7 @@ CLIPTokenizer(
     "StableDiffusionSafetyChecker"
   ],
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   "text_encoder": [
@@ -430,11 +430,11 @@ CLIPTokenizer(
     "CLIPTokenizer"
   ],
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }

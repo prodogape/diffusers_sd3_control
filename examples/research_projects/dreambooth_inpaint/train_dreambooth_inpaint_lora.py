@@ -19,15 +19,15 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, DDPMScheduler, StableDiffusionInpaintPipeline, UNet2DConditionModel
-from diffusers.loaders import AttnProcsLayers
-from diffusers.models.attention_processor import LoRAAttnProcessor
-from diffusers.optimization import get_scheduler
-from diffusers.utils import check_min_version
-from diffusers.utils.import_utils import is_xformers_available
+from diffusers_sd3_control import AutoencoderKL, DDPMScheduler, StableDiffusionInpaintPipeline, UNet2DConditionModel
+from diffusers_sd3_control.loaders import AttnProcsLayers
+from diffusers_sd3_control.models.attention_processor import LoRAAttnProcessor
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.utils import check_min_version
+from diffusers_sd3_control.utils.import_utils import is_xformers_available
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.13.0.dev0")
 
 logger = get_logger(__name__)

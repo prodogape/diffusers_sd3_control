@@ -2,10 +2,10 @@ from typing import List, Optional, Tuple, Union
 
 import torch
 
-from diffusers import DiffusionPipeline
-from diffusers.configuration_utils import ConfigMixin
-from diffusers.pipelines.pipeline_utils import ImagePipelineOutput
-from diffusers.schedulers.scheduling_utils import SchedulerMixin
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.configuration_utils import ConfigMixin
+from diffusers_sd3_control.pipelines.pipeline_utils import ImagePipelineOutput
+from diffusers_sd3_control.schedulers.scheduling_utils import SchedulerMixin
 
 
 class IADBScheduler(SchedulerMixin, ConfigMixin):

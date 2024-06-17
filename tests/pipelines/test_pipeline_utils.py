@@ -1,6 +1,6 @@
 import unittest
 
-from diffusers.pipelines.pipeline_utils import is_safetensors_compatible
+from diffusers_sd3_control.pipelines.pipeline_utils import is_safetensors_compatible
 
 
 class IsSafetensorsCompatibleTests(unittest.TestCase):

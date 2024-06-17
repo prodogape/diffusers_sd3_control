@@ -4,8 +4,8 @@ import unittest
 import numpy as np
 import torch
 
-from diffusers import DiffusionPipeline
-from diffusers.models.attention_processor import Attention, AttnAddedKVProcessor
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.models.attention_processor import Attention, AttnAddedKVProcessor
 
 
 class AttnAddedKVProcessorTests(unittest.TestCase):

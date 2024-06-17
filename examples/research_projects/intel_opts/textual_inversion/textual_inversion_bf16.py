@@ -16,7 +16,7 @@ from accelerate.logging import get_logger
 from accelerate.utils import ProjectConfiguration, set_seed
 from huggingface_hub import create_repo, upload_folder
 
-# TODO: remove and import from diffusers.utils when the new version of diffusers is released
+# TODO: remove and import from diffusers_sd3_control.utils when the new version of diffusers_sd3_control is released
 from packaging import version
 from PIL import Image
 from torch.utils.data import Dataset
@@ -24,10 +24,10 @@ from torchvision import transforms
 from tqdm.auto import tqdm
 from transformers import CLIPImageProcessor, CLIPTextModel, CLIPTokenizer
 
-from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler, StableDiffusionPipeline, UNet2DConditionModel
-from diffusers.optimization import get_scheduler
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
-from diffusers.utils import check_min_version
+from diffusers_sd3_control import AutoencoderKL, DDPMScheduler, PNDMScheduler, StableDiffusionPipeline, UNet2DConditionModel
+from diffusers_sd3_control.optimization import get_scheduler
+from diffusers_sd3_control.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+from diffusers_sd3_control.utils import check_min_version
 
 
 if version.parse(version.parse(PIL.__version__).base_version) >= version.parse("9.1.0"):
@@ -49,7 +49,7 @@ else:
 # ------------------------------------------------------------------------------
 
 
-# Will error if the minimal version of diffusers is not installed. Remove at your own risks.
+# Will error if the minimal version of diffusers_sd3_control is not installed. Remove at your own risks.
 check_min_version("0.13.0.dev0")
 
 

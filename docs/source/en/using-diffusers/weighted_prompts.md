@@ -54,7 +54,7 @@ Start by defining certain styles and a list of words (you can check out a more c
 ```py
 import torch
 from transformers import GenerationConfig, GPT2LMHeadModel, GPT2Tokenizer, LogitsProcessor, LogitsProcessorList
-from diffusers import StableDiffusionXLPipeline
+from diffusers_sd3_control import StableDiffusionXLPipeline
 
 styles = {
     "cinematic": "cinematic film still of {prompt}, highly detailed, high budget hollywood movie, cinemascope, moody, epic, gorgeous, film grain",
@@ -235,7 +235,7 @@ Before you begin, make sure you have the latest version of Compel installed:
 For this guide, let's generate an image with the prompt `"a red cat playing with a ball"` using the [`StableDiffusionPipeline`]:
 
 ```py
-from diffusers import StableDiffusionPipeline, UniPCMultistepScheduler
+from diffusers_sd3_control import StableDiffusionPipeline, UniPCMultistepScheduler
 import torch
 
 pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", use_safetensors=True)
@@ -362,7 +362,7 @@ Create a pipeline and use the [`~loaders.TextualInversionLoaderMixin.load_textua
 
 ```py
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 from compel import Compel, DiffusersTextualInversionManager
 
 pipe = StableDiffusionPipeline.from_pretrained(
@@ -400,7 +400,7 @@ image
 
 ```py
 import torch
-from diffusers import DiffusionPipeline, UniPCMultistepScheduler
+from diffusers_sd3_control import DiffusionPipeline, UniPCMultistepScheduler
 from compel import Compel
 
 pipe = DiffusionPipeline.from_pretrained("sd-dreambooth-library/dndcoverart-v1", torch_dtype=torch.float16).to("cuda")
@@ -426,8 +426,8 @@ Stable Diffusion XL (SDXL) has two tokenizers and text encoders so it's usage is
 
 ```py
 from compel import Compel, ReturnedEmbeddingsType
-from diffusers import DiffusionPipeline
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import make_image_grid
 import torch
 
 pipeline = DiffusionPipeline.from_pretrained(

@@ -13,7 +13,7 @@ Before running the scripts, make sure to install the library's training dependen
 To make sure you can successfully run the latest versions of the example scripts, we highly recommend **installing from source** and keeping the install up to date as we update the example scripts frequently and install some example-specific requirements. To do this, execute the following steps in a new virtual environment:
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install -e .
 ```
 
@@ -260,8 +260,8 @@ Set `base_model_path` and `controlnet_path` to the values `--pretrained_model_na
 `--output_dir` were respectively set to in the training script.
 
 ```py
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
-from diffusers.utils import load_image
+from diffusers_sd3_control import StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler
+from diffusers_sd3_control.utils import load_image
 import torch
 
 base_model_path = "path to model"
@@ -332,7 +332,7 @@ Then install Diffusers and the library's training dependencies:
 
 ```bash
 git clone https://github.com/huggingface/diffusers
-cd diffusers
+cd diffusers_sd3_control
 pip install .
 ```
 

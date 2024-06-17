@@ -2,7 +2,7 @@ import tempfile
 
 import torch
 
-from diffusers import (
+from diffusers_sd3_control import (
     DEISMultistepScheduler,
     DPMSolverMultistepScheduler,
     DPMSolverSinglestepScheduler,

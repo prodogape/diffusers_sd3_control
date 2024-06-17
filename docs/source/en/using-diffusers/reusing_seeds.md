@@ -29,7 +29,7 @@ Gaussian noise tensors to denoise and adding noise to the scheduling step.
 Take a look at the tensor values in the [`DDIMPipeline`] after two inference steps.
 
 ```python
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 import numpy as np
 
 ddim = DDIMPipeline.from_pretrained( "google/ddpm-cifar10-32", use_safetensors=True)
@@ -54,7 +54,7 @@ To generate reproducible results on a CPU, you'll need to use a PyTorch [Generat
 ```python
 import torch
 import numpy as np
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 
 ddim = DDIMPipeline.from_pretrained("google/ddpm-cifar10-32", use_safetensors=True)
 generator = torch.Generator(device="cpu").manual_seed(0)
@@ -70,7 +70,7 @@ Writing a reproducible pipeline on a GPU is a bit trickier, and full reproducibi
 ```python
 import torch
 import numpy as np
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 
 ddim = DDIMPipeline.from_pretrained("google/ddpm-cifar10-32", use_safetensors=True)
 ddim.to("cuda")
@@ -84,7 +84,7 @@ To avoid this issue, Diffusers has a [`~utils.torch_utils.randn_tensor`] functio
 ```python
 import torch
 import numpy as np
-from diffusers import DDIMPipeline
+from diffusers_sd3_control import DDIMPipeline
 
 ddim = DDIMPipeline.from_pretrained("google/ddpm-cifar10-32", use_safetensors=True)
 ddim.to("cuda")
@@ -119,7 +119,7 @@ Now when you run the same pipeline twice, you'll get identical results.
 
 ```py
 import torch
-from diffusers import DDIMScheduler, StableDiffusionPipeline
+from diffusers_sd3_control import DDIMScheduler, StableDiffusionPipeline
 
 pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", use_safetensors=True).to("cuda")
 pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
@@ -145,8 +145,8 @@ Let's use the [runwayml/stable-diffusion-v1-5](https://huggingface.co/runwayml/s
 
 ```py
 import torch
-from diffusers import DiffusionPipeline
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control import DiffusionPipeline
+from diffusers_sd3_control.utils import make_image_grid
 
 pipeline = DiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, use_safetensors=True

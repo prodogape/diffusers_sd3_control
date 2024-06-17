@@ -21,14 +21,14 @@ import numpy as np
 import torch
 from transformers import CLIPTextModel, CLIPTextModelWithProjection, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     DDIMScheduler,
     LCMScheduler,
     UNet2DConditionModel,
 )
-from diffusers.utils.import_utils import is_peft_available
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.import_utils import is_peft_available
+from diffusers_sd3_control.utils.testing_utils import (
     floats_tensor,
     require_peft_backend,
     require_peft_version_greater,

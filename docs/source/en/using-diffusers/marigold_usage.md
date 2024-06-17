@@ -52,14 +52,14 @@ This makes it easier to compare visualizations of the predictions across various
 To get the first depth prediction, load `prs-eth/marigold-depth-lcm-v1-0` checkpoint into `MarigoldDepthPipeline` pipeline, put the image through the pipeline, and save the predictions:
 
 ```python
-import diffusers
+import diffusers_sd3_control
 import torch
 
-pipe = diffusers.MarigoldDepthPipeline.from_pretrained(
+pipe = diffusers_sd3_control.MarigoldDepthPipeline.from_pretrained(
     "prs-eth/marigold-depth-lcm-v1-0", variant="fp16", torch_dtype=torch.float16
 ).to("cuda")
 
-image = diffusers.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
+image = diffusers_sd3_control.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
 depth = pipe(image)
 
 vis = pipe.image_processor.visualize_depth(depth.prediction)
@@ -94,14 +94,14 @@ Below are the raw and the visualized predictions; as can be seen, dark areas (mu
 Load `prs-eth/marigold-normals-lcm-v0-1` checkpoint into `MarigoldNormalsPipeline` pipeline, put the image through the pipeline, and save the predictions:
 
 ```python
-import diffusers
+import diffusers_sd3_control
 import torch
 
-pipe = diffusers.MarigoldNormalsPipeline.from_pretrained(
+pipe = diffusers_sd3_control.MarigoldNormalsPipeline.from_pretrained(
     "prs-eth/marigold-normals-lcm-v0-1", variant="fp16", torch_dtype=torch.float16
 ).to("cuda")
 
-image = diffusers.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
+image = diffusers_sd3_control.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
 normals = pipe(image)
 
 vis = pipe.image_processor.visualize_normals(normals.prediction)
@@ -196,24 +196,24 @@ The recommended values vary across checkpoints but primarily depend on the sched
 The effect of ensembling is particularly well-seen with surface normals:
 
 ```python
-import diffusers
+import diffusers_sd3_control
 
 model_path = "prs-eth/marigold-normals-v1-0"
 
 model_paper_kwargs = {
-	diffusers.schedulers.DDIMScheduler: {
+	diffusers_sd3_control.schedulers.DDIMScheduler: {
 		"num_inference_steps": 10,
 		"ensemble_size": 10,
 	},
-	diffusers.schedulers.LCMScheduler: {
+	diffusers_sd3_control.schedulers.LCMScheduler: {
 		"num_inference_steps": 4,
 		"ensemble_size": 5,
 	},
 }
 
-image = diffusers.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
+image = diffusers_sd3_control.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
 
-pipe = diffusers.MarigoldNormalsPipeline.from_pretrained(model_path).to("cuda")
+pipe = diffusers_sd3_control.MarigoldNormalsPipeline.from_pretrained(model_path).to("cuda")
 pipe_kwargs = model_paper_kwargs[type(pipe.scheduler)]
 
 depth = pipe(image, **pipe_kwargs)
@@ -246,7 +246,7 @@ To evaluate Marigold quantitatively in standard leaderboards and benchmarks (suc
 Optionally seed randomness to ensure reproducibility. Maximizing `batch_size` will deliver maximum device utilization.
 
 ```python
-import diffusers
+import diffusers_sd3_control
 import torch
 
 device = "cuda"
@@ -254,20 +254,20 @@ seed = 2024
 model_path = "prs-eth/marigold-v1-0"
 
 model_paper_kwargs = {
-	diffusers.schedulers.DDIMScheduler: {
+	diffusers_sd3_control.schedulers.DDIMScheduler: {
 		"num_inference_steps": 50,
 		"ensemble_size": 10,
 	},
-	diffusers.schedulers.LCMScheduler: {
+	diffusers_sd3_control.schedulers.LCMScheduler: {
 		"num_inference_steps": 4,
 		"ensemble_size": 10,
 	},
 }
 
-image = diffusers.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
+image = diffusers_sd3_control.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
 
 generator = torch.Generator(device=device).manual_seed(seed)
-pipe = diffusers.MarigoldDepthPipeline.from_pretrained(model_path).to(device)
+pipe = diffusers_sd3_control.MarigoldDepthPipeline.from_pretrained(model_path).to(device)
 pipe_kwargs = model_paper_kwargs[type(pipe.scheduler)]
 
 depth = pipe(image, generator=generator, **pipe_kwargs)
@@ -283,14 +283,14 @@ The resulting uncertainty will be available in the `uncertainty` field of the ou
 It can be visualized as follows:
 
 ```python
-import diffusers
+import diffusers_sd3_control
 import torch
 
-pipe = diffusers.MarigoldDepthPipeline.from_pretrained(
+pipe = diffusers_sd3_control.MarigoldDepthPipeline.from_pretrained(
     "prs-eth/marigold-depth-lcm-v1-0", variant="fp16", torch_dtype=torch.float16
 ).to("cuda")
 
-image = diffusers.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
+image = diffusers_sd3_control.utils.load_image("https://marigoldmonodepth.github.io/images/einstein.jpg")
 depth = pipe(
 	image,
 	ensemble_size=10,  # any number greater than 1; higher values yield higher precision
@@ -343,17 +343,17 @@ Empirically, we found that a convex combination of the very same starting point 
 import imageio
 from PIL import Image
 from tqdm import tqdm
-import diffusers
+import diffusers_sd3_control
 import torch
 
 device = "cuda"
 path_in = "obama.mp4"
 path_out = "obama_depth.gif"
 
-pipe = diffusers.MarigoldDepthPipeline.from_pretrained(
+pipe = diffusers_sd3_control.MarigoldDepthPipeline.from_pretrained(
     "prs-eth/marigold-depth-lcm-v1-0", variant="fp16", torch_dtype=torch.float16
 ).to(device)
-pipe.vae = diffusers.AutoencoderTiny.from_pretrained(
+pipe.vae = diffusers_sd3_control.AutoencoderTiny.from_pretrained(
     "madebyollin/taesd", torch_dtype=torch.float16
 ).to(device)
 pipe.set_progress_bar_config(disable=True)
@@ -378,7 +378,7 @@ with imageio.get_reader(path_in) as reader:
         last_frame_latent = depth.latent
         out.append(pipe.image_processor.visualize_depth(depth.prediction)[0])
 
-    diffusers.utils.export_to_gif(out, path_out, fps=reader.get_meta_data()['fps'])
+    diffusers_sd3_control.utils.export_to_gif(out, path_out, fps=reader.get_meta_data()['fps'])
 ```
 
 Here, the diffusion process starts from the given computed latent.
@@ -405,15 +405,15 @@ The snippet below demonstrates how to load an image, compute depth, and pass it 
 
 ```python
 import torch
-import diffusers
+import diffusers_sd3_control
 
 device = "cuda"
 generator = torch.Generator(device=device).manual_seed(2024)
-image = diffusers.utils.load_image(
+image = diffusers_sd3_control.utils.load_image(
     "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/controlnet_depth_source.png"
 )
 
-pipe = diffusers.MarigoldDepthPipeline.from_pretrained(
+pipe = diffusers_sd3_control.MarigoldDepthPipeline.from_pretrained(
     "prs-eth/marigold-depth-lcm-v1-0", torch_dtype=torch.float16, variant="fp16"
 ).to(device)
 
@@ -421,13 +421,13 @@ depth_image = pipe(image, generator=generator).prediction
 depth_image = pipe.image_processor.visualize_depth(depth_image, color_map="binary")
 depth_image[0].save("motorcycle_controlnet_depth.png")
 
-controlnet = diffusers.ControlNetModel.from_pretrained(
-    "diffusers/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
+controlnet = diffusers_sd3_control.ControlNetModel.from_pretrained(
+    "diffusers_sd3_control/controlnet-depth-sdxl-1.0", torch_dtype=torch.float16, variant="fp16"
 ).to(device)
-pipe = diffusers.StableDiffusionXLControlNetPipeline.from_pretrained(
+pipe = diffusers_sd3_control.StableDiffusionXLControlNetPipeline.from_pretrained(
     "SG161222/RealVisXL_V4.0", torch_dtype=torch.float16, variant="fp16", controlnet=controlnet
 ).to(device)
-pipe.scheduler = diffusers.DPMSolverMultistepScheduler.from_config(pipe.scheduler.config, use_karras_sigmas=True)
+pipe.scheduler = diffusers_sd3_control.DPMSolverMultistepScheduler.from_config(pipe.scheduler.config, use_karras_sigmas=True)
 
 controlnet_out = pipe(
     prompt="high quality photo of a sports bike, city",

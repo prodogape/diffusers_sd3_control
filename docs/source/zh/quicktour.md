@@ -40,7 +40,7 @@ specific language governing permissions and limitations under the License.
 在开始之前，确认一下你已经安装好了所需要的库：
 
 ```bash
-pip install --upgrade diffusers accelerate transformers
+pip install --upgrade diffusers_sd3_control accelerate transformers
 ```
 
 - [🤗 Accelerate](https://huggingface.co/docs/accelerate/index) 在推理和训练过程中加速模型加载。
@@ -75,7 +75,7 @@ pip install --upgrade diffusers accelerate transformers
 用[`~DiffusionPipeline.from_pretrained`]方法加载模型。
 
 ```python
->>> from diffusers import DiffusionPipeline
+>>> from diffusers_sd3_control import DiffusionPipeline
 
 >>> pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 ```
@@ -88,16 +88,16 @@ StableDiffusionPipeline {
   "_diffusers_version": "0.13.1",
   ...,
   "scheduler": [
-    "diffusers",
+    "diffusers_sd3_control",
     "PNDMScheduler"
   ],
   ...,
   "unet": [
-    "diffusers",
+    "diffusers_sd3_control",
     "UNet2DConditionModel"
   ],
   "vae": [
-    "diffusers",
+    "diffusers_sd3_control",
     "AutoencoderKL"
   ]
 }
@@ -151,7 +151,7 @@ git clone https://huggingface.co/runwayml/stable-diffusion-v1-5
 不同的调度器对去噪速度和质量的权衡是不同的。要想知道哪种调度器最适合你，最好的办法就是试用一下。🧨 Diffusers的主要特点之一是允许你轻松切换不同的调度器。例如，要用[`EulerDiscreteScheduler`]替换默认的[`PNDMScheduler`]，用[`~diffusers.ConfigMixin.from_config`]方法加载即可：
 
 ```py
->>> from diffusers import EulerDiscreteScheduler
+>>> from diffusers_sd3_control import EulerDiscreteScheduler
 
 >>> pipeline = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 >>> pipeline.scheduler = EulerDiscreteScheduler.from_config(pipeline.scheduler.config)
@@ -168,9 +168,8 @@ git clone https://huggingface.co/runwayml/stable-diffusion-v1-5
 
 模型是用[`~ModelMixin.from_pretrained`]方法启动的，该方法还在本地缓存了模型权重，所以下次加载模型时更快。对于快速入门，你默认加载的是[`UNet2DModel`]，这是一个基础的无条件图像生成模型，该模型有一个在猫咪图像上训练的检查点：
 
-
 ```py
->>> from diffusers import UNet2DModel
+>>> from diffusers_sd3_control import UNet2DModel
 
 >>> repo_id = "google/ddpm-cat-256"
 >>> model = UNet2DModel.from_pretrained(repo_id)
@@ -230,7 +229,7 @@ torch.Size([1, 3, 256, 256])
 在快速入门教程中，你将用它的[`~diffusers.ConfigMixin.from_config`]方法实例化[`DDPMScheduler`]：
 
 ```py
->>> from diffusers import DDPMScheduler
+>>> from diffusers_sd3_control import DDPMScheduler
 
 >>> scheduler = DDPMScheduler.from_config(repo_id)
 >>> scheduler

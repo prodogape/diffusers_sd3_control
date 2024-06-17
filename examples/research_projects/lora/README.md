@@ -69,7 +69,7 @@ Once you have trained a model using above command, the inference can be done sim
 need to pass the `output_dir` for loading the LoRA weights which, in this case, is `sd-naruto-model-lora`.
 
 ```python
-from diffusers import StableDiffusionPipeline
+from diffusers_sd3_control import StableDiffusionPipeline
 import torch
 
 model_path = "sayakpaul/sd-model-finetuned-lora-t4"

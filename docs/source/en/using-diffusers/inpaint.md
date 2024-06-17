@@ -22,8 +22,8 @@ With 🤗 Diffusers, here is how you can do inpainting:
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "kandinsky-community/kandinsky-2-2-decoder-inpaint", torch_dtype=torch.float16
@@ -91,8 +91,8 @@ To use this, create a blurred mask with the image processor.
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image
 from PIL import Image
 
 pipeline = AutoPipelineForInpainting.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16).to('cuda')
@@ -123,8 +123,8 @@ Stable Diffusion Inpainting is a latent diffusion model finetuned on 512x512 ima
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -149,11 +149,11 @@ SDXL is a larger and more powerful version of Stable Diffusion v1.5. This model 
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
-    "diffusers/stable-diffusion-xl-1.0-inpainting-0.1", torch_dtype=torch.float16, variant="fp16"
+    "diffusers_sd3_control/stable-diffusion-xl-1.0-inpainting-0.1", torch_dtype=torch.float16, variant="fp16"
 )
 pipeline.enable_model_cpu_offload()
 # remove following line if xFormers is not installed or you have PyTorch 2.0 or higher installed
@@ -175,8 +175,8 @@ The Kandinsky model family is similar to SDXL because it uses two models as well
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "kandinsky-community/kandinsky-2-2-decoder-inpaint", torch_dtype=torch.float16
@@ -225,8 +225,8 @@ The image on the left is generated from a regular checkpoint, and the image on t
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16"
@@ -250,8 +250,8 @@ make_image_grid([init_image, image], rows=1, cols=2)
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -291,8 +291,8 @@ However, for more basic tasks like erasing an object from an image (like the roc
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16"
@@ -314,8 +314,8 @@ make_image_grid([init_image, image], rows=1, cols=2)
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -355,8 +355,8 @@ import PIL
 import numpy as np
 import torch
 
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 device = "cuda"
 pipeline = AutoPipelineForInpainting.from_pretrained(
@@ -393,8 +393,8 @@ Image features - like quality and "creativity" - are dependent on pipeline param
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -438,8 +438,8 @@ You can use `strength` and `guidance_scale` together for more control over how e
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -478,8 +478,8 @@ A negative prompt assumes the opposite role of a prompt; it guides the model awa
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -513,8 +513,8 @@ Add the `padding_mask_crop` parameter to the pipeline call and set it to the des
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import load_image
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image
 from PIL import Image
 
 generator = torch.Generator(device='cuda').manual_seed(0)
@@ -550,8 +550,8 @@ Start with the text-to-image pipeline to create a castle:
 
 ```py
 import torch
-from diffusers import AutoPipelineForText2Image, AutoPipelineForInpainting
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForText2Image, AutoPipelineForInpainting
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForText2Image.from_pretrained(
     "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -603,8 +603,8 @@ Begin by inpainting an image:
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting, AutoPipelineForImage2Image
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting, AutoPipelineForImage2Image
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16, variant="fp16"
@@ -683,8 +683,8 @@ Once you've generated the embeddings, pass them to the `prompt_embeds` (and `neg
 
 ```py
 import torch
-from diffusers import AutoPipelineForInpainting
-from diffusers.utils import make_image_grid
+from diffusers_sd3_control import AutoPipelineForInpainting
+from diffusers_sd3_control.utils import make_image_grid
 
 pipeline = AutoPipelineForInpainting.from_pretrained(
     "runwayml/stable-diffusion-inpainting", torch_dtype=torch.float16,
@@ -710,8 +710,8 @@ For example, let's condition an image with a ControlNet pretrained on inpaint im
 ```py
 import torch
 import numpy as np
-from diffusers import ControlNetModel, StableDiffusionControlNetInpaintPipeline
-from diffusers.utils import load_image, make_image_grid
+from diffusers_sd3_control import ControlNetModel, StableDiffusionControlNetInpaintPipeline
+from diffusers_sd3_control.utils import load_image, make_image_grid
 
 # load ControlNet
 controlnet = ControlNetModel.from_pretrained("lllyasviel/control_v11p_sd15_inpaint", torch_dtype=torch.float16, variant="fp16")
@@ -753,7 +753,7 @@ make_image_grid([init_image, mask_image, PIL.Image.fromarray(np.uint8(control_im
 You can take this a step further and chain it with an image-to-image pipeline to apply a new [style](https://huggingface.co/nitrosocke/elden-ring-diffusion):
 
 ```py
-from diffusers import AutoPipelineForImage2Image
+from diffusers_sd3_control import AutoPipelineForImage2Image
 
 pipeline = AutoPipelineForImage2Image.from_pretrained(
     "nitrosocke/elden-ring-diffusion", torch_dtype=torch.float16,

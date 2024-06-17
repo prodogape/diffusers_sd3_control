@@ -22,7 +22,7 @@ import numpy as np
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTokenizer
 
-from diffusers import (
+from diffusers_sd3_control import (
     AutoencoderKL,
     AutoencoderTiny,
     DDIMScheduler,
@@ -34,7 +34,7 @@ from diffusers import (
     StableDiffusionImg2ImgPipeline,
     UNet2DConditionModel,
 )
-from diffusers.utils.testing_utils import (
+from diffusers_sd3_control.utils.testing_utils import (
     enable_full_determinism,
     floats_tensor,
     load_image,

@@ -18,7 +18,7 @@ To use with Stable Diffusion v-2.1:
 
 ```python
 import torch
-from diffusers import DiffusionPipeline, AutoencoderTiny
+from diffusers_sd3_control import DiffusionPipeline, AutoencoderTiny
 
 pipe = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-1-base", torch_dtype=torch.float16
@@ -35,7 +35,7 @@ To use with Stable Diffusion XL 1.0
 
 ```python
 import torch
-from diffusers import DiffusionPipeline, AutoencoderTiny
+from diffusers_sd3_control import DiffusionPipeline, AutoencoderTiny
 
 pipe = DiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16

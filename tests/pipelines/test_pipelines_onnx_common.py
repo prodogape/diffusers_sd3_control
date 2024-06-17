@@ -1,4 +1,4 @@
-from diffusers.utils.testing_utils import require_onnxruntime
+from diffusers_sd3_control.utils.testing_utils import require_onnxruntime
 
 
 @require_onnxruntime

@@ -3,9 +3,9 @@ import unittest
 
 from parameterized import parameterized
 
-from diffusers import FlaxUNet2DConditionModel
-from diffusers.utils import is_flax_available
-from diffusers.utils.testing_utils import load_hf_numpy, require_flax, slow
+from diffusers_sd3_control import FlaxUNet2DConditionModel
+from diffusers_sd3_control.utils import is_flax_available
+from diffusers_sd3_control.utils.testing_utils import load_hf_numpy, require_flax, slow
 
 
 if is_flax_available():

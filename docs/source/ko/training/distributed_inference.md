@@ -12,10 +12,9 @@
 
 이제 컨텍스트 관리자로 [`~accelerate.PartialState.split_between_processes`] 유틸리티를 사용하여 프로세스 수에 따라 프롬프트를 자동으로 분배합니다.
 
-
 ```py
 from accelerate import PartialState
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 pipeline = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
 distributed_state = PartialState()
@@ -49,7 +48,7 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 
-from diffusers import DiffusionPipeline
+from diffusers_sd3_control import DiffusionPipeline
 
 sd = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
 ```
