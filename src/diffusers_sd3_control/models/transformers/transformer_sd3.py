@@ -341,6 +341,7 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
             # remove `lora_scale` from each PEFT layer
             unscale_lora_layers(self, lora_scale)
 
+        print(output)
         if not return_dict:
             return (output,)
 
