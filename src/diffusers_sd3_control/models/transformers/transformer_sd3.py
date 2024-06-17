@@ -280,7 +280,7 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
             lora_scale = joint_attention_kwargs.pop("scale", 1.0)
         else:
             lora_scale = 1.0
-
+        print("A")
         if USE_PEFT_BACKEND:
             # weight the lora layers by setting `lora_scale` for each PEFT layer
             scale_lora_layers(self, lora_scale)
@@ -289,13 +289,13 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
                 logger.warning(
                     "Passing `scale` via `joint_attention_kwargs` when not using the PEFT backend is ineffective."
                 )
-
+        print("B")
         height, width = hidden_states.shape[-2:]
 
         hidden_states = self.pos_embed(hidden_states)  # takes care of adding positional embeddings too.
         temb = self.time_text_embed(timestep, pooled_projections)
         encoder_hidden_states = self.context_embedder(encoder_hidden_states)
-
+        print("C")
         for index_block, block in enumerate(self.transformer_blocks):
             if self.training and self.gradient_checkpointing:
 
@@ -326,7 +326,7 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
             if block_controlnet_hidden_states is not None and not block.context_pre_only:
                 interval_control = len(self.transformer_blocks) // len(block_controlnet_hidden_states)
                 hidden_states = hidden_states + block_controlnet_hidden_states[index_block // interval_control]
-
+        print("D")
         hidden_states = self.norm_out(hidden_states, temb)
         hidden_states = self.proj_out(hidden_states)
 
@@ -334,7 +334,7 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
         patch_size = self.config.patch_size
         height = height // patch_size
         width = width // patch_size
-
+        print("E")
         hidden_states = hidden_states.reshape(
             shape=(hidden_states.shape[0], height, width, patch_size, patch_size, self.out_channels)
         )
@@ -342,7 +342,7 @@ class SD3Transformer2DModel(ModelMixin, ConfigMixin, PeftAdapterMixin, FromOrigi
         output = hidden_states.reshape(
             shape=(hidden_states.shape[0], self.out_channels, height * patch_size, width * patch_size)
         )
-
+        print("F")
         if USE_PEFT_BACKEND:
             # remove `lora_scale` from each PEFT layer
             unscale_lora_layers(self, lora_scale)
