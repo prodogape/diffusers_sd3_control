@@ -4,7 +4,9 @@ from diffusers_sd3_control.models import SD3ControlNetModel, SD3MultiControlNetM
 from diffusers_sd3_control.utils import load_image
 
 # load pipeline
+print("****** Start load controlnet")
 controlnet = SD3ControlNetModel.from_pretrained("InstantX/SD3-Controlnet-Canny")
+print("******* Start load SD3")
 pipe = StableDiffusion3ControlNetPipeline.from_pretrained(
     "stabilityai/stable-diffusion-3-medium-diffusers",
     controlnet=controlnet
