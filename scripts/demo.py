@@ -11,6 +11,7 @@ pipe = StableDiffusion3ControlNetPipeline.from_pretrained(
     "stabilityai/stable-diffusion-3-medium-diffusers",
     controlnet=controlnet
 )
+print("*** load SD3 ok")
 pipe.to("cuda", torch.float16)
 
 # config
