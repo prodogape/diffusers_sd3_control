@@ -9,7 +9,8 @@ controlnet = SD3ControlNetModel.from_pretrained("InstantX/SD3-Controlnet-Canny")
 print("******* Start load SD3")
 pipe = StableDiffusion3ControlNetPipeline.from_pretrained(
     "stabilityai/stable-diffusion-3-medium-diffusers",
-    controlnet=controlnet
+    controlnet=controlnet,
+    torch_dtype=torch.float16
 )
 print("*** load SD3 ok")
 pipe.to("cuda", torch.float16)
