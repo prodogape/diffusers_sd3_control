@@ -12,7 +12,7 @@ pipe = StableDiffusion3ControlNetPipeline.from_pretrained(
 pipe.to("cuda", torch.float16)
 
 # config
-control_image = load_image("https://huggingface.co/InstantX/SD3-Controlnet-Canny/resolve/main/canny.jpg")
+control_image = load_image("https://hf-mirror.com/InstantX/SD3-Controlnet-Canny/resolve/main/canny.jpg")
 prompt = 'Anime style illustration of a girl wearing a suit. A moon in sky. In the background we see a big rain approaching. text "InstantX" on image'
 n_prompt = 'NSFW, nude, naked, porn, ugly'
 image = pipe(
