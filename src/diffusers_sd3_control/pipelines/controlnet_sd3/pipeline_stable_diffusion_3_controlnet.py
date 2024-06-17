@@ -19,6 +19,7 @@ import torch
 from transformers import (
     CLIPTextModelWithProjection,
     CLIPTokenizer,
+    CLIPTokenizerFast,
     T5EncoderModel,
     T5TokenizerFast,
 )
