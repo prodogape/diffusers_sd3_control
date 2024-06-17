@@ -860,7 +860,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
 
         device = self._execution_device
         dtype = self.transformer.dtype
-
+        print("before encode_prompt")
         (
             prompt_embeds,
             negative_prompt_embeds,
@@ -882,7 +882,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
             clip_skip=self.clip_skip,
             num_images_per_prompt=num_images_per_prompt,
         )
-
+        print("after encode_prompt")
         if self.do_classifier_free_guidance:
             prompt_embeds = torch.cat([negative_prompt_embeds, prompt_embeds], dim=0)
             pooled_prompt_embeds = torch.cat([negative_pooled_prompt_embeds, pooled_prompt_embeds], dim=0)
