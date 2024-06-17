@@ -698,14 +698,14 @@ def load_sub_model(
             loading_kwargs["low_cpu_mem_usage"] = low_cpu_mem_usage
         else:
             loading_kwargs["low_cpu_mem_usage"] = False
-    print("loaded sub model")
+    print("loaded sub model", name)
     # check if the module is in a subdirectory
     if os.path.isdir(os.path.join(cached_folder, name)):
         loaded_sub_model = load_method(os.path.join(cached_folder, name), **loading_kwargs)
     else:
         # else load from the root directory
         loaded_sub_model = load_method(cached_folder, **loading_kwargs)
-
+    print("postprocess")
     if isinstance(loaded_sub_model, torch.nn.Module) and isinstance(device_map, dict):
         # remove hooks
         remove_hook_from_module(loaded_sub_model, recurse=True)
