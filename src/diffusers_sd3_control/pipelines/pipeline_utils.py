@@ -819,13 +819,13 @@ class DiffusionPipeline(ConfigMixin, PushToHubMixin):
                 " Please, pass `safety_checker=None` to `from_pretrained`, and load the safety checker"
                 " separately if you need it."
             )
-        print("5")
+
         # 5. Throw nice warnings / errors for fast accelerate loading
         if len(unused_kwargs) > 0:
             logger.warning(
                 f"Keyword arguments {unused_kwargs} are not expected by {pipeline_class.__name__} and will be ignored."
             )
-        print("6")
+
         # import it here to avoid circular import
         from diffusers_sd3_control import pipelines
 
@@ -848,7 +848,7 @@ class DiffusionPipeline(ConfigMixin, PushToHubMixin):
                 token=token,
                 revision=revision,
             )
-        print("7")
+
         # 7. Load each module in the pipeline
         current_device_map = None
         for name, (library_name, class_name) in logging.tqdm(init_dict.items(), desc="Loading pipeline components..."):
@@ -954,7 +954,7 @@ class DiffusionPipeline(ConfigMixin, PushToHubMixin):
                 init_kwargs.update(
                     {"_".join([prefix, name]): component for name, component in connected_pipe.components.items()}
                 )
-        print("8")
+
         # 8. Potentially add passed objects if expected
         missing_modules = set(expected_modules) - set(init_kwargs.keys())
         passed_modules = list(passed_class_obj.keys())
@@ -967,10 +967,10 @@ class DiffusionPipeline(ConfigMixin, PushToHubMixin):
             raise ValueError(
                 f"Pipeline {pipeline_class} expected {expected_modules}, but only {passed_modules} were passed."
             )
-        print("10")
+
         # 10. Instantiate the pipeline
         model = pipeline_class(**init_kwargs)
-        print("11")
+
         # 11. Save where the model was instantiated from
         model.register_to_config(_name_or_path=pretrained_model_name_or_path)
         if device_map is not None:
