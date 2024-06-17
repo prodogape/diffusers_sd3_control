@@ -698,7 +698,7 @@ def load_sub_model(
             loading_kwargs["low_cpu_mem_usage"] = low_cpu_mem_usage
         else:
             loading_kwargs["low_cpu_mem_usage"] = False
-    print("loaded sub model", name)
+    print("loaded sub model", name, loading_kwargs)
     # check if the module is in a subdirectory
     if os.path.isdir(os.path.join(cached_folder, name)):
         loaded_sub_model = load_method(os.path.join(cached_folder, name), **loading_kwargs)
