@@ -190,7 +190,7 @@ class StableDiffusion3ControlNetPipeline(DiffusionPipeline, SD3LoraLoaderMixin, 
         ],
     ):
         super().__init__()
-
+        print("************** INit start")
         self.register_modules(
             vae=vae,
             text_encoder=text_encoder,
